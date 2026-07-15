@@ -1,0 +1,648 @@
+{
+  "id": "windsor-ev",
+  "name": "MG Windsor EV",
+  "cardekhoSlug": "windsor-ev",
+  "pageUrl": "https://www.cardekho.com/mg/windsor-ev/pictures",
+  "images": [
+    {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1755845275936/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "02-front-view-118.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/front-view-118.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "03-side-view-left-90.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/side-view-(left)-90.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "04-rear-left-view-121.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/rear-left-view-121.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "05-rear-view-119.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/rear-view-119.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "06-rear-right-side-48.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/rear-right-side-48.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "07-front-right-view-120.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/front-right-view-120.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "08-exterior-image-164.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/exterior-image-164.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "09-exterior-image-165.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/exterior-image-165.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "10-exterior-image-166.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/exterior-image-166.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "11-exterior-image-170.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/exterior-image-170.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "12-exterior-image-172.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/exterior-image-172.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "13-grille-97.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/grille-97.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "14-front-bumper-222.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/front-bumper-222.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "15-front-fender-223.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/front-fender-223.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "16-wheel-42.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/wheel-42.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "17-side-mirror-body-93.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/side-mirror-(body)-93.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "18-door-handle-45.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/door-handle-45.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "19-rear-door-handle-225.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/rear-door-handle-225.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "20-rear-fender-226.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/rear-fender-226.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "21-ev-charging-port-closed-228.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/ev-charging-port-closed-228.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "22-ev-charging-port-open-229.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/ev-charging-port-open-229.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "23-side-skirt-230.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/side-skirt-230.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "24-rear-spoiler-233.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/rear-spoiler-233.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "25-rear-bumper-234.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/rear-bumper-234.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "26-rear-windshield-235.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/rear-windshield-235.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "27-drl-237.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/drl-237.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "28-headlight-43.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/headlight-43.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "29-taillight-44.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/taillight-44.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "30-rear-turn-indicator-239.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/rear-turn-indicator-239.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "31-reverse-lamp-241.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/reverse-lamp-241.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "32-top-brake-lamp-high-mount-stop-lamp-244.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/top-brake-lamp-(high-mount-stop-lamp)-244.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "33-front-grill-logo-98.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/front-grill---logo-98.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "34-model-and-badging-100.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/model-and-badging-100.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "35-tail-gate-logo-99.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/tail-gate---logo-99.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "36-rear-parking-sensors-top-view-156.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/rear-parking-sensors-top-view-156.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "37-360-camera-front-249.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/360-camera-front-249.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "38-360-camera-rear-250.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/360-camera-rear-250.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "39-360-camera-right-252.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/360-camera-right-252.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "40-dashboard-59.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/dashboard-59.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "41-steering-wheel-54.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/steering-wheel-54.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "42-horn-263.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/horn-263.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "43-steering-controls-138.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/steering-controls-138.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "44-configuration-selector-knob-140.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/configuration-selector-knob-140.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "45-wiper-control-264.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/wiper-control-264.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "46-instrument-cluster-62.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/instrument-cluster-62.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "47-drive-modes-267.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/drive-modes-267.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "48-settings-menu-268.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/settings-menu-268.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "49-gear-shifter-87.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/gear-shifter-87.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "50-hand-brake-270.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/hand-brake-270.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "51-door-view-of-driver-seat-51.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/door-view-of-driver-seat-51.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "52-seat-headrest-200.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/seat-headrest-200.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "53-driver-seat-controls-272.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/driver-seat-controls-272.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "54-seat-adjustment-191.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/seat-adjustment-191.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "55-front-armrest-185.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/front-armrest-185.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "56-rear-seats-52.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/rear-seats-52.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "57-rear-head-rest-273.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/rear-head-rest-273.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "58-center-console-55.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/center-console-55.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "59-cup-holder-side-view-126.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/cup-holder-side-view-126.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "60-front-cup-holder-127.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/front-cup-holder-127.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "61-front-arm-rest-storage-275.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/front-arm-rest-storage-275.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "62-glovebox-closed-129.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/glovebox-(closed)-129.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "63-drivers-door-panel-39.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/drivers-door-panel-39.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "64-front-seat-back-pockets-276.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/front-seat-back-pockets-276.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "65-centre-tunnel-storage-rear-150.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/centre-tunnel-storage(rear)-150.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "66-open-trunk-49.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/open-trunk-49.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "67-boot-open-122.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/boot-(open)-122.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "68-boot-lights-280.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/boot-lights-280.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "69-infotainment-system-main-menu-183.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/infotainment-system-main-menu-183.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "70-navigation-or-infotainment-mid-closeup-112.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/navigation-or-infotainment-mid-closeup-112.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "71-android-auto-wired-wireless-283.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/android-auto-(wired-wireless)-283.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "72-front-tweeters-286.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/front-tweeters-286.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "73-speakers-58.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/speakers-58.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "74-rear-door-speakers-288.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/rear-door-speakers-288.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "75-ac-controls-151.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/ac-controls-151.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "76-side-ac-control-111.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/side-ac-control-111.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "77-driver-ac-vent-290.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/driver-ac-vent-290.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "78-front-passenger-ac-vent-291.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/front-passenger-ac-vent-291.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "79-front-air-vents-144.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/front-air-vents-144.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "80-floor-mounted-ac-vents-192.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/floor-mounted-ac-vents-192.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "81-roof-mounted-sunroof-control-293.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/roof-mounted-sunroof-control-293.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "82-sun-roof-moon-roof-81.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/sun-roof-moon-roof-81.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "83-hazard-light-switch-189.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/hazard-light-switch-189.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "84-door-controls-40.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/door-controls-40.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "85-pedals-82.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/pedals-82.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "86-key-79.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/key-79.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "87-reading-lamps-84.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/reading-lamps-84.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "88-front-usb-port-303.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/front-usb-port-303.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "89-wireless-charging-pad-206.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/wireless-charging-pad-206.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "90-driver-airbag-311.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/driver-airbag-311.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "91-passenger-airbag-312.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/passenger-airbag-312.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "92-front-seatbelt-329.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/front-seatbelt-329.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "93-ambient-light-strip-187.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/ambient-light-strip-187.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "94-ambient-lighting-view-181.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/ambient-lighting-view-181.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "95-ambient-lighting-display-320.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/ambient-lighting-display-320.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "96-door-scuff-plate-202.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545650333/door-scuff-plate-202.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "97-223-pearl-white-c0c0c0.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Windsor-EV/11848/1726050610616/223_PEARL-WHITE_c0c0c0.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "98-starburst-black-000000.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Windsor-EV/11848/1747133011968/STARBURST-BLACK_000000.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "99-turquoise-green-2d4047.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Windsor-EV/11848/1747133011968/TURQUOISE-GREEN_2d4047.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "100-aurora-silver-b5b5b5.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Windsor-EV/11848/1747133011968/AURORA-SILVER_-b5b5b5.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "101-glaze-red-b10404.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Windsor-EV/11848/1747133011968/GLAZE-RED_b10404.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "102-celadon-blue-2e3d52.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Windsor-EV/11848/1747133011968/CELADON-BLUE_2e3d52.jpg",
+      "kind": "colour",
+      "status": "cached"
+    }
+  ],
+  "aliases": {
+    "hero": {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1755845275936/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    "exterior": {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1755845275936/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    "safety": {
+      "file": "32-top-brake-lamp-high-mount-stop-lamp-244.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Windsor-EV/11848/1751545279539/top-brake-lamp-(high-mount-stop-lamp)-244.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    "technology": {
+      "file": "40-dashboard-59.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Windsor-EV/11848/1751545543860/dashboard-59.jpg",
+      "kind": "interior",
+      "status": "cached"
+    }
+  },
+  "status": "ok",
+  "note": ""
+}

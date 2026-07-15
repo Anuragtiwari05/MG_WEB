@@ -1,0 +1,288 @@
+{
+  "id": "comet-ev",
+  "name": "MG Comet EV",
+  "cardekhoSlug": "comet-ev",
+  "pageUrl": "https://www.cardekho.com/mg/comet-ev/pictures",
+  "images": [
+    {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712400778/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "02-front-view-118.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/front-view-118.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "03-side-view-left-90.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/side-view-(left)-90.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "04-rear-left-view-121.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/rear-left-view-121.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "05-rear-right-side-48.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/rear-right-side-48.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "06-front-right-view-120.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/front-right-view-120.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "07-exterior-image-164.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/exterior-image-164.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "08-exterior-image-165.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/exterior-image-165.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "09-exterior-image-166.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/exterior-image-166.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "10-exterior-image-168.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/exterior-image-168.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "11-exterior-image-171.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/exterior-image-171.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "12-exterior-image-172.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/exterior-image-172.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "13-grille-97.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/grille-97.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "14-wheel-42.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/wheel-42.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "15-side-mirror-body-93.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/side-mirror-(body)-93.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "16-ev-charging-port-open-229.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1783322779323/ev-charging-port-open-229.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "17-rear-bumper-234.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/rear-bumper-234.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "18-headlight-43.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/headlight-43.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "19-taillight-44.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/taillight-44.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "20-tail-gate-logo-99.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712350843/tail-gate---logo-99.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "21-dashboard-59.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/dashboard-59.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "22-steering-wheel-54.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/steering-wheel-54.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "23-drive-modes-267.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/drive-modes-267.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "24-gear-shifter-87.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/gear-shifter-87.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "25-door-view-of-driver-seat-51.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/door-view-of-driver-seat-51.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "26-rear-seats-52.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/rear-seats-52.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "27-drivers-door-panel-39.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/drivers-door-panel-39.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "28-open-trunk-49.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/open-trunk-49.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "29-boot-open-122.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/boot-(open)-122.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "30-boot-space-with-third-row-folded-279.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/boot-space-with-third-row-folded-279.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "31-infotainment-system-main-menu-183.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/infotainment-system-main-menu-183.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "32-apple-carplay-wired-wireless-284.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/apple-carplay-(wired-wireless)-284.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "33-front-passenger-ac-vent-291.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/front-passenger-ac-vent-291.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "34-front-air-vents-144.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/front-air-vents-144.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "35-orvm-controls-298.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/orvm-controls-298.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "36-key-79.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/key-79.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "37-12v-socket-front-326.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/12v-socket-front-326.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "38-green-with-black-sunroof-98ca31.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Comet-EV/11556/1779863274115/Green-With-black-sunroof_98ca31.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "39-starry-black-292929.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Comet-EV/11556/1779863274115/STARRY-Black_292929.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "40-aurora-silver-8e929a.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Comet-EV/11556/1779863274115/AURORA-SILVER_8e929a.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "41-candy-white-with-black-sunroof-f1f1f3.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Comet-EV/11556/1779863274115/CANDY-White-With-black-sunroof_f1f1f3.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "42-candy-white-e0dfe4.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Comet-EV/11556/1779863274115/CANDY-White_e0dfe4.jpg",
+      "kind": "colour",
+      "status": "cached"
+    }
+  ],
+  "aliases": {
+    "hero": {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712400778/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    "exterior": {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712400778/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    "safety": {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Comet-EV/11556/1772712400778/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    "technology": {
+      "file": "21-dashboard-59.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Comet-EV/11556/1772712271251/dashboard-59.jpg",
+      "kind": "interior",
+      "status": "cached"
+    }
+  },
+  "status": "ok",
+  "note": ""
+}

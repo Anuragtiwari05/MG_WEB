@@ -1,0 +1,690 @@
+{
+  "id": "cyberster",
+  "name": "MG Cyberster",
+  "cardekhoSlug": "cyberster",
+  "pageUrl": "https://www.cardekho.com/mg/cyberster/pictures",
+  "images": [
+    {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1758802623039/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "02-front-view-118.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/front-view-118.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "03-side-view-left-90.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/side-view-(left)-90.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "04-rear-left-view-121.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/rear-left-view-121.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "05-rear-view-119.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/rear-view-119.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "06-rear-right-side-48.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/rear-right-side-48.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "07-front-right-view-120.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/front-right-view-120.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "08-exterior-image-164.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/exterior-image-164.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "09-window-line-158.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/window-line-158.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "10-perspective-view-doors-open-145.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/perspective-view(-doors-open)-145.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "11-exterior-image-165.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/exterior-image-165.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "12-exterior-image-166.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/exterior-image-166.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "13-exterior-image-167.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/exterior-image-167.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "14-exterior-image-168.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/exterior-image-168.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "15-exterior-image-169.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/exterior-image-169.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "16-exterior-image-170.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/exterior-image-170.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "17-exterior-image-171.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/exterior-image-171.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "18-exterior-image-172.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/exterior-image-172.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "19-grille-97.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/grille-97.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "20-front-bumper-222.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/front-bumper-222.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "21-front-wiper-96.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/front-wiper-96.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "22-front-fender-223.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/front-fender-223.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "23-wheel-42.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/wheel-42.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "24-side-mirror-body-93.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/side-mirror-(body)-93.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "25-side-mirror-glass-92.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/side-mirror-(glass)-92.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "26-rear-fender-226.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/rear-fender-226.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "27-ev-charging-port-closed-228.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/ev-charging-port-closed-228.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "28-ev-charging-port-open-229.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/ev-charging-port-open-229.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "29-rear-bumper-234.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/rear-bumper-234.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "30-headlight-43.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/headlight-43.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "31-front-turn-indicator-238.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/front-turn-indicator-238.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "32-taillight-44.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/taillight-44.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "33-rear-turn-indicator-239.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/rear-turn-indicator-239.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "34-led-blinker-on-ovrm-91.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/led-blinker-on-ovrm-91.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "35-reverse-lamp-241.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/reverse-lamp-241.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "36-rear-reflector-243.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/rear-reflector-243.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "37-front-grill-logo-98.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/front-grill---logo-98.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "38-model-and-badging-100.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/model-and-badging-100.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "39-front-parking-sensor-248.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/front-parking-sensor-248.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "40-rear-parking-sensors-top-view-156.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127680252/rear-parking-sensors-top-view-156.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "41-360-camera-front-249.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/360-camera-front-249.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "42-360-camera-rear-250.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/360-camera-rear-250.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "43-360-camera-left-251.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/360-camera-left-251.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "44-360-camera-right-252.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/360-camera-right-252.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "45-adas-camera-front-254.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/adas-camera-front-254.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "46-tyre-pressure-sticker-258.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/tyre-pressure-sticker-258.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "47-charger-261.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/charger-261.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "48-dashboard-59.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/dashboard-59.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "49-right-corner-front-view-137.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/right-corner-front-view-137.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "50-dashboard-controls-262.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/dashboard-controls-262.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "51-rear-view-mirror-courtesy-lamps-64.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/rear-view-mirror-courtesy-lamps-64.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "52-steering-wheel-54.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/steering-wheel-54.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "53-horn-263.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/horn-263.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "54-steering-controls-138.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/steering-controls-138.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "55-configuration-selector-knob-140.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/configuration-selector-knob-140.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "56-headlamp-beam-switches-146.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/headlamp-beam-switches-146.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "57-wiper-control-264.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/wiper-control-264.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "58-paddle-shifters-182.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/paddle-shifters-182.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "59-paddle-shifter-up-265.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/paddle-shifter-up-265.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "60-instrument-cluster-62.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/instrument-cluster-62.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "61-gear-shifter-87.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/gear-shifter-87.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "62-door-view-of-driver-seat-51.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/door-view-of-driver-seat-51.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "63-front-seats-passenger-view-88.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/front-seats-(passenger-view)-88.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "64-seat-headrest-200.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/seat-headrest-200.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "65-upholstery-with-stitching-271.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/upholstery-with-stitching-271.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "66-upholstery-details-135.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/upholstery-details-135.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "67-driver-seat-controls-272.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/driver-seat-controls-272.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "68-front-armrest-185.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/front-armrest-185.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "69-storage-center-console-148.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/storage-(center-console)-148.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "70-front-cup-holder-127.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/front-cup-holder-127.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "71-front-arm-rest-storage-275.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/front-arm-rest-storage-275.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "72-glovebox-closed-129.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/glovebox-(closed)-129.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "73-glovebox-130.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/glovebox-130.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "74-drivers-door-panel-39.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/drivers-door-panel-39.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "75-open-trunk-49.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/open-trunk-49.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "76-boot-open-122.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/boot-(open)-122.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "77-boot-lights-280.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/boot-lights-280.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "78-frunk-282.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/frunk-282.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "79-infotainment-system-main-menu-183.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782128823413/infotainment-system-main-menu-183.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "80-apple-carplay-wired-wireless-284.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/apple-carplay-(wired-wireless)-284.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "81-parking-camera-display-136.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/parking-camera-display-136.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "82-360-camera-view-285.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/360-camera-view-285.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "83-speakers-58.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/speakers-58.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "84-ac-controls-151.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/ac-controls-151.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "85-driver-ac-vent-290.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/driver-ac-vent-290.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "86-front-passenger-ac-vent-291.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/front-passenger-ac-vent-291.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "87-front-air-vents-144.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/front-air-vents-144.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "88-roof-mounted-sunroof-control-293.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/roof-mounted-sunroof-control-293.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "89-hazard-light-switch-189.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/hazard-light-switch-189.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "90-door-controls-40.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/door-controls-40.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "91-electronic-parking-brake-297.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/electronic-parking-brake-297.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "92-orvm-controls-298.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127519459/orvm-controls-298.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "93-pedals-82.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/pedals-82.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "94-bonnet-hood-release-299.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/bonnet-hood-release-299.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "95-key-79.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/key-79.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "96-key-rear-301.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/key-rear-301.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "97-reading-lamps-84.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/reading-lamps-84.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "98-front-usb-port-303.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/front-usb-port-303.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "99-ventilated-front-seats-heated-display-307.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/ventilated-front-seats-heated-display-307.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "100-driver-airbag-311.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/driver-airbag-311.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "101-passenger-airbag-312.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/passenger-airbag-312.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "102-tpms-display-315.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/tpms-display-315.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "103-adas-menu-316.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/adas-menu-316.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "104-ambient-lighting-display-320.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/ambient-lighting-display-320.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "105-sun-visor-with-vanity-mirror-83.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/sun-visor-with-vanity-mirror-83.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "106-andes-grey-3b3b3b.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Cyberster/12221/1753354798238/Andes-Grey_3b3b3b.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "107-nuclear-yellow-eeac37.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Cyberster/12221/1753354798238/Nuclear-Yellow_eeac37.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "108-flare-red-ba0116.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Cyberster/12221/1753354798238/Flare-Red_ba0116.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "109-modern-beige-b8b5a8.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Cyberster/12221/1753354798238/Modern-Beige_b8b5a8.jpg",
+      "kind": "colour",
+      "status": "cached"
+    }
+  ],
+  "aliases": {
+    "hero": {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1758802623039/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    "exterior": {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1758802623039/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    "safety": {
+      "file": "41-360-camera-front-249.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Cyberster/12221/1782127603216/360-camera-front-249.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    "technology": {
+      "file": "48-dashboard-59.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Cyberster/12221/1782127435994/dashboard-59.jpg",
+      "kind": "interior",
+      "status": "cached"
+    }
+  },
+  "status": "ok",
+  "note": ""
+}

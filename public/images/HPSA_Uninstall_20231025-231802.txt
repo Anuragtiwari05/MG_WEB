@@ -1,0 +1,10 @@
+08-07-2026 15:03:45: start uninstall HPSA.
+08-07-2026 15:03:45: Start Misc
+08-07-2026 15:03:45: Start remove custom protocol pop up for HPNC.
+08-07-2026 15:03:45: Elevation key exists at Software\Microsoft\Internet Explorer\Low Rights\ElevationPolicy\{dee26fb9-e649-44e5-ac53-68e920d413aa}
+08-07-2026 15:03:45: Setting app settings at Software\Microsoft\Internet Explorer\Low Rights\ElevationPolicy\{dee26fb9-e649-44e5-ac53-68e920d413aa}
+08-07-2026 15:03:45: Refreshing system icon cache
+08-07-2026 15:03:45: End Misc
+08-07-2026 15:03:46: start uninstall HPSA.
+08-07-2026 15:03:46: start uninstall SSF.
+08-07-2026 15:03:46: preparing to uninstall the Framework

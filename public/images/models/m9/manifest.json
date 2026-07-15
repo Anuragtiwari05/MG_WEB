@@ -1,0 +1,774 @@
+{
+  "id": "m9",
+  "name": "MG M9",
+  "cardekhoSlug": "m9",
+  "pageUrl": "https://www.cardekho.com/mg/m9/pictures",
+  "images": [
+    {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1758802685718/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "02-front-view-118.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/front-view-118.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "03-side-view-left-90.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255139320/side-view-(left)-90.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "04-rear-left-view-121.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/rear-left-view-121.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "05-rear-view-119.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/rear-view-119.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "06-rear-right-side-48.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255139320/rear-right-side-48.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "07-front-right-view-120.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/front-right-view-120.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "08-exterior-image-164.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/exterior-image-164.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "09-exterior-image-165.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/exterior-image-165.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "10-exterior-image-166.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/exterior-image-166.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "11-exterior-image-168.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/exterior-image-168.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "12-exterior-image-172.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/exterior-image-172.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "13-grille-97.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255139320/grille-97.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "14-front-bumper-222.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/front-bumper-222.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "15-front-wiper-96.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255139320/front-wiper-96.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "16-front-fender-223.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/front-fender-223.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "17-wheel-42.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255139320/wheel-42.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "18-side-mirror-body-93.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255139320/side-mirror-(body)-93.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "19-side-mirror-glass-92.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255139320/side-mirror-(glass)-92.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "20-door-handle-45.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255139320/door-handle-45.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "21-rear-door-handle-225.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/rear-door-handle-225.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "22-rear-fender-226.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/rear-fender-226.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "23-ev-charging-port-closed-228.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/ev-charging-port-closed-228.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "24-ev-charging-port-open-229.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/ev-charging-port-open-229.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "25-side-skirt-230.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/side-skirt-230.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "26-rear-spoiler-233.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/rear-spoiler-233.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "27-rear-bumper-234.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/rear-bumper-234.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "28-rear-windshield-235.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/rear-windshield-235.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "29-rear-wiper-134.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/rear-wiper-134.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "30-drl-237.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/drl-237.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "31-headlight-43.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255139320/headlight-43.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "32-front-turn-indicator-238.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/front-turn-indicator-238.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "33-taillight-44.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255139320/taillight-44.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "34-rear-turn-indicator-239.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/rear-turn-indicator-239.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "35-led-blinker-on-ovrm-91.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255139320/led-blinker-on-ovrm-91.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "36-rear-reflector-243.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/rear-reflector-243.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "37-top-brake-lamp-high-mount-stop-lamp-244.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/top-brake-lamp-(high-mount-stop-lamp)-244.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "38-front-grill-logo-98.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/front-grill---logo-98.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "39-model-and-badging-100.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/model-and-badging-100.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "40-front-parking-sensor-248.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/front-parking-sensor-248.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "41-rear-parking-sensors-top-view-156.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/rear-parking-sensors-top-view-156.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "42-360-camera-front-249.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/360-camera-front-249.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "43-360-camera-rear-250.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/360-camera-rear-250.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "44-360-camera-right-252.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/360-camera-right-252.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "45-adas-radar-front-253.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/adas-radar-front-253.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "46-adas-camera-front-254.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/adas-camera-front-254.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "47-rain-sensors-203.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/rain-sensors-203.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "48-tyre-pressure-sticker-258.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/tyre-pressure-sticker-258.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "49-dashboard-59.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/dashboard-59.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "50-right-corner-front-view-137.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/right-corner-front-view-137.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "51-rear-view-mirror-courtesy-lamps-64.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/rear-view-mirror-courtesy-lamps-64.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "52-steering-wheel-54.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/steering-wheel-54.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "53-horn-263.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/horn-263.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "54-steering-controls-138.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/steering-controls-138.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "55-configuration-selector-knob-140.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/configuration-selector-knob-140.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "56-wiper-control-264.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/wiper-control-264.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "57-steering-position-adjustments-141.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/steering-position-adjustments-141.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "58-instrument-cluster-62.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/instrument-cluster-62.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "59-door-view-of-driver-seat-51.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/door-view-of-driver-seat-51.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "60-front-seats-passenger-view-88.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/front-seats-(passenger-view)-88.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "61-seat-headrest-200.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/seat-headrest-200.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "62-driver-seat-controls-272.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/driver-seat-controls-272.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "63-seat-adjustments-control-65.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/seat-adjustments-control-65.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "64-front-armrest-185.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/front-armrest-185.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "65-rear-seats-52.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/rear-seats-52.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "66-rear-head-rest-273.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/rear-head-rest-273.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "67-rear-seats-with-arm-rest-193.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/rear-seats-with-arm-rest-193.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "68-third-row-seats-274.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/third-row-seats-274.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "69-storage-center-console-148.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/storage-(center-console)-148.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "70-front-cup-holder-127.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/front-cup-holder-127.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "71-front-arm-rest-storage-275.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/front-arm-rest-storage-275.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "72-glovebox-closed-129.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/glovebox-(closed)-129.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "73-glovebox-130.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/glovebox-130.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "74-drivers-door-panel-39.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/drivers-door-panel-39.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "75-front-seat-back-pockets-276.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/front-seat-back-pockets-276.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "76-centre-tunnel-storage-rear-150.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/centre-tunnel-storage(rear)-150.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "77-third-row-storage-277.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/third-row-storage-277.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "78-open-trunk-49.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/open-trunk-49.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "79-boot-open-122.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/boot-(open)-122.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "80-seats-turned-over-113.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/seats-(turned-over)-113.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "81-boot-lights-280.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/boot-lights-280.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "82-powered-tailgate-controls-281.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/powered-tailgate-controls-281.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "83-third-row-power-folding-seat-switches-198.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/third-row-power-folding-seat-switches-198.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "84-frunk-282.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/frunk-282.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "85-infotainment-system-main-menu-183.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/infotainment-system-main-menu-183.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "86-navigation-or-infotainment-mid-closeup-112.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/navigation-or-infotainment-mid-closeup-112.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "87-apple-carplay-wired-wireless-284.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/apple-carplay-(wired-wireless)-284.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "88-front-tweeters-286.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/front-tweeters-286.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "89-speakers-58.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/speakers-58.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "90-rear-door-speakers-288.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/rear-door-speakers-288.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "91-entertainment-system-rear-143.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/entertainment-system-(rear)-143.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "92-ac-controls-151.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/ac-controls-151.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "93-driver-ac-vent-290.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/driver-ac-vent-290.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "94-front-passenger-ac-vent-291.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/front-passenger-ac-vent-291.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "95-front-air-vents-144.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/front-air-vents-144.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "96-roof-mounted-ac-vents-196.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/roof-mounted-ac-vents-196.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "97-rear-air-vents-86.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/rear-air-vents-86.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "98-roof-mounted-sunroof-control-293.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/roof-mounted-sunroof-control-293.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "99-sun-roof-moon-roof-81.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/sun-roof-moon-roof-81.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "100-hazard-light-switch-189.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/hazard-light-switch-189.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "101-door-controls-40.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/door-controls-40.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "102-orvm-controls-298.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/orvm-controls-298.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "103-pedals-82.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/pedals-82.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "104-reading-lamps-84.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/reading-lamps-84.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "105-cabin-light-rear-302.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/cabin-light-rear-302.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "106-12v-socket-front-326.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/12v-socket-front-326.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "107-front-usb-port-303.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/front-usb-port-303.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "108-wireless-charging-pad-206.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/wireless-charging-pad-206.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "109-third-row-charging-ports-304.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/third-row-charging-ports-304.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "110-driver-airbag-311.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/driver-airbag-311.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "111-passenger-airbag-312.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/passenger-airbag-312.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "112-curtain-airbag-313.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/curtain-airbag-313.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "113-seat-belt-95.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/seat-belt-95.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "114-isofix-mounts-314.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/isofix-mounts-314.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "115-tpms-display-315.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/tpms-display-315.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "116-rear-side-curtains-147.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/rear-side-curtains-147.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "117-ambient-lighting-display-320.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/ambient-lighting-display-320.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "118-floor-mat-199.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255305064/floor-mat-199.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "119-sun-visor-with-vanity-mirror-83.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/sun-visor-with-vanity-mirror-83.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "120-grab-handle-85.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/grab-handle-85.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "121-pearl-white-with-black-roof-c0c0c0.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/M9/12270/1753102162609/Pearl-White-with-Black-Roof_c0c0c0.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "122-concrete-grey-with-black-roof-74787b.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/M9/12270/1753102162609/Concrete-Grey-with-Black-Roof_74787b.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "123-metal-black-010101.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/M9/12270/1753102162609/Metal-Black_010101.jpg",
+      "kind": "colour",
+      "status": "cached"
+    }
+  ],
+  "aliases": {
+    "hero": {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1758802685718/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    "exterior": {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1758802685718/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    "safety": {
+      "file": "37-top-brake-lamp-high-mount-stop-lamp-244.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/M9/12270/1753255038147/top-brake-lamp-(high-mount-stop-lamp)-244.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    "technology": {
+      "file": "49-dashboard-59.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/M9/12270/1753255216050/dashboard-59.jpg",
+      "kind": "interior",
+      "status": "cached"
+    }
+  },
+  "status": "ok",
+  "note": ""
+}

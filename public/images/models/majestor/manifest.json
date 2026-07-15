@@ -1,0 +1,888 @@
+{
+  "id": "majestor",
+  "name": "MG Majestor",
+  "cardekhoSlug": "majestor",
+  "pageUrl": "https://www.cardekho.com/mg/majestor/pictures",
+  "images": [
+    {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1783329135195/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "02-front-view-118.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/front-view-118.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "03-side-view-left-90.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/side-view-(left)-90.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "04-rear-left-view-121.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/rear-left-view-121.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "05-rear-view-119.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/rear-view-119.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "06-rear-right-side-48.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/rear-right-side-48.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "07-front-right-view-120.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/front-right-view-120.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "08-window-line-158.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/window-line-158.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "09-grille-97.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/grille-97.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "10-front-bumper-222.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/front-bumper-222.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "11-front-wiper-96.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/front-wiper-96.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "12-front-fender-223.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/front-fender-223.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "13-wheel-42.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/wheel-42.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "14-side-mirror-body-93.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/side-mirror-(body)-93.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "15-side-mirror-glass-92.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/side-mirror-(glass)-92.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "16-door-handle-45.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/door-handle-45.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "17-rear-door-handle-225.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/rear-door-handle-225.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "18-rear-fender-226.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/rear-fender-226.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "19-gas-cap-open-77.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/gas-cap-(open)-77.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "20-fuel-lid-closed-227.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/fuel-lid-closed-227.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "21-side-skirt-230.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/side-skirt-230.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "22-side-step-231.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/side-step-231.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "23-rear-spoiler-233.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/rear-spoiler-233.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "24-rear-bumper-234.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/rear-bumper-234.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "25-rear-windshield-235.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/rear-windshield-235.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "26-rear-wiper-134.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/rear-wiper-134.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "27-exhaust-pipe-67.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/exhaust-pipe-67.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "28-drl-237.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/drl-237.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "29-headlight-43.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/headlight-43.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "30-front-turn-indicator-238.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/front-turn-indicator-238.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "31-taillight-44.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/taillight-44.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "32-rear-turn-indicator-239.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/rear-turn-indicator-239.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "33-led-blinker-on-ovrm-91.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/led-blinker-on-ovrm-91.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "34-reverse-lamp-241.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/reverse-lamp-241.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "35-rear-foglamp-242.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/rear-foglamp-242.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "36-rear-reflector-243.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/rear-reflector-243.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "37-top-brake-lamp-high-mount-stop-lamp-244.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/top-brake-lamp-(high-mount-stop-lamp)-244.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "38-front-grill-logo-98.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/front-grill---logo-98.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "39-model-and-badging-100.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/model-and-badging-100.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "40-front-parking-sensor-248.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/front-parking-sensor-248.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "41-rear-parking-sensors-top-view-156.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/rear-parking-sensors-top-view-156.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "42-360-camera-front-249.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/360-camera-front-249.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "43-360-camera-rear-250.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/360-camera-rear-250.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "44-360-camera-left-251.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/360-camera-left-251.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "45-360-camera-right-252.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/360-camera-right-252.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "46-adas-camera-front-254.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/adas-camera-front-254.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "47-rain-sensors-203.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/rain-sensors-203.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "48-tyre-pressure-sticker-258.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/tyre-pressure-sticker-258.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "49-fuel-information-sticker-259.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/fuel-information-sticker-259.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "50-engine-50.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/engine-50.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "51-spare-wheel-78.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777892956827/spare-wheel-78.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    {
+      "file": "52-dashboard-59.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/dashboard-59.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "53-dashboard-controls-262.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/dashboard-controls-262.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "54-rear-view-mirror-courtesy-lamps-64.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/rear-view-mirror-courtesy-lamps-64.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "55-steering-wheel-54.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/steering-wheel-54.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "56-steering-controls-138.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/steering-controls-138.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "57-configuration-selector-knob-140.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/configuration-selector-knob-140.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "58-headlamp-beam-switches-146.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/headlamp-beam-switches-146.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "59-paddle-shifters-182.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/paddle-shifters-182.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "60-paddle-shifter-up-265.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/paddle-shifter-up-265.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "61-steering-position-adjustments-141.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/steering-position-adjustments-141.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "62-instrument-cluster-62.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/instrument-cluster-62.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "63-gear-shifter-87.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/gear-shifter-87.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "64-knob-selector-184.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/knob-selector-184.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "65-door-view-of-driver-seat-51.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/door-view-of-driver-seat-51.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "66-front-seats-passenger-view-88.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/front-seats-(passenger-view)-88.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "67-seat-headrest-200.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/seat-headrest-200.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "68-upholstery-with-stitching-271.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/upholstery-with-stitching-271.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "69-upholstery-details-135.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/upholstery-details-135.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "70-driver-seat-controls-272.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/driver-seat-controls-272.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "71-front-armrest-185.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/front-armrest-185.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "72-rear-seats-52.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/rear-seats-52.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "73-rear-head-rest-273.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/rear-head-rest-273.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "74-rear-seats-with-arm-rest-193.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/rear-seats-with-arm-rest-193.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "75-rear-arm-rest-close-view-194.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/rear-arm-rest-close-view-194.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "76-third-row-seats-274.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/third-row-seats-274.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "77-third-row-seat-belts-197.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/third-row-seat-belts-197.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "78-center-console-55.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/center-console-55.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "79-front-cup-holder-127.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/front-cup-holder-127.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "80-front-arm-rest-storage-275.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/front-arm-rest-storage-275.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "81-glovebox-closed-129.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/glovebox-(closed)-129.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "82-glovebox-130.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/glovebox-130.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "83-drivers-door-panel-39.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/drivers-door-panel-39.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "84-front-seat-back-pockets-276.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/front-seat-back-pockets-276.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "85-open-trunk-49.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/open-trunk-49.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "86-boot-space-with-third-row-folded-279.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/boot-space-with-third-row-folded-279.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "87-boot-lights-280.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/boot-lights-280.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "88-luggage-hook-323.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/luggage-hook-323.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "89-powered-tailgate-controls-281.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/powered-tailgate-controls-281.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "90-infotainment-system-main-menu-183.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/infotainment-system-main-menu-183.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "91-navigation-or-infotainment-mid-closeup-112.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/navigation-or-infotainment-mid-closeup-112.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "92-android-auto-wired-wireless-283.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/android-auto-(wired-wireless)-283.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "93-parking-camera-display-136.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/parking-camera-display-136.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "94-360-camera-view-285.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/360-camera-view-285.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "95-front-top-speakers-287.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/front-top-speakers-287.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "96-speakers-58.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/speakers-58.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "97-rear-door-speakers-288.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/rear-door-speakers-288.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "98-ac-controls-151.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/ac-controls-151.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "99-side-ac-control-111.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/side-ac-control-111.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "100-driver-ac-vent-290.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/driver-ac-vent-290.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "101-front-passenger-ac-vent-291.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/front-passenger-ac-vent-291.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "102-front-air-vents-144.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/front-air-vents-144.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "103-roof-mounted-ac-vents-196.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/roof-mounted-ac-vents-196.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "104-rear-air-vents-86.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/rear-air-vents-86.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "105-third-row-ac-vents-292.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/third-row-ac-vents-292.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "106-roof-mounted-sunroof-control-293.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/roof-mounted-sunroof-control-293.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "107-sun-roof-moon-roof-81.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/sun-roof-moon-roof-81.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "108-sunglass-holder-149.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/sunglass-holder-149.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "109-ignition-start-stop-button-142.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/ignition-start-stop-button-142.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "110-hazard-light-switch-189.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/hazard-light-switch-189.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "111-door-controls-40.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/door-controls-40.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "112-electronic-parking-brake-297.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/electronic-parking-brake-297.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "113-orvm-controls-298.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/orvm-controls-298.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "114-pedals-82.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/pedals-82.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "115-bonnet-hood-release-299.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/bonnet-hood-release-299.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "116-gas-cap-release-63.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/gas-cap-release-63.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "117-key-79.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/key-79.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "118-key-rear-301.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/key-rear-301.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "119-reading-lamps-84.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/reading-lamps-84.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "120-cabin-light-rear-302.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/cabin-light-rear-302.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "121-front-usb-port-303.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/front-usb-port-303.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "122-wireless-charging-pad-206.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/wireless-charging-pad-206.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "123-center-tunnel-with-attached-smartphone-123.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/center-tunnel-with-attached-smartphone-123.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "124-third-row-charging-ports-304.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/third-row-charging-ports-304.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "125-ventilated-seat-close-up-305.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/ventilated-seat-close-up-305.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "126-ventilated-front-seats-buttons-306.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/ventilated-front-seats-buttons-306.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "127-driver-airbag-311.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/driver-airbag-311.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "128-passenger-airbag-312.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/passenger-airbag-312.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "129-curtain-airbag-313.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/curtain-airbag-313.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "130-seat-belt-95.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/seat-belt-95.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "131-tpms-display-315.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/tpms-display-315.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "132-adas-menu-316.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/adas-menu-316.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "133-ambient-light-strip-187.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/ambient-light-strip-187.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "134-ambient-lighting-display-320.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892852131/ambient-lighting-display-320.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "135-door-scuff-plate-202.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/door-scuff-plate-202.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "136-sun-visor-with-vanity-mirror-83.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/sun-visor-with-vanity-mirror-83.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "137-grab-handle-85.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/grab-handle-85.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "138-coat-hanger-205.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892759370/coat-hanger-205.jpg",
+      "kind": "interior",
+      "status": "cached"
+    },
+    {
+      "file": "139-black-metal-0b0c0c.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Majestor/13304/1770899352555/Black-Metal_0b0c0c.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "140-pearl-white-edefef.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Majestor/13304/1770899352555/Pearl-White_edefef.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "141-concrete-grey-5c616a.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Majestor/13304/1770899352555/Concrete-Grey_5c616a.jpg",
+      "kind": "colour",
+      "status": "cached"
+    },
+    {
+      "file": "142-black-ash-2a2a2a.jpg",
+      "url": "https://stimg.cardekho.com/images/car-images/930x620/MG/Majestor/13304/1770899352555/Black-Ash_2a2a2a.jpg",
+      "kind": "colour",
+      "status": "cached"
+    }
+  ],
+  "aliases": {
+    "hero": {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1783329135195/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    "exterior": {
+      "file": "01-front-left-side-47.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1783329135195/front-left-side-47.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    "safety": {
+      "file": "37-top-brake-lamp-high-mount-stop-lamp-244.jpg",
+      "url": "https://stimg.cardekho.com/images/carexteriorimages/930x620/MG/Majestor/12370/1777893036648/top-brake-lamp-(high-mount-stop-lamp)-244.jpg",
+      "kind": "exterior",
+      "status": "cached"
+    },
+    "technology": {
+      "file": "52-dashboard-59.jpg",
+      "url": "https://stimg.cardekho.com/images/carinteriorimages/930x620/MG/Majestor/12370/1777892453031/dashboard-59.jpg",
+      "kind": "interior",
+      "status": "cached"
+    }
+  },
+  "status": "ok",
+  "note": ""
+}
