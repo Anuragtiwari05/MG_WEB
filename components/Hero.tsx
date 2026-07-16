@@ -25,22 +25,39 @@ export default function Hero() {
     <section
       id="home"
       className="relative overflow-hidden bg-brand-deep"
-      style={{ marginTop: "72px" }}
+      style={{ marginTop: "80px" }}
     >
-      <div className="relative h-[420px] w-full sm:h-[480px] lg:h-[540px] xl:h-[580px] md:h-[620px]">
-        {/* Carousel Images - Simple, no text overlays or scrims */}
-        {heroSlides.map((slide, i) => (
-          <Image
-            key={`${slide.model}-${i}`}
-            src={slide.image}
-            alt={slide.alt}
-            fill
-            priority={i === 0}
-            sizes="100vw"
-            className="object-cover transition-opacity duration-1000 ease-out"
-            style={{ opacity: i === index ? 1 : 0 }}
-          />
-        ))}
+      <div className="relative h-[calc(100vh-80px)] min-h-[500px] w-full">
+        {/* Carousel Images & Videos - Simple, no text overlays or scrims */}
+        {heroSlides.map((slide, i) => {
+          const isActive = i === index;
+          if (slide.video) {
+            return (
+              <video
+                key={`${slide.model}-${i}`}
+                src={slide.video}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-out"
+                style={{ opacity: isActive ? 1 : 0, pointerEvents: isActive ? "auto" : "none" }}
+              />
+            );
+          }
+          return (
+            <Image
+              key={`${slide.model}-${i}`}
+              src={slide.image}
+              alt={slide.alt}
+              fill
+              priority={i === 0}
+              sizes="100vw"
+              className="object-cover transition-opacity duration-1000 ease-out"
+              style={{ opacity: isActive ? 1 : 0 }}
+            />
+          );
+        })}
 
         {/* Slide navigation controls */}
         <button

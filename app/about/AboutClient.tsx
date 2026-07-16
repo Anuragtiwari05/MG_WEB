@@ -214,11 +214,19 @@ export default function AboutPage() {
                     Our Brand Heritage
                   </p>
                   <h3 className="mt-2 font-display text-2xl font-black uppercase tracking-wide sm:text-3xl">
-                    MG Motor India: &ldquo;{mgIndiaFacts.tagline}&rdquo;
+                    JSW MG Motor India: &ldquo;{mgIndiaFacts.tagline}&rdquo;
                   </h3>
-                  <p className="mt-4 text-sm leading-relaxed text-white/70">
-                    Founded in {mgIndiaFacts.founded}, MG (Morris Garages) has a 100+ year global legacy. In India, we are pioneering the electric and connected vehicle landscape. {mgIndiaFacts.plant} {mgIndiaFacts.network}
-                  </p>
+                  <div className="mt-4 space-y-3 text-sm leading-relaxed text-white/70">
+                    <p>
+                      Founded in {mgIndiaFacts.founded} in Oxford, UK, MG (Morris Garages) has a 100+ year global legacy. In India, we are pioneering the electric and connected vehicle landscape. {mgIndiaFacts.plant} {mgIndiaFacts.network}
+                    </p>
+                    <p>
+                      {mgIndiaFacts.jswJointVenture}
+                    </p>
+                    <p>
+                      {mgIndiaFacts.caePhilosophy}
+                    </p>
+                  </div>
                 </Reveal>
                 <div className="grid gap-4 sm:grid-cols-2">
                   {mgIndiaFacts.csr.map((c, i) => (

@@ -58,3 +58,9 @@ remove_shadows.py
 .claude/
 CLAUDE.md
 image-fetch-report.md
+
+# reference downloads
+*.html
+*_files/
+scratch/
+

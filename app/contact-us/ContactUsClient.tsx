@@ -26,6 +26,7 @@ export default function ContactUsClient() {
     name: "",
     phone: "",
     email: "",
+    pincode: "",
     subject: "",
     message: "",
   });
@@ -43,8 +44,8 @@ export default function ContactUsClient() {
         {/* Page Hero */}
         <section className="relative h-[240px] w-full overflow-hidden bg-brand-deep sm:h-[300px]">
           <Image
-            alt="MG Motor Mumbai Showroom"
-            src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=1600&q=80"
+            alt="MG Cyberster"
+            src="https://imgd.aeplcdn.com/1920x1080/n/cw/ec/193375/cyberster-exterior-left-rear-three-quarter.jpeg?isig=0&q=80"
             fill
             className="object-cover"
             priority
@@ -185,6 +186,7 @@ export default function ContactUsClient() {
                           name: "",
                           phone: "",
                           email: "",
+                          pincode: "",
                           subject: "",
                           message: "",
                         });
@@ -233,6 +235,19 @@ export default function ContactUsClient() {
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           placeholder="you@example.com"
+                          className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none transition-all placeholder:text-faint focus:border-brand focus:ring-2 focus:ring-brand/10"
+                        />
+                      </label>
+
+                      <label className="block">
+                        <span className="mb-1.5 block text-xs font-semibold text-muted">Pincode</span>
+                        <input
+                          type="text"
+                          required
+                          pattern="[0-9]{6}"
+                          value={formData.pincode}
+                          onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
+                          placeholder="6-digit pincode"
                           className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none transition-all placeholder:text-faint focus:border-brand focus:ring-2 focus:ring-brand/10"
                         />
                       </label>

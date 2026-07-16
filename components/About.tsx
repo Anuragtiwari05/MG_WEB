@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Reveal from "./Reveal";
 import { Check } from "./icons";
@@ -23,6 +24,7 @@ function joinWithAnd(items: string[]) {
 }
 
 export default function About() {
+  const [activeCard, setActiveCard] = useState<number | null>(null);
   return (
     <section id="about" className="scroll-mt-24 bg-white py-14 lg:py-20">
       <div className="container-px mx-auto max-w-[1400px]">
@@ -132,25 +134,95 @@ export default function About() {
                   key={c.title}
                   delay={i * 100}
                   variant="fade-up"
-                  className="rounded-lg border border-white/10 bg-white/5 p-6"
                 >
-                  <div className="flex items-start gap-3">
-                    <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
-                    <div>
-                      <h4 className="text-sm font-bold uppercase tracking-wider text-white">
-                        {c.title}
-                      </h4>
-                      <p className="mt-1.5 text-xs leading-relaxed text-white/70">
-                        {c.text}
-                      </p>
+                  <button
+                    type="button"
+                    onClick={() => setActiveCard(i)}
+                    className="group w-full rounded-lg border border-white/10 bg-white/5 p-6 text-left transition-all duration-200 hover:border-brand/60 hover:bg-white/10 cursor-pointer"
+                  >
+                    <div className="flex items-start gap-3">
+                      <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand transition-transform group-hover:scale-110" />
+                      <div className="flex-1">
+                        <h4 className="text-sm font-bold uppercase tracking-wider text-white group-hover:text-brand transition-colors">
+                          {c.title}
+                        </h4>
+                        <p className="mt-1.5 text-xs leading-relaxed text-white/70 line-clamp-2">
+                          {c.text}
+                        </p>
+                        <span className="mt-3 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-brand/70 group-hover:text-brand transition-colors">
+                          Learn more
+                          <svg className="h-2.5 w-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                  </button>
                 </Reveal>
               ))}
             </div>
           </div>
         </div>
       </div>
+
+      {/* ── CSR CARD MODAL POPUP ───────────────────────────────── */}
+      {activeCard !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          onClick={() => setActiveCard(null)}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+
+          {/* Card */}
+          <div
+            className="relative z-10 w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Top red accent */}
+            <div className="h-1.5 w-full bg-brand" />
+
+            <div className="p-7">
+              {/* Header */}
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10">
+                    <Check className="h-5 w-5 text-brand" />
+                  </span>
+                  <h3 className="font-display text-xl font-black uppercase tracking-wide text-text">
+                    {mgIndiaFacts.csr[activeCard].title}
+                  </h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveCard(null)}
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors cursor-pointer"
+                >
+                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Body */}
+              <p className="mt-5 text-sm leading-relaxed text-muted">
+                {mgIndiaFacts.csr[activeCard].text}
+              </p>
+
+              {/* Close button */}
+              <div className="mt-7">
+                <button
+                  type="button"
+                  onClick={() => setActiveCard(null)}
+                  className="w-full rounded-lg bg-brand py-3 text-sm font-bold text-white transition-all hover:bg-brand/90 cursor-pointer"
+                >
+                  Got it
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

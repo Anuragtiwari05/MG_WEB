@@ -57,10 +57,11 @@ export const nav = {
   links: [
     { label: "Home", href: "/#home" },
     { label: "About", href: "/about" },
-    { label: "Models", href: "/cars" },
-    { label: "Services", href: "/locate-service-centre" },
+    { label: "Find a Car", href: "/cars" },
+    { label: "Service", href: "/locate-service-centre" },
     { label: "Locations", href: "/locations" },
     { label: "Contact Us", href: "/contact-us" },
+    { label: "Blogs", href: "/blogs" },
   ],
 };
 
@@ -107,19 +108,29 @@ export const groupInfo = {
 };
 
 export const mgIndiaFacts = {
-  tagline: "Passion Drives",
+  tagline: "100 Years of Driving Passion",
   founded: 1924,
-  plant: "Manufacturing plant in Halol, Gujarat, with advanced robotics and sustainability initiatives.",
-  network: "Wide sales and service network across India providing seamless support.",
-  milestone: "Celebrating 100+ years of MG legacy worldwide, delivering premium motoring experiences.",
+  plant: "Our state-of-the-art manufacturing plant in Halol, Gujarat, established in 2017, features advanced robotic automation, carbon-neutral initiatives, and serves as our core production hub.",
+  network: "With a robust network of showrooms, workshops, and high-speed charging stations across India, JSW MG Motor India provides seamless support.",
+  milestone: "Marking 100+ years since Morris Garages was founded in Oxford, UK, we continue to shape the future of tech-mobility.",
+  jswJointVenture: "In 2023, JSW Group and SAIC Motor entered a strategic joint venture, forming JSW MG Motor India to accelerate green mobility and local tech integration.",
+  caePhilosophy: "Driven by the CAE philosophy (Connected, Autonomous, Electric), we introduced India's first internet car (Hector) and continue to lead with Windsor EV, Comet EV, and ZS EV.",
   csr: [
     {
       title: "MG SEWA",
-      text: "Supporting community empowerment, diversity, and girl child education across India.",
+      text: "Supporting community empowerment, diversity, and girl child education, alongside supporting local healthcare initiatives.",
     },
     {
       title: "Green Mobility",
-      text: "Pioneering the electric vehicle landscape with Windsor, ZS EV and eco-initiatives.",
+      text: "Leading the electric vehicle revolution in India by building a robust EV charging ecosystem and carbon-offset programs.",
+    },
+    {
+      title: "MG NURTURE",
+      text: "Empowering students and startups through engineering and innovation programs, preparing the youth for future auto-tech roles.",
+    },
+    {
+      title: "CAE INNOVATION",
+      text: "Pioneering the market with AI assistants, Level 2 ADAS technologies, and smart connected dashboards.",
     },
   ],
 };
@@ -133,7 +144,7 @@ export const aboutFaqData = [
   {
     question: "Is MG Motor Mumbai an authorized MG dealership?",
     answer:
-      "Yes. MG Motor Mumbai is an authorized MG Motor India dealership, with showrooms and service centers located in Malad, Andheri, Thane, and Navi Mumbai.",
+      "Yes. MG Motor Mumbai (Krishiv Auto) is an authorized JSW MG Motor India dealership, with state-of-the-art showrooms located in Jogeshwari, Prabhadevi, Malad, Vasai, and Worli.",
   },
   {
     question: "How many customers does MG Motor Mumbai have?",
@@ -143,7 +154,7 @@ export const aboutFaqData = [
   {
     question: "What areas do you cover in Mumbai?",
     answer:
-      "Our showrooms and workshops are strategically located across Mumbai, including Malad (West), Andheri (West), Thane, and Navi Mumbai.",
+      "Our showrooms and workshops are strategically located across Mumbai, including Jogeshwari, Prabhadevi, Malad, Vasai, and Worli.",
   },
   {
     question: "When was MG founded?",
@@ -161,9 +172,81 @@ export type Slide = {
   image: string;
   alt: string;
   features: string[];
+  video?: string;
 };
 
 export const heroSlides: Slide[] = [
+  {
+    model: "MG ZS EV",
+    badge: "PURE ELECTRIC SUV",
+    headline: "MG ZS EV",
+    sub: "Advanced tech meets clean electric power with Level 2 ADAS safety.",
+    price: "18.98",
+    image: "https://mgmotor.scene7.com/is/image/mgmotor/zs-bn-dsc-0109?hei=1920&qlt=80&resMode=bisharp",
+    alt: "MG ZS EV Banner",
+    features: [],
+  },
+  {
+    model: "MG CYBERSTER",
+    badge: "ELECTRIC ROADSTER",
+    headline: "MG CYBERSTER",
+    sub: "An all-electric roadster that marks the return of the iconic MG sports car.",
+    price: "65.00",
+    image: "https://mgmotor.scene7.com/is/image/mgmotor/cybie-kmi-desktop-g?fmt=webp-alpha&resMode=bisharp&fit=constrain&qlt=90&wid=1920",
+    alt: "MG Cyberster Electric Roadster",
+    features: [],
+  },
+  {
+    model: "MG WINDSOR EV",
+    badge: "PURE ELECTRIC CUV",
+    headline: "BUSINESS CLASS COMFORT",
+    sub: "India's first CUV, combining sedan luxury with SUV space.",
+    price: "13.50",
+    image: "https://mgmotor.scene7.com/is/image/mgmotor/cuv-bn-dsc-033?hei=1920&qlt=80&resMode=bisharp",
+    alt: "MG Windsor EV CUV",
+    features: [],
+  },
+  {
+    model: "MG ASTOR",
+    badge: "TECH-FORWARD SUV",
+    headline: "MG ASTOR",
+    sub: "Premium design featuring Personal AI Assistant robot on your dashboard.",
+    price: "9.98",
+    image: "https://mgmotor.scene7.com/is/image/mgmotor/as-bn-dsc-053?hei=1920&qlt=80&resMode=bisharp",
+    alt: "MG Astor Banner",
+    features: [],
+  },
+  {
+    model: "MG HECTOR",
+    badge: "INTERNET SUV",
+    headline: "BOLD & POWERFUL",
+    sub: "Make a statement with an Argyle-inspired front grille and Level 2 ADAS.",
+    price: "11.99",
+    image: "https://mgmotor.scene7.com/is/image/mgmotor/mgi-hector-bn-homepage-003?hei=1920&qlt=80&resMode=bisharp",
+    alt: "MG Hector SUV",
+    features: [],
+  },
+  {
+    model: "MG MAJESTOR",
+    badge: "PREMIUM 7-SEATER SUV",
+    headline: "MG MAJESTOR",
+    sub: "The best 7-seater premium SUV.",
+    price: "39.99",
+    image: "/images/hero-majestor.jpg",
+    video: "/videos/hero-majestor.mp4",
+    alt: "MG Majestor 7 Seater SUV",
+    features: [],
+  },
+  {
+    model: "MG M9",
+    badge: "PREMIUM ELECTRIC MPV",
+    headline: "MG M9",
+    sub: "Experience the peak of luxury electric MPV travel.",
+    price: "45.00",
+    image: "https://mgmotor.scene7.com/is/image/mgmotor/m9-kmi-desktop-g?fmt=webp-alpha&resMode=bisharp&fit=constrain&qlt=90&wid=1920",
+    alt: "MG M9 Premium Electric MPV",
+    features: [],
+  },
   {
     model: "MG MOTOR LINEUP 1",
     badge: "PREMIUM PERFORMANCE",
@@ -192,26 +275,6 @@ export const heroSlides: Slide[] = [
     price: "15.00",
     image: "https://mgmotor.scene7.com/is/image/mgmotor/mg-bn-dsc-087?hei=1920&qlt=80&resMode=bisharp",
     alt: "MG Motor Premium Lineup 3",
-    features: [],
-  },
-  {
-    model: "MG HECTOR",
-    badge: "INTERNET SUV",
-    headline: "BOLD & POWERFUL",
-    sub: "Make a statement with an Argyle-inspired front grille and Level 2 ADAS.",
-    price: "11.99",
-    image: "https://mgmotor.scene7.com/is/image/mgmotor/mgi-hector-bn-homepage-003?hei=1920&qlt=80&resMode=bisharp",
-    alt: "MG Hector SUV",
-    features: [],
-  },
-  {
-    model: "MG WINDSOR EV",
-    badge: "PURE ELECTRIC CUV",
-    headline: "BUSINESS CLASS COMFORT",
-    sub: "India's first CUV, combining sedan luxury with SUV space.",
-    price: "13.50",
-    image: "https://mgmotor.scene7.com/is/image/mgmotor/cuv-bn-dsc-033?hei=1920&qlt=80&resMode=bisharp",
-    alt: "MG Windsor EV CUV",
     features: [],
   },
 ];
@@ -302,6 +365,7 @@ export type Car = {
   youtubeVideo: string;
   categorizedFeatures: CategorizedFeatures;
   featureSections?: FeatureSection[];
+  brochureUrl?: string;
 };
 
 const lakh = (inr: number) => (inr / 100000).toFixed(2);
@@ -319,7 +383,7 @@ export const cars: Car[] = [
     fuel: "Petrol",
     blurb: "MG's tech-forward mid-size SUV, featuring Personal AI Assistant and Level 2 ADAS.",
     cta: "Explore the Astor",
-    image: "/images/models/model-astor-transparent.png",
+    image: "/images/models/astor/01-front-left-side-47.jpg",
     alt: "MG Astor SUV",
     seating: "5 Seater",
     mileage: "14.5 kmpl",
@@ -332,6 +396,7 @@ export const cars: Car[] = [
     ],
     heroImage: "/images/models/model-astor.png",
     interiorImage: "/images/models/astor/10-dashboard-59.jpg",
+    brochureUrl: "https://s7ap1.scene7.com/is/content/mgmotor/brand/mgmotor/homepage/tools/brochures/MG%20Astor%20-%20Brochure.pdf",
     galleryImages: [
       { src: "/images/models/astor/01-front-left-side-47.jpg", caption: "Commanding front-facing road posture" },
       { src: "/images/models/astor/04-exterior-image-166.jpg", caption: "Sporty rear-three-quarters profile" },
@@ -489,7 +554,7 @@ export const cars: Car[] = [
     fuel: "Petrol · Diesel",
     blurb: "India's first internet SUV, redefined with the bold new Aura Hex grille and immersive interior tech.",
     cta: "Explore the Hector",
-    image: "/images/models/model-hector-transparent.png",
+    image: "/images/models/hector/01-front-left-side-47.jpg",
     alt: "MG Hector SUV",
     seating: "5, 6 or 7 Seater",
     mileage: "13.7 kmpl",
@@ -502,6 +567,7 @@ export const cars: Car[] = [
     ],
     heroImage: "/images/models/model-hector.png",
     interiorImage: "/images/models/hector/08-dashboard-59.jpg",
+    brochureUrl: "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Hector%20-%20Brochure.pdf",
     galleryImages: [
       { src: "/images/models/hector/01-front-left-side-47.jpg", caption: "MG Hector — Commanding front road posture" },
       { src: "/images/models/hector/02-exterior-image-164.jpg", caption: "Sporty front-facing road stance" },
@@ -742,7 +808,7 @@ export const cars: Car[] = [
     fuel: "Electric",
     blurb: "The premium electric SUV delivering clean style, Level 2 ADAS safety, and long range electric performance.",
     cta: "Explore ZS EV",
-    image: "/images/models/model-zs-ev-transparent.png",
+    image: "/images/models/zs-ev/01-front-left-side-47.jpg",
     alt: "MG ZS EV SUV",
     seating: "5 Seater",
     mileage: "461 km Range*",
@@ -755,6 +821,7 @@ export const cars: Car[] = [
     ],
     heroImage: "/images/models/model-zs-ev.png",
     interiorImage: "/images/models/zs-ev/15-dashboard-59.jpg",
+    brochureUrl: "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20ZSEV%20-%20Brochure.pdf",
     galleryImages: [
       { src: "/images/models/zs-ev/01-front-left-side-47.jpg", caption: "MG ZS EV — Commanding front road posture" },
       { src: "/images/models/zs-ev/03-side-view-left-90.jpg", caption: "Sleek and aerodynamic side silhouette" },
@@ -975,7 +1042,7 @@ export const cars: Car[] = [
     fuel: "Electric",
     blurb: "India's first CUV, combining the luxury of a sedan with the spaciousness of an SUV.",
     cta: "Explore Windsor EV",
-    image: "/images/models/model-windsor-transparent.png",
+    image: "/images/models/windsor-ev/01-front-left-side-47.jpg",
     alt: "MG Windsor EV crossover",
     seating: "5 Seater",
     mileage: "331 km Range*",
@@ -988,6 +1055,7 @@ export const cars: Car[] = [
     ],
     heroImage: "/images/models/model-windsor.png",
     interiorImage: "/images/models/windsor-ev/40-dashboard-59.jpg",
+    brochureUrl: "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Windsor%20EV%20-%20Brochure.pdf",
     galleryImages: [
       { src: "/images/models/windsor-ev/01-front-left-side-47.jpg", caption: "MG Windsor EV — Commanding front road posture" },
       { src: "/images/models/windsor-ev/03-side-view-left-90.jpg", caption: "Sleek aerodynamic side silhouette" },
@@ -1000,10 +1068,12 @@ export const cars: Car[] = [
       { src: "/images/models/windsor-ev/16-wheel-42.jpg", caption: "Dynamic 18-inch aerodynamic alloy wheels" },
     ],
     colors: [
-      { name: "Clay Beige", hex: "#bba895", cssFilter: "none", image: "/images/models/windsor-ev/99-turquoise-green-2d4047.jpg" }, // using a valid color placeholder
-      { name: "Turquoise Green", hex: "#005952", cssFilter: "none", image: "/images/models/windsor-ev/99-turquoise-green-2d4047.jpg" },
-      { name: "Pearl White", hex: "#f3f4f6", cssFilter: "none", image: "/images/models/windsor-ev/97-223-pearl-white-c0c0c0.jpg" },
-      { name: "Starry Black", hex: "#111111", cssFilter: "none", image: "/images/models/windsor-ev/98-starburst-black-000000.jpg" },
+      { name: "Pearl White", hex: "#c0c0c0", cssFilter: "none", image: "/images/models/windsor-ev/color-pearl-white.png" },
+      { name: "Starburst Black", hex: "#000000", cssFilter: "none", image: "/images/models/windsor-ev/color-starburst-black.png" },
+      { name: "Turquoise Green", hex: "#2d4047", cssFilter: "none", image: "/images/models/windsor-ev/color-turquoise-green.png" },
+      { name: "Aurora Silver", hex: "#b5b5b5", cssFilter: "none", image: "/images/models/windsor-ev/color-aurora-silver.png" },
+      { name: "Glaze Red", hex: "#b10404", cssFilter: "none", image: "/images/models/windsor-ev/color-glaze-red.png" },
+      { name: "Clay Beige", hex: "#bba895", cssFilter: "none", image: "/images/models/model-windsor-transparent.png" },
     ],
     details: {
       length: "4300 mm",
@@ -1142,7 +1212,7 @@ export const cars: Car[] = [
     fuel: "Electric",
     blurb: "Ultra-compact smart urban hatchback, designed for easy city parking and emission-free transit.",
     cta: "Explore Comet EV",
-    image: "/images/models/model-comet-ev-transparent.png",
+    image: "/images/models/comet-ev/01-front-left-side-47.jpg",
     alt: "MG Comet EV",
     seating: "4 Seater",
     mileage: "230 km Range*",
@@ -1155,6 +1225,7 @@ export const cars: Car[] = [
     ],
     heroImage: "/images/models/model-comet-ev.png",
     interiorImage: "/images/models/comet-ev/21-dashboard-59.jpg",
+    brochureUrl: "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Comet%20EV%20-%20Brochure.pdf",
     galleryImages: [
       { src: "/images/models/comet-ev/01-front-left-side-47.jpg", caption: "MG Comet EV — Commanding front road posture" },
       { src: "/images/models/comet-ev/03-side-view-left-90.jpg", caption: "Sleek aerodynamic side profile" },
@@ -1167,10 +1238,11 @@ export const cars: Car[] = [
       { src: "/images/models/comet-ev/14-wheel-42.jpg", caption: "Stylized urban alloy wheels" },
     ],
     colors: [
-      { name: "Apple Green / Black", hex: "#7fff00", cssFilter: "none", image: "/images/models/comet-ev/38-green-with-black-sunroof-98ca31.jpg" },
-      { name: "Candy White", hex: "#ffffff", cssFilter: "none", image: "/images/models/comet-ev/42-candy-white-e0dfe4.jpg" },
-      { name: "Aurora Silver", hex: "#cccccc", cssFilter: "none", image: "/images/models/comet-ev/40-aurora-silver-8e929a.jpg" },
-      { name: "Starry Black", hex: "#111111", cssFilter: "none", image: "/images/models/comet-ev/39-starry-black-292929.jpg" },
+      { name: "Apple Green / Black", hex: "#98ca31", cssFilter: "none", image: "/images/models/comet-ev/color-apple-green-black.png" },
+      { name: "Candy White", hex: "#e0dfe4", cssFilter: "none", image: "/images/models/comet-ev/color-candy-white.png" },
+      { name: "Aurora Silver", hex: "#8e929a", cssFilter: "none", image: "/images/models/comet-ev/color-aurora-silver.png" },
+      { name: "Starry Black", hex: "#292929", cssFilter: "none", image: "/images/models/comet-ev/color-starry-black.png" },
+      { name: "Candy White / Black", hex: "#f1f1f3", cssFilter: "none", image: "/images/models/comet-ev/color-candy-white-black.png" },
     ],
     details: {
       length: "2974 mm",
@@ -1308,7 +1380,7 @@ export const cars: Car[] = [
     fuel: "Diesel",
     blurb: "A new level of power & presence. The ultimate premium luxury SUV commanding respect on all roads.",
     cta: "Explore the Majestor",
-    image: "/images/models/model-majestor-transparent.png",
+    image: "/images/models/majestor/01-front-left-side-47.jpg",
     alt: "MG Majestor SUV",
     seating: "7 Seater",
     mileage: "12.4 kmpl",
@@ -1321,6 +1393,7 @@ export const cars: Car[] = [
     ],
     heroImage: "/images/models/model-majestor.png",
     interiorImage: "/images/models/majestor/52-dashboard-59.jpg",
+    brochureUrl: "https://s7ap1.scene7.com/is/content/mgmotor/mgmotor/documents/MG%20Majestor%20-%20Brochure.pdf",
     galleryImages: [
       { src: "/images/models/majestor/01-front-left-side-47.jpg", caption: "MG Majestor — Commanding front road posture" },
       { src: "/images/models/majestor/03-side-view-left-90.jpg", caption: "Sleek aerodynamic side profile" },
@@ -1333,10 +1406,9 @@ export const cars: Car[] = [
       { src: "/images/models/majestor/13-wheel-42.jpg", caption: "Dynamic multi-spoke alloy wheels" },
     ],
     colors: [
-      { name: "Pearl White", hex: "#ffffff", cssFilter: "none", image: "/images/models/majestor/140-pearl-white-edefef.jpg" },
-      { name: "Concrete Grey", hex: "#7e8285", cssFilter: "none", image: "/images/models/majestor/141-concrete-grey-5c616a.jpg" },
-      { name: "Metal Black", hex: "#111111", cssFilter: "none", image: "/images/models/majestor/139-black-metal-0b0c0c.jpg" },
-      { name: "Metal Ash", hex: "#4f5459", cssFilter: "none", image: "/images/models/majestor/142-black-ash-2a2a2a.jpg" },
+      { name: "Pearl White", hex: "#edefef", cssFilter: "none", image: "/images/models/majestor/color-pearl-white.png" },
+      { name: "Concrete Grey", hex: "#5c616a", cssFilter: "none", image: "/images/models/majestor/color-concrete-grey.png" },
+      { name: "Black Ash", hex: "#2a2a2a", cssFilter: "none", image: "/images/models/majestor/color-black-ash.png" },
     ],
     details: {
       length: "4985 mm",
@@ -1478,7 +1550,7 @@ export const cars: Car[] = [
     fuel: "Electric",
     blurb: "MG Select's flagship electric luxury MPV, redefining first-class travel in Mumbai.",
     cta: "Explore MG M9",
-    image: "/images/models/model-m9-transparent.png",
+    image: "/images/models/m9/01-front-left-side-47.jpg",
     alt: "MG M9 Electric Luxury MPV",
     seating: "7 Seater",
     mileage: "480 km Range*",
@@ -1503,9 +1575,9 @@ export const cars: Car[] = [
       { src: "/images/models/m9/17-wheel-42.jpg", caption: "Stylized multi-spoke alloy wheels" },
     ],
     colors: [
-      { name: "Pearl White", hex: "#ffffff", cssFilter: "none", image: "/images/models/m9/121-pearl-white-with-black-roof-c0c0c0.jpg" },
-      { name: "Aurora Silver", hex: "#cccccc", cssFilter: "none", image: "/images/models/m9/122-concrete-grey-with-black-roof-74787b.jpg" },
-      { name: "Starry Black", hex: "#111111", cssFilter: "saturate(0.1) brightness(0.25) contrast(1.4)", image: "/images/models/m9/123-metal-black-010101.jpg" },
+      { name: "Pearl White with Black Roof", hex: "#c0c0c0", cssFilter: "none", image: "/images/models/m9/color-pearl-white-black-roof.png" },
+      { name: "Concrete Grey with Black Roof", hex: "#74787b", cssFilter: "none", image: "/images/models/m9/color-concrete-grey-black-roof.png" },
+      { name: "Metal Black", hex: "#010101", cssFilter: "none", image: "/images/models/m9/color-metal-black.png" },
     ],
     details: {
       length: "5270 mm",
@@ -1648,7 +1720,7 @@ export const cars: Car[] = [
     fuel: "Electric",
     blurb: "The premium electric scissor-door roadster, delivering supercar dynamics and performance.",
     cta: "Explore Cyberster",
-    image: "/images/models/model-cyberster-transparent.png",
+    image: "/images/models/cyberster/01-front-left-side-47.jpg",
     alt: "MG Cyberster Electric Roadster",
     seating: "2 Seater",
     mileage: "509 km Range*",
@@ -1673,10 +1745,10 @@ export const cars: Car[] = [
       { src: "/images/models/cyberster/23-wheel-42.jpg", caption: "Dynamic turbine alloy wheels" },
     ],
     colors: [
-      { name: "Dynamic Red", hex: "#cc0000", cssFilter: "none", image: "/images/models/cyberster/108-flare-red-ba0116.jpg" },
-      { name: "Electric Yellow", hex: "#ffea00", cssFilter: "none", image: "/images/models/cyberster/107-nuclear-yellow-eeac37.jpg" },
-      { name: "Bullet Silver", hex: "#cccccc", cssFilter: "saturate(0.1) brightness(1.2) contrast(0.9)", image: "/images/models/cyberster/109-modern-beige-b8b5a8.jpg" }, // matching beige/silver placeholder
-      { name: "Starry Black", hex: "#111111", cssFilter: "saturate(0.1) brightness(0.25) contrast(1.4)", image: "/images/models/cyberster/106-andes-grey-3b3b3b.jpg" },
+      { name: "Dynamic Red", hex: "#cc0000", cssFilter: "none", image: "/images/models/cyberster/Flare-Red_ba0116.jpg" },
+      { name: "Electric Yellow", hex: "#ffea00", cssFilter: "none", image: "/images/models/cyberster/Nuclear-Yellow_eeac37.jpg" },
+      { name: "Bullet Silver", hex: "#cccccc", cssFilter: "none", image: "/images/models/cyberster/Modern-Beige_b8b5a8.jpg" },
+      { name: "Andes Grey", hex: "#111111", cssFilter: "none", image: "/images/models/cyberster/Andes-Grey_3b3b3b.jpg" },
     ],
     details: {
       length: "4535 mm",
@@ -1976,7 +2048,7 @@ export const faqData = [
   {
     question: "Where are the showroom locations in Mumbai?",
     answer:
-      "Our showroom branches are located in Malad (West), Andheri (West), Thane (West), and Palm Beach Road in Navi Mumbai. Detailed addresses and contact details are available on our Contact Us page.",
+      "Our showroom branches are located in Jogeshwari, Prabhadevi, Malad, Vasai, and Worli in Mumbai. Detailed addresses and contact details are available on our Contact Us page.",
   },
 ];
 
@@ -1997,7 +2069,7 @@ export const blogs: Blog[] = [
     title: "Future is Electric: Why EVs are the Smarter Choice",
     excerpt: "Explore how MG's electric mobility lineup is shaping a cleaner, smarter, and more sustainable tomorrow.",
     readTime: "5 min read",
-    image: "/images/blog-ev.png",
+    image: "/images/models/model-windsor-transparent.png",
     alt: "Future of EV banner",
   },
   {
@@ -2006,7 +2078,7 @@ export const blogs: Blog[] = [
     title: "MG Cyberster: Redefining Electric Performance",
     excerpt: "A closer look at MG's all-electric roadster and the future of performance EVs.",
     readTime: "5 min read",
-    image: "/images/blog-cyberster.jpg",
+    image: "/images/models/model-cyberster-transparent.png",
     alt: "MG Cyberster roadster",
   },
   {
@@ -2015,7 +2087,7 @@ export const blogs: Blog[] = [
     title: "5 Essential Tips for a Smooth MG Drive",
     excerpt: "Simple maintenance habits and driving habits that keep your MG performing at its best.",
     readTime: "4 min read",
-    image: "/images/blog-drive.jpg",
+    image: "/images/models/model-hector-transparent.png",
     alt: "MG highway drive",
   },
   {
@@ -2024,7 +2096,7 @@ export const blogs: Blog[] = [
     title: "How MG i-SMART Makes Every Drive Smarter",
     excerpt: "Explore the connected dashboard and app features that keep you safe, informed, and in control.",
     readTime: "5 min read",
-    image: "/images/blog-ismart.png",
+    image: "/images/models/model-astor-transparent.png",
     alt: "MG i-SMART screen",
   },
   {
@@ -2033,7 +2105,7 @@ export const blogs: Blog[] = [
     title: "SUV vs EV: Which MG Fits Your Lifestyle?",
     excerpt: "Compare the benefits of traditional fuel efficiency and electric power to find your perfect match.",
     readTime: "4 min read",
-    image: "/images/blog-suv-vs-ev.jpg",
+    image: "/images/models/model-zs-ev-transparent.png",
     alt: "MG SUVs lineup",
   },
   {
@@ -2042,8 +2114,62 @@ export const blogs: Blog[] = [
     title: "Preparing Your MG for Mumbai's Monsoon Season",
     excerpt: "Essential care tips to keep your MG safe, dry, and road-ready during heavy rainfall.",
     readTime: "4 min read",
-    image: "/images/blog-monsoon.jpg",
+    image: "/images/models/model-majestor-transparent.png",
     alt: "Monsoon driving tips",
+  },
+  {
+    date: "Apr 28, 2025",
+    category: "Electric Vehicles",
+    title: "MG Comet EV: The Ultimate Smart Urban Commuter",
+    excerpt: "Discover why the Comet EV is the perfect solution for navigating crowded city streets with ease.",
+    readTime: "3 min read",
+    image: "/images/models/model-comet-transparent.png",
+    alt: "MG Comet EV",
+  },
+  {
+    date: "Apr 20, 2025",
+    category: "MG News",
+    title: "Introducing MG M9 EV: Luxury Redefined in India",
+    excerpt: "A detailed look at the flagship electric MPV, loaded with first-class comfort and futuristic cabin tech.",
+    readTime: "6 min read",
+    image: "/images/models/model-m9-transparent.png",
+    alt: "MG M9 EV",
+  },
+  {
+    date: "Apr 15, 2025",
+    category: "Technology",
+    title: "Understanding Level 2 ADAS in MG SUVs",
+    excerpt: "Learn how Advanced Driver Assistance Systems keep you secure on high-speed expressways.",
+    readTime: "5 min read",
+    image: "/images/models/model-zs-ev-transparent.png",
+    alt: "MG ADAS technology",
+  },
+  {
+    date: "Apr 10, 2025",
+    category: "Ownership Tips",
+    title: "How to Maximize Your MG Electric Range",
+    excerpt: "Simple driving techniques and battery habits to squeeze the most kilometers out of every charge.",
+    readTime: "4 min read",
+    image: "/images/models/model-windsor-transparent.png",
+    alt: "EV Range tips",
+  },
+  {
+    date: "Apr 05, 2025",
+    category: "MG News",
+    title: "MG Cyberster Wins Global EV Design Award",
+    excerpt: "The all-electric roadster receives critical acclaim for blending heritage aesthetics with supercar aero.",
+    readTime: "3 min read",
+    image: "/images/models/model-cyberster-transparent.png",
+    alt: "MG Cyberster award",
+  },
+  {
+    date: "Apr 01, 2025",
+    category: "Buying Guide",
+    title: "Choosing the Right MG Hector Variant for You",
+    excerpt: "A comprehensive breakdown of features, engine choices, and pricing across the Hector lineup.",
+    readTime: "5 min read",
+    image: "/images/models/model-hector-transparent.png",
+    alt: "MG Hector guide",
   },
 ];
 

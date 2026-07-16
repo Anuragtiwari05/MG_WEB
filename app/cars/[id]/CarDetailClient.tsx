@@ -6,8 +6,10 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import Car360Viewer from "@/components/Car360Viewer";
 import { type Car, type FeatureSection, formatINR } from "@/lib/data";
 import { getCarDekhoImage } from "@/lib/cardekho-image-map";
+import { get360Config } from "@/lib/car360Config";
 
 type Props = { car: Car };
 
@@ -50,13 +52,32 @@ function TabIcon({ name, className }: { name: string; className?: string }) {
   }
 }
 
+const getBestFor = (id: string) => {
+  switch (id) {
+    case "astor": return "Urban families looking for a high-tech, feature-rich compact SUV with advanced safety.";
+    case "hector": return "Families seeking an ultra-spacious, premium SUV with next-gen connected features.";
+    case "zs-ev": return "Eco-conscious buyers wanting a powerful, long-range green electric SUV.";
+    case "windsor-ev": return "City commuters looking for a luxurious, spacious electric crossover utility vehicle.";
+    case "comet-ev": return "Urban commuters seeking a compact, highly maneuverable, and smart city electric vehicle.";
+    case "majestor": return "Elite travelers and executives seeking supreme business-class comfort and heavy-duty SUV road presence.";
+    case "m9": return "VVIPs and large families wanting the pinnacle of luxury, silent, and clean electric MPV mobility.";
+    case "cyberster": return "Sports car enthusiasts wanting pure open-top electric roadster thrills and jaw-dropping styling.";
+    default: return "Buyers seeking premium luxury, safety, and modern connected vehicle technology.";
+  }
+};
+
 export default function CarDetailClient({ car }: Props) {
   const [selectedColor, setSelectedColor] = useState(car.colors[0]);
+  const [activeGalleryIndex, setActiveGalleryIndex] = useState<number | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   /* featureSections state */
   const [activeFsTab, setActiveFsTab] = useState(0);
   const [activeFsItem, setActiveFsItem] = useState(0);
+
+  // 360 View
+  const [is360Active, setIs360Active] = useState(false);
+  const car360Config = get360Config(car.id);
 
   const keyFacts = [
     ["Fuel type", car.fuel],
@@ -73,14 +94,21 @@ export default function CarDetailClient({ car }: Props) {
   /* Current active feature section & item */
   const fs: FeatureSection | undefined = car.featureSections?.[activeFsTab];
   const fsItem = fs?.items[activeFsItem];
-  const heroImage = getCarDekhoImage(car.id, "hero", selectedColor.name) ?? selectedColor.image ?? car.image;
+
+  const activeImage = activeGalleryIndex !== null 
+    ? car.galleryImages[activeGalleryIndex].src
+    : (getCarDekhoImage(car.id, "hero", selectedColor.name) ?? selectedColor.image ?? car.image);
+
+  const activeLabel = activeGalleryIndex !== null
+    ? car.galleryImages[activeGalleryIndex].caption
+    : selectedColor.name;
 
   return (
     <>
       <Navbar />
       <main className="mt-[80px] bg-white">
         {/* ── HERO SECTION ── */}
-        <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-[#f0f0f0] via-[#f0f0f0] to-white">
+        <section className="relative overflow-hidden border-b border-border bg-white">
           <div className="container-px mx-auto max-w-[1400px] pt-7 lg:pt-10">
             <nav aria-label="Breadcrumb" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
               <Link href="/" className="hover:text-brand">Home</Link>
@@ -90,84 +118,277 @@ export default function CarDetailClient({ car }: Props) {
               <span className="text-text">MG {car.name}</span>
             </nav>
 
-            <div className="grid items-center gap-5 pb-10 pt-7 lg:min-h-[580px] lg:grid-cols-[0.8fr_1.2fr] lg:gap-12 lg:py-12">
-              <Reveal className="order-2 lg:order-1">
-                <p className="eyebrow">{car.type}</p>
-                <h1 className="mt-3 font-display text-4xl font-black uppercase leading-[0.95] tracking-tight text-text sm:text-5xl lg:text-6xl">
-                  MG {car.name}
-                </h1>
-                <p className="mt-5 max-w-lg text-sm leading-7 text-muted sm:text-base">{car.blurb}</p>
-                <div className="mt-7 border-l-2 border-brand pl-4">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted">Starting from</p>
-                  <p className="mt-1 text-3xl font-black text-text">{formatINR(car.priceINR)}<span className="ml-1 text-sm font-medium text-muted">*</span></p>
-                  <p className="mt-1 text-xs text-muted">Ex-showroom price. Terms and conditions apply.</p>
-                </div>
-                <div className="mt-7 flex flex-wrap gap-3">
-                  <Link href={`/locate-service-centre?model=${encodeURIComponent(car.name)}`} className="btn-primary px-6 py-3 text-xs uppercase tracking-wider">
-                    Book a test drive
-                  </Link>
-                  <Link href="/contact-us" className="btn-outline px-6 py-3 text-xs uppercase tracking-wider">
-                    Request a callback
-                  </Link>
-                </div>
-              </Reveal>
-
-              <Reveal variant="slide-left" className="order-1 lg:order-2 flex flex-col gap-6 w-full">
-                {/* Frameless floating image — no box, no border, no shadow */}
-                <div className="relative isolate aspect-[16/9] w-full">
-                  {/* Subtle ground shadow */}
-                  <div className="absolute inset-x-[20%] bottom-[5%] h-[6%] rounded-[50%] bg-black/10 blur-2xl" />
-                  <Image
-                    src={heroImage}
-                    alt={`${car.name} front three-quarter view in ${selectedColor.name}`}
-                    fill
-                    priority
-                    className="object-contain transition-all duration-[600ms]"
-                    style={{ filter: heroImage === car.image ? selectedColor.cssFilter || "none" : "none" }}
+            <div className="grid grid-cols-1 gap-8 pb-10 pt-7 lg:min-h-[580px] lg:grid-cols-2 lg:gap-12 lg:py-12">
+              {/* Left Column: Color & Gallery Preview Card + Color Selection + Gallery Selection */}
+              <Reveal variant="slide-right" className="flex flex-col gap-6 w-full">
+                {/* Main Color & Angle Preview Card — or 360° Viewer for Hector */}
+                {is360Active && car360Config ? (
+                  <Car360Viewer
+                    config={car360Config}
+                    onClose={() => setIs360Active(false)}
                   />
-                  {/* Left edge fade — blends into section bg */}
-                  <div className="pointer-events-none absolute inset-y-0 left-0 w-[18%] bg-gradient-to-r from-[#f0f0f0] to-transparent" />
-                  {/* Right edge fade */}
-                  <div className="pointer-events-none absolute inset-y-0 right-0 w-[18%] bg-gradient-to-l from-[#f0f0f0] to-transparent" />
-                  {/* Bottom fade */}
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-[#f0f0f0] to-transparent" />
-                  {/* Top fade */}
-                  <div className="pointer-events-none absolute inset-x-0 top-0 h-[15%] bg-gradient-to-b from-[#f0f0f0] to-transparent" />
-                  <span className="absolute left-3 top-3 rounded-full border border-black/10 bg-white/70 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.15em] text-text backdrop-blur-sm">MG {car.name}</span>
-                </div>
+                ) : (
+                  /* ── STATIC PREVIEW CARD ─────────────────────────── */
+                  <div className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden rounded-2xl bg-white border border-slate-200/60 shadow-sm">
+                    <div className="absolute inset-x-[20%] bottom-[8%] h-[6%] rounded-[50%] bg-black/10 blur-2xl" />
+                    
+                    <Image
+                      src={activeImage}
+                      alt={`${car.name} preview in ${activeLabel}`}
+                      fill
+                      priority
+                      className="object-contain p-4 transition-all duration-[600ms]"
+                      style={{ filter: activeImage === car.image ? selectedColor.cssFilter || "none" : "none" }}
+                    />
+
+                    <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-text shadow-sm backdrop-blur">
+                      {activeLabel}
+                    </span>
+
+                    <span className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full border border-black/10 bg-white/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-text backdrop-blur-sm shadow-sm">
+                      <Image
+                        src="/images/logo-mg.png"
+                        alt="MG Logo"
+                        width={12}
+                        height={12}
+                        className="object-contain"
+                      />
+                      <span>MG {car.name}</span>
+                    </span>
+
+                    {car360Config && (
+                      <button
+                        type="button"
+                        onClick={() => setIs360Active(true)}
+                        className="absolute right-4 bottom-4 group flex items-center gap-2 rounded-full bg-slate-900 hover:bg-[#B71C1C] text-white font-bold text-[11px] px-4 py-2 shadow-lg transition-all duration-200 cursor-pointer hover:scale-105 z-20"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 7.89M9 11l3-3 3 3m-3-3v12" />
+                        </svg>
+                        360° View
+                      </button>
+                    )}
+                  </div>
+                )}
+
 
                 {/* ── COLOUR OPTION BELOW THE CAR IMAGE ── */}
                 <div className="flex flex-col items-center lg:items-start bg-white p-4 sm:p-5 rounded-2xl border border-slate-100 shadow-sm">
-                  <p className="text-[10px] font-black uppercase tracking-[0.16em] text-muted">Select Colour Variant</p>
+                  <div className="flex items-center justify-between w-full">
+                    <p className="text-[10px] font-black uppercase tracking-[0.16em] text-muted">
+                      Colours · <span className="text-slate-800 font-bold">{car.colors.length} options</span>
+                    </p>
+                    <p className="text-[11px] font-semibold text-slate-400">
+                      Selected: <strong className="text-slate-800">{selectedColor.name}</strong>
+                    </p>
+                  </div>
                   <div className="mt-3.5 flex flex-wrap gap-2.5 justify-center lg:justify-start">
                     {car.colors.map((color) => {
-                      const selected = color.name === selectedColor.name;
+                      const selected = color.name === selectedColor.name && activeGalleryIndex === null;
                       return (
                         <button
                           key={color.name}
                           type="button"
-                          onClick={() => setSelectedColor(color)}
+                          onClick={() => {
+                            setSelectedColor(color);
+                            setActiveGalleryIndex(null);
+                          }}
+                          aria-label={`Show ${car.name} in ${color.name}`}
                           aria-pressed={selected}
-                          className={`group flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold transition-all duration-200 ${
+                          title={color.name}
+                          className={`h-9 w-9 shrink-0 rounded-full border-2 transition-all cursor-pointer ${
                             selected
-                              ? "border-slate-900 bg-slate-900 text-white shadow-md"
-                              : "border-slate-200 bg-white text-slate-600 hover:border-slate-400 hover:text-slate-900"
+                              ? "border-slate-800 ring-2 ring-slate-800/20 scale-110"
+                              : "border-slate-200 hover:border-slate-400"
                           }`}
-                        >
-                          <span
-                            className={`h-4 w-4 rounded-full border transition-all duration-200 ${
-                              selected ? "border-white/40 ring-2 ring-white/60 scale-110" : "border-black/10 shadow-inner"
-                            }`}
-                            style={{ backgroundColor: color.hex }}
-                          />
-                          <span className="pr-0.5">{color.name}</span>
-                        </button>
+                          style={{ backgroundColor: color.hex }}
+                        />
                       );
                     })}
                   </div>
-                  <p className="mt-3 text-[11px] font-semibold text-slate-400">
-                    Selected: <strong className="text-slate-800">{selectedColor.name}</strong>
-                  </p>
+                </div>
+
+                {/* ── IMAGE GALLERY THUMBNAILS RIGHT BELOW THE COLORS ── */}
+                {car.galleryImages.length > 0 && (
+                  <div className="flex flex-col bg-white p-4 sm:p-5 rounded-2xl border border-slate-100 shadow-sm">
+                    <div className="flex items-center justify-between w-full">
+                      <p className="text-[10px] font-black uppercase tracking-[0.16em] text-muted">
+                        Gallery Preview · <span className="text-slate-800 font-bold">{car.galleryImages.length} angles</span>
+                      </p>
+                      <p className="text-[10px] text-slate-400 font-semibold">Tap to preview on the car</p>
+                    </div>
+                    <div className="mt-3.5 grid grid-cols-3 gap-3">
+                      {car.galleryImages.slice(0, 8).map((img, i) => {
+                        const selected = activeGalleryIndex === i;
+                        return (
+                          <button
+                            key={img.src}
+                            type="button"
+                            onClick={() => setActiveGalleryIndex(i)}
+                            aria-pressed={selected}
+                            title={img.caption}
+                            className={`group relative aspect-video overflow-hidden rounded-lg border bg-slate-50 transition-all cursor-pointer ${
+                              selected
+                                ? "border-brand ring-2 ring-brand/15 shadow-sm"
+                                : "border-slate-200 hover:border-brand"
+                            }`}
+                          >
+                            <Image
+                              src={img.src}
+                              alt={img.caption}
+                              fill
+                              sizes="(max-width: 640px) 33vw, 150px"
+                              className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            />
+                            <div className={`absolute inset-0 bg-black/5 transition-opacity duration-200 ${selected ? "opacity-0" : "group-hover:opacity-0"}`} />
+                          </button>
+                        );
+                      })}
+                      
+                      {/* 9th box: View All link to #gallery */}
+                      <a
+                        href="#gallery"
+                        className="group relative flex aspect-video flex-col items-center justify-center overflow-hidden rounded-lg border border-slate-200 bg-slate-50 transition-all hover:border-brand cursor-pointer"
+                      >
+                        {/* 2x2 Image Collage Background with low opacity */}
+                        <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 gap-0.5 opacity-40 group-hover:opacity-60 transition-opacity duration-300">
+                          {car.galleryImages.slice(0, 4).map((img, idx) => (
+                            <div key={idx} className="relative w-full h-full bg-slate-200">
+                              <Image
+                                src={img.src}
+                                alt=""
+                                fill
+                                sizes="60px"
+                                className="object-cover"
+                              />
+                            </div>
+                          ))}
+                        </div>
+                        
+                        {/* Overlay to ensure text readability */}
+                        <div className="absolute inset-0 bg-slate-50/65 group-hover:bg-slate-100/45 transition-colors duration-300" />
+
+                        {/* Foreground Label & Arrow */}
+                        <div className="relative z-10 flex flex-col items-center justify-center gap-1">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-slate-800">View All</span>
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="h-3.5 w-3.5 text-slate-800 transition-transform group-hover:translate-x-0.5"
+                          >
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                          </svg>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </Reveal>
+
+              {/* Right Column: Title + Specifications + Key Highlights + Action Buttons */}
+              <Reveal variant="slide-left" className="flex flex-col w-full">
+                <p className="text-xs font-semibold uppercase tracking-wider text-brand">
+                  {car.category === "Electric" ? "Electric Vehicle" : car.type}
+                </p>
+                <h1 className="mt-1 font-display text-3xl font-black uppercase text-text sm:text-4xl">
+                  MG {car.name}
+                </h1>
+                <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">
+                  {car.blurb}
+                </p>
+                
+                <div className="mt-5 flex items-baseline gap-2 border-t border-slate-100 pt-5">
+                  <span className="font-display text-3xl font-black text-brand">
+                    {formatINR(car.priceINR)}
+                  </span>
+                  <span className="text-xs font-semibold text-slate-400">
+                    *Ex-showroom price
+                  </span>
+                </div>
+
+                <dl className="mt-5 grid grid-cols-2 gap-x-4 gap-y-4 border-t border-slate-100 pt-5 sm:grid-cols-3">
+                  <div>
+                    <dt className="text-xs font-semibold text-muted">Seating</dt>
+                    <dd className="mt-0.5 text-sm font-bold text-text leading-snug">{car.seating}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs font-semibold text-muted">Fuel</dt>
+                    <dd className="mt-0.5 text-sm font-bold text-text leading-snug">{car.fuel}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs font-semibold text-muted">Mileage / range</dt>
+                    <dd className="mt-0.5 text-sm font-bold text-text leading-snug">{car.mileage}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-xs font-semibold text-muted">Boot space</dt>
+                    <dd className="mt-0.5 text-sm font-bold text-text leading-snug">{car.bootSpace}</dd>
+                  </div>
+                  <div className="col-span-2 sm:col-span-3">
+                    <dt className="text-xs font-semibold text-muted">Best for</dt>
+                    <dd className="mt-0.5 text-sm font-medium text-text leading-snug">{getBestFor(car.id)}</dd>
+                  </div>
+                  <div className="col-span-2 sm:col-span-3">
+                    <dt className="text-xs font-semibold text-muted">Engine / motor choices</dt>
+                    <dd className="mt-1 flex flex-wrap gap-1.5">
+                      {car.engine.split("|").map(choice => (
+                        <span key={choice} className="rounded border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-bold text-text">
+                          {choice.trim()}
+                        </span>
+                      ))}
+                    </dd>
+                  </div>
+                  <div className="col-span-2 sm:col-span-3">
+                    <dt className="text-xs font-semibold text-muted">Transmission choices</dt>
+                    <dd className="mt-1 flex flex-wrap gap-1.5">
+                      {car.transmission.split("|").map(choice => (
+                        <span key={choice} className="rounded border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-bold text-text">
+                          {choice.trim()}
+                        </span>
+                      ))}
+                    </dd>
+                  </div>
+                </dl>
+
+                {/* KEY HIGHLIGHTS */}
+                <div className="mt-5 border-t border-slate-100 pt-5">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-muted">Key Highlights</p>
+                  <ul className="mt-3 grid gap-2.5 sm:grid-cols-2">
+                    {car.highlights.map((highlight) => (
+                      <li key={highlight} className="flex items-start gap-2 text-sm text-text">
+                        <svg className="mt-0.5 h-4 w-4 shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* CTAs */}
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link href={`/locate-service-centre?model=${encodeURIComponent(car.name)}`} className="group inline-flex items-center gap-2 rounded bg-brand px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-light cursor-pointer">
+                    Book a Test Drive 
+                    <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </Link>
+                  <Link href="/contact-us" className="inline-flex items-center gap-2 rounded border border-brand bg-white px-6 py-3.5 text-sm font-semibold text-brand transition-all hover:bg-brand hover:text-white cursor-pointer">
+                    Get a Variant Quote
+                  </Link>
+                  {car.brochureUrl && (
+                    <a href={car.brochureUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded border border-slate-200 bg-slate-50 px-6 py-3.5 text-sm font-semibold text-text transition-all hover:border-slate-400 hover:bg-slate-100 cursor-pointer">
+                      <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                      </svg>
+                      Download Brochure
+                    </a>
+                  )}
                 </div>
               </Reveal>
             </div>

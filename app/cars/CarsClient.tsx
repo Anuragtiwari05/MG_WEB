@@ -85,14 +85,15 @@ export default function CarsPage() {
                         {/* Image Container */}
                         <Link
                           href={`/cars/${car.id}`}
-                          className="relative flex h-48 items-center justify-center bg-bg-2 p-6 overflow-hidden cursor-pointer"
+                          className="relative block w-full overflow-hidden bg-bg-2 cursor-pointer"
+                          style={{ aspectRatio: "16/10" }}
                         >
                           <Image
                             src={car.image}
                             alt={car.alt}
-                            width={320}
-                            height={120}
-                            className="h-auto w-full max-w-[260px] object-contain transition-transform duration-500 group-hover:scale-110"
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            className="object-contain p-5 transition-transform duration-500 group-hover:scale-105"
                           />
                         </Link>
 

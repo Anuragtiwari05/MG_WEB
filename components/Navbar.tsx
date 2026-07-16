@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 import { nav } from "@/lib/data";
-import { Phone, Menu, X, Search } from "./icons";
+import { Menu, X, Search } from "./icons";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -63,6 +63,7 @@ export default function Navbar() {
     if (href === "/locate-service-centre" && pathname === "/locate-service-centre") return true;
     if (href === "/locations" && pathname === "/locations") return true;
     if (href === "/contact-us" && pathname === "/contact-us") return true;
+    if (href === "/blogs" && pathname === "/blogs") return true;
     if (pathname === "/" && href.startsWith("/#")) {
       return activeSection === href.replace("/#", "");
     }
@@ -95,7 +96,7 @@ export default function Navbar() {
                 >
                   {l.label}
                   {isActive && (
-                    <span className="absolute bottom-[-18px] left-3.5 right-3.5 h-0.5 bg-brand transition-all duration-300" />
+                    <span className="absolute bottom-0 left-3.5 right-3.5 h-0.5 bg-brand" />
                   )}
                 </a>
               </li>
@@ -105,14 +106,6 @@ export default function Navbar() {
 
         {/* Right cluster */}
         <div className="flex items-center gap-3">
-          <a
-            href={`tel:${nav.phone.replace(/\s/g, "")}`}
-            aria-label="Call Us"
-            className="text-text hover:text-brand transition-colors p-2 rounded-full hover:bg-bg-2 flex items-center gap-2"
-          >
-            <Phone className="h-5 w-5 text-brand" />
-            <span className="hidden xl:inline text-xs font-bold tracking-wider text-muted">{nav.phone}</span>
-          </a>
           <a
             href="#test-drive"
             className="hidden rounded bg-brand px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-brand-light sm:inline-block"

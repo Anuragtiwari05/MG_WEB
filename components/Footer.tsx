@@ -19,6 +19,7 @@ const quickLinks = [
   { label: "Car Models", href: "/cars" },
   { label: "Service", href: "/locate-service-centre" },
   { label: "Locations", href: "/locations" },
+  { label: "Blogs", href: "/blogs" },
   { label: "Test Drive", href: "/locate-service-centre" },
   { label: "Contact Us", href: "/contact-us" },
 ];

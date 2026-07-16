@@ -25,7 +25,7 @@ export default function Services() {
             </p>
           </div>
           <Link
-            href="#offers"
+            href="/locate-service-centre"
             className="group inline-flex shrink-0 items-center gap-2 rounded border border-brand bg-brand/10 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-brand hover:text-white hover:shadow-[0_0_16px_rgba(255,0,0,0.2)]"
           >
             Book a Service Appointment
