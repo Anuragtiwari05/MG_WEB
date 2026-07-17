@@ -28,9 +28,6 @@ const ourServices = [
   { label: "New Car Sales", href: "/cars" },
   { label: "Service & Maintenance", href: "/locate-service-centre" },
   { label: "Genuine Parts", href: "/locate-service-centre" },
-  { label: "Finance & Insurance", href: "/" },
-  { label: "Extended Warranty", href: "/locate-service-centre" },
-  { label: "Roadside Assistance", href: "/locate-service-centre" },
 ];
 
 const socials = [
@@ -70,7 +67,7 @@ export default function Footer() {
 
           {/* Quick links */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white">Quick Links</h4>
+            <h4 className="text-xs font-bold tracking-wider text-white">Quick Links</h4>
             <ul className="mt-4 space-y-3">
               {quickLinks.map((l) => (
                 <li key={l.label}>
@@ -87,7 +84,7 @@ export default function Footer() {
 
           {/* Popular cars */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white">Popular Models</h4>
+            <h4 className="text-xs font-bold tracking-wider text-white">Popular Models</h4>
             <ul className="mt-4 space-y-3">
               {cars.map((c) => (
                 <li key={c.name}>
@@ -104,7 +101,7 @@ export default function Footer() {
 
           {/* Service links */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white">Our Services</h4>
+            <h4 className="text-xs font-bold tracking-wider text-white">Our Services</h4>
             <ul className="mt-4 space-y-3">
               {ourServices.map((s) => (
                 <li key={s.label}>
@@ -121,7 +118,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="col-span-2 lg:col-span-1">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-white">Contact Us</h4>
+            <h4 className="text-xs font-bold tracking-wider text-white">Contact Us</h4>
             <ul className="mt-4 space-y-4 text-xs text-white/60">
               <li className="flex gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-white/40" />

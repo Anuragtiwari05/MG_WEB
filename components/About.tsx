@@ -34,8 +34,8 @@ export default function About() {
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
               Who We Are
             </p>
-            <h2 className="mt-2 font-display text-3xl font-black uppercase tracking-wide text-text sm:text-4xl">
-              About MG Motor Mumbai
+            <h2 className="mt-2 font-display text-3xl font-black tracking-wide text-text sm:text-4xl">
+              About MG Motor Mumbai & Thane
             </h2>
             <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted sm:text-base">
               <p>
@@ -93,7 +93,7 @@ export default function About() {
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
               What Drives Us
             </p>
-            <h3 className="mt-2 font-display text-2xl font-black uppercase tracking-wide text-text sm:text-3xl">
+            <h3 className="mt-2 font-display text-2xl font-black tracking-wide text-text sm:text-3xl">
               Our Core Values
             </h3>
           </Reveal>
@@ -105,7 +105,7 @@ export default function About() {
                 variant="scale-up"
                 className="rounded-lg border border-border bg-white p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
-                <h4 className="text-sm font-bold uppercase tracking-wider text-text">{v.title}</h4>
+                <h4 className="text-sm font-bold tracking-wider text-text">{v.title}</h4>
                 <p className="mt-2 text-xs leading-relaxed text-muted">
                   {v.text}
                 </p>
@@ -121,7 +121,7 @@ export default function About() {
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
                 Our Brand Heritage
               </p>
-              <h3 className="mt-2 font-display text-2xl font-black uppercase tracking-wide sm:text-3xl">
+              <h3 className="mt-2 font-display text-2xl font-black tracking-wide sm:text-3xl">
                 MG Motor India: &ldquo;{mgIndiaFacts.tagline}&rdquo;
               </h3>
               <p className="mt-4 text-sm leading-relaxed text-white/70">
@@ -143,7 +143,7 @@ export default function About() {
                     <div className="flex items-start gap-3">
                       <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand transition-transform group-hover:scale-110" />
                       <div className="flex-1">
-                        <h4 className="text-sm font-bold uppercase tracking-wider text-white group-hover:text-brand transition-colors">
+                        <h4 className="text-sm font-bold tracking-wider text-white group-hover:text-brand transition-colors">
                           {c.title}
                         </h4>
                         <p className="mt-1.5 text-xs leading-relaxed text-white/70 line-clamp-2">
@@ -189,7 +189,7 @@ export default function About() {
                   <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand/10">
                     <Check className="h-5 w-5 text-brand" />
                   </span>
-                  <h3 className="font-display text-xl font-black uppercase tracking-wide text-text">
+                  <h3 className="font-display text-xl font-black tracking-wide text-text">
                     {mgIndiaFacts.csr[activeCard].title}
                   </h3>
                 </div>

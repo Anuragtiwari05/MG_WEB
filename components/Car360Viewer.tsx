@@ -6,6 +6,7 @@ export type Car360Config = {
   id: string;
   exteriorFrameCount: number;
   template: string; // {n} replaced with frame number
+  reversed?: boolean;
 };
 
 function frameSrc(template: string, n: number): string {
@@ -20,7 +21,7 @@ type Props = {
 const DRAG_SENSITIVITY = 0.65;
 
 export default function Car360Viewer({ config, onClose }: Props) {
-  const { exteriorFrameCount: totalFrames, template } = config;
+  const { exteriorFrameCount: totalFrames, template, reversed } = config;
 
   const [frame, setFrame] = useState(1);
   const [isDragging, setIsDragging] = useState(false);
@@ -92,11 +93,12 @@ export default function Car360Viewer({ config, onClose }: Props) {
         const dx = clientX - dragStartX.current;
         const rotPx = viewerWidth.current * DRAG_SENSITIVITY || 400;
         const steps = Math.round((dx / rotPx) * totalFrames);
-        const nf = ((dragStartFrame.current - 1 - steps) % totalFrames + totalFrames) % totalFrames + 1;
+        const directionMultiplier = reversed ? 1 : -1;
+        const nf = ((dragStartFrame.current - 1 + directionMultiplier * steps) % totalFrames + totalFrames) % totalFrames + 1;
         setFrame(nf);
       });
     },
-    [isDragging, totalFrames]
+    [isDragging, totalFrames, reversed]
   );
 
   const handleDragEnd = useCallback(() => {

@@ -15,7 +15,7 @@ export default function Services() {
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
               Care &amp; Maintenance
             </p>
-            <h2 className="mt-2 font-display text-2xl font-black uppercase tracking-wide text-white sm:text-3xl">
+            <h2 className="mt-2 font-display text-2xl font-black tracking-wide text-white sm:text-3xl">
               Service That Cares
             </h2>
             <p className="mt-3 max-w-xl text-xs sm:text-sm text-white/60 leading-relaxed">

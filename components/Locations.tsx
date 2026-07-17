@@ -20,7 +20,7 @@ export default function Locations() {
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
               Our Presence
             </p>
-            <h2 className="mt-1 font-display text-2xl font-black uppercase tracking-wide sm:text-3xl">
+            <h2 className="mt-1 font-display text-2xl font-black tracking-wide sm:text-3xl">
               FIND US NEAR YOU
             </h2>
             <p className="mt-2 text-sm text-white/70">

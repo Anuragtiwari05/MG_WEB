@@ -72,6 +72,8 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
 };
 
+import FloatingActions from "@/components/FloatingActions";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -82,6 +84,7 @@ export default function RootLayout({
       <body className="min-h-screen antialiased">
         <JsonLd />
         {children}
+        <FloatingActions />
       </body>
     </html>
   );

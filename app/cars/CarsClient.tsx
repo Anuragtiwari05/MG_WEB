@@ -40,7 +40,7 @@ export default function CarsPage() {
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
                 Our Lineup
               </p>
-              <h1 className="mt-2 font-display text-3xl font-black uppercase tracking-wide text-text sm:text-4xl">
+              <h1 className="mt-2 font-display text-3xl font-black tracking-wide text-text sm:text-4xl">
                 Explore the Full MG Range
               </h1>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
@@ -102,7 +102,7 @@ export default function CarsPage() {
                           <p className="text-[10px] font-bold uppercase tracking-wider text-brand">
                             {car.type}
                           </p>
-                          <h3 className="mt-1 font-display text-lg font-black uppercase text-text hover:text-brand transition-colors">
+                          <h3 className="mt-1 font-display text-lg font-black text-text hover:text-brand transition-colors">
                             <Link href={`/cars/${car.id}`}>
                               MG {car.name}
                             </Link>

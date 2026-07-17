@@ -42,16 +42,22 @@ export default function ContactUsClient() {
       <Navbar />
       <main className="mt-[80px] min-h-screen bg-bg-2">
         {/* Page Hero */}
-        <section className="relative h-[240px] w-full overflow-hidden bg-brand-deep sm:h-[300px]">
+        <section className="relative h-[280px] w-full overflow-hidden bg-neutral-950 sm:h-[380px] lg:h-[420px]">
+          {/* Background Image */}
           <Image
             alt="MG Cyberster"
-            src="https://imgd.aeplcdn.com/1920x1080/n/cw/ec/193375/cyberster-exterior-left-rear-three-quarter.jpeg?isig=0&q=80"
+            src="https://mgmotor.scene7.com/is/image/mgmotor/cyberter-night-full?fmt=webp-alpha&resMode=bisharp&fit=constrain&qlt=90&wid=1920"
             fill
-            className="object-cover"
+            className="object-cover opacity-85 lg:object-[65%_center] z-0"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
-          <div className="container-px absolute inset-x-0 bottom-10 mx-auto max-w-[1400px]">
+          {/* Overlays */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-brand-deep/30 to-black z-10" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(227,24,55,0.24)_0%,transparent_65%)] z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent z-10" />
+          <div className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-brand/40 to-transparent z-20" />
+          
+          <div className="container-px absolute inset-x-0 bottom-12 z-30 mx-auto max-w-[1400px]">
             <Reveal variant="fade-up">
               <p className="text-sm font-semibold uppercase tracking-wider text-white/70">
                 Contact

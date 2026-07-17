@@ -57,6 +57,9 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, [pathname]);
 
+  const isHome = pathname === "/";
+  const isTransparent = isHome && !scrolled;
+
   const getIsActive = (href: string) => {
     if (href === "/about" && pathname === "/about") return true;
     if (href === "/cars" && pathname === "/cars") return true;
@@ -72,13 +75,17 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 bg-white transition-all duration-300 ${
-        scrolled ? "shadow-md h-[72px]" : "border-b border-border h-[80px]"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        isTransparent
+          ? "bg-transparent h-[80px]"
+          : scrolled
+          ? "bg-white shadow-md h-[72px]"
+          : "bg-white border-b border-border h-[80px]"
       } flex items-center`}
     >
       {/* Main nav */}
       <nav className="container-px mx-auto flex w-full max-w-[1400px] items-center justify-between">
-        <Logo />
+        <Logo dark={isTransparent} />
 
         {/* Desktop links */}
         <ul className="hidden items-center lg:gap-2 xl:gap-4 lg:flex">
@@ -86,11 +93,13 @@ export default function Navbar() {
             const isActive = getIsActive(l.href);
             return (
               <li key={l.href}>
-                <a
+                <Link
                   href={l.href}
                   className={`relative rounded px-3.5 py-2 text-xs uppercase font-bold tracking-wider transition-colors duration-200 ${
                     isActive
                       ? "text-brand"
+                      : isTransparent
+                      ? "text-white hover:text-brand"
                       : "text-muted hover:text-brand"
                   }`}
                 >
@@ -98,7 +107,7 @@ export default function Navbar() {
                   {isActive && (
                     <span className="absolute bottom-0 left-3.5 right-3.5 h-0.5 bg-brand" />
                   )}
-                </a>
+                </Link>
               </li>
             );
           })}
@@ -106,16 +115,20 @@ export default function Navbar() {
 
         {/* Right cluster */}
         <div className="flex items-center gap-3">
-          <a
-            href="#test-drive"
+          <Link
+            href="/#test-drive"
             className="hidden rounded bg-brand px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-brand-light sm:inline-block"
           >
             BOOK A TEST DRIVE
-          </a>
+          </Link>
           <button
             aria-label="Open menu"
             onClick={() => setOpen(true)}
-            className="grid h-9 w-9 place-items-center rounded border border-border bg-bg-2 text-text lg:hidden"
+            className={`grid h-9 w-9 place-items-center rounded border transition-colors ${
+              isTransparent
+                ? "border-white/30 bg-white/10 text-white hover:bg-white/20"
+                : "border-border bg-bg-2 text-text"
+            } lg:hidden`}
           >
             <Menu className="h-5 w-5" />
           </button>
@@ -152,7 +165,7 @@ export default function Navbar() {
           {nav.links.map((l) => {
             const isActive = getIsActive(l.href);
             return (
-              <a
+              <Link
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
@@ -161,17 +174,17 @@ export default function Navbar() {
                 }`}
               >
                 {l.label}
-              </a>
+              </Link>
             );
           })}
 
-          <a
-            href="#test-drive"
+          <Link
+            href="/#test-drive"
             onClick={() => setOpen(false)}
             className="mt-6 flex items-center justify-center gap-2 rounded bg-brand px-5 py-3.5 text-sm font-semibold text-white hover:bg-brand-light"
           >
             Book a Test Drive
-          </a>
+          </Link>
         </div>
       </div>
     </header>

@@ -20,7 +20,7 @@ export default function ServicePromo() {
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
               Authorised Service
             </p>
-            <h2 className="mt-2 font-display text-3xl font-black uppercase tracking-wide text-text sm:text-4xl">
+            <h2 className="mt-2 font-display text-3xl font-black tracking-wide text-text sm:text-4xl">
               Genuine MG service, close to home
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">

@@ -45,7 +45,7 @@ export default function LineupCategories() {
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
             The MG Lineup
           </p>
-          <h2 className="mt-2 font-display text-3xl font-black uppercase tracking-wide text-text sm:text-4xl">
+          <h2 className="mt-2 font-display text-3xl font-black tracking-wide text-text sm:text-4xl">
             New MG cars for every driver, family and budget
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">
@@ -117,7 +117,7 @@ export default function LineupCategories() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <span className="text-3xl">{categories[activePopup].icon}</span>
-                  <h3 className="mt-2 font-display text-xl font-black uppercase tracking-wide text-text">
+                  <h3 className="mt-2 font-display text-xl font-black tracking-wide text-text">
                     {categories[activePopup].title}
                   </h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted">

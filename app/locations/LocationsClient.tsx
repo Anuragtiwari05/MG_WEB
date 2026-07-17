@@ -44,7 +44,7 @@ export default function LocationsPage() {
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
                 Locations
               </span>
-              <h1 className="mt-2 font-display text-3xl font-black uppercase tracking-wide text-text sm:text-4xl">
+              <h1 className="mt-2 font-display text-3xl font-black tracking-wide text-text sm:text-4xl">
                 Our Showrooms & Workshops
               </h1>
               <p className="mt-2 text-sm text-muted max-w-xl">

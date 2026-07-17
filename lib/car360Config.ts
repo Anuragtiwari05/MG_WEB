@@ -8,18 +8,21 @@ export const car360Configs: Record<string, Car360Config> = {
   },
   "zs-ev": {
     id: "zs-ev",
-    exteriorFrameCount: 72,
+    exteriorFrameCount: 27,
     template: "/images/models/zs-ev/360/ext_{n}.jpg",
+    reversed: true,
   },
   "windsor-ev": {
     id: "windsor-ev",
-    exteriorFrameCount: 72,
+    exteriorFrameCount: 30,
     template: "/images/models/windsor-ev/360/ext_{n}.jpg",
+    reversed: true,
   },
   "comet-ev": {
     id: "comet-ev",
-    exteriorFrameCount: 72,
+    exteriorFrameCount: 23,
     template: "/images/models/comet-ev/360/ext_{n}.jpg",
+    reversed: true,
   },
   majestor: {
     id: "majestor",
@@ -28,8 +31,9 @@ export const car360Configs: Record<string, Car360Config> = {
   },
   astor: {
     id: "astor",
-    exteriorFrameCount: 72,
+    exteriorFrameCount: 19,
     template: "/images/models/astor/360/ext_{n}.jpg",
+    reversed: true,
   },
   m9: {
     id: "m9",

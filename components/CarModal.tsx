@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import type { Car } from "@/lib/data";
 import { formatINR } from "@/lib/data";
 import { Check, X } from "./icons";
@@ -109,13 +110,13 @@ export default function CarModal({
             </ul>
           </div>
 
-          <a
-            href="#test-drive"
+          <Link
+            href="/#test-drive"
             onClick={onClose}
             className="mt-8 inline-flex w-full items-center justify-center rounded bg-brand py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-light"
           >
             Book a Test Drive
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -14,13 +14,11 @@ import Blogs from "@/components/Blogs";
 import FAQ from "@/components/FAQ";
 import Locations from "@/components/Locations";
 import Footer from "@/components/Footer";
-import FloatingActions from "@/components/FloatingActions";
 
 export default function Home() {
   return (
     <>
       <Navbar />
-      <FloatingActions />
       <main>
         <Hero />
         <TrustStrip />

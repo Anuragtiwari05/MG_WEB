@@ -33,7 +33,7 @@ export default function Offers() {
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
               Special Promotion
             </p>
-            <h2 className="mt-2 font-display text-3xl font-black uppercase tracking-wide sm:text-4xl">
+            <h2 className="mt-2 font-display text-3xl font-black tracking-wide sm:text-4xl">
               CURRENT OFFERS
             </h2>
             <div className="mt-8 space-y-6">

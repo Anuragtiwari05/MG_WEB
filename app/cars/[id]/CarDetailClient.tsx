@@ -296,7 +296,7 @@ export default function CarDetailClient({ car }: Props) {
                 <p className="text-xs font-semibold uppercase tracking-wider text-brand">
                   {car.category === "Electric" ? "Electric Vehicle" : car.type}
                 </p>
-                <h1 className="mt-1 font-display text-3xl font-black uppercase text-text sm:text-4xl">
+                <h1 className="mt-1 font-display text-3xl font-black text-text sm:text-4xl">
                   MG {car.name}
                 </h1>
                 <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">
@@ -414,7 +414,7 @@ export default function CarDetailClient({ car }: Props) {
             <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
               <Reveal>
                 <p className="eyebrow">Vehicle Overview</p>
-                <h2 className="mt-2 font-display text-3xl font-black uppercase text-text">Key facts</h2>
+                <h2 className="mt-2 font-display text-3xl font-black text-text">Key facts</h2>
                 <p className="mt-4 max-w-md text-sm leading-7 text-muted">
                   Built to deliver a powerful, connected, and extremely comfortable driving experience. Explore the standard specifications and performance of the MG {car.name}.
                 </p>
@@ -436,7 +436,7 @@ export default function CarDetailClient({ car }: Props) {
           <div className="container-px mx-auto max-w-[1180px]">
             <Reveal className="max-w-xl">
               <p className="eyebrow">Designed around you</p>
-              <h2 className="mt-2 font-display text-3xl font-black uppercase text-text">Made for every drive</h2>
+              <h2 className="mt-2 font-display text-3xl font-black text-text">Made for every drive</h2>
             </Reveal>
             <div className="mt-9 grid gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-2">
               {car.highlights.map((highlight, index) => (
@@ -455,7 +455,7 @@ export default function CarDetailClient({ car }: Props) {
             <div className="container-px mx-auto max-w-[1280px]">
               <Reveal>
                 <p className="text-[11px] font-black uppercase tracking-[0.22em] text-brand">Explore every dimension</p>
-                <h2 className="mt-2 font-display text-3xl font-black uppercase lg:text-4xl">MG {car.name} — Feature Explorer</h2>
+                <h2 className="mt-2 font-display text-3xl font-black lg:text-4xl">MG {car.name} — Feature Explorer</h2>
               </Reveal>
 
               {/* Tab bar */}
@@ -517,7 +517,7 @@ export default function CarDetailClient({ car }: Props) {
                     {fsItem.subtitle && (
                       <p className="text-[10px] font-black uppercase tracking-[0.22em] text-brand">{fsItem.subtitle}</p>
                     )}
-                    <h3 className="mt-2 font-display text-xl font-black uppercase leading-tight text-white">{fsItem.title}</h3>
+                    <h3 className="mt-2 font-display text-xl font-black leading-tight text-white">{fsItem.title}</h3>
                     <div className="mt-3 h-px w-10 bg-brand" />
                     <p className="mt-4 text-sm leading-7 text-white/70">{fsItem.description}</p>
                     {fsItem.highlights && (
@@ -543,7 +543,7 @@ export default function CarDetailClient({ car }: Props) {
             <div className="container-px mx-auto max-w-[1180px]">
               <Reveal className="max-w-xl">
                 <p className="eyebrow">Under the surface</p>
-                <h2 className="mt-2 font-display text-3xl font-black uppercase text-text">What makes the {car.name}</h2>
+                <h2 className="mt-2 font-display text-3xl font-black text-text">What makes the {car.name}</h2>
               </Reveal>
               <div className="mt-10 space-y-16 lg:space-y-20">
                 {car.detailedSections.map((section, index) => (
@@ -557,7 +557,7 @@ export default function CarDetailClient({ car }: Props) {
                     </div>
                     <div>
                       <span className="text-[11px] font-black uppercase tracking-[0.2em] text-brand">0{index + 1}</span>
-                      <h3 className="mt-2 font-display text-2xl font-black uppercase leading-tight text-text lg:text-3xl">{section.title}</h3>
+                      <h3 className="mt-2 font-display text-2xl font-black leading-tight text-text lg:text-3xl">{section.title}</h3>
                       <div className="mt-4 h-0.5 w-12 bg-brand" />
                       <p className="mt-5 text-sm leading-7 text-muted">{section.description}</p>
                     </div>
@@ -573,7 +573,7 @@ export default function CarDetailClient({ car }: Props) {
           <div className="container-px mx-auto max-w-[1180px]">
             <Reveal className="text-center">
               <p className="eyebrow">Your peace of mind</p>
-              <h2 className="mt-2 font-display text-3xl font-black uppercase text-text">Safety, as standard</h2>
+              <h2 className="mt-2 font-display text-3xl font-black text-text">Safety, as standard</h2>
             </Reveal>
             <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {car.details.safety.map((item, index) => (
@@ -596,7 +596,7 @@ export default function CarDetailClient({ car }: Props) {
             <div className="container-px mx-auto max-w-[1180px]">
               <Reveal>
                 <p className="eyebrow">In the spotlight</p>
-                <h2 className="mt-2 font-display text-3xl font-black uppercase text-text">MG {car.name} gallery</h2>
+                <h2 className="mt-2 font-display text-3xl font-black text-text">MG {car.name} gallery</h2>
                 <p className="mt-3 max-w-md text-sm text-muted">Every angle, every detail. Tap any photo to view full screen.</p>
               </Reveal>
               <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
@@ -657,7 +657,7 @@ export default function CarDetailClient({ car }: Props) {
           <div className="container-px mx-auto max-w-[1180px]">
             <Reveal className="text-center">
               <p className="eyebrow">Built-in intelligence</p>
-              <h2 className="mt-2 font-display text-3xl font-black uppercase text-text">Key technology</h2>
+              <h2 className="mt-2 font-display text-3xl font-black text-text">Key technology</h2>
             </Reveal>
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {car.details.features.map((feat, index) => (
@@ -679,7 +679,7 @@ export default function CarDetailClient({ car }: Props) {
           <div className="container-px mx-auto max-w-[1180px]">
             <Reveal>
               <p className="eyebrow">The details</p>
-              <h2 className="mt-2 font-display text-3xl font-black uppercase text-text">Specifications</h2>
+              <h2 className="mt-2 font-display text-3xl font-black text-text">Specifications</h2>
             </Reveal>
             <div className="mt-8 grid gap-6 lg:grid-cols-2">
               <SpecCard title="Dimensions & capacity" items={[["Length", car.details.length], ["Width", car.details.width], ["Height", car.details.height], ["Wheelbase", car.details.wheelbase], ["Boot space", car.bootSpace]]} />
@@ -695,7 +695,7 @@ export default function CarDetailClient({ car }: Props) {
           <div className="container-px mx-auto flex max-w-[1180px] flex-col justify-between gap-7 md:flex-row md:items-center">
             <Reveal>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand">Ready when you are</p>
-              <h2 className="mt-2 font-display text-3xl font-black uppercase">Meet the MG {car.name}</h2>
+              <h2 className="mt-2 font-display text-3xl font-black">Meet the MG {car.name}</h2>
               <p className="mt-2 text-sm text-white/65">Book a test drive with MG Motor Mumbai.</p>
             </Reveal>
             <Reveal variant="slide-left" className="flex flex-wrap gap-3">
@@ -713,7 +713,7 @@ export default function CarDetailClient({ car }: Props) {
 function SpecCard({ title, items }: { title: string; items: string[][] }) {
   return (
     <Reveal className="rounded-xl border border-border bg-white p-6 sm:p-7">
-      <h3 className="border-b border-border pb-4 text-xs font-black uppercase tracking-[0.13em] text-text">{title}</h3>
+      <h3 className="border-b border-border pb-4 text-xs font-black tracking-[0.13em] text-text">{title}</h3>
       <dl className="mt-2">
         {items.map(([label, value]) => (
           <div key={label} className="flex gap-5 border-b border-border/70 py-3.5 text-xs last:border-0">

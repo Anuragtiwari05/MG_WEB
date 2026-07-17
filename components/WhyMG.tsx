@@ -21,7 +21,7 @@ export default function WhyMG() {
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
               Why MG Motor Mumbai
             </p>
-            <h2 className="mt-2 font-display text-3xl font-black uppercase tracking-wide text-text sm:text-4xl">
+            <h2 className="mt-2 font-display text-3xl font-black tracking-wide text-text sm:text-4xl">
               Your authorised MG dealer across the Mumbai region
             </h2>
             <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted sm:text-base">
@@ -35,7 +35,7 @@ export default function WhyMG() {
             
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
-                href="#test-drive"
+                href="/#test-drive"
                 className="rounded bg-brand px-6 py-3 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-brand-light hover:shadow-[0_0_16px_rgba(255,0,0,0.2)]"
               >
                 Book a Test Drive
@@ -44,7 +44,7 @@ export default function WhyMG() {
                 href="/about"
                 className="rounded border border-border bg-white px-6 py-3 text-xs font-bold uppercase tracking-wider text-text transition-all hover:bg-bg-2 hover:border-brand"
               >
-                About MG Motor Mumbai
+                About MG Motor Mumbai & Thane
               </Link>
             </div>
           </Reveal>

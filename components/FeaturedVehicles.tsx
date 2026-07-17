@@ -70,10 +70,10 @@ export default function FeaturedVehicles() {
   const isMobile = stageWidth < 640;
   const isTablet = stageWidth >= 640 && stageWidth < 1024;
   const step = isMobile
-    ? stageWidth * 0.38
+    ? stageWidth * 0.34
     : isTablet
     ? stageWidth * 0.42
-    : Math.min(stageWidth * 0.48, 480);
+    : Math.min(stageWidth * 0.56, 560);
 
   return (
     <section
@@ -103,7 +103,7 @@ export default function FeaturedVehicles() {
         {/* Coverflow stage */}
         <div
           ref={stageRef}
-          className="relative mt-6 sm:mt-8 h-[240px] sm:h-[300px] lg:h-[360px] select-none"
+          className="relative mt-6 sm:mt-8 h-[220px] sm:h-[280px] lg:h-[340px] select-none"
         >
           <button
             aria-label="Previous car"
@@ -119,8 +119,8 @@ export default function FeaturedVehicles() {
             if (offset < -len / 2) offset += len;
             if (Math.abs(offset) > 2) return null;
             const abs = Math.abs(offset);
-            const scale = offset === 0 ? 1.28 : (abs > 1 ? 0.4 : 0.47);
-            const opacity = offset === 0 ? 1 : (abs > 1 ? 0.32 : 0.66);
+            const scale = offset === 0 ? 1.28 : (abs > 1 ? 0.32 : 0.4);
+            const opacity = offset === 0 ? 1 : (abs > 1 ? 0.45 : 0.7);
             const translateX = offset * step;
             return (
               <div
@@ -148,15 +148,18 @@ export default function FeaturedVehicles() {
                       alt={car.alt}
                       fill
                       priority={offset === 0}
-                      className="object-contain drop-shadow-xl transition-transform duration-300 hover:scale-[1.03]"
+                      className={`object-contain transition-all duration-300 ${
+                        offset === 0 ? "hover:scale-[1.03]" : "grayscale"
+                      }`}
                       sizes="(max-width: 640px) 75vw, (max-width: 1024px) 60vw, 50vw"
                     />
                   </div>
                   {/* Soft realistic floor shadow under tyres */}
-                  <div 
-                    className="absolute bottom-[2%] left-1/2 h-[10px] w-[75%] -translate-x-1/2 rounded-[50%] bg-slate-950/15 blur-[5px] pointer-events-none transition-opacity duration-500" 
-                    style={{ opacity: offset === 0 ? 1 : 0.4 }} 
-                  />
+                  {offset === 0 && (
+                    <div
+                      className="absolute bottom-[4%] left-1/2 h-[8px] w-[60%] -translate-x-1/2 rounded-[50%] bg-slate-950/10 blur-[4px] pointer-events-none"
+                    />
+                  )}
                   {/* Hover popup for side cars */}
                   {offset !== 0 && abs <= 1 && (
                     <div className="absolute -top-2 left-1/2 -translate-x-1/2 -translate-y-full whitespace-nowrap rounded-lg bg-text px-3 py-1.5 text-xs font-bold text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none z-50 shadow-lg">
@@ -181,7 +184,7 @@ export default function FeaturedVehicles() {
         {/* Info row, keyed so it fades between models */}
         <div
           key={active.name}
-          className="mx-auto mt-8 sm:mt-12 lg:mt-16 max-w-2xl text-center animate-[fade-up_.35s_ease-out_both]"
+          className="mx-auto -mt-2 sm:mt-0 lg:mt-2 max-w-2xl text-center animate-[fade-up_.35s_ease-out_both]"
         >
           <Link
             href={`/cars/${active.id}`}
