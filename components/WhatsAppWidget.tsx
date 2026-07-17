@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const PHONE = "918697882371"; // 91 = India country code
-const WA_URL = `https://wa.me/${PHONE}?text=Hi%20MG%20Motor%20Mumbai!%20I%27d%20like%20to%20know%20more%20about%20your%20cars.`;
+const WA_URL = `https://wa.me/${PHONE}?text=Hi`;
 
 export default function WhatsAppWidget() {
   const [hovered, setHovered] = useState(false);
