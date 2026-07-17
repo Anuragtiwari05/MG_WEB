@@ -73,6 +73,7 @@ export const metadata: Metadata = {
 };
 
 import FloatingActions from "@/components/FloatingActions";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 export default function RootLayout({
   children,
@@ -85,6 +86,7 @@ export default function RootLayout({
         <JsonLd />
         {children}
         <FloatingActions />
+        <WhatsAppWidget />
       </body>
     </html>
   );
