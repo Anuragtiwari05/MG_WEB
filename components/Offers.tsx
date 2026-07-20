@@ -56,14 +56,6 @@ export default function Offers() {
                 );
               })}
             </div>
-            <div className="mt-8">
-              <a
-                href="/test-drive"
-                className="inline-flex items-center justify-center rounded bg-brand px-8 py-3.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-brand-light"
-              >
-                EXPLORE OFFERS
-              </a>
-            </div>
           </Reveal>
 
           {/* Hector Showcase Image (Right) */}

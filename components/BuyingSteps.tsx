@@ -51,13 +51,13 @@ export default function BuyingSteps() {
               variant="scale-up"
               className="h-full"
             >
-              <div className="group relative flex h-full flex-col justify-start rounded-xl border border-border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand/40 hover:shadow-md">
+              <div className="group relative flex h-full flex-col justify-start rounded-xl border border-border bg-white p-6 shadow-sm transition-all duration-500 [transition-timing-function:cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-1.5 hover:border-brand/30 hover:shadow-md">
                 {/* Step number in background styling */}
-                <div className="font-display text-4xl font-black text-brand/10 transition-colors group-hover:text-brand/20">
+                <div className="font-display text-4xl font-black text-brand/10 transition-colors duration-300 ease-out group-hover:text-brand/20">
                   {s.num}
                 </div>
                 
-                <h3 className="mt-4 font-display text-base font-bold text-text transition-colors group-hover:text-brand">
+                <h3 className="mt-4 font-display text-base font-bold text-text transition-colors duration-300 ease-out group-hover:text-brand">
                   {s.title}
                 </h3>
                 
@@ -66,7 +66,7 @@ export default function BuyingSteps() {
                 </p>
                 
                 {/* Decorative border accent */}
-                <div className="absolute top-0 left-6 right-6 h-[2px] bg-transparent transition-all group-hover:bg-brand" />
+                <div className="absolute top-0 left-6 right-6 h-[2px] bg-brand scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 origin-center" />
               </div>
             </Reveal>
           ))}

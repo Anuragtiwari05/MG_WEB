@@ -381,6 +381,20 @@ export type Car = {
 
 const lakh = (inr: number) => (inr / 100000).toFixed(2);
 
+export function getCarTransparentImage(id: string): string {
+  switch (id) {
+    case "astor": return "/images/models/model-astor-transparent.png";
+    case "hector": return "/images/models/model-hector-transparent.png";
+    case "zs-ev": return "/images/models/model-zs-ev-transparent.png";
+    case "windsor-ev": return "/images/models/model-windsor-transparent.png";
+    case "comet-ev": return "/images/models/model-comet-transparent.png";
+    case "majestor": return "/images/models/model-majestor-transparent.png";
+    case "m9": return "/images/models/model-m9-transparent.png";
+    case "cyberster": return "/images/models/model-cyberster-transparent.png";
+    default: return `/images/models/model-${id}-transparent.png`;
+  }
+}
+
 export const cars: Car[] = [
   {
     id: "astor",
@@ -2117,7 +2131,7 @@ export const blogs: Blog[] = [
     excerpt: "Simple maintenance habits and driving habits that keep your MG performing at its best.",
     readTime: "4 min read",
     image: "/images/models/model-hector-transparent.png",
-    coverImage: "https://mgmotor.scene7.com/is/image/mgmotor/mgi-hector-bn-homepage-003?hei=1920&qlt=80&resMode=bisharp",
+    coverImage: "/images/models/hector/02-exterior-image-164.jpg",
     alt: "MG Hector highway",
     author: "Rahul Desai",
     authorRole: "Service Advisor",
@@ -2243,7 +2257,7 @@ export const blogs: Blog[] = [
     excerpt: "A comprehensive breakdown of features, engine choices, and pricing across the Hector lineup.",
     readTime: "5 min read",
     image: "/images/models/model-hector-transparent.png",
-    coverImage: "https://mgmotor.scene7.com/is/image/mgmotor/mgi-hector-bn-homepage-003?hei=1920&qlt=80&resMode=bisharp",
+    coverImage: "/images/models/hector/01-front-left-side-47.jpg",
     alt: "MG Hector variants guide",
     author: "Vikram Nair",
     authorRole: "Product Consultant",

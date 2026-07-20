@@ -39,18 +39,18 @@ export default function Services() {
             const Icon = iconMap[s.icon as IconName];
             return (
               <Reveal key={s.title} delay={i * 80} variant="scale-up" className="h-full">
-                <div className="group relative flex h-full flex-col items-center justify-between p-5 rounded-xl border border-white/[0.06] bg-white/[0.01] hover:bg-white/[0.03] backdrop-blur-sm text-center transition-all duration-500 ease-out hover:-translate-y-1 hover:border-brand/40 hover:shadow-[0_8px_32px_0_rgba(255,0,0,0.1)] overflow-hidden">
+                <div className="group relative flex h-full flex-col items-center justify-between p-5 rounded-xl border border-white/[0.06] bg-white/[0.01] hover:bg-white/[0.03] backdrop-blur-sm text-center transition-all duration-500 [transition-timing-function:cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-1.5 hover:border-brand/40 hover:shadow-[0_8px_32px_0_rgba(255,0,0,0.15)] overflow-hidden">
                   
                   {/* Decorative glowing background accent */}
                   <div className="absolute -top-10 -right-10 w-20 h-20 bg-brand/5 rounded-full blur-xl group-hover:bg-brand/10 transition-all duration-500" />
                   
                   <div className="flex flex-col items-center flex-1">
                     {/* Premium high-contrast icon wrapper */}
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.08] text-white/90 group-hover:scale-110 group-hover:bg-brand group-hover:border-brand group-hover:text-white transition-all duration-500 shadow-md shadow-black/20">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.08] text-white/90 group-hover:scale-110 group-hover:bg-brand group-hover:border-brand group-hover:text-white transition-all duration-500 [transition-timing-function:cubic-bezier(0.25,1,0.5,1)] shadow-md shadow-black/20">
                       {Icon && <Icon className="h-5 w-5" />}
                     </div>
                     
-                    <h3 className="mt-4 text-xs sm:text-sm font-bold tracking-wide text-white transition-colors group-hover:text-brand">
+                    <h3 className="mt-4 text-xs sm:text-sm font-bold tracking-wide text-white transition-colors duration-300 ease-out group-hover:text-brand">
                       {s.title}
                     </h3>
                     
@@ -60,7 +60,7 @@ export default function Services() {
                   </div>
 
                   {/* Red bottom accent bar animation */}
-                  <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-brand transition-all duration-500 group-hover:w-full" />
+                  <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-brand scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100 origin-center" />
                 </div>
               </Reveal>
             );

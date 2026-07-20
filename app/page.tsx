@@ -2,7 +2,6 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import TrustStrip from "@/components/TrustStrip";
 import FeaturedVehicles from "@/components/FeaturedVehicles";
-import LineupCategories from "@/components/LineupCategories";
 import Offers from "@/components/Offers";
 import WhyMG from "@/components/WhyMG";
 import TestDrive from "@/components/TestDrive";
@@ -23,7 +22,6 @@ export default function Home() {
         <Hero />
         <TrustStrip />
         <FeaturedVehicles />
-        <LineupCategories />
         <Offers />
         <WhyMG />
         <TestDrive />

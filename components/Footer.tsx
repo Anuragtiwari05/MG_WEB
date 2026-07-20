@@ -20,7 +20,7 @@ const quickLinks = [
   { label: "Service", href: "/locate-service-centre" },
   { label: "Locations", href: "/locations" },
   { label: "Blogs", href: "/blogs" },
-  { label: "Test Drive", href: "/locate-service-centre" },
+  { label: "Test Drive", href: "/book-a-test-drive" },
   { label: "Contact Us", href: "/contact-us" },
 ];
 

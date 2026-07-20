@@ -4,24 +4,9 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { cars, formatINR, type CarCategory } from "@/lib/data";
+import { cars, formatINR, getCarTransparentImage, type CarCategory } from "@/lib/data";
 import { ChevronLeft, ChevronRight } from "./icons";
 import Reveal from "./Reveal";
-import CarModal from "./CarModal";
-
-function getTransparentImage(id: string): string {
-  switch (id) {
-    case "astor": return "/images/models/model-astor-transparent.png";
-    case "hector": return "/images/models/model-hector-transparent.png";
-    case "zs-ev": return "/images/models/model-zs-ev-transparent.png";
-    case "windsor-ev": return "/images/models/model-windsor-transparent.png";
-    case "comet-ev": return "/images/models/model-comet-transparent.png";
-    case "majestor": return "/images/models/model-majestor-transparent.png";
-    case "m9": return "/images/models/model-m9-transparent.png";
-    case "cyberster": return "/images/models/model-cyberster-transparent.png";
-    default: return `/images/models/model-${id}-transparent.png`;
-  }
-}
 
 const categories: ("All" | CarCategory)[] = [
   "All",
@@ -31,27 +16,37 @@ const categories: ("All" | CarCategory)[] = [
   "Select",
 ];
 
+function getFiltered(category: "All" | CarCategory) {
+  return category === "All"
+    ? cars
+    : category === "Electric"
+    ? cars.filter((c) => c.category === "Electric" || c.fuel === "Electric")
+    : cars.filter((c) => c.category === category);
+}
+
 export default function FeaturedVehicles() {
   const router = useRouter();
   const [category, setCategory] = useState<"All" | CarCategory>("All");
   const [index, setIndex] = useState(0);
-  const [showDetails, setShowDetails] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
   const [stageWidth, setStageWidth] = useState(1000);
-  const [prevCategory, setPrevCategory] = useState(category);
 
-  const filtered =
-    category === "All"
-      ? cars
-      : category === "Electric"
-      ? cars.filter((c) => c.category === "Electric" || c.fuel === "Electric")
-      : cars.filter((c) => c.category === category);
+  const filtered = getFiltered(category);
   const active = filtered[index] ?? filtered[0];
 
-  if (category !== prevCategory) {
-    setPrevCategory(category);
-    setIndex(0);
-  }
+  const selectCategory = (cat: "All" | CarCategory) => {
+    if (cat === category) return;
+    const nextFiltered = getFiltered(cat);
+    const currentId = active?.id;
+    const matchIdx = nextFiltered.findIndex((c) => c.id === currentId);
+    // Avoid landing on the same car that was already showing — hop to the next one instead
+    const nextIndex =
+      matchIdx !== -1 && nextFiltered.length > 1
+        ? (matchIdx + 1) % nextFiltered.length
+        : 0;
+    setCategory(cat);
+    setIndex(nextIndex);
+  };
 
   useEffect(() => {
     const el = stageRef.current;
@@ -66,14 +61,24 @@ export default function FeaturedVehicles() {
   const len = filtered.length;
   const go = (dir: number) => setIndex((i) => (i + dir + len) % len);
 
-  // Spacing proportional to stage width
+  // Every car shares the same container width (widthFrac * stageWidth) and is only
+  // told apart by CSS scale — object-contain never renders past that container, so
+  // widthFrac*scale is a hard upper bound on any car's on-screen size regardless of
+  // its image's own aspect ratio (this is what kept the wide-aspect Cyberster from
+  // blowing past its neighbors). step is then derived directly from that bound so
+  // the center and side cars never overlap, while still leaving the nav arrows
+  // (~48px circle sitting a few px off the edge) clear of the side cars.
+  const CENTER_SCALE = 1.15;
+  const SIDE_SCALE = 0.3;
+  const CENTER_SIDE_GAP = 24;
   const isMobile = stageWidth < 640;
   const isTablet = stageWidth >= 640 && stageWidth < 1024;
-  const step = isMobile
-    ? stageWidth * 0.34
-    : isTablet
-    ? stageWidth * 0.42
-    : Math.min(stageWidth * 0.56, 560);
+  // Widths chosen so the side car's outer edge clears the nav button (which sits
+  // left-2/4/6 i.e. 8/16/24px off the edge) with real margin, not just barely.
+  const widthFrac = isMobile ? 0.25 : isTablet ? 0.34 : 0.42;
+  const step =
+    (widthFrac * stageWidth * (CENTER_SCALE + SIDE_SCALE)) / 2 +
+    CENTER_SIDE_GAP;
 
   return (
     <section
@@ -87,7 +92,7 @@ export default function FeaturedVehicles() {
             {categories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setCategory(cat)}
+                onClick={() => selectCategory(cat)}
                 className={`shrink-0 border-b-2 px-3 py-2 text-sm font-semibold transition-colors sm:px-4 ${
                   category === cat
                     ? "border-brand text-brand"
@@ -108,19 +113,28 @@ export default function FeaturedVehicles() {
           <button
             aria-label="Previous car"
             onClick={() => go(-1)}
-            className="absolute left-0 top-1/2 z-40 grid h-10 w-10 -translate-y-1/2 place-items-center text-text transition-opacity sm:h-12 sm:w-12"
+            className="absolute left-2 sm:left-4 lg:left-6 top-1/2 z-40 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-slate-300 bg-white text-slate-800 shadow-lg transition-all duration-200 hover:scale-110 hover:shadow-xl active:scale-95 sm:h-12 sm:w-12 cursor-pointer"
           >
-            <ChevronLeft className="h-6 w-6" />
+            <ChevronLeft className="h-6 w-6 text-slate-800" />
+          </button>
+
+          <button
+            aria-label="Next car"
+            onClick={() => go(1)}
+            className="absolute right-2 sm:right-4 lg:right-6 top-1/2 z-40 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-slate-300 bg-white text-slate-800 shadow-lg transition-all duration-200 hover:scale-110 hover:shadow-xl active:scale-95 sm:h-12 sm:w-12 cursor-pointer"
+          >
+            <ChevronRight className="h-6 w-6 text-slate-800" />
           </button>
 
           {filtered.map((car, i) => {
             let offset = i - index;
             if (offset > len / 2) offset -= len;
             if (offset < -len / 2) offset += len;
-            if (Math.abs(offset) > 2) return null;
             const abs = Math.abs(offset);
-            const scale = offset === 0 ? 1.28 : (abs > 1 ? 0.32 : 0.4);
-            const opacity = offset === 0 ? 1 : (abs > 1 ? 0.45 : 0.7);
+            if (abs > 2) return null;
+            const scale =
+              offset === 0 ? CENTER_SCALE : abs === 1 ? SIDE_SCALE : SIDE_SCALE * 0.75;
+            const opacity = offset === 0 ? 1 : abs === 1 ? 0.55 : 0;
             const translateX = offset * step;
             return (
               <div
@@ -132,26 +146,30 @@ export default function FeaturedVehicles() {
                     setIndex(i);
                   }
                 }}
-                className="absolute left-1/2 top-1/2 flex h-full w-[75%] items-center justify-center transition-all duration-[650ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.15)] sm:w-[60%] lg:w-[50%] group"
+                className="absolute left-1/2 top-1/2 flex h-full items-center justify-center transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group"
                 style={{
+                  width: `${widthFrac * 100}%`,
                   transform: `translate(-50%, -50%) translateX(${translateX}px) scale(${scale})`,
                   opacity,
                   zIndex: 20 - abs,
                   cursor: offset !== 0 ? "pointer" : "default",
                   pointerEvents: abs > 1 ? "none" : "auto",
+                  willChange: "transform, opacity",
                 }}
               >
                 <div className="relative h-[85%] w-full flex flex-col items-center justify-center bg-transparent">
                   <div className="relative w-full h-[90%] flex items-center justify-center">
                     <Image
-                      src={getTransparentImage(car.id)}
+                      src={getCarTransparentImage(car.id)}
                       alt={car.alt}
                       fill
                       priority={offset === 0}
                       className={`object-contain transition-all duration-300 ${
-                        offset === 0 ? "hover:scale-[1.03]" : "grayscale"
+                        offset === 0
+                          ? "hover:scale-[1.03]"
+                          : "grayscale-[55%] saturate-[0.6] brightness-105"
                       }`}
-                      sizes="(max-width: 640px) 75vw, (max-width: 1024px) 60vw, 50vw"
+                      sizes="(max-width: 640px) 30vw, (max-width: 1024px) 40vw, 46vw"
                     />
                   </div>
                   {/* Soft realistic floor shadow under tyres */}
@@ -171,14 +189,6 @@ export default function FeaturedVehicles() {
               </div>
             );
           })}
-
-          <button
-            aria-label="Next car"
-            onClick={() => go(1)}
-            className="absolute right-0 top-1/2 z-40 grid h-10 w-10 -translate-y-1/2 place-items-center text-text transition-opacity sm:h-12 sm:w-12"
-          >
-            <ChevronRight className="h-6 w-6" />
-          </button>
         </div>
 
         {/* Info row, keyed so it fades between models */}
@@ -219,18 +229,14 @@ export default function FeaturedVehicles() {
             </div>
           </div>
 
-          <button
-            onClick={() => setShowDetails(true)}
-            className="mt-4 rounded bg-brand px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-brand-light cursor-pointer"
+          <Link
+            href={`/cars/${active.id}`}
+            className="mt-4 inline-block rounded bg-brand px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-brand-light cursor-pointer"
           >
             View Details
-          </button>
+          </Link>
         </div>
       </div>
-
-      {showDetails && (
-        <CarModal car={active} onClose={() => setShowDetails(false)} />
-      )}
     </section>
   );
 }

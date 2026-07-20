@@ -59,6 +59,7 @@ export default function Navbar() {
 
   const isHome = pathname === "/";
   const isTransparent = isHome && !scrolled;
+  const isCarDetailPage = Boolean(pathname?.startsWith("/cars/") && pathname !== "/cars");
 
   const getIsActive = (href: string) => {
     if (href === "/about" && pathname === "/about") return true;
@@ -115,12 +116,14 @@ export default function Navbar() {
 
         {/* Right cluster */}
         <div className="flex items-center gap-3">
-          <Link
-            href="/#test-drive"
-            className="hidden rounded bg-brand px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-brand-light sm:inline-block"
-          >
-            BOOK A TEST DRIVE
-          </Link>
+          {!isCarDetailPage && (
+            <Link
+              href="/book-a-test-drive"
+              className="hidden rounded bg-brand px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-brand-light sm:inline-block"
+            >
+              BOOK A TEST DRIVE
+            </Link>
+          )}
           <button
             aria-label="Open menu"
             onClick={() => setOpen(true)}
@@ -178,13 +181,15 @@ export default function Navbar() {
             );
           })}
 
-          <Link
-            href="/#test-drive"
-            onClick={() => setOpen(false)}
-            className="mt-6 flex items-center justify-center gap-2 rounded bg-brand px-5 py-3.5 text-sm font-semibold text-white hover:bg-brand-light"
-          >
-            Book a Test Drive
-          </Link>
+          {!isCarDetailPage && (
+            <Link
+              href="/book-a-test-drive"
+              onClick={() => setOpen(false)}
+              className="mt-6 flex items-center justify-center gap-2 rounded bg-brand px-5 py-3.5 text-sm font-semibold text-white hover:bg-brand-light"
+            >
+              Book a Test Drive
+            </Link>
+          )}
         </div>
       </div>
     </header>

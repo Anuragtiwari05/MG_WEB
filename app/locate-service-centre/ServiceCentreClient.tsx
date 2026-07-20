@@ -25,6 +25,7 @@ const timeSlots = [
 export default function LocateServiceCentrePage() {
   const [formData, setFormData] = useState({
     carModel: "",
+    carModelOther: "",
     serviceCentre: "",
     serviceType: "",
     name: "",
@@ -36,6 +37,9 @@ export default function LocateServiceCentrePage() {
     timeSlot: "",
     notes: "",
   });
+
+  const carModelForDisplay =
+    formData.carModel === "Other" ? formData.carModelOther : formData.carModel;
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -98,13 +102,14 @@ export default function LocateServiceCentrePage() {
                     Booking Request Submitted!
                   </h3>
                   <p className="mt-2 max-w-md text-sm text-muted">
-                    Thank you, <span className="font-semibold text-text">{formData.name}</span>. Your service booking request for your <span className="font-semibold text-text">MG {formData.carModel}</span> has been logged. Our representative will contact you at <span className="font-semibold text-text">{formData.phone}</span> shortly.
+                    Thank you, <span className="font-semibold text-text">{formData.name}</span>. Your service booking request for your <span className="font-semibold text-text">MG {carModelForDisplay}</span> has been logged. Our representative will contact you at <span className="font-semibold text-text">{formData.phone}</span> shortly.
                   </p>
                   <button
                     onClick={() => {
                       setSubmitted(false);
                       setFormData({
                         carModel: "",
+                        carModelOther: "",
                         serviceCentre: "",
                         serviceType: "",
                         name: "",
@@ -142,7 +147,19 @@ export default function LocateServiceCentrePage() {
                         <option value="MAJESTOR">MAJESTOR</option>
                         <option value="M9">M9</option>
                         <option value="CYBERSTER">CYBERSTER</option>
+                        <option value="Other">Other</option>
                       </select>
+                      {formData.carModel === "Other" && (
+                        <input
+                          type="text"
+                          required
+                          autoFocus
+                          placeholder="Please specify your car model"
+                          value={formData.carModelOther}
+                          onChange={(e) => setFormData({ ...formData, carModelOther: e.target.value })}
+                          className="mt-2 w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none focus:border-brand focus:ring-2 focus:ring-brand/10"
+                        />
+                      )}
                   </label>
 
                   {/* Select Service Centre */}

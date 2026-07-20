@@ -147,6 +147,18 @@ export default function ContactUsClient() {
 
                   <li className="flex items-start gap-3">
                     <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
+                      <MapPin className="h-4 w-4" />
+                    </span>
+                    <div>
+                      <p className="text-xs font-medium text-muted">Main Office</p>
+                      <p className="text-sm font-semibold text-text">
+                        Shop No. 7 &amp; 8, Raj Akshay Building, Miragaon, Mira Road East, Thane – 401107
+                      </p>
+                    </div>
+                  </li>
+
+                  <li className="flex items-start gap-3">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
                       <Clock className="h-4 w-4" />
                     </span>
                     <div>

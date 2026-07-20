@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import Car360Viewer from "@/components/Car360Viewer";
+import TestDriveForm from "@/components/TestDriveForm";
 import { type Car, type FeatureSection, formatINR } from "@/lib/data";
 import { getCarDekhoImage } from "@/lib/cardekho-image-map";
 import { get360Config } from "@/lib/car360Config";
@@ -70,6 +71,35 @@ export default function CarDetailClient({ car }: Props) {
   const [selectedColor, setSelectedColor] = useState(car.colors[0]);
   const [activeGalleryIndex, setActiveGalleryIndex] = useState<number | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [showStickyCtas, setShowStickyCtas] = useState(false);
+  const [showTestDriveModal, setShowTestDriveModal] = useState(false);
+  const ctasRef = useRef<HTMLDivElement>(null);
+
+  // Lock background scroll while the test drive modal is open
+  useEffect(() => {
+    if (showTestDriveModal) {
+      const prevOverflow = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prevOverflow;
+      };
+    }
+  }, [showTestDriveModal]);
+
+  useEffect(() => {
+    const target = ctasRef.current;
+    if (!target) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowStickyCtas(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+      },
+      { threshold: 0 }
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
 
   /* featureSections state */
   const [activeFsTab, setActiveFsTab] = useState(0);
@@ -371,13 +401,13 @@ export default function CarDetailClient({ car }: Props) {
                 </div>
 
                 {/* CTAs */}
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Link href={`/locate-service-centre?model=${encodeURIComponent(car.name)}`} className="group inline-flex items-center gap-2 rounded bg-brand px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-light cursor-pointer">
-                    Book a Test Drive 
+                <div ref={ctasRef} className="mt-6 flex flex-wrap gap-3">
+                  <button type="button" onClick={() => setShowTestDriveModal(true)} className="group inline-flex items-center gap-2 rounded bg-brand px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-light cursor-pointer">
+                    Book a Test Drive
                     <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
-                  </Link>
+                  </button>
                   <Link href="/contact-us" className="inline-flex items-center gap-2 rounded border border-brand bg-white px-6 py-3.5 text-sm font-semibold text-brand transition-all hover:bg-brand hover:text-white cursor-pointer">
                     Get a Variant Quote
                   </Link>
@@ -396,15 +426,58 @@ export default function CarDetailClient({ car }: Props) {
         </section>
 
         {/* ── STICKY NAV ── */}
-        <nav aria-label="Vehicle sections" className="sticky top-[80px] z-20 hidden border-b border-border bg-white/95 backdrop-blur lg:block">
-          <div className="container-px mx-auto flex max-w-[1400px] items-center gap-8 overflow-x-auto py-4 text-[11px] font-bold uppercase tracking-[0.14em] text-muted">
-            <a href="#overview" className="whitespace-nowrap text-brand">Overview</a>
-            <a href="#highlights" className="whitespace-nowrap hover:text-brand">Highlights</a>
-            {car.featureSections && <a href="#explore" className="whitespace-nowrap hover:text-brand">Explore</a>}
-            <a href="#deep-dive" className="whitespace-nowrap hover:text-brand">Deep Dive</a>
-            <a href="#gallery" className="whitespace-nowrap hover:text-brand">Gallery</a>
-            <a href="#specifications" className="whitespace-nowrap hover:text-brand">Specifications</a>
-            <a href="#enquire" className="ml-auto whitespace-nowrap text-brand hover:underline">Enquire now</a>
+        <nav aria-label="Vehicle sections" className="sticky top-[80px] z-30 hidden border-b border-slate-200 bg-white/95 backdrop-blur-md lg:block shadow-sm">
+          <div className="container-px mx-auto flex max-w-[1400px] items-center justify-between py-3.5">
+            {/* Left / Middle Navigation Links */}
+            <div className="flex items-center gap-7 text-[11px] font-bold uppercase tracking-[0.14em] text-slate-600">
+              <a href="#overview" className="whitespace-nowrap transition-colors hover:text-brand">Overview</a>
+              <a href="#gallery" className="whitespace-nowrap transition-colors hover:text-brand">Gallery</a>
+              <a href={car.featureSections ? "#explore" : "#highlights"} className="whitespace-nowrap transition-colors hover:text-brand">Features</a>
+              <a href="#safety" className="whitespace-nowrap transition-colors hover:text-brand">Safety</a>
+              <a href="#specifications" className="whitespace-nowrap transition-colors hover:text-brand">Specifications</a>
+              <a href="#specifications" className="whitespace-nowrap transition-colors hover:text-brand">Variants</a>
+            </div>
+
+            {/* Extreme Right: Transitioned CTA Buttons */}
+            <div
+              className={`flex items-center gap-2.5 transition-all duration-300 ${
+                showStickyCtas
+                  ? "opacity-100 translate-y-0 pointer-events-auto"
+                  : "opacity-0 translate-y-2 pointer-events-none"
+              }`}
+            >
+              <button
+                type="button"
+                onClick={() => setShowTestDriveModal(true)}
+                className="group inline-flex items-center gap-1.5 rounded bg-brand px-4 py-2 text-xs font-semibold text-white transition-all hover:bg-brand-light cursor-pointer shadow-sm"
+              >
+                <span>Book a Test Drive</span>
+                <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+
+              <Link
+                href="/contact-us"
+                className="inline-flex items-center gap-1.5 rounded border border-brand bg-white px-4 py-2 text-xs font-semibold text-brand transition-all hover:bg-brand hover:text-white cursor-pointer"
+              >
+                Get a Variant Quote
+              </Link>
+
+              {car.brochureUrl && (
+                <a
+                  href={car.brochureUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs font-semibold text-text transition-all hover:border-slate-400 hover:bg-slate-100 cursor-pointer"
+                >
+                  <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+                  </svg>
+                  <span>Download Brochure</span>
+                </a>
+              )}
+            </div>
           </div>
         </nav>
 
@@ -699,13 +772,39 @@ export default function CarDetailClient({ car }: Props) {
               <p className="mt-2 text-sm text-white/65">Book a test drive with MG Motor Mumbai.</p>
             </Reveal>
             <Reveal variant="slide-left" className="flex flex-wrap gap-3">
-              <Link href={`/locate-service-centre?model=${encodeURIComponent(car.name)}`} className="btn-primary px-6 py-3 text-xs uppercase tracking-wider">Book a test drive</Link>
+              <button type="button" onClick={() => setShowTestDriveModal(true)} className="btn-primary px-6 py-3 text-xs uppercase tracking-wider cursor-pointer">Book a test drive</button>
               <Link href="/contact-us" className="rounded-md border border-white/35 px-6 py-3 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-white hover:text-text">Enquire now</Link>
             </Reveal>
           </div>
         </section>
       </main>
       <Footer />
+
+      {/* ── BOOK A TEST DRIVE MODAL — stays on this car's URL, sized to fit the viewport ── */}
+      {showTestDriveModal && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowTestDriveModal(false);
+          }}
+        >
+          <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col rounded-xl bg-white shadow-2xl animate-in zoom-in-95 duration-200">
+            <button
+              type="button"
+              onClick={() => setShowTestDriveModal(false)}
+              aria-label="Close"
+              className="absolute right-4 top-4 z-10 rounded-full bg-white p-2 text-slate-400 shadow-sm transition-colors hover:bg-slate-100 hover:text-slate-700 cursor-pointer"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <div className="overflow-y-auto rounded-xl p-6 sm:p-10">
+              <TestDriveForm presetCarId={car.id} onExit={() => setShowTestDriveModal(false)} />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
