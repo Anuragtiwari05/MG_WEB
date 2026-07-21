@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { cars, getCarTransparentImage, type Car } from "@/lib/data";
 import { Shield, X, CheckCircle } from "@/components/icons";
+import { usePhoneVerification } from "@/components/PhoneVerificationContext";
+import ReverifyModal from "@/components/ReverifyModal";
 
 function CarCard({
   car,
@@ -56,7 +59,8 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
   const isFromCarPage = Boolean(presetCarId);
 
   /* ── PHONE + OTP GATE ── */
-  const [verified, setVerified] = useState(false);
+  const { verifiedPhone, verifyPhone, resetVerification, isMounted } = usePhoneVerification();
+  const [reverifyOpen, setReverifyOpen] = useState(false);
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [sendingOtp, setSendingOtp] = useState(false);
@@ -65,6 +69,21 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
   const [otpError, setOtpError] = useState("");
   const [verifyingOtp, setVerifyingOtp] = useState(false);
   const otpInputRef = useRef<HTMLInputElement>(null);
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const verified = isMounted && Boolean(verifiedPhone);
+
+  useEffect(() => {
+    if (verifiedPhone) {
+      setPhone(verifiedPhone);
+    } else {
+      setPhone("");
+    }
+  }, [verifiedPhone]);
 
   useEffect(() => {
     if (otpModalOpen) {
@@ -99,7 +118,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
     setTimeout(() => {
       setVerifyingOtp(false);
       setOtpModalOpen(false);
-      setVerified(true);
+      verifyPhone(phone);
     }, 800);
   };
 
@@ -119,6 +138,11 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
   const [email, setEmail] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [notes, setNotes] = useState<string>("");
+
+  // Error states for Step 3 validation
+  const [nameError, setNameError] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [addressError, setAddressError] = useState<string>("");
 
   // Modal & submission state
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
@@ -163,7 +187,46 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (fullName && phone) {
+    let isValid = true;
+
+    // Full Name: required, min 3 chars, letters and spaces only
+    if (!fullName.trim()) {
+      setNameError("Full name is required");
+      isValid = false;
+    } else if (fullName.trim().length < 3) {
+      setNameError("Full name must be at least 3 characters");
+      isValid = false;
+    } else if (!/^[a-zA-Z\s]+$/.test(fullName.trim())) {
+      setNameError("Full name must contain only letters and spaces");
+      isValid = false;
+    } else {
+      setNameError("");
+    }
+
+    // Email Address: required, valid email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.trim()) {
+      setEmailError("Email address is required");
+      isValid = false;
+    } else if (!emailRegex.test(email.trim())) {
+      setEmailError("Please enter a valid email address");
+      isValid = false;
+    } else {
+      setEmailError("");
+    }
+
+    // Address: required, min 10 characters
+    if (!address.trim()) {
+      setAddressError("Address / Area is required");
+      isValid = false;
+    } else if (address.trim().length < 10) {
+      setAddressError("Please enter a complete address (minimum 10 characters)");
+      isValid = false;
+    } else {
+      setAddressError("");
+    }
+
+    if (isValid && phone) {
       setShowSuccessModal(true);
     }
   };
@@ -176,9 +239,11 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
     setEmail("");
     setAddress("");
     setNotes("");
-    setVerified(false);
-    setPhone("");
     setOtp("");
+    setNameError("");
+    setEmailError("");
+    setAddressError("");
+    resetVerification();
   };
 
   const showroomOptions = [
@@ -198,7 +263,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
   /* ── GATE SCREEN — shown until phone is OTP-verified ── */
   if (!verified) {
     return (
-      <>
+      <div className="mx-auto max-w-sm w-full py-4 text-left">
         <h3 className="font-display text-lg font-bold text-slate-900">
           Verify Your Number
         </h3>
@@ -206,7 +271,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
           We&apos;ll text you a one-time code to confirm your test drive booking.
         </p>
 
-        <div className="mt-6 max-w-sm">
+        <div className="mt-6 w-full">
           <label className="block text-xs font-semibold text-slate-700 mb-2">
             Mobile Number
           </label>
@@ -257,87 +322,90 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
         </div>
 
         {/* ── OTP VERIFICATION POPUP ── */}
-        {otpModalOpen && (
-          <div
-            className="fixed inset-0 z-[120] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
-            onClick={(e) => {
-              if (e.target === e.currentTarget) setOtpModalOpen(false);
-            }}
-          >
-            <div className="relative w-full max-w-sm rounded-2xl bg-white p-7 text-center shadow-2xl animate-[fade-up_.3s_ease-out_both] sm:p-8">
-              <button
-                type="button"
-                onClick={() => setOtpModalOpen(false)}
-                aria-label="Close"
-                className="absolute right-4 top-4 rounded-full p-1.5 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700 cursor-pointer"
-              >
-                <X className="h-4 w-4" />
-              </button>
-
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand/10 text-brand">
-                <Shield className="h-6 w-6" />
-              </div>
-
-              <h3 className="mt-4 font-display text-xl font-bold text-slate-900">
-                Verify OTP
-              </h3>
-              <p className="mt-1.5 text-xs text-slate-500 font-light">
-                Enter the 4-digit code sent to{" "}
-                <span className="font-semibold text-slate-800">+91 {phone}</span>
-              </p>
-
-              <input
-                ref={otpInputRef}
-                type="text"
-                inputMode="numeric"
-                maxLength={4}
-                value={otp}
-                onChange={(e) => {
-                  setOtp(e.target.value.replace(/\D/g, "").slice(0, 4));
-                  if (otpError) setOtpError("");
+        {otpModalOpen && mounted && typeof window !== "undefined"
+          ? createPortal(
+              <div
+                className="fixed inset-0 z-[250] flex items-center justify-center bg-black/55 backdrop-blur-sm p-4 animate-in fade-in duration-200"
+                onClick={(e) => {
+                  if (e.target === e.currentTarget) setOtpModalOpen(false);
                 }}
-                onKeyDown={(e) => e.key === "Enter" && handleVerifyOtp()}
-                className={`mt-6 w-full rounded-lg border bg-white py-3 text-center text-2xl font-bold tracking-[0.5em] text-slate-900 outline-none transition-colors focus:ring-2 ${
-                  otpError
-                    ? "border-red-300 focus:border-red-400 focus:ring-red-100"
-                    : "border-slate-200 focus:border-brand focus:ring-brand/20"
-                }`}
-                placeholder="••••"
-              />
-              {otpError && (
-                <p className="mt-1.5 text-xs font-medium text-red-500">{otpError}</p>
-              )}
-
-              <button
-                type="button"
-                onClick={handleVerifyOtp}
-                disabled={verifyingOtp}
-                className="mt-6 flex w-full items-center justify-center gap-2 rounded bg-brand px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-light cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
               >
-                {verifyingOtp ? (
-                  <>
-                    <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-                    </svg>
-                    Verifying...
-                  </>
-                ) : (
-                  "Verify OTP"
-                )}
-              </button>
+                <div className="relative w-full max-w-sm rounded-2xl bg-white p-7 text-center shadow-2xl animate-[fade-up_.3s_ease-out_both] sm:p-8">
+                  <button
+                    type="button"
+                    onClick={() => setOtpModalOpen(false)}
+                    aria-label="Close"
+                    className="absolute right-4 top-4 rounded-full p-1.5 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700 cursor-pointer"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
 
-              <button
-                type="button"
-                onClick={() => setOtpModalOpen(false)}
-                className="mt-3 text-xs font-semibold text-slate-500 transition-colors hover:text-brand cursor-pointer"
-              >
-                ← Change number
-              </button>
-            </div>
-          </div>
-        )}
-      </>
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand/10 text-brand">
+                    <Shield className="h-6 w-6" />
+                  </div>
+
+                  <h3 className="mt-4 font-display text-xl font-bold text-slate-900">
+                    Verify OTP
+                  </h3>
+                  <p className="mt-1.5 text-xs text-slate-500 font-light">
+                    Enter the 4-digit code sent to{" "}
+                    <span className="font-semibold text-slate-800">+91 {phone}</span>
+                  </p>
+
+                  <input
+                    ref={otpInputRef}
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={4}
+                    value={otp}
+                    onChange={(e) => {
+                      setOtp(e.target.value.replace(/\D/g, "").slice(0, 4));
+                      if (otpError) setOtpError("");
+                    }}
+                    onKeyDown={(e) => e.key === "Enter" && handleVerifyOtp()}
+                    className={`mt-6 w-full rounded-lg border bg-white py-3 text-center text-2xl font-bold tracking-[0.5em] pl-[0.25em] text-slate-900 outline-none transition-colors focus:ring-2 ${
+                      otpError
+                        ? "border-red-300 focus:border-red-400 focus:ring-red-100"
+                        : "border-slate-200 focus:border-brand focus:ring-brand/20"
+                    }`}
+                    placeholder="••••"
+                  />
+                  {otpError && (
+                    <p className="mt-1.5 text-xs font-medium text-red-500">{otpError}</p>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={handleVerifyOtp}
+                    disabled={verifyingOtp}
+                    className="mt-6 flex w-full items-center justify-center gap-2 rounded bg-brand px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-light cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
+                  >
+                    {verifyingOtp ? (
+                      <>
+                        <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                        </svg>
+                        Verifying...
+                      </>
+                    ) : (
+                      "Verify OTP"
+                    )}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setOtpModalOpen(false)}
+                    className="mt-3 text-xs font-semibold text-slate-500 transition-colors hover:text-brand cursor-pointer"
+                  >
+                    ← Change number
+                  </button>
+                </div>
+              </div>,
+              document.body
+            )
+          : null}
+      </div>
     );
   }
 
@@ -620,11 +688,14 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Mobile Number
                 </label>
-                <div className="flex items-center gap-2 rounded-lg border border-blue-200 bg-blue-50 px-3.5 py-3">
+                <div 
+                  className="flex items-center gap-2 rounded-lg border border-blue-200 bg-blue-50 px-3.5 py-3 cursor-pointer transition-colors hover:bg-blue-100/70"
+                  onClick={() => setReverifyOpen(true)}
+                >
                   <CheckCircle className="h-4 w-4 shrink-0 text-blue-600" />
                   <span className="text-sm font-semibold text-blue-800">+91 {phone}</span>
-                  <span className="ml-auto shrink-0 text-[10px] font-bold uppercase tracking-wide text-blue-500">
-                    Verified
+                  <span className="ml-auto text-[10px] font-bold uppercase tracking-wide text-blue-500 hover:text-blue-700">
+                    Change
                   </span>
                 </div>
                 <input type="hidden" name="mobile" value={phone} />
@@ -639,22 +710,43 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                   required
                   placeholder="e.g. Rahul Sharma"
                   value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  className="w-full rounded-lg border border-slate-200 bg-white p-3 text-sm text-slate-800 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"
+                  onChange={(e) => {
+                    setFullName(e.target.value);
+                    if (nameError) setNameError("");
+                  }}
+                  className={`w-full rounded-lg border p-3 text-sm text-slate-800 outline-none transition-colors focus:ring-2 ${
+                    nameError 
+                      ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
+                      : "border-slate-200 focus:border-brand focus:ring-brand/20"
+                  }`}
                 />
+                {nameError && (
+                  <p className="mt-1.5 text-xs font-medium text-red-500">{nameError}</p>
+                )}
               </div>
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Email Address
+                  Email Address *
                 </label>
                 <input
                   type="email"
+                  required
                   placeholder="e.g. rahul@example.com"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-lg border border-slate-200 bg-white p-3 text-sm text-slate-800 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (emailError) setEmailError("");
+                  }}
+                  className={`w-full rounded-lg border p-3 text-sm text-slate-800 outline-none transition-colors focus:ring-2 ${
+                    emailError
+                      ? "border-red-300 focus:border-red-400 focus:ring-red-100"
+                      : "border-slate-200 focus:border-brand focus:ring-brand/20"
+                  }`}
                 />
+                {emailError && (
+                  <p className="mt-1.5 text-xs font-medium text-red-500">{emailError}</p>
+                )}
               </div>
 
               <div>
@@ -666,9 +758,19 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                   required
                   placeholder="e.g. Flat 402, Sunshine Heights, Malad West, Mumbai"
                   value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  className="w-full rounded-lg border border-slate-200 bg-white p-3 text-sm text-slate-800 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20"
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                    if (addressError) setAddressError("");
+                  }}
+                  className={`w-full rounded-lg border p-3 text-sm text-slate-800 outline-none transition-colors focus:ring-2 ${
+                    addressError
+                      ? "border-red-300 focus:border-red-400 focus:ring-red-100"
+                      : "border-slate-200 focus:border-brand focus:ring-brand/20"
+                  }`}
                 />
+                {addressError && (
+                  <p className="mt-1.5 text-xs font-medium text-red-500">{addressError}</p>
+                )}
               </div>
 
               <div>
@@ -750,6 +852,15 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
           </div>
         </div>
       )}
+
+      <ReverifyModal 
+        isOpen={reverifyOpen}
+        onClose={() => setReverifyOpen(false)}
+        onConfirm={() => {
+          setReverifyOpen(false);
+          resetVerification();
+        }}
+      />
     </>
   );
 }

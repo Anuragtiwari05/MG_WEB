@@ -6,6 +6,7 @@ import Link from "next/link";
 import type { Car } from "@/lib/data";
 import { formatINR } from "@/lib/data";
 import { Check, X } from "./icons";
+import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 
 export default function CarModal({
   car,
@@ -14,6 +15,7 @@ export default function CarModal({
   car: Car;
   onClose: () => void;
 }) {
+  const { openTestDriveModal } = usePhoneVerification();
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", onKey);
@@ -110,13 +112,15 @@ export default function CarModal({
             </ul>
           </div>
 
-          <Link
-            href="/#test-drive"
-            onClick={onClose}
-            className="mt-8 inline-flex w-full items-center justify-center rounded bg-brand py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-light"
+          <button
+            onClick={() => {
+              onClose();
+              openTestDriveModal(car.id);
+            }}
+            className="mt-8 inline-flex w-full items-center justify-center rounded bg-brand py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-light cursor-pointer"
           >
             Book a Test Drive
-          </Link>
+          </button>
         </div>
       </div>
     </div>

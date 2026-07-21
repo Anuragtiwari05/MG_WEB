@@ -1,11 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import { MapPin, Phone, Mail, Clock } from "@/components/icons";
+import { usePhoneVerification } from "@/components/PhoneVerificationContext";
+import PhoneOtpGate from "@/components/PhoneOtpGate";
+import ReverifyModal from "@/components/ReverifyModal";
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -22,6 +25,8 @@ const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 export default function ContactUsClient() {
+  const { verifiedPhone, resetVerification, isMounted } = usePhoneVerification();
+  const [reverifyOpen, setReverifyOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -32,9 +37,87 @@ export default function ContactUsClient() {
   });
   const [submitted, setSubmitted] = useState(false);
 
+  // Field validation errors
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [pincodeError, setPincodeError] = useState("");
+  const [subjectError, setSubjectError] = useState("");
+  const [messageError, setMessageError] = useState("");
+
+  useEffect(() => {
+    if (verifiedPhone) {
+      setFormData((prev) => ({ ...prev, phone: verifiedPhone }));
+    } else {
+      setFormData((prev) => ({ ...prev, phone: "" }));
+    }
+  }, [verifiedPhone]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    let isValid = true;
+
+    // Name: required, min 3 chars, letters/spaces only
+    if (!formData.name.trim()) {
+      setNameError("Name is required");
+      isValid = false;
+    } else if (formData.name.trim().length < 3) {
+      setNameError("Name must be at least 3 characters");
+      isValid = false;
+    } else if (!/^[a-zA-Z\s]+$/.test(formData.name.trim())) {
+      setNameError("Name must contain only letters and spaces");
+      isValid = false;
+    } else {
+      setNameError("");
+    }
+
+    // Email: required, valid format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      setEmailError("Email address is required");
+      isValid = false;
+    } else if (!emailRegex.test(formData.email.trim())) {
+      setEmailError("Please enter a valid email address");
+      isValid = false;
+    } else {
+      setEmailError("");
+    }
+
+    // Pincode: required, 6 digits
+    if (!formData.pincode.trim()) {
+      setPincodeError("Pincode is required");
+      isValid = false;
+    } else if (!/^[0-9]{6}$/.test(formData.pincode.trim())) {
+      setPincodeError("Please enter a valid 6-digit pincode");
+      isValid = false;
+    } else {
+      setPincodeError("");
+    }
+
+    // Subject: required, min 4 chars
+    if (!formData.subject.trim()) {
+      setSubjectError("Subject is required");
+      isValid = false;
+    } else if (formData.subject.trim().length < 4) {
+      setSubjectError("Subject must be at least 4 characters");
+      isValid = false;
+    } else {
+      setSubjectError("");
+    }
+
+    // Message: required, min 10 chars
+    if (!formData.message.trim()) {
+      setMessageError("Message is required");
+      isValid = false;
+    } else if (formData.message.trim().length < 10) {
+      setMessageError("Message must be at least 10 characters");
+      isValid = false;
+    } else {
+      setMessageError("");
+    }
+
+    if (isValid && formData.phone) {
+      setSubmitted(true);
+    }
   };
 
   return (
@@ -46,7 +129,7 @@ export default function ContactUsClient() {
           {/* Background Image */}
           <Image
             alt="MG Cyberster"
-            src="https://mgmotor.scene7.com/is/image/mgmotor/cyberter-night-full?fmt=webp-alpha&resMode=bisharp&fit=constrain&qlt=90&wid=1920"
+            src="/images/cyberster-night.webp"
             fill
             className="object-cover opacity-85 lg:object-[65%_center] z-0"
             priority
@@ -172,8 +255,14 @@ export default function ContactUsClient() {
               </Reveal>
 
               {/* Right Column: Form */}
-              <Reveal variant="slide-left" className="rounded-lg border border-border bg-white p-6 shadow-[0_4px_32px_0_rgba(228,0,43,0.06)] sm:p-8">
-                {submitted ? (
+              <Reveal variant="slide-left" className="rounded-lg border border-border bg-white p-6 shadow-[0_4px_32px_0_rgba(228,0,43,0.06)] sm:p-8 flex flex-col h-full justify-center">
+                {isMounted && !verifiedPhone ? (
+                  <PhoneOtpGate
+                    title="Send Us a Message"
+                    description="Verify your phone number first to send a message."
+                    onVerified={(phone) => setFormData((prev) => ({ ...prev, phone }))}
+                  />
+                ) : submitted ? (
                   <div className="flex h-full flex-col items-center justify-center py-10 text-center">
                     <div className="grid h-16 w-16 place-items-center rounded-full bg-brand/10 text-brand mb-4">
                       <svg
@@ -208,6 +297,11 @@ export default function ContactUsClient() {
                           subject: "",
                           message: "",
                         });
+                        setNameError("");
+                        setEmailError("");
+                        setPincodeError("");
+                        setSubjectError("");
+                        setMessageError("");
                       }}
                       className="mt-6 rounded bg-brand px-6 py-2.5 text-sm font-semibold text-white hover:bg-brand-light transition-all"
                     >
@@ -220,79 +314,137 @@ export default function ContactUsClient() {
                       Send Us a Message
                     </h3>
                     <form onSubmit={handleSubmit} className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                      <label className="block">
-                        <span className="mb-1.5 block text-xs font-semibold text-muted">Your Name</span>
-                        <input
-                          type="text"
-                          required
-                          value={formData.name}
-                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          placeholder="Your name"
-                          className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none transition-all placeholder:text-faint focus:border-brand focus:ring-2 focus:ring-brand/10"
-                        />
-                      </label>
+                      <div>
+                        <label className="block">
+                          <span className="mb-1.5 block text-xs font-semibold text-muted">Your Name</span>
+                          <input
+                            type="text"
+                            required
+                            value={formData.name}
+                            onChange={(e) => {
+                              setFormData({ ...formData, name: e.target.value });
+                              if (nameError) setNameError("");
+                            }}
+                            placeholder="Your name"
+                            className={`w-full rounded border bg-white px-4 py-3 text-sm text-text outline-none transition-all placeholder:text-faint focus:ring-2 ${
+                              nameError 
+                                ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
+                                : "border-border focus:border-brand focus:ring-brand/10"
+                            }`}
+                          />
+                        </label>
+                        {nameError && (
+                          <p className="mt-1 text-[11px] font-medium text-red-500">{nameError}</p>
+                        )}
+                      </div>
 
-                      <label className="block">
+                      <div className="block cursor-pointer" onClick={() => setReverifyOpen(true)}>
                         <span className="mb-1.5 block text-xs font-semibold text-muted">Mobile Number</span>
                         <input
                           type="tel"
-                          required
-                          pattern="[0-9]{10}"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          readOnly
                           placeholder="Mobile number"
-                          className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none transition-all placeholder:text-faint focus:border-brand focus:ring-2 focus:ring-brand/10"
+                          value={formData.phone ? `+91 ${formData.phone} (Verified)` : ""}
+                          className="w-full rounded border border-blue-200 bg-blue-50/55 px-4 py-3 text-sm text-blue-800 font-semibold outline-none cursor-pointer"
                         />
-                      </label>
+                      </div>
 
-                      <label className="block">
-                        <span className="mb-1.5 block text-xs font-semibold text-muted">Your Email</span>
-                        <input
-                          type="email"
-                          required
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          placeholder="you@example.com"
-                          className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none transition-all placeholder:text-faint focus:border-brand focus:ring-2 focus:ring-brand/10"
-                        />
-                      </label>
+                      <div>
+                        <label className="block">
+                          <span className="mb-1.5 block text-xs font-semibold text-muted">Your Email</span>
+                          <input
+                            type="email"
+                            required
+                            value={formData.email}
+                            onChange={(e) => {
+                              setFormData({ ...formData, email: e.target.value });
+                              if (emailError) setEmailError("");
+                            }}
+                            placeholder="you@example.com"
+                            className={`w-full rounded border bg-white px-4 py-3 text-sm text-text outline-none transition-all placeholder:text-faint focus:ring-2 ${
+                              emailError 
+                                ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
+                                : "border-border focus:border-brand focus:ring-brand/10"
+                            }`}
+                          />
+                        </label>
+                        {emailError && (
+                          <p className="mt-1 text-[11px] font-medium text-red-500">{emailError}</p>
+                        )}
+                      </div>
 
-                      <label className="block">
-                        <span className="mb-1.5 block text-xs font-semibold text-muted">Pincode</span>
-                        <input
-                          type="text"
-                          required
-                          pattern="[0-9]{6}"
-                          value={formData.pincode}
-                          onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
-                          placeholder="6-digit pincode"
-                          className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none transition-all placeholder:text-faint focus:border-brand focus:ring-2 focus:ring-brand/10"
-                        />
-                      </label>
+                      <div>
+                        <label className="block">
+                          <span className="mb-1.5 block text-xs font-semibold text-muted">Pincode</span>
+                          <input
+                            type="text"
+                            required
+                            pattern="[0-9]{6}"
+                            value={formData.pincode}
+                            onChange={(e) => {
+                              setFormData({ ...formData, pincode: e.target.value });
+                              if (pincodeError) setPincodeError("");
+                            }}
+                            placeholder="6-digit pincode"
+                            className={`w-full rounded border bg-white px-4 py-3 text-sm text-text outline-none transition-all placeholder:text-faint focus:ring-2 ${
+                              pincodeError 
+                                ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
+                                : "border-border focus:border-brand focus:ring-brand/10"
+                            }`}
+                          />
+                        </label>
+                        {pincodeError && (
+                          <p className="mt-1 text-[11px] font-medium text-red-500">{pincodeError}</p>
+                        )}
+                      </div>
 
-                      <label className="block">
-                        <span className="mb-1.5 block text-xs font-semibold text-muted">Subject</span>
-                        <input
-                          type="text"
-                          required
-                          value={formData.subject}
-                          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                          placeholder="How can we help?"
-                          className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none transition-all placeholder:text-faint focus:border-brand focus:ring-2 focus:ring-brand/10"
-                        />
-                      </label>
+                      <div>
+                        <label className="block">
+                          <span className="mb-1.5 block text-xs font-semibold text-muted">Subject</span>
+                          <input
+                            type="text"
+                            required
+                            value={formData.subject}
+                            onChange={(e) => {
+                              setFormData({ ...formData, subject: e.target.value });
+                              if (subjectError) setSubjectError("");
+                            }}
+                            placeholder="How can we help?"
+                            className={`w-full rounded border bg-white px-4 py-3 text-sm text-text outline-none transition-all placeholder:text-faint focus:ring-2 ${
+                              subjectError 
+                                ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
+                                : "border-border focus:border-brand focus:ring-brand/10"
+                            }`}
+                          />
+                        </label>
+                        {subjectError && (
+                          <p className="mt-1 text-[11px] font-medium text-red-500">{subjectError}</p>
+                        )}
+                      </div>
 
-                      <label className="col-span-full block">
-                        <span className="mb-1.5 block text-xs font-semibold text-muted">Your Message</span>
-                        <textarea
-                          required
-                          rows={5}
-                          value={formData.message}
-                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                          placeholder="Tell us more..."
-                          className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none transition-all placeholder:text-faint focus:border-brand focus:ring-2 focus:ring-brand/10 resize-none"
-                        />
-                      </label>
+                      <div className="col-span-full">
+                        <label className="block">
+                          <span className="mb-1.5 block text-xs font-semibold text-muted">Your Message</span>
+                          <textarea
+                            required
+                            rows={5}
+                            value={formData.message}
+                            onChange={(e) => {
+                              setFormData({ ...formData, message: e.target.value });
+                              if (messageError) setMessageError("");
+                            }}
+                            placeholder="Tell us more..."
+                            className={`w-full rounded border bg-white px-4 py-3 text-sm text-text outline-none transition-all placeholder:text-faint focus:ring-2 resize-none ${
+                              messageError 
+                                ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
+                                : "border-border focus:border-brand focus:ring-brand/10"
+                            }`}
+                          />
+                        </label>
+                        {messageError && (
+                          <p className="mt-1 text-[11px] font-medium text-red-500">{messageError}</p>
+                        )}
+                      </div>
 
                       <button
                         type="submit"
@@ -309,6 +461,15 @@ export default function ContactUsClient() {
         </section>
       </main>
       <Footer />
+
+      <ReverifyModal 
+        isOpen={reverifyOpen}
+        onClose={() => setReverifyOpen(false)}
+        onConfirm={() => {
+          setReverifyOpen(false);
+          resetVerification();
+        }}
+      />
     </>
   );
 }

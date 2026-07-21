@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { nav } from "@/lib/data";
 import { Calendar, WhatsApp, Phone, ChevronRight, ChevronLeft } from "./icons";
+import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 
 const actions = [
   { label: "Book a\nTest Drive", href: "/book-a-test-drive", Icon: Calendar },
@@ -11,6 +12,7 @@ const actions = [
 ];
 
 export default function FloatingActions() {
+  const { openTestDriveModal } = usePhoneVerification();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -39,32 +41,60 @@ export default function FloatingActions() {
 
       {/* Action Tiles */}
       <div className="flex flex-col border-l border-t border-b border-white/20 rounded-l-lg overflow-hidden">
-        {actions.map(({ label, href, Icon }, i) => (
-          <a
-            key={label}
-            href={href}
-            aria-label={label}
-            className={`group flex items-center bg-brand text-white transition-colors hover:bg-brand-light ${
-              i === 0 ? "rounded-tl-lg" : ""
-            } ${i === actions.length - 1 ? "rounded-bl-lg" : ""}`}
-          >
-            {/* Hover label */}
-            <span className="pointer-events-none absolute right-[calc(100%+8px)] whitespace-nowrap rounded border border-border bg-white px-3 py-1.5 text-xs font-semibold text-brand opacity-0 shadow-md transition-all group-hover:-translate-x-1 group-hover:opacity-100">
-              {label.replace("\n", " ")}
-            </span>
-            {/* Icon tile */}
-            <span className="flex h-[56px] w-14 flex-col items-center justify-center gap-0.5 border-b border-white/20 last:border-0">
-              <Icon className="h-5 w-5" />
-              <span className="text-center text-[8px] font-semibold leading-tight opacity-90">
-                {label.split("\n").map((line, idx) => (
-                  <span key={idx} className="block">
-                    {line}
-                  </span>
-                ))}
+        {actions.map(({ label, href, Icon }, i) => {
+          const isTestDrive = href === "/book-a-test-drive";
+          return isTestDrive ? (
+            <button
+              key={label}
+              onClick={() => openTestDriveModal()}
+              aria-label={label}
+              className={`relative group flex items-center bg-brand text-white transition-colors hover:bg-brand-light border-b border-white/20 last:border-0 cursor-pointer ${
+                i === 0 ? "rounded-tl-lg" : ""
+              } ${i === actions.length - 1 ? "rounded-bl-lg" : ""}`}
+            >
+              {/* Hover label */}
+              <span className="pointer-events-none absolute right-[calc(100%+8px)] whitespace-nowrap rounded border border-border bg-white px-3 py-1.5 text-xs font-semibold text-brand opacity-0 shadow-md transition-all group-hover:-translate-x-1 group-hover:opacity-100">
+                {label.replace("\n", " ")}
               </span>
-            </span>
-          </a>
-        ))}
+              {/* Icon tile */}
+              <span className="flex h-[56px] w-14 flex-col items-center justify-center gap-0.5">
+                <Icon className="h-5 w-5" />
+                <span className="text-center text-[8px] font-semibold leading-tight opacity-90">
+                  {label.split("\n").map((line, idx) => (
+                    <span key={idx} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </span>
+              </span>
+            </button>
+          ) : (
+            <a
+              key={label}
+              href={href}
+              aria-label={label}
+              className={`relative group flex items-center bg-brand text-white transition-colors hover:bg-brand-light ${
+                i === 0 ? "rounded-tl-lg" : ""
+              } ${i === actions.length - 1 ? "rounded-bl-lg" : ""}`}
+            >
+              {/* Hover label */}
+              <span className="pointer-events-none absolute right-[calc(100%+8px)] whitespace-nowrap rounded border border-border bg-white px-3 py-1.5 text-xs font-semibold text-brand opacity-0 shadow-md transition-all group-hover:-translate-x-1 group-hover:opacity-100">
+                {label.replace("\n", " ")}
+              </span>
+              {/* Icon tile */}
+              <span className="flex h-[56px] w-14 flex-col items-center justify-center gap-0.5 border-b border-white/20 last:border-0">
+                <Icon className="h-5 w-5" />
+                <span className="text-center text-[8px] font-semibold leading-tight opacity-90">
+                  {label.split("\n").map((line, idx) => (
+                    <span key={idx} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </span>
+              </span>
+            </a>
+          );
+        })}
       </div>
     </div>
   );

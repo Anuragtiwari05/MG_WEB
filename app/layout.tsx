@@ -74,6 +74,8 @@ export const metadata: Metadata = {
 
 import FloatingActions from "@/components/FloatingActions";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
+import { PhoneVerificationProvider } from "@/components/PhoneVerificationContext";
+import TestDriveModal from "@/components/TestDriveModal";
 
 export default function RootLayout({
   children,
@@ -83,10 +85,13 @@ export default function RootLayout({
   return (
     <html lang="en-IN" className={`${inter.variable} ${sora.variable}`}>
       <body className="min-h-screen antialiased" suppressHydrationWarning>
-        <JsonLd />
-        {children}
-        <FloatingActions />
-        <WhatsAppWidget />
+        <PhoneVerificationProvider>
+          <JsonLd />
+          {children}
+          <FloatingActions />
+          <WhatsAppWidget />
+          <TestDriveModal />
+        </PhoneVerificationProvider>
       </body>
     </html>
   );

@@ -1,12 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { workshops } from "@/lib/data";
 import Reveal from "@/components/Reveal";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { MapPin, Phone, Calendar, CheckCircle } from "@/components/icons";
+import { usePhoneVerification } from "@/components/PhoneVerificationContext";
+import PhoneOtpGate from "@/components/PhoneOtpGate";
+import ReverifyModal from "@/components/ReverifyModal";
 
 const serviceTypes = [
   "First Free Service",
@@ -23,6 +26,8 @@ const timeSlots = [
 ];
 
 export default function LocateServiceCentrePage() {
+  const { verifiedPhone, resetVerification, isMounted } = usePhoneVerification();
+  const [reverifyOpen, setReverifyOpen] = useState(false);
   const [formData, setFormData] = useState({
     carModel: "",
     carModelOther: "",
@@ -38,6 +43,24 @@ export default function LocateServiceCentrePage() {
     notes: "",
   });
 
+  // Validation errors
+  const [modelError, setModelError] = useState("");
+  const [centreError, setCentreError] = useState("");
+  const [typeError, setTypeError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [pincodeError, setPincodeError] = useState("");
+  const [dateError, setDateError] = useState("");
+  const [slotError, setSlotError] = useState("");
+
+  useEffect(() => {
+    if (verifiedPhone) {
+      setFormData((prev) => ({ ...prev, phone: verifiedPhone }));
+    } else {
+      setFormData((prev) => ({ ...prev, phone: "" }));
+    }
+  }, [verifiedPhone]);
+
   const carModelForDisplay =
     formData.carModel === "Other" ? formData.carModelOther : formData.carModel;
 
@@ -45,8 +68,91 @@ export default function LocateServiceCentrePage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate booking submission
-    setSubmitted(true);
+    let isValid = true;
+
+    // Car Model
+    if (!formData.carModel) {
+      setModelError("Please select your car model");
+      isValid = false;
+    } else if (formData.carModel === "Other" && !formData.carModelOther.trim()) {
+      setModelError("Please specify your car model");
+      isValid = false;
+    } else {
+      setModelError("");
+    }
+
+    // Service Centre
+    if (!formData.serviceCentre) {
+      setCentreError("Please select a service centre");
+      isValid = false;
+    } else {
+      setCentreError("");
+    }
+
+    // Service Type
+    if (!formData.serviceType) {
+      setTypeError("Please select service type");
+      isValid = false;
+    } else {
+      setTypeError("");
+    }
+
+    // Name: required, min 3 chars, letters/spaces only
+    if (!formData.name.trim()) {
+      setNameError("Name is required");
+      isValid = false;
+    } else if (formData.name.trim().length < 3) {
+      setNameError("Name must be at least 3 characters");
+      isValid = false;
+    } else if (!/^[a-zA-Z\s]+$/.test(formData.name.trim())) {
+      setNameError("Name must contain only letters and spaces");
+      isValid = false;
+    } else {
+      setNameError("");
+    }
+
+    // Email: required, valid format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      setEmailError("Email address is required");
+      isValid = false;
+    } else if (!emailRegex.test(formData.email.trim())) {
+      setEmailError("Please enter a valid email address");
+      isValid = false;
+    } else {
+      setEmailError("");
+    }
+
+    // Pincode: required, 6 digits
+    if (!formData.pincode.trim()) {
+      setPincodeError("Pincode is required");
+      isValid = false;
+    } else if (!/^[0-9]{6}$/.test(formData.pincode.trim())) {
+      setPincodeError("Please enter a valid 6-digit pincode");
+      isValid = false;
+    } else {
+      setPincodeError("");
+    }
+
+    // Date
+    if (!formData.date) {
+      setDateError("Please select preferred date");
+      isValid = false;
+    } else {
+      setDateError("");
+    }
+
+    // Time slot
+    if (!formData.timeSlot) {
+      setSlotError("Please select preferred time slot");
+      isValid = false;
+    } else {
+      setSlotError("");
+    }
+
+    if (isValid && formData.phone) {
+      setSubmitted(true);
+    }
   };
 
   return (
@@ -56,7 +162,7 @@ export default function LocateServiceCentrePage() {
         {/* Banner Section */}
         <section className="relative h-[280px] w-full overflow-hidden bg-brand-deep sm:h-[340px]">
           <Image
-            src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1600&q=80"
+            src="/images/service-centre-hero.jpg"
             alt="MG Motor authorized workshop bay"
             fill
             priority
@@ -95,7 +201,13 @@ export default function LocateServiceCentrePage() {
             </div>
 
             <div className="mx-auto max-w-3xl rounded-xl border border-border bg-bg-2 p-6 shadow-md sm:p-10">
-              {submitted ? (
+              {isMounted && !verifiedPhone ? (
+                <PhoneOtpGate
+                  title="Book a Service Appointment"
+                  description="Verify your phone number first to secure your slot."
+                  onVerified={(phone) => setFormData((prev) => ({ ...prev, phone }))}
+                />
+              ) : submitted ? (
                 <div className="flex flex-col items-center py-8 text-center">
                   <CheckCircle className="h-16 w-16 text-[#00ad8a]" />
                   <h3 className="mt-4 font-display text-xl font-bold text-text">
@@ -121,6 +233,14 @@ export default function LocateServiceCentrePage() {
                         timeSlot: "",
                         notes: "",
                       });
+                      setModelError("");
+                      setCentreError("");
+                      setTypeError("");
+                      setNameError("");
+                      setEmailError("");
+                      setPincodeError("");
+                      setDateError("");
+                      setSlotError("");
                     }}
                     className="mt-6 rounded bg-brand px-6 py-2.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-brand-light transition-all"
                   >
@@ -130,15 +250,23 @@ export default function LocateServiceCentrePage() {
               ) : (
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   {/* Select Car Model */}
-                  <label className="block">
-                    <span className="mb-1.5 block text-xs font-semibold text-muted">Select Car Model</span>
+                  <div>
+                    <label className="block">
+                      <span className="mb-1.5 block text-xs font-semibold text-muted">Select Car Model</span>
                       <select
                         required
                         value={formData.carModel}
-                        onChange={(e) => setFormData({ ...formData, carModel: e.target.value })}
-                        className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none focus:border-brand focus:ring-2 focus:ring-brand/10"
+                        onChange={(e) => {
+                          setFormData({ ...formData, carModel: e.target.value });
+                          if (modelError) setModelError("");
+                        }}
+                        className={`w-full rounded border bg-white px-4 py-3 text-sm text-text outline-none focus:ring-2 ${
+                          modelError 
+                            ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
+                            : "border-border focus:border-brand focus:ring-brand/10"
+                        }`}
                       >
-                        <option value="" disabled>Select Car Model</option>
+                        <option value="" disabled className="text-muted">Select Car Model</option>
                         <option value="COMET EV">COMET EV</option>
                         <option value="ASTOR">ASTOR</option>
                         <option value="HECTOR">HECTOR</option>
@@ -149,139 +277,228 @@ export default function LocateServiceCentrePage() {
                         <option value="CYBERSTER">CYBERSTER</option>
                         <option value="Other">Other</option>
                       </select>
-                      {formData.carModel === "Other" && (
-                        <input
-                          type="text"
-                          required
-                          autoFocus
-                          placeholder="Please specify your car model"
-                          value={formData.carModelOther}
-                          onChange={(e) => setFormData({ ...formData, carModelOther: e.target.value })}
-                          className="mt-2 w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none focus:border-brand focus:ring-2 focus:ring-brand/10"
-                        />
-                      )}
-                  </label>
+                    </label>
+                    {formData.carModel === "Other" && (
+                      <input
+                        type="text"
+                        required
+                        autoFocus
+                        placeholder="Please specify your car model"
+                        value={formData.carModelOther}
+                        onChange={(e) => {
+                          setFormData({ ...formData, carModelOther: e.target.value });
+                          if (modelError) setModelError("");
+                        }}
+                        className={`mt-2 w-full rounded border bg-white px-4 py-3 text-sm text-text outline-none focus:ring-2 ${
+                          modelError 
+                            ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
+                            : "border-border focus:border-brand focus:ring-brand/10"
+                        }`}
+                      />
+                    )}
+                    {modelError && (
+                      <p className="mt-1 text-[11px] font-medium text-red-500">{modelError}</p>
+                    )}
+                  </div>
 
                   {/* Select Service Centre */}
-                  <label className="block">
-                    <span className="mb-1.5 block text-xs font-semibold text-muted">Select Service Centre</span>
-                    <select
-                      required
-                      value={formData.serviceCentre}
-                      onChange={(e) => setFormData({ ...formData, serviceCentre: e.target.value })}
-                      className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none focus:border-brand focus:ring-2 focus:ring-brand/10"
-                    >
-                      <option value="" disabled>Select Service Centre</option>
-                      {workshops.map((w) => (
-                        <option key={w.city} value={`${w.name} (${w.city})`}>
-                          {w.name} ({w.city})
-                        </option>
-                      ))}
-                    </select>
-                  </label>
+                  <div>
+                    <label className="block">
+                      <span className="mb-1.5 block text-xs font-semibold text-muted">Select Service Centre</span>
+                      <select
+                        required
+                        value={formData.serviceCentre}
+                        onChange={(e) => {
+                          setFormData({ ...formData, serviceCentre: e.target.value });
+                          if (centreError) setCentreError("");
+                        }}
+                        className={`w-full rounded border bg-white px-4 py-3 text-sm text-text outline-none focus:ring-2 ${
+                          centreError 
+                            ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
+                            : "border-border focus:border-brand focus:ring-brand/10"
+                        }`}
+                      >
+                        <option value="" disabled className="text-muted">Select Service Centre</option>
+                        {workshops.map((w) => (
+                          <option key={w.city} value={`${w.name} (${w.city})`}>
+                            {w.name} ({w.city})
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    {centreError && (
+                      <p className="mt-1 text-[11px] font-medium text-red-500">{centreError}</p>
+                    )}
+                  </div>
 
                   {/* Type of Service */}
-                  <label className="block">
-                    <span className="mb-1.5 block text-xs font-semibold text-muted">Type of Service</span>
-                    <select
-                      required
-                      value={formData.serviceType}
-                      onChange={(e) => setFormData({ ...formData, serviceType: e.target.value })}
-                      className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none focus:border-brand focus:ring-2 focus:ring-brand/10"
-                    >
-                      <option value="" disabled>Select Service Type</option>
-                      {serviceTypes.map((t) => (
-                        <option key={t} value={t}>{t}</option>
-                      ))}
-                    </select>
-                  </label>
+                  <div>
+                    <label className="block">
+                      <span className="mb-1.5 block text-xs font-semibold text-muted">Type of Service</span>
+                      <select
+                        required
+                        value={formData.serviceType}
+                        onChange={(e) => {
+                          setFormData({ ...formData, serviceType: e.target.value });
+                          if (typeError) setTypeError("");
+                        }}
+                        className={`w-full rounded border bg-white px-4 py-3 text-sm text-text outline-none focus:ring-2 ${
+                          typeError 
+                            ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
+                            : "border-border focus:border-brand focus:ring-brand/10"
+                        }`}
+                      >
+                        <option value="" disabled className="text-muted">Select Service Type</option>
+                        {serviceTypes.map((t) => (
+                          <option key={t} value={t}>{t}</option>
+                        ))}
+                      </select>
+                    </label>
+                    {typeError && (
+                      <p className="mt-1 text-[11px] font-medium text-red-500">{typeError}</p>
+                    )}
+                  </div>
 
                   {/* Your Name */}
-                  <label className="block">
-                    <span className="mb-1.5 block text-xs font-semibold text-muted">Your Name</span>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Enter your name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none focus:border-brand focus:ring-2 focus:ring-brand/10"
-                    />
-                  </label>
+                  <div>
+                    <label className="block">
+                      <span className="mb-1.5 block text-xs font-semibold text-muted">Your Name</span>
+                      <input
+                        type="text"
+                        required
+                        placeholder="Enter your name"
+                        value={formData.name}
+                        onChange={(e) => {
+                          setFormData({ ...formData, name: e.target.value });
+                          if (nameError) setNameError("");
+                        }}
+                        className={`w-full rounded border bg-white px-4 py-3 text-sm text-text outline-none focus:ring-2 ${
+                          nameError 
+                            ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
+                            : "border-border focus:border-brand focus:ring-brand/10"
+                        }`}
+                      />
+                    </label>
+                    {nameError && (
+                      <p className="mt-1 text-[11px] font-medium text-red-500">{nameError}</p>
+                    )}
+                  </div>
 
                   {/* Mobile Number */}
-                  <label className="block">
+                  <div className="block cursor-pointer" onClick={() => setReverifyOpen(true)}>
                     <span className="mb-1.5 block text-xs font-semibold text-muted">Mobile Number</span>
                     <input
                       type="tel"
-                      required
-                      pattern="[0-9]{10}"
+                      readOnly
                       placeholder="10-digit mobile number"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none focus:border-brand focus:ring-2 focus:ring-brand/10"
+                      value={formData.phone ? `+91 ${formData.phone} (Verified)` : ""}
+                      className="w-full rounded border border-blue-200 bg-blue-50/55 px-4 py-3 text-sm text-blue-800 font-semibold outline-none cursor-pointer"
                     />
-                  </label>
+                  </div>
 
                   {/* Email */}
-                  <label className="block">
-                    <span className="mb-1.5 block text-xs font-semibold text-muted">Email Address</span>
-                    <input
-                      type="email"
-                      required
-                      placeholder="yourname@email.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none focus:border-brand focus:ring-2 focus:ring-brand/10"
-                    />
-                  </label>
+                  <div>
+                    <label className="block">
+                      <span className="mb-1.5 block text-xs font-semibold text-muted">Email Address</span>
+                      <input
+                        type="email"
+                        required
+                        placeholder="yourname@email.com"
+                        value={formData.email}
+                        onChange={(e) => {
+                          setFormData({ ...formData, email: e.target.value });
+                          if (emailError) setEmailError("");
+                        }}
+                        className={`w-full rounded border bg-white px-4 py-3 text-sm text-text outline-none focus:ring-2 ${
+                          emailError 
+                            ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
+                            : "border-border focus:border-brand focus:ring-brand/10"
+                        }`}
+                      />
+                    </label>
+                    {emailError && (
+                      <p className="mt-1 text-[11px] font-medium text-red-500">{emailError}</p>
+                    )}
+                  </div>
 
                   {/* Pincode */}
-                  <label className="block">
-                    <span className="mb-1.5 block text-xs font-semibold text-muted">Pincode</span>
-                    <input
-                      type="text"
-                      required
-                      pattern="[0-9]{6}"
-                      placeholder="6-digit pincode"
-                      value={formData.pincode}
-                      onChange={(e) => setFormData({ ...formData, pincode: e.target.value })}
-                      className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none focus:border-brand focus:ring-2 focus:ring-brand/10"
-                    />
-                  </label>
+                  <div>
+                    <label className="block">
+                      <span className="mb-1.5 block text-xs font-semibold text-muted">Pincode</span>
+                      <input
+                        type="text"
+                        required
+                        pattern="[0-9]{6}"
+                        placeholder="6-digit pincode"
+                        value={formData.pincode}
+                        onChange={(e) => {
+                          setFormData({ ...formData, pincode: e.target.value });
+                          if (pincodeError) setPincodeError("");
+                        }}
+                        className={`w-full rounded border bg-white px-4 py-3 text-sm text-text outline-none focus:ring-2 ${
+                          pincodeError 
+                            ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
+                            : "border-border focus:border-brand focus:ring-brand/10"
+                        }`}
+                      />
+                    </label>
+                    {pincodeError && (
+                      <p className="mt-1 text-[11px] font-medium text-red-500">{pincodeError}</p>
+                    )}
+                  </div>
 
                   {/* Preferred Date */}
-                  <label className="block">
-                    <span className="mb-1.5 block text-xs font-semibold text-muted">Preferred Date</span>
-                    <input
-                      type="date"
-                      required
-                      value={formData.date}
-                      onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                      className="w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none focus:border-brand focus:ring-2 focus:ring-brand/10"
-                    />
-                  </label>
+                  <div>
+                    <label className="block">
+                      <span className="mb-1.5 block text-xs font-semibold text-muted">Preferred Date</span>
+                      <input
+                        type="date"
+                        required
+                        value={formData.date}
+                        onChange={(e) => {
+                          setFormData({ ...formData, date: e.target.value });
+                          if (dateError) setDateError("");
+                        }}
+                        className={`w-full rounded border bg-white px-4 py-3 text-sm text-text outline-none focus:ring-2 ${
+                          dateError 
+                            ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
+                            : "border-border focus:border-brand focus:ring-brand/10"
+                        }`}
+                      />
+                    </label>
+                    {dateError && (
+                      <p className="mt-1 text-[11px] font-medium text-red-500">{dateError}</p>
+                    )}
+                  </div>
 
                   {/* Preferred Time Slot */}
-                  <label className="block sm:col-span-2">
-                    <span className="mb-1.5 block text-xs font-semibold text-muted">Preferred Time Slot</span>
-                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-                      {timeSlots.map((slot) => (
-                        <button
-                          key={slot}
-                          type="button"
-                          onClick={() => setFormData({ ...formData, timeSlot: slot })}
-                          className={`rounded border px-4 py-2.5 text-xs font-semibold transition-all ${
-                            formData.timeSlot === slot
-                              ? "bg-brand border-brand text-white"
-                              : "bg-white border-border text-muted hover:bg-bg-2"
-                          }`}
-                        >
-                          {slot.split(" ")[0]}
-                        </button>
-                      ))}
-                    </div>
-                  </label>
+                  <div className="block sm:col-span-2">
+                    <label className="block">
+                      <span className="mb-1.5 block text-xs font-semibold text-muted">Preferred Time Slot</span>
+                      <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+                        {timeSlots.map((slot) => (
+                          <button
+                            key={slot}
+                            type="button"
+                            onClick={() => {
+                              setFormData({ ...formData, timeSlot: slot });
+                              if (slotError) setSlotError("");
+                            }}
+                            className={`rounded border px-4 py-2.5 text-xs font-semibold transition-all cursor-pointer ${
+                              formData.timeSlot === slot
+                                ? "bg-brand border-brand text-white shadow-sm"
+                                : "bg-white border-border text-muted hover:bg-bg-2"
+                            }`}
+                          >
+                            {slot.split(" ")[0]}
+                          </button>
+                        ))}
+                      </div>
+                    </label>
+                    {slotError && (
+                      <p className="mt-1.5 text-[11px] font-medium text-red-500">{slotError}</p>
+                    )}
+                  </div>
 
                   {/* Address */}
                   <label className="block sm:col-span-2">
@@ -379,6 +596,15 @@ export default function LocateServiceCentrePage() {
         </section>
       </main>
       <Footer />
+
+      <ReverifyModal 
+        isOpen={reverifyOpen}
+        onClose={() => setReverifyOpen(false)}
+        onConfirm={() => {
+          setReverifyOpen(false);
+          resetVerification();
+        }}
+      />
     </>
   );
 }

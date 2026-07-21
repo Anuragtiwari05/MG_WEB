@@ -73,7 +73,7 @@ export default function CarsPage() {
             {/* Cars Grid */}
             <div className="mt-8">
               {filtered.length > 0 ? (
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div key={category} className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {filtered.map((car, i) => (
                     <Reveal
                       key={car.id}

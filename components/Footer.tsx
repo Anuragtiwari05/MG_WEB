@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Logo from "./Logo";
 import { cars, nav, company } from "@/lib/data";
@@ -12,6 +14,7 @@ import {
   LinkedIn,
   YouTube,
 } from "./icons";
+import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -39,6 +42,7 @@ const socials = [
 ];
 
 export default function Footer() {
+  const { openTestDriveModal } = usePhoneVerification();
   return (
     <footer className="bg-brand-deep border-t border-white/5">
       {/* Main footer grid */}
@@ -69,16 +73,28 @@ export default function Footer() {
           <div>
             <h4 className="text-xs font-bold tracking-wider text-white">Quick Links</h4>
             <ul className="mt-4 space-y-3">
-              {quickLinks.map((l) => (
-                <li key={l.label}>
-                  <Link
-                    href={l.href}
-                    className="text-xs font-semibold text-white/60 transition-colors hover:text-white"
-                  >
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
+              {quickLinks.map((l) => {
+                const isTestDrive = l.href === "/book-a-test-drive";
+                return (
+                  <li key={l.label}>
+                    {isTestDrive ? (
+                      <button
+                        onClick={() => openTestDriveModal()}
+                        className="text-xs font-semibold text-white/60 transition-colors hover:text-white cursor-pointer bg-transparent border-0 p-0 text-left"
+                      >
+                        {l.label}
+                      </button>
+                    ) : (
+                      <Link
+                        href={l.href}
+                        className="text-xs font-semibold text-white/60 transition-colors hover:text-white"
+                      >
+                        {l.label}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
 

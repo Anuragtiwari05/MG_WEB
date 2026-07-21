@@ -106,6 +106,14 @@ export const Shield = (p: IconProps) => (
   </svg>
 );
 
+export const ShieldAlert = (p: IconProps) => (
+  <svg {...base} {...p}>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    <line x1="12" y1="9" x2="12" y2="13" />
+    <line x1="12" y1="17" x2="12.01" y2="17" />
+  </svg>
+);
+
 export const Users = (p: IconProps) => (
   <svg {...base} {...p}>
     <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />

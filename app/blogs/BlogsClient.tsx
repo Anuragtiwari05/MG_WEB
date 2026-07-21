@@ -57,7 +57,7 @@ export default function BlogsClient() {
         {/* HERO BANNER SECTION */}
         <section className="relative overflow-hidden bg-neutral-950 py-16 text-white lg:py-20">
           <Image
-            src="https://mgmotor.scene7.com/is/image/mgmotor/m9-night-full?fmt=webp-alpha&resMode=bisharp&fit=constrain&qlt=90&wid=1920"
+            src="/images/m9-night.webp"
             alt="MG Motor blog journal"
             fill
             priority

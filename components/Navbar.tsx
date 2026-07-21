@@ -6,8 +6,10 @@ import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 import { nav } from "@/lib/data";
 import { Menu, X, Search } from "./icons";
+import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 
 export default function Navbar() {
+  const { openTestDriveModal } = usePhoneVerification();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -117,12 +119,12 @@ export default function Navbar() {
         {/* Right cluster */}
         <div className="flex items-center gap-3">
           {!isCarDetailPage && (
-            <Link
-              href="/book-a-test-drive"
-              className="hidden rounded bg-brand px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-brand-light sm:inline-block"
+            <button
+              onClick={() => openTestDriveModal()}
+              className="hidden rounded bg-brand px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-brand-light sm:inline-block cursor-pointer"
             >
               BOOK A TEST DRIVE
-            </Link>
+            </button>
           )}
           <button
             aria-label="Open menu"
@@ -182,13 +184,15 @@ export default function Navbar() {
           })}
 
           {!isCarDetailPage && (
-            <Link
-              href="/book-a-test-drive"
-              onClick={() => setOpen(false)}
-              className="mt-6 flex items-center justify-center gap-2 rounded bg-brand px-5 py-3.5 text-sm font-semibold text-white hover:bg-brand-light"
+            <button
+              onClick={() => {
+                setOpen(false);
+                openTestDriveModal();
+              }}
+              className="mt-6 flex items-center justify-center gap-2 rounded bg-brand px-5 py-3.5 text-sm font-semibold text-white hover:bg-brand-light cursor-pointer w-full"
             >
               Book a Test Drive
-            </Link>
+            </button>
           )}
         </div>
       </div>
