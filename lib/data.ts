@@ -60,8 +60,8 @@ export const nav = {
     { label: "Find a Car", href: "/cars" },
     { label: "Service", href: "/locate-service-centre" },
     { label: "Locations", href: "/locations" },
-    { label: "Contact Us", href: "/contact-us" },
     { label: "Blogs", href: "/blogs" },
+    { label: "Contact Us", href: "/contact-us" },
   ],
 };
 
