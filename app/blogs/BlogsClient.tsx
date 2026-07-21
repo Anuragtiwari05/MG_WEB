@@ -57,11 +57,11 @@ export default function BlogsClient() {
         {/* HERO BANNER SECTION */}
         <section className="relative overflow-hidden bg-neutral-950 py-16 text-white lg:py-20">
           <Image
-            src="/images/m9-night.webp"
+            src="/images/models/cyberster/03-side-view-left-90.jpg"
             alt="MG Motor blog journal"
             fill
             priority
-            className="object-cover"
+            className="object-cover opacity-65"
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30" />
