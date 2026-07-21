@@ -338,15 +338,23 @@ export default function ContactUsClient() {
                         )}
                       </div>
 
-                      <div className="block cursor-pointer" onClick={() => setReverifyOpen(true)}>
+                      <div className="relative block cursor-pointer" onClick={() => setReverifyOpen(true)}>
                         <span className="mb-1.5 block text-xs font-semibold text-muted">Mobile Number</span>
-                        <input
-                          type="tel"
-                          readOnly
-                          placeholder="Mobile number"
-                          value={formData.phone ? `+91 ${formData.phone} (Verified)` : ""}
-                          className="w-full rounded border border-blue-200 bg-blue-50/55 px-4 py-3 text-sm text-blue-800 font-semibold outline-none cursor-pointer"
-                        />
+                        <div className="relative">
+                          <input
+                            type="tel"
+                            readOnly
+                            placeholder="Mobile number"
+                            value={formData.phone ? `+91 ${formData.phone}` : ""}
+                            className="w-full rounded border border-emerald-200 bg-emerald-50/30 px-4 py-3 text-sm text-emerald-800 font-semibold outline-none cursor-pointer pr-24"
+                          />
+                          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 rounded bg-emerald-500 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
+                            <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                            Verified
+                          </div>
+                        </div>
                       </div>
 
                       <div>

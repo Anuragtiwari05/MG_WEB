@@ -689,12 +689,15 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                   Mobile Number
                 </label>
                 <div 
-                  className="flex items-center gap-2 rounded-lg border border-blue-200 bg-blue-50 px-3.5 py-3 cursor-pointer transition-colors hover:bg-blue-100/70"
+                  className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3.5 py-3 cursor-pointer transition-colors hover:bg-emerald-100/70"
                   onClick={() => setReverifyOpen(true)}
                 >
-                  <CheckCircle className="h-4 w-4 shrink-0 text-blue-600" />
-                  <span className="text-sm font-semibold text-blue-800">+91 {phone}</span>
-                  <span className="ml-auto text-[10px] font-bold uppercase tracking-wide text-blue-500 hover:text-blue-700">
+                  <CheckCircle className="h-4 w-4 shrink-0 text-emerald-600" />
+                  <span className="text-sm font-semibold text-emerald-800">+91 {phone}</span>
+                  <div className="flex items-center gap-1 rounded bg-emerald-500 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
+                    Verified
+                  </div>
+                  <span className="ml-auto text-[10px] font-bold uppercase tracking-wide text-emerald-600 hover:text-emerald-800">
                     Change
                   </span>
                 </div>

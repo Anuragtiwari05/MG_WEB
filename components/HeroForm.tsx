@@ -136,15 +136,21 @@ export default function HeroForm() {
               )}
             </div>
 
-            <div className="block cursor-pointer" onClick={() => setReverifyOpen(true)}>
+            <div className="relative cursor-pointer" onClick={() => setReverifyOpen(true)}>
               <span className="sr-only">Mobile Number</span>
               <input 
                 type="tel" 
                 readOnly
                 placeholder="Mobile Number" 
-                className={`${fieldBase} border-blue-200 bg-blue-50/50 cursor-pointer text-blue-800 font-semibold`}
-                value={mobile ? `+91 ${mobile} (Verified)` : ""}
+                className={`${fieldBase} border-emerald-200 bg-emerald-50/30 cursor-pointer text-emerald-800 font-semibold pr-24`}
+                value={mobile ? `+91 ${mobile}` : ""}
               />
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1 rounded bg-emerald-500 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
+                <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                Verified
+              </div>
             </div>
 
             <div>
