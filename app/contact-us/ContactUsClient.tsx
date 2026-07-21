@@ -129,7 +129,7 @@ export default function ContactUsClient() {
           {/* Background Image */}
           <Image
             alt="MG Cyberster"
-            src="/images/cyberster-night.webp"
+            src="/images/models/cyberster/03-side-view-left-90.jpg"
             fill
             className="object-cover opacity-85 lg:object-[65%_center] z-0"
             priority
