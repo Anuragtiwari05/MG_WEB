@@ -131,7 +131,7 @@ export default function ContactUsClient() {
             alt="MG Cyberster"
             src="/images/models/cyberster/03-side-view-left-90.jpg"
             fill
-            className="object-cover opacity-85 lg:object-[65%_center] z-0"
+            className="object-cover opacity-30 lg:object-[65%_center] z-0"
             priority
           />
           {/* Overlays */}
