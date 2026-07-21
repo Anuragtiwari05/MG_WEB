@@ -316,24 +316,37 @@ export default function BlogsClient() {
         </section>
 
         {/* BOTTOM QUESTION / BOOK TEST DRIVE BANNER */}
-        <section className="bg-brand py-12 lg:py-16">
-          <div className="container-px mx-auto flex max-w-[1180px] flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
+        <section className="relative overflow-hidden bg-neutral-950 py-14 lg:py-18 border-y border-white/5 bg-[linear-gradient(45deg,rgba(255,255,255,0.015)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.015)_50%,rgba(255,255,255,0.015)_75%,transparent_75%,transparent)] bg-[length:24px_24px]">
+          {/* Top highlight bar */}
+          <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-brand/40 to-transparent" />
+          
+          {/* Ambient red glows */}
+          <div className="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full bg-brand/10 blur-[100px]" />
+          <div className="pointer-events-none absolute -left-32 -bottom-32 h-80 w-80 rounded-full bg-brand/10 blur-[100px]" />
+          
+          <div className="container-px relative z-10 mx-auto flex max-w-[1180px] flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
             <div>
-              <h2 className="font-display text-xl font-bold text-white sm:text-2xl">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-light">
                 Have a question about your next MG?
+              </span>
+              <h2 className="mt-1.5 font-display text-xl font-bold text-white sm:text-2xl lg:text-3xl">
+                Let's get you behind the wheel.
               </h2>
-              <p className="mt-2 max-w-lg text-sm text-white/80 font-light">
-                Our team can help you compare models, plan your finance or book a test drive at a showroom near you.
+              <p className="mt-2 max-w-lg text-sm text-white/60 font-light leading-relaxed">
+                Our specialist team can help you compare models, plan your finance or schedule a test drive at your nearest Mumbai showroom.
               </p>
             </div>
             <Link
               href="/#test-drive"
-              className="group inline-flex shrink-0 items-center gap-2 rounded bg-white px-6 py-3 text-sm font-semibold text-brand transition-all hover:bg-white/90"
+              className="group inline-flex shrink-0 items-center gap-2 rounded bg-brand px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand-light hover:-translate-y-0.5 hover:shadow-brand/40 active:translate-y-0 cursor-pointer"
             >
               Book a Test Drive
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
+
+          {/* Bottom highlight bar */}
+          <div className="absolute bottom-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-brand/40 to-transparent" />
         </section>
 
       </main>
