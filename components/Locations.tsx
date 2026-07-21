@@ -6,10 +6,12 @@ import { locations, workshops } from "@/lib/data";
 import { MapPin, Phone, ArrowRight } from "./icons";
 import Reveal from "./Reveal";
 import Link from "next/link";
+import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 
 export default function Locations() {
   const [activeTab, setActiveTab] = useState<"showrooms" | "workshops">("showrooms");
   const currentList = activeTab === "showrooms" ? locations : workshops;
+  const { openTestDriveModal } = usePhoneVerification();
 
   return (
     <section id="locations" className="scroll-mt-24 bg-brand-deep py-14 lg:py-20 text-white">
@@ -28,13 +30,13 @@ export default function Locations() {
             </p>
           </div>
           <div className="flex shrink-0 items-center">
-            <Link
-              href="#offers"
-              className="group inline-flex items-center gap-2 rounded border border-white/30 bg-white/10 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white backdrop-blur transition-all hover:bg-white/20"
+            <button
+              onClick={() => openTestDriveModal()}
+              className="group inline-flex items-center gap-2 rounded border border-white/30 bg-white/10 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white backdrop-blur transition-all hover:bg-white/20 cursor-pointer"
             >
               BOOK TEST DRIVE
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            </button>
           </div>
         </Reveal>
 
