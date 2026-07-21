@@ -265,56 +265,6 @@ export default function BlogsClient() {
           </div>
         </section>
 
-        {/* NEWSLETTER BANNER */}
-        <section className="bg-white">
-          <div className="container-px mx-auto max-w-[1180px] pb-20 pt-16">
-            <div className="relative overflow-hidden rounded-xl bg-neutral-950 px-6 py-12 text-white sm:px-10 sm:py-14">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-0"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(500px 260px at 12% 20%, rgba(228,0,43,0.3), transparent 60%)",
-                }}
-              />
-              <div className="relative flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
-                <div>
-                  <h3 className="font-display text-2xl font-semibold">Never miss an update</h3>
-                  <p className="mt-2 max-w-sm text-sm text-white/70 font-light">
-                    New guides, maintenance reminders and offer alerts, straight to your inbox.
-                  </p>
-                </div>
-                <div className="w-full sm:w-auto">
-                  {subscribed ? (
-                    <div className="rounded-md bg-emerald-500/20 border border-emerald-500/40 px-4 py-3 text-sm font-semibold text-emerald-400">
-                      ✓ Subscribed successfully!
-                    </div>
-                  ) : (
-                    <form onSubmit={handleSubscribe} className="flex gap-2.5">
-                      <input
-                        type="email"
-                        required
-                        placeholder="Enter your email"
-                        aria-label="Email address"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full rounded-md border border-white/20 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-brand-light focus:ring-2 focus:ring-brand-light/20 sm:w-60"
-                      />
-                      <button
-                        type="submit"
-                        className="shrink-0 whitespace-nowrap rounded-md bg-brand px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-light"
-                      >
-                        Subscribe
-                      </button>
-                    </form>
-                  )}
-                  <p className="mt-2.5 text-xs text-white/50">One email a month. No spam, ever.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* BOTTOM QUESTION / BOOK TEST DRIVE BANNER */}
         <section className="relative overflow-hidden bg-gradient-to-r from-brand-deep via-brand to-brand-deep py-14 lg:py-18 border-y border-white/10 bg-[linear-gradient(45deg,rgba(255,255,255,0.02)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.02)_50%,rgba(255,255,255,0.02)_75%,transparent_75%,transparent)] bg-[length:24px_24px]">
           {/* Ambient light highlight */}
@@ -332,13 +282,18 @@ export default function BlogsClient() {
                 Our specialist team can help you compare models, plan your finance or schedule a test drive at your nearest Mumbai showroom.
               </p>
             </div>
-            <Link
-              href="/#test-drive"
-              className="group inline-flex shrink-0 items-center gap-2 rounded bg-white px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-brand shadow-lg shadow-black/10 transition-all hover:bg-white/95 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
-            >
-              Book a Test Drive
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+            <div className="flex flex-col items-center sm:items-end gap-2 shrink-0">
+              <Link
+                href="/#test-drive"
+                className="group inline-flex items-center gap-2 rounded bg-white px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-brand shadow-lg shadow-black/10 transition-all hover:bg-white/95 hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+              >
+                Book a Test Drive
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+              <span className="text-[10px] text-white/60 tracking-wider font-light">
+                * Free doorstep scheduling • Instant OTP verification
+              </span>
+            </div>
           </div>
         </section>
 
