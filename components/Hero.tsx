@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
-import { heroSlides, type Slide } from "@/lib/data";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { heroSlides, getCarTransparentImage } from "@/lib/data";
 import { ChevronLeft, ChevronRight } from "./icons";
 import Reveal from "./Reveal";
 
@@ -22,217 +22,316 @@ function getModelSlug(model: string): string {
   return "";
 }
 
-// Mobile drops slides where the car isn't the dominant, tightly-framed
-// subject (baked text/graphics eat too much of the frame, or there's no car
-// at all) instead of showing them letterboxed. Desktop keeps every slide.
-const mobileSlides = heroSlides.filter((s) => s.mobileImage && !s.mobileExclude);
-
-function HeroCarousel({ slides, isMobile }: { slides: Slide[]; isMobile: boolean }) {
-  const [index, setIndex] = useState(0);
-  const count = slides.length;
-
-  const go = useCallback(
-    (dir: number) => setIndex((i) => (i + dir + count) % count),
-    [count]
-  );
-
-  useEffect(() => {
-    const t = setInterval(() => setIndex((i) => (i + 1) % count), AUTOPLAY);
-    return () => clearInterval(t);
-  }, [count]);
-
-  return (
-    <div className="relative h-full w-full">
-      {slides.map((slide, i) => {
-        const isActive = i === index;
-        const slug = slide.exploreSlug || getModelSlug(slide.model);
-        // On mobile the baked-in banner text never survives the crop, so our
-        // own badge/headline/price always render there. Desktop keeps the
-        // original behaviour: hidden when hasImageText, since the full-bleed
-        // desktop banner already has that copy baked in.
-        const showOwnText = isMobile || !slide.hasImageText;
-
-        return (
-          <div
-            key={`${slide.model}-${i}`}
-            className="absolute inset-0 h-full w-full overflow-hidden transition-opacity duration-1000 ease-out"
-            style={{
-              opacity: isActive ? 1 : 0,
-              pointerEvents: isActive ? "auto" : "none",
-              zIndex: isActive ? 10 : 0,
-            }}
-          >
-            {isMobile ? (
-              <Image
-                src={slide.mobileImage!}
-                alt={slide.alt}
-                fill
-                priority={i === 0}
-                sizes="100vw"
-                className={slide.mobileFit === "contain" ? "object-contain object-top" : "object-cover"}
-              />
-            ) : slide.video ? (
-              <video
-                src={slide.video}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            ) : (
-              <Image
-                src={slide.image}
-                alt={slide.alt}
-                fill
-                priority={i === 0}
-                sizes="100vw"
-                className="object-cover"
-              />
-            )}
-
-            {/* Scrim Overlay */}
-            <div className={`absolute inset-0 z-10 transition-all duration-300 ${
-              isMobile
-                ? "bg-gradient-to-t from-black/85 via-black/20 to-transparent"
-                : slide.hasImageText
-                ? "bg-gradient-to-t from-black/60 via-transparent to-transparent"
-                : "bg-gradient-to-r from-black/80 via-black/45 to-transparent"
-            }`} />
-
-            {/* Content Overlay */}
-            <div className={`container-px absolute z-20 mx-auto flex w-full max-w-[1400px] flex-col text-white ${
-              isMobile
-                ? "inset-x-0 bottom-0 items-center pb-6 text-center"
-                : slide.hasImageText
-                ? "inset-y-0 left-0 right-0 justify-end pb-24 md:pb-28 items-start text-left"
-                : "inset-y-0 left-0 right-0 justify-center items-start text-left"
-            }`}>
-              <div className={`flex w-full max-w-2xl flex-col ${isMobile ? "items-center" : "items-start"}`}>
-                {isActive && (
-                  <Reveal variant="fade-up" className={`flex w-full flex-col ${isMobile ? "items-center" : "items-start"}`}>
-                    {showOwnText && (
-                      <>
-                        <span className="inline-block rounded-full bg-brand px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest">
-                          {slide.badge}
-                        </span>
-                        <h1 className={`mt-2 font-display font-black tracking-tight leading-[1.05] sm:mt-4 ${
-                          isMobile ? "text-[clamp(1.5rem,1rem+4vw,2.5rem)]" : "text-6xl lg:text-7xl"
-                        }`}>
-                          {slide.headline}
-                        </h1>
-                        <p className={`mt-2 text-white/85 sm:mt-4 ${
-                          isMobile ? "max-w-xs text-[clamp(0.8125rem,0.75rem+0.4vw,1.125rem)]" : "max-w-2xl text-base md:text-lg"
-                        }`}>
-                          {slide.sub}
-                        </p>
-                        {slide.price && (
-                          <p className="mt-2 text-xs font-semibold tracking-wide text-white/70 sm:mt-5 sm:text-sm">
-                            Starting at{" "}
-                            <span className={`font-bold text-white ${isMobile ? "text-[clamp(1.125rem,1rem+1vw,1.5rem)]" : "text-2xl"}`}>
-                              ₹{slide.price} Lakh
-                            </span>
-                            *
-                          </p>
-                        )}
-                      </>
-                    )}
-                    {/* Feature chips (mobile-only): stands in for whatever feature
-                        row is baked into the desktop banner's own pixels — real
-                        text so it reflows instead of getting cut mid-word. */}
-                    {isMobile && slide.features.length > 0 && (
-                      <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
-                        {slide.features.map((feature, idx) => (
-                          <span key={feature} className="flex items-center gap-3">
-                            {idx > 0 && <span className="h-3 w-px bg-white/30" aria-hidden="true" />}
-                            <span className="text-[10px] font-bold uppercase tracking-wide text-white/90">
-                              {feature}
-                            </span>
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                    <div className={`grid w-full gap-2.5 ${isMobile ? "mt-4" : "mt-8 flex w-auto flex-wrap gap-4"} ${
-                      slug ? "grid-cols-2" : "grid-cols-1 max-w-[200px]"
-                    }`}>
-                      <Link
-                        href="/#test-drive"
-                        className="block w-full rounded bg-brand px-4 py-2.5 text-center text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-brand-light sm:w-auto sm:px-6 sm:py-3"
-                      >
-                        Book Test Drive
-                      </Link>
-                      {slug && (
-                        <Link
-                          href={`/cars/${slug}`}
-                          className="block w-full rounded border border-white/30 bg-white/10 px-4 py-2.5 text-center text-xs font-bold uppercase tracking-wider text-white backdrop-blur-sm transition-colors hover:bg-white/20 sm:w-auto sm:px-6 sm:py-3"
-                        >
-                          Explore Model
-                        </Link>
-                      )}
-                    </div>
-                  </Reveal>
-                )}
-              </div>
-            </div>
-          </div>
-        );
-      })}
-
-      {/* Slide navigation controls */}
-      <button
-        aria-label="Previous slide"
-        onClick={() => go(-1)}
-        className={`absolute top-1/2 z-30 grid -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-all hover:bg-black/55 ${
-          isMobile ? "left-2 h-8 w-8" : "left-4 h-10 w-10"
-        }`}
-      >
-        <ChevronLeft className={isMobile ? "h-4 w-4" : "h-5 w-5"} />
-      </button>
-      <button
-        aria-label="Next slide"
-        onClick={() => go(1)}
-        className={`absolute top-1/2 z-30 grid -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-all hover:bg-black/55 ${
-          isMobile ? "right-2 h-8 w-8" : "right-4 h-10 w-10"
-        }`}
-      >
-        <ChevronRight className={isMobile ? "h-4 w-4" : "h-5 w-5"} />
-      </button>
-
-      {/* Dot navigation */}
-      <div className={`absolute left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 ${isMobile ? "bottom-3" : "bottom-6"}`}>
-        {slides.map((s, i) => (
-          <button
-            key={`${s.model}-${i}`}
-            aria-label={`Go to slide ${i + 1}`}
-            onClick={() => setIndex(i)}
-            className="h-1.5 overflow-hidden rounded-full bg-white/20 transition-all"
-            style={{ width: i === index ? 36 : 12 }}
-          >
-            <span
-              className="block h-full rounded-full bg-brand"
-              style={{
-                width: i === index ? "100%" : "0%",
-                transition: i === index ? `width ${AUTOPLAY}ms linear` : "none",
-              }}
-            />
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-}
+// Mobile shows the car alone (no banner scenery/baked text — see the
+// transparent product cutouts under public/images/models/), so only slides
+// that resolve to a real model get a cutout to show; the two generic
+// "MG MOTOR LINEUP" filler slides don't name an actual model and are skipped.
+const mobileSlides = heroSlides.filter((s) => s.exploreSlug || getModelSlug(s.model));
 
 export default function Hero() {
+  const [mobileIndex, setMobileIndex] = useState(0);
+  const [desktopIndex, setDesktopIndex] = useState(0);
+  const mobTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const deskTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // Mobile autoplay
+  useEffect(() => {
+    if (mobTimer.current) clearInterval(mobTimer.current);
+    mobTimer.current = setInterval(
+      () => setMobileIndex((i) => (i + 1) % mobileSlides.length),
+      AUTOPLAY
+    );
+    return () => { if (mobTimer.current) clearInterval(mobTimer.current); };
+  }, []);
+
+  // Desktop autoplay
+  useEffect(() => {
+    if (deskTimer.current) clearInterval(deskTimer.current);
+    deskTimer.current = setInterval(
+      () => setDesktopIndex((i) => (i + 1) % heroSlides.length),
+      AUTOPLAY
+    );
+    return () => { if (deskTimer.current) clearInterval(deskTimer.current); };
+  }, []);
+
+  const goMobile = useCallback((dir: number) =>
+    setMobileIndex((i) => (i + dir + mobileSlides.length) % mobileSlides.length), []);
+
+  const goDesktop = useCallback((dir: number) =>
+    setDesktopIndex((i) => (i + dir + heroSlides.length) % heroSlides.length), []);
+
+  const slide = mobileSlides[mobileIndex];
+  const slideSlug = slide ? slide.exploreSlug || getModelSlug(slide.model) : "";
+
   return (
-    <section
-      id="home"
-      className="relative w-full overflow-hidden bg-brand-deep h-[64vh] min-h-[440px] max-h-[640px] sm:h-screen sm:h-dvh sm:min-h-0 sm:max-h-none"
-    >
-      <div className="block h-full w-full sm:hidden">
-        <HeroCarousel slides={mobileSlides} isMobile />
+    <section id="home" className="w-full bg-brand-deep">
+
+      {/* ═══════════════════════════════════════
+          MOBILE  (<640 px)
+          Just the car — a transparent product cutout, not the desktop
+          banner — floating on the brand background. No crop, ever: the
+          whole vehicle is always visible on every phone size.
+          Text + CTAs sit below in a dark panel.
+          ═══════════════════════════════════════ */}
+      <div className="sm:hidden">
+
+        <div className="relative w-full overflow-hidden aspect-[4/3] min-h-[220px] max-h-[38vh]">
+          {/* Soft spotlight + floor shadow so the floating cutout doesn't look bare */}
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+            <div className="h-2/3 w-2/3 rounded-full bg-brand/10 blur-3xl" />
+          </div>
+          <div className="pointer-events-none absolute bottom-[8%] left-1/2 h-4 w-2/3 -translate-x-1/2 rounded-[100%] bg-black/50 blur-md" />
+
+          {mobileSlides.map((s, i) => {
+            const active = i === mobileIndex;
+            const cutout = getCarTransparentImage(s.exploreSlug || getModelSlug(s.model));
+            return (
+              <div
+                key={`mob-img-${s.model}`}
+                className="absolute inset-0 transition-opacity duration-1000"
+                style={{ opacity: active ? 1 : 0, zIndex: active ? 10 : 0, pointerEvents: active ? "auto" : "none" }}
+              >
+                <Image
+                  src={cutout}
+                  alt={s.alt}
+                  fill
+                  priority={i === 0}
+                  sizes="100vw"
+                  className="object-contain p-6"
+                />
+              </div>
+            );
+          })}
+
+          {/* Prev / Next arrows */}
+          <button
+            aria-label="Previous slide"
+            onClick={() => goMobile(-1)}
+            className="absolute left-2 top-1/2 z-30 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur-sm"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+          <button
+            aria-label="Next slide"
+            onClick={() => goMobile(1)}
+            className="absolute right-2 top-1/2 z-30 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur-sm"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Text panel */}
+        <div className="bg-brand-deep px-4 pt-4 pb-6 text-center text-white">
+          {slide && (
+            <Reveal key={slide.model} variant="fade-up" className="flex flex-col items-center">
+              <span className="inline-block rounded-full bg-brand px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest">
+                {slide.badge}
+              </span>
+              <h1 className="mt-2 font-display text-2xl font-black leading-tight tracking-tight">
+                {slide.headline}
+              </h1>
+              <p className="mt-1.5 max-w-xs text-sm leading-snug text-white/75">
+                {slide.sub}
+              </p>
+              {slide.price && (
+                <p className="mt-2 text-xs font-semibold text-white/60">
+                  Starting at{" "}
+                  <span className="text-lg font-bold text-white">₹{slide.price} Lakh</span>*
+                </p>
+              )}
+              {/* Feature chips: stands in for whatever feature row is baked
+                  into the desktop banner's own pixels — the cutout carries
+                  none of that copy, so it renders as real text here. */}
+              {slide.features.length > 0 && (
+                <div className="mt-2 flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+                  {slide.features.map((feature, idx) => (
+                    <span key={feature} className="flex items-center gap-3">
+                      {idx > 0 && <span className="h-3 w-px bg-white/30" aria-hidden="true" />}
+                      <span className="text-[10px] font-bold uppercase tracking-wide text-white/90">
+                        {feature}
+                      </span>
+                    </span>
+                  ))}
+                </div>
+              )}
+              <div className={`mt-4 grid w-full gap-2.5 ${slideSlug ? "grid-cols-2" : "grid-cols-1 max-w-[200px]"}`}>
+                <Link
+                  href="/#test-drive"
+                  className="block rounded bg-brand px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-brand-light"
+                >
+                  Book Test Drive
+                </Link>
+                {slideSlug && (
+                  <Link
+                    href={`/cars/${slideSlug}`}
+                    className="block rounded border border-white/30 bg-white/10 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-white backdrop-blur-sm hover:bg-white/20"
+                  >
+                    Explore Model
+                  </Link>
+                )}
+              </div>
+            </Reveal>
+          )}
+
+          {/* Dots */}
+          <div className="mt-5 flex items-center justify-center gap-2">
+            {mobileSlides.map((s, i) => (
+              <button
+                key={`mob-dot-${s.model}`}
+                aria-label={`Go to slide ${i + 1}`}
+                onClick={() => setMobileIndex(i)}
+                className="h-1.5 overflow-hidden rounded-full bg-white/20 transition-all"
+                style={{ width: i === mobileIndex ? 36 : 12 }}
+              >
+                <span
+                  className="block h-full rounded-full bg-brand"
+                  style={{
+                    width: i === mobileIndex ? "100%" : "0%",
+                    transition: i === mobileIndex ? `width ${AUTOPLAY}ms linear` : "none",
+                  }}
+                />
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="hidden h-full w-full sm:block">
-        <HeroCarousel slides={heroSlides} isMobile={false} />
+
+      {/* ═══════════════════════════════════════
+          DESKTOP  (≥640 px)
+          Full viewport height. Video plays where available.
+          Text overlaid bottom-left (or center-left).
+          ═══════════════════════════════════════ */}
+      <div className="relative hidden h-screen h-dvh w-full sm:block">
+        {heroSlides.map((s, i) => {
+          const active = i === desktopIndex;
+          const slug = s.exploreSlug || getModelSlug(s.model);
+          const showOwnText = !s.hasImageText;
+
+          return (
+            <div
+              key={`desk-${s.model}`}
+              className="absolute inset-0 h-full w-full overflow-hidden transition-opacity duration-1000"
+              style={{ opacity: active ? 1 : 0, zIndex: active ? 10 : 0, pointerEvents: active ? "auto" : "none" }}
+            >
+              {s.video ? (
+                <video
+                  src={s.video}
+                  poster={s.image}
+                  autoPlay loop muted playsInline
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              ) : (
+                <Image
+                  src={s.image}
+                  alt={s.alt}
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                />
+              )}
+
+              {/* Scrim */}
+              <div
+                className={`absolute inset-0 z-10 ${
+                  s.hasImageText
+                    ? "bg-gradient-to-t from-black/70 via-black/10 to-transparent"
+                    : "bg-gradient-to-r from-black/80 via-black/40 to-transparent"
+                }`}
+              />
+
+              {/* Text overlay */}
+              <div
+                className={`container-px absolute inset-x-0 z-20 mx-auto flex w-full max-w-[1400px] flex-col items-start text-left text-white ${
+                  s.hasImageText
+                    ? "bottom-0 justify-end pb-24 md:pb-32"
+                    : "inset-y-0 justify-center"
+                }`}
+              >
+                <div className="flex w-full max-w-2xl flex-col items-start">
+                  {active && (
+                    <Reveal variant="fade-up" className="flex w-full flex-col items-start">
+                      {showOwnText && (
+                        <>
+                          <span className="inline-block rounded-full bg-brand px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest">
+                            {s.badge}
+                          </span>
+                          <h1 className="mt-4 font-display text-6xl font-black leading-[1.05] tracking-tight lg:text-7xl">
+                            {s.headline}
+                          </h1>
+                          <p className="mt-4 max-w-lg text-base text-white/85 md:text-lg">
+                            {s.sub}
+                          </p>
+                          {s.price && (
+                            <p className="mt-5 text-sm font-semibold tracking-wide text-white/70">
+                              Starting at{" "}
+                              <span className="text-2xl font-bold text-white">
+                                ₹{s.price} Lakh
+                              </span>
+                              *
+                            </p>
+                          )}
+                        </>
+                      )}
+                      <div className="mt-8 flex flex-wrap gap-4">
+                        <Link
+                          href="/#test-drive"
+                          className="rounded bg-brand px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-brand-light"
+                        >
+                          Book Test Drive
+                        </Link>
+                        {slug && (
+                          <Link
+                            href={`/cars/${slug}`}
+                            className="rounded border border-white/30 bg-white/10 px-7 py-3.5 text-sm font-bold uppercase tracking-wider text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+                          >
+                            Explore Model
+                          </Link>
+                        )}
+                      </div>
+                    </Reveal>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+
+        {/* Prev / Next */}
+        <button
+          aria-label="Previous slide"
+          onClick={() => goDesktop(-1)}
+          className="absolute left-4 top-1/2 z-30 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-all hover:bg-black/55"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          aria-label="Next slide"
+          onClick={() => goDesktop(1)}
+          className="absolute right-4 top-1/2 z-30 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/35 text-white backdrop-blur-sm transition-all hover:bg-black/55"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+
+        {/* Dots */}
+        <div className="absolute bottom-6 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2">
+          {heroSlides.map((s, i) => (
+            <button
+              key={`desk-dot-${s.model}`}
+              aria-label={`Go to slide ${i + 1}`}
+              onClick={() => setDesktopIndex(i)}
+              className="h-1.5 overflow-hidden rounded-full bg-white/20 transition-all"
+              style={{ width: i === desktopIndex ? 36 : 12 }}
+            >
+              <span
+                className="block h-full rounded-full bg-brand"
+                style={{
+                  width: i === desktopIndex ? "100%" : "0%",
+                  transition: i === desktopIndex ? `width ${AUTOPLAY}ms linear` : "none",
+                }}
+              />
+            </button>
+          ))}
+        </div>
       </div>
     </section>
   );

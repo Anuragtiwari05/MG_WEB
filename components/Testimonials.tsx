@@ -43,7 +43,12 @@ export default function Testimonials() {
   };
 
   const dotsCount = testimonials.length - visibleCards + 1;
-  const translatePercent = active * (100 / visibleCards);
+  // `translateX(-P%)` is relative to the flex track's own width (which is
+  // testimonials.length cards wide, each 100/visibleCards% of the viewport),
+  // not the viewport itself — so P must be expressed as a fraction of the
+  // total card count, not of visibleCards, or each step overshoots by
+  // testimonials.length/visibleCards and the cards drift out of alignment.
+  const translatePercent = active * (100 / testimonials.length);
 
   return (
     <section className="bg-white py-14 lg:py-20 overflow-hidden">
@@ -103,7 +108,7 @@ export default function Testimonials() {
                     width: `${100 / visibleCards}%`,
                   }}
                 >
-                  <figure className="flex h-full flex-col rounded-xl border border-border bg-white p-6 shadow-[0_4px_16px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)]">
+                  <figure className="flex h-full flex-col rounded-xl bg-white p-6 shadow-[0_0_0_1px_rgba(0,0,0,0.04),0_4px_24px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(0,0,0,0.04),0_12px_32px_rgba(0,0,0,0.12)]">
                     <div className="flex gap-1">
                       {Array.from({ length: t.rating }).map((_, rIndex) => (
                         <Star key={rIndex} className="h-4 w-4 text-amber-400" />

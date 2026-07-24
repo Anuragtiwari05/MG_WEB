@@ -28,6 +28,7 @@ export const car360Configs: Record<string, Car360Config> = {
     id: "majestor",
     exteriorFrameCount: 40,
     template: "/images/models/majestor/360/ext_{n}.jpg",
+    reversed: true,
   },
   astor: {
     id: "astor",

@@ -18,7 +18,9 @@ export async function submitLead(formType: string, formData: Record<string, unkn
   }
 
   const payload = { form_type: formType, ...formData };
-  console.log(`[submitLead] form_type="${formType}" payload:`, payload);
+  if (process.env.NODE_ENV === "development") {
+    console.log(`[submitLead] form_type="${formType}" payload:`, payload);
+  }
 
   await fetch(SHEET_ENDPOINT, {
     method: "POST",

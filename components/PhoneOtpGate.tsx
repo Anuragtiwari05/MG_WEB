@@ -175,8 +175,6 @@ export default function PhoneOtpGate({
             I agree to MG Motor Mumbai&apos;s{" "}
             <a
               href="/terms-and-conditions"
-              target="_blank"
-              rel="noopener noreferrer"
               className="font-semibold text-text underline underline-offset-2 hover:text-brand"
             >
               T&amp;C
@@ -184,8 +182,6 @@ export default function PhoneOtpGate({
             and{" "}
             <a
               href="/privacy-policy"
-              target="_blank"
-              rel="noopener noreferrer"
               className="font-semibold text-text underline underline-offset-2 hover:text-brand"
             >
               Privacy Policy

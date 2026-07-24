@@ -421,8 +421,6 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                 I agree to MG Motor Mumbai&apos;s{" "}
                 <a
                   href="/terms-and-conditions"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="font-semibold text-slate-800 underline underline-offset-2 hover:text-brand"
                 >
                   T&amp;C
@@ -430,8 +428,6 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                 and{" "}
                 <a
                   href="/privacy-policy"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="font-semibold text-slate-800 underline underline-offset-2 hover:text-brand"
                 >
                   Privacy Policy

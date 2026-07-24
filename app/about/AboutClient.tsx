@@ -79,29 +79,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* JOURNEY NARRATIVE SECTION */}
-        <section className="py-14 lg:py-20 bg-black border-b border-white/10">
-          <div className="container-px mx-auto max-w-[850px] text-center">
-            <Reveal variant="fade-up" className="space-y-6 text-base leading-relaxed text-white/80 font-light sm:text-lg">
-              <p className="text-xl font-medium text-white sm:text-2xl leading-snug font-display">
-                &ldquo;As we move into a new phase of growth, we remain grounded in a legacy built on trust, passion, and excellence.&rdquo;
-              </p>
-              <p>
-                With nearly a century of progress behind us, our focus is clear: to raise the bar in innovation and customer engagement while creating experiences that go beyond mobility.
-              </p>
-              <p>
-                Our journey began in Mumbai with Hyundai, laying a strong foundation in India&apos;s rapidly evolving automotive market. This growth led to the establishment of one of the region&apos;s earliest premium luxury destinations, Audi Thane, where elevated design and refined service came together to redefine the customer experience.
-              </p>
-              <p>
-                In 2019, our association with Morris Garages (MG Motor) at the beginning of its India journey further strengthened our portfolio, bringing together heritage, innovation, and modern connected mobility.
-              </p>
-              <p className="text-sm text-white/60">
-                In 2023, we introduced a state-of-the-art Mahindra facility integrating Sales and After-Sales operations. The launch of Modi Kia in Kalyan in 2024, followed by the arrival of MG Select at Worli, marks the next stage of our evolution.
-              </p>
-            </Reveal>
-          </div>
-        </section>
-
         {/* WHO WE ARE SECTION (Featuring Gautam Modi Group photo) */}
         <section className="bg-neutral-950 py-16 lg:py-24 border-b border-white/10">
           <div className="container-px mx-auto max-w-[1400px]">

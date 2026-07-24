@@ -12,16 +12,8 @@ import ReverifyModal from "@/components/ReverifyModal";
 import { submitLead } from "@/lib/submitLead";
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.6"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
-    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+  <svg viewBox="0 0 32 32" fill="currentColor" {...props}>
+    <path d="M16.001 2.667C8.637 2.667 2.667 8.637 2.667 16c0 2.363.63 4.587 1.728 6.517L2 30l7.72-2.347A13.273 13.273 0 0 0 16 29.333C23.363 29.333 29.333 23.363 29.333 16S23.363 2.667 16.001 2.667zm0 2.666A10.618 10.618 0 0 1 26.667 16c0 5.88-4.787 10.667-10.666 10.667a10.62 10.62 0 0 1-5.38-1.458l-.385-.225-4.583 1.394 1.35-4.42-.252-.4A10.593 10.593 0 0 1 5.333 16c0-5.88 4.787-10.667 10.668-10.667zm-3.56 5.333c-.213 0-.56.08-.853.4-.293.32-1.12 1.094-1.12 2.667 0 1.573 1.147 3.093 1.307 3.307.16.213 2.253 3.44 5.453 4.826 2.667 1.12 3.2 1.12 3.76 1.12.56 0 1.786-.507 2.04-1.76.253-1.253.04-2-.08-2.187-.133-.186-.213-.213-.4-.293-.186-.08-1.573-.8-1.813-.88-.24-.08-.413-.12-.587.12-.173.24-.666.88-.813 1.066-.147.187-.293.213-.533.08-.24-.133-1.013-.373-1.934-1.2-.72-.64-1.2-1.426-1.347-1.666-.147-.24-.013-.373.107-.493.107-.107.24-.28.36-.413.12-.133.16-.24.24-.4.08-.16.04-.307-.02-.427-.06-.12-.56-1.493-.787-2.013-.187-.48-.4-.44-.587-.44z" />
   </svg>
 );
 
@@ -149,15 +141,15 @@ export default function ContactUsClient() {
           {/* Background Image */}
           <Image
             alt="MG Cyberster"
-            src="/images/cyberster-night.webp"
+            src="/images/models/cyberster/03-side-view-left-90.jpg"
             fill
-            className="object-cover opacity-45 lg:object-[65%_center] z-0"
+            className="object-cover opacity-80 lg:object-[65%_center] z-0"
             priority
           />
           {/* Overlays */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-brand-deep/30 to-black z-10" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(227,24,55,0.24)_0%,transparent_65%)] z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-black/70 z-10" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(227,24,55,0.2)_0%,transparent_65%)] z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/85 via-neutral-950/15 to-transparent z-10" />
           <div className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-brand/40 to-transparent z-20" />
           
           <div className="container-px absolute inset-x-0 bottom-12 z-30 mx-auto max-w-[1400px]">

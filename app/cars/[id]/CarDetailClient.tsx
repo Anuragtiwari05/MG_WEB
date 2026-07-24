@@ -222,6 +222,7 @@ export default function CarDetailClient({ car }: Props) {
                           onClick={() => {
                             setSelectedColor(color);
                             setActiveGalleryIndex(null);
+                            setIs360Active(false);
                           }}
                           aria-label={`Show ${car.name} in ${color.name}`}
                           aria-pressed={selected}

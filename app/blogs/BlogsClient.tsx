@@ -162,13 +162,16 @@ export default function BlogsClient() {
           <section className="bg-white pt-10">
             <div className="container-px mx-auto max-w-[1180px]">
               <Reveal variant="fade-up">
-                <div className="grid overflow-hidden rounded-xl border border-slate-200 shadow-[0_1px_2px_rgba(0,0,0,0.04)] lg:grid-cols-[1.05fr_1fr]">
+                <Link
+                  href={`/blogs/${featuredBlog.slug}`}
+                  className="group grid overflow-hidden rounded-xl border border-slate-200 shadow-[0_1px_2px_rgba(0,0,0,0.04)] transition-shadow hover:shadow-md lg:grid-cols-[1.05fr_1fr]"
+                >
                   <div className="relative min-h-[280px] lg:min-h-[340px]">
                     <Image
                       src={featuredBlog.coverImage}
                       alt={featuredBlog.title}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 1024px) 100vw, 50vw"
                     />
                     <span className="absolute left-5 top-5 rounded-full bg-white px-3 py-1.5 text-[11px] font-bold uppercase tracking-wide text-brand shadow-sm">
@@ -179,7 +182,7 @@ export default function BlogsClient() {
                     <span className="inline-flex w-fit items-center rounded-md bg-brand/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-brand">
                       {featuredBlog.category}
                     </span>
-                    <h2 className="mt-4 font-display text-2xl font-semibold leading-snug text-slate-900">
+                    <h2 className="mt-4 font-display text-2xl font-semibold leading-snug text-slate-900 transition-colors group-hover:text-brand">
                       {featuredBlog.title}
                     </h2>
                     <p className="mt-3 text-sm leading-relaxed text-slate-500 font-light">
@@ -192,14 +195,11 @@ export default function BlogsClient() {
                       <span aria-hidden="true" className="h-1 w-1 rounded-full bg-slate-300" />
                       <span>{featuredBlog.date}</span>
                     </div>
-                    <Link
-                      href={`/blogs/${featuredBlog.slug}`}
-                      className="group mt-6 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-brand transition-colors hover:text-brand-light"
-                    >
+                    <span className="mt-6 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-brand">
                       Read the full guide <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                    </Link>
+                    </span>
                   </div>
-                </div>
+                </Link>
               </Reveal>
             </div>
           </section>
