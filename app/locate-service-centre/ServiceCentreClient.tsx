@@ -6,10 +6,11 @@ import { workshops } from "@/lib/data";
 import Reveal from "@/components/Reveal";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { MapPin, Phone, Calendar, CheckCircle } from "@/components/icons";
+import { MapPin, Phone, CheckCircle, Wrench, Shield, DiscIcon, WindIcon, Road, BatteryIcon } from "@/components/icons";
 import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 import PhoneOtpGate from "@/components/PhoneOtpGate";
 import ReverifyModal from "@/components/ReverifyModal";
+import { submitLead } from "@/lib/submitLead";
 
 const serviceTypes = [
   "First Free Service",
@@ -23,6 +24,39 @@ const timeSlots = [
   "Morning (09:00 AM - 12:00 PM)",
   "Afternoon (12:00 PM - 03:00 PM)",
   "Evening (03:00 PM - 06:00 PM)",
+];
+
+const serviceCategories = [
+  {
+    Icon: Wrench,
+    title: "General Service",
+    description: "Comprehensive mechanical check-up and regular maintenance for peak performance.",
+  },
+  {
+    Icon: Shield,
+    title: "Engine Care",
+    description: "Advanced diagnostics, engine tuning, and original fuel system care.",
+  },
+  {
+    Icon: DiscIcon,
+    title: "Brake Service",
+    description: "Thorough inspection, pad replacement, and brake fluid flushing for maximum safety.",
+  },
+  {
+    Icon: WindIcon,
+    title: "AC Service",
+    description: "Cabin cooling recharge, filter replacement, and system sanitization all year round.",
+  },
+  {
+    Icon: Road,
+    title: "Tyre & Wheel Care",
+    description: "Precision alignment, balancing, and premium replacements for a smooth ride.",
+  },
+  {
+    Icon: BatteryIcon,
+    title: "Battery Service",
+    description: "Battery diagnostics, terminal cleaning, and quick replacements for uninterrupted journeys.",
+  },
 ];
 
 export default function LocateServiceCentrePage() {
@@ -65,8 +99,10 @@ export default function LocateServiceCentrePage() {
     formData.carModel === "Other" ? formData.carModelOther : formData.carModel;
 
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     let isValid = true;
 
@@ -151,7 +187,30 @@ export default function LocateServiceCentrePage() {
     }
 
     if (isValid && formData.phone) {
-      setSubmitted(true);
+      setSubmitError("");
+      setSending(true);
+      try {
+        await submitLead("service", {
+          car_model: carModelForDisplay,
+          service_centre: formData.serviceCentre,
+          service_type: formData.serviceType,
+          name: formData.name,
+          mobile_number: formData.phone,
+          email: formData.email,
+          pincode: formData.pincode,
+          address: formData.address,
+          preferred_date: formData.date,
+          preferred_time: formData.timeSlot,
+          notes: formData.notes,
+          form_source: "service",
+        });
+        setSubmitted(true);
+      } catch (err) {
+        console.error("Service booking submission failed:", err);
+        setSubmitError("Something went wrong submitting your booking. Please try again.");
+      } finally {
+        setSending(false);
+      }
     }
   };
 
@@ -160,23 +219,23 @@ export default function LocateServiceCentrePage() {
       <Navbar />
       <main className="mt-[80px] min-h-screen bg-bg-2">
         {/* Banner Section */}
-        <section className="relative h-[280px] w-full overflow-hidden bg-brand-deep sm:h-[340px]">
+        <section className="relative h-[460px] w-full overflow-hidden bg-brand-deep sm:h-[620px]">
           <Image
             src="/images/service-centre-hero.jpg"
             alt="MG Motor authorized workshop bay"
             fill
             priority
-            className="object-cover opacity-75"
+            className="object-cover opacity-70 animate-kenburns"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
-          <div className="container-px absolute inset-x-0 bottom-10 mx-auto max-w-[1400px]">
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10" />
+          <div className="container-px absolute inset-x-0 top-14 mx-auto max-w-[1400px] sm:top-20">
             <Reveal variant="fade-up">
               <p className="text-sm font-semibold uppercase tracking-wider text-brand">
                 Service
               </p>
-              <h1 className="mt-2 font-display text-3xl font-black text-white sm:text-4xl">
-                Locate a Service Centre & Book a Service
+              <h1 className="mt-2 font-display text-3xl font-black text-white sm:text-5xl lg:text-6xl">
+                Locate a Service Centre &amp; Book a Service
               </h1>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/80 sm:text-base">
                 Genuine parts, factory-trained technicians, and transparent pricing at every MG Motor Krishiv Auto service centre.
@@ -185,26 +244,31 @@ export default function LocateServiceCentrePage() {
           </div>
         </section>
 
-        {/* Booking Form Section */}
-        <section id="book-service" className="scroll-mt-24 py-14 lg:py-20 bg-white border-b border-border">
-          <div className="container-px mx-auto max-w-[1400px]">
-            <div className="mx-auto mb-10 max-w-xl text-center">
-              <p className="text-xs font-semibold uppercase tracking-wider text-brand">
-                Service Appointment
-              </p>
-              <h2 className="mt-2 font-display text-2xl font-bold text-text sm:text-3xl">
-                Book a Service Online
-              </h2>
-              <p className="mt-3 text-sm text-muted">
-                Complete the details below to reserve a service appointment slot. Our team will contact you to confirm.
-              </p>
-            </div>
+        {/* Booking Form Section — floats up over the hero, Kia-style */}
+        <section id="book-service" className="scroll-mt-24 relative z-10 px-4 pb-14 lg:pb-24">
+          <Reveal
+            variant="scale-up"
+            className="container-px relative -mt-32 mx-auto max-w-[1400px] sm:-mt-48"
+          >
+            <div className="pointer-events-none absolute inset-x-10 top-0 -z-10 h-24 rounded-full bg-brand/40 blur-3xl sm:h-32" />
+            <div className="mx-auto max-w-[1140px] overflow-hidden rounded-[28px] bg-white p-6 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.45)] sm:p-12">
+              <div className="mb-10 text-center">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
+                  Service Appointment
+                </p>
+                <h2 className="mt-3 font-display text-2xl font-black text-text sm:text-4xl">
+                  Book a Service Appointment
+                </h2>
+                <p className="mx-auto mt-3 max-w-lg text-sm text-muted">
+                  Choose your nearest service centre and a slot that works for you. Our team will confirm your booking shortly.
+                </p>
+              </div>
 
-            <div className="mx-auto max-w-3xl rounded-xl border border-border bg-bg-2 p-6 shadow-md sm:p-10">
               {isMounted && !verifiedPhone ? (
                 <PhoneOtpGate
                   title="Book a Service Appointment"
                   description="Verify your phone number first to secure your slot."
+                  formSource="service"
                   onVerified={(phone) => setFormData((prev) => ({ ...prev, phone }))}
                 />
               ) : submitted ? (
@@ -520,15 +584,58 @@ export default function LocateServiceCentrePage() {
                     />
                   </label>
 
+                  {submitError && (
+                    <p className="col-span-full text-xs font-medium text-red-500">{submitError}</p>
+                  )}
+
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="col-span-full mt-2 rounded bg-brand py-3.5 text-sm font-semibold text-white hover:bg-brand-light transition-all shadow-md"
+                    disabled={sending}
+                    className="col-span-full mt-2 rounded bg-brand py-3.5 text-sm font-semibold text-white hover:bg-brand-light transition-all shadow-md disabled:cursor-not-allowed disabled:opacity-70"
                   >
-                    Confirm Booking Request
+                    {sending ? "Submitting..." : "Confirm Booking Request"}
                   </button>
                 </form>
               )}
+            </div>
+          </Reveal>
+        </section>
+
+        {/* Service Categories Section */}
+        <section className="bg-neutral-950 py-14 lg:py-20">
+          <div className="container-px mx-auto max-w-[1400px]">
+            <Reveal variant="fade-up" className="max-w-2xl">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand">
+                Care &amp; Maintenance
+              </p>
+              <h2 className="mt-2 font-display text-2xl font-black text-white sm:text-3xl">
+                Service That Cares
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-white/60 sm:text-base">
+                From routine maintenance to roadside help, our factory-trained team keeps your MG running the way it should, with genuine parts, transparent pricing, and state-of-the-art service centres.
+              </p>
+            </Reveal>
+
+            <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {serviceCategories.map(({ Icon, title, description }, i) => (
+                <Reveal
+                  key={title}
+                  delay={i * 80}
+                  variant="scale-up"
+                  className="group rounded-xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand/40 hover:bg-white/[0.06] hover:shadow-[0_8px_30px_rgba(228,0,43,0.15)]"
+                >
+                  <span className="grid h-12 w-12 place-items-center rounded-lg bg-brand/10 text-brand transition-colors duration-300 group-hover:bg-brand group-hover:text-white">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <h3 className="mt-4 font-display text-base font-bold text-white">
+                    {title}
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-white/60">
+                    {description}
+                  </p>
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>

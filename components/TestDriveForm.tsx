@@ -4,9 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { cars, getCarTransparentImage, type Car } from "@/lib/data";
-import { Shield, X, CheckCircle } from "@/components/icons";
+import { Shield, X, CheckCircle, ArrowRight } from "@/components/icons";
 import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 import ReverifyModal from "@/components/ReverifyModal";
+import CountryCodeSelect from "@/components/CountryCodeSelect";
+import { countryCodes, isValidPhoneForCountry, type Country } from "@/lib/countryCodes";
+import { submitLead } from "@/lib/submitLead";
 
 function CarCard({
   car,
@@ -43,7 +46,8 @@ function CarCard({
   );
 }
 
-const isValidPhone = (p: string) => /^[6-9]\d{9}$/.test(p);
+const gateImage =
+  "https://www.entrepreneurindia.com/img/1600x940/uploads/news/fi/68a6efdde7f8e.webp";
 
 type Props = {
   // Pre-selects this car and switches Step 1 to the "Car Selected" / "More Options"
@@ -63,11 +67,15 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
   const [reverifyOpen, setReverifyOpen] = useState(false);
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
+  const [country, setCountry] = useState<Country>(countryCodes[0]);
+  const [consent, setConsent] = useState(false);
+  const [consentError, setConsentError] = useState("");
   const [sendingOtp, setSendingOtp] = useState(false);
   const [otpModalOpen, setOtpModalOpen] = useState(false);
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] = useState("");
   const [verifyingOtp, setVerifyingOtp] = useState(false);
+  const [otpVerificationId, setOtpVerificationId] = useState<string | null>(null);
   const otpInputRef = useRef<HTMLInputElement>(null);
 
   const [mounted, setMounted] = useState(false);
@@ -95,40 +103,94 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
     }
   }, [otpModalOpen]);
 
-  const handleSendOtp = () => {
-    if (!isValidPhone(phone)) {
-      setPhoneError("Enter a valid 10-digit mobile number");
-      return;
+  const handleSendOtp = async () => {
+    let isValid = true;
+    if (!isValidPhoneForCountry(country.dial, phone)) {
+      setPhoneError(
+        country.dial === "+91"
+          ? "Enter a valid 10-digit mobile number"
+          : "Enter a valid mobile number"
+      );
+      isValid = false;
+    } else {
+      setPhoneError("");
     }
-    setPhoneError("");
+    if (!consent) {
+      setConsentError("Please accept our T&C and Privacy Policy to continue");
+      isValid = false;
+    } else {
+      setConsentError("");
+    }
+    if (!isValid) return;
+
     setSendingOtp(true);
-    setTimeout(() => {
-      setSendingOtp(false);
+    try {
+      const res = await fetch("/api/otp/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phoneNumber: `${country.dial}${phone}`,
+          formSource: isFromCarPage ? `test_drive_${presetCarId}` : "test_drive_pop_up",
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to send OTP");
+      setOtpVerificationId(data.otpVerificationId);
       setOtpModalOpen(true);
-    }, 1200);
+    } catch (err) {
+      console.error("Send OTP failed:", err);
+      setPhoneError(err instanceof Error ? err.message : "Failed to send OTP. Please try again.");
+    } finally {
+      setSendingOtp(false);
+    }
   };
 
-  const handleVerifyOtp = () => {
+  const handleVerifyOtp = async () => {
     if (otp.length !== 4) {
       setOtpError("Enter the 4-digit code sent to your phone");
       return;
     }
+    if (!otpVerificationId) {
+      setOtpError("Something went wrong. Please request a new code.");
+      return;
+    }
     setOtpError("");
     setVerifyingOtp(true);
-    setTimeout(() => {
-      setVerifyingOtp(false);
+    try {
+      const res = await fetch("/api/otp/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ otpVerificationId, otpCode: otp }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.verified) throw new Error(data.error || "Verification failed");
+
       setOtpModalOpen(false);
       verifyPhone(phone);
-    }, 800);
+      // Fire-and-forget: capture the number the moment it's verified, regardless
+      // of whether the visitor goes on to finish/abandon the rest of the wizard.
+      submitLead("phone_capture", {
+        phone_number: phone,
+        form_source: isFromCarPage ? `test_drive_${presetCarId}` : "test_drive_pop_up",
+      }).catch((err) => {
+        console.error("Phone capture failed:", err);
+      });
+    } catch (err) {
+      console.error("Verify OTP failed:", err);
+      setOtpError(err instanceof Error ? err.message : "Incorrect code. Please try again.");
+    } finally {
+      setVerifyingOtp(false);
+    }
   };
 
   /* ── BOOKING WIZARD (unlocked once verified) ── */
 
-  // Step state (1: Select Car, 2: When & Where, 3: Your Details)
-  const [step, setStep] = useState<1 | 2 | 3>(1);
+  // Step state (1: Select Car, 2: When & Where, 3: Your Details).
+  // Skip straight to step 2 when arriving with a car already chosen from that car's page.
+  const [step, setStep] = useState<1 | 2 | 3>(isFromCarPage ? 2 : 1);
 
   // Form selections
-  const [selectedCarId, setSelectedCarId] = useState<string>("");
+  const [selectedCarId, setSelectedCarId] = useState<string>(presetCarId || "");
   const [location, setLocation] = useState<string>("Malad West (Link Road)");
   const [preferredDate, setPreferredDate] = useState<string>("");
   const [timeSlot, setTimeSlot] = useState<string>("Morning (9–12)");
@@ -146,13 +208,8 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
 
   // Modal & submission state
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
-
-  // Pre-select model if passed in
-  useEffect(() => {
-    if (presetCarId) {
-      setSelectedCarId(presetCarId);
-    }
-  }, [presetCarId]);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const [minDate, setMinDate] = useState<string>("");
 
@@ -179,13 +236,17 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
     if (step === 1) {
       if (isFromCarPage) onExit?.();
     } else if (step === 2) {
-      setStep(1);
+      if (isFromCarPage) {
+        onExit?.();
+      } else {
+        setStep(1);
+      }
     } else if (step === 3) {
       setStep(2);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     let isValid = true;
 
@@ -227,7 +288,29 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
     }
 
     if (isValid && phone) {
-      setShowSuccessModal(true);
+      setSubmitError("");
+      setSending(true);
+      try {
+        await submitLead("test_drive", {
+          car_model: selectedCar?.name || "",
+          location,
+          name: fullName,
+          mobile_number: phone,
+          email,
+          pincode: "",
+          address,
+          preferred_date: preferredDate,
+          preferred_time: timeSlot,
+          notes,
+          form_source: isFromCarPage ? `test_drive_${presetCarId}` : "test_drive_pop_up",
+        });
+        setShowSuccessModal(true);
+      } catch (err) {
+        console.error("Test drive form submission failed:", err);
+        setSubmitError("Something went wrong booking your test drive. Please try again.");
+      } finally {
+        setSending(false);
+      }
     }
   };
 
@@ -263,62 +346,125 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
   /* ── GATE SCREEN — shown until phone is OTP-verified ── */
   if (!verified) {
     return (
-      <div className="mx-auto max-w-sm w-full py-4 text-left">
-        <h3 className="font-display text-lg font-bold text-slate-900">
-          Verify Your Number
-        </h3>
-        <p className="mt-1 text-xs text-slate-500 font-light">
-          We&apos;ll text you a one-time code to confirm your test drive booking.
-        </p>
-
-        <div className="mt-6 w-full">
-          <label className="block text-xs font-semibold text-slate-700 mb-2">
-            Mobile Number
-          </label>
-          <div className="flex gap-2">
-            <span className="flex items-center rounded-lg border border-slate-200 bg-slate-50 px-3.5 text-sm font-semibold text-slate-500">
-              +91
-            </span>
-            <input
-              type="tel"
-              inputMode="numeric"
-              maxLength={10}
-              placeholder="98765 43210"
-              value={phone}
-              onChange={(e) => {
-                setPhone(e.target.value.replace(/\D/g, "").slice(0, 10));
-                if (phoneError) setPhoneError("");
-              }}
-              onKeyDown={(e) => e.key === "Enter" && handleSendOtp()}
-              className={`w-full rounded-lg border bg-white p-3 text-sm text-slate-800 outline-none transition-colors focus:ring-2 ${
-                phoneError
-                  ? "border-red-300 focus:border-red-400 focus:ring-red-100"
-                  : "border-slate-200 focus:border-brand focus:ring-brand/20"
-              }`}
-            />
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.15fr]">
+        {/* Visual side */}
+        <div className="relative hidden min-h-[460px] overflow-hidden lg:block lg:min-h-full">
+          <Image
+            src={gateImage}
+            alt="MG Cyberster deliveries in Bengaluru"
+            fill
+            sizes="420px"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-black/40" />
+          <div className="absolute inset-x-0 bottom-0 p-8">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/70">
+              MG Motor Mumbai
+            </p>
+            <h4 className="mt-2 font-display text-xl font-bold leading-snug text-white">
+              Experience MG, First-Hand
+            </h4>
+            <p className="mt-2 text-xs leading-relaxed text-white/70">
+              Verify your number to lock in a test drive slot at your nearest showroom.
+            </p>
           </div>
-          {phoneError && (
-            <p className="mt-1.5 text-xs font-medium text-red-500">{phoneError}</p>
-          )}
+        </div>
 
-          <button
-            type="button"
-            onClick={handleSendOtp}
-            disabled={sendingOtp}
-            className="mt-5 flex w-full items-center justify-center gap-2 rounded bg-brand px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-light cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
-          >
-            {sendingOtp ? (
-              <>
-                <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-                </svg>
-                Sending OTP...
-              </>
-            ) : (
-              "Send OTP"
+        {/* Form side */}
+        <div className="flex flex-col justify-center px-6 py-10 sm:px-10 sm:py-12">
+          <h3 className="font-display text-xl font-bold text-slate-900">
+            Verify your Mobile Number
+          </h3>
+          <p className="mt-1.5 text-xs text-slate-500 font-light">
+            To serve you better, please verify your phone number to proceed with your test drive booking.
+          </p>
+
+          <div className="mt-6 w-full">
+            <label className="block text-xs font-semibold text-slate-700 mb-2">
+              Mobile Number
+            </label>
+            <div className="flex gap-2">
+              <CountryCodeSelect value={country} onChange={setCountry} />
+              <input
+                type="tel"
+                inputMode="numeric"
+                maxLength={country.dial === "+91" ? 10 : 14}
+                placeholder="98765 43210"
+                value={phone}
+                onChange={(e) => {
+                  setPhone(e.target.value.replace(/\D/g, "").slice(0, country.dial === "+91" ? 10 : 14));
+                  if (phoneError) setPhoneError("");
+                }}
+                onKeyDown={(e) => e.key === "Enter" && handleSendOtp()}
+                className={`w-full rounded-lg border bg-white p-3 text-sm text-slate-800 outline-none transition-colors focus:ring-2 ${
+                  phoneError
+                    ? "border-red-300 focus:border-red-400 focus:ring-red-100"
+                    : "border-slate-200 focus:border-brand focus:ring-brand/20"
+                }`}
+              />
+            </div>
+            {phoneError && (
+              <p className="mt-1.5 text-xs font-medium text-red-500">{phoneError}</p>
             )}
-          </button>
+
+            <label className="mt-4 flex cursor-pointer items-start gap-2.5">
+              <input
+                type="checkbox"
+                checked={consent}
+                onChange={(e) => {
+                  setConsent(e.target.checked);
+                  if (consentError) setConsentError("");
+                }}
+                className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded border-slate-300 accent-brand focus:ring-2 focus:ring-brand/20"
+              />
+              <span className="text-[11px] leading-relaxed text-slate-500">
+                I agree to MG Motor Mumbai&apos;s{" "}
+                <a
+                  href="/terms-and-conditions"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-slate-800 underline underline-offset-2 hover:text-brand"
+                >
+                  T&amp;C
+                </a>{" "}
+                and{" "}
+                <a
+                  href="/privacy-policy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-slate-800 underline underline-offset-2 hover:text-brand"
+                >
+                  Privacy Policy
+                </a>
+                . This consent overrides any DNC/NDNC registrations.
+              </span>
+            </label>
+            {consentError && (
+              <p className="mt-1.5 text-xs font-medium text-red-500">{consentError}</p>
+            )}
+
+            <button
+              type="button"
+              onClick={handleSendOtp}
+              disabled={sendingOtp}
+              className="mt-5 flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-black cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              {sendingOtp ? (
+                <>
+                  <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                  </svg>
+                  Sending OTP...
+                </>
+              ) : (
+                <>
+                  Send OTP
+                  <ArrowRight className="h-4 w-4" />
+                </>
+              )}
+            </button>
+          </div>
         </div>
 
         {/* ── OTP VERIFICATION POPUP ── */}
@@ -349,7 +495,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                   </h3>
                   <p className="mt-1.5 text-xs text-slate-500 font-light">
                     Enter the 4-digit code sent to{" "}
-                    <span className="font-semibold text-slate-800">+91 {phone}</span>
+                    <span className="font-semibold text-slate-800">{country.dial} {phone}</span>
                   </p>
 
                   <input
@@ -415,7 +561,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
       {/* STEP PROGRESS BAR */}
       <div className="flex items-center justify-between border-b border-slate-100 pb-8">
         {/* Step 1 Indicator */}
-        <div className="flex flex-1 items-center last:flex-none">
+        <div className="flex flex-1 items-start last:flex-none">
           <div className="flex flex-col items-center gap-1.5">
             <span
               className={`grid h-8 w-8 shrink-0 place-items-center rounded-full text-xs font-bold transition-colors ${
@@ -430,11 +576,11 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
               Select Car
             </span>
           </div>
-          <span className={`mx-2 h-0.5 flex-1 rounded transition-colors ${step >= 2 ? "bg-brand" : "bg-slate-200"}`} />
+          <span className={`mx-2 mt-[15px] h-0.5 flex-1 rounded transition-colors ${step >= 2 ? "bg-brand" : "bg-slate-200"}`} />
         </div>
 
         {/* Step 2 Indicator */}
-        <div className="flex flex-1 items-center last:flex-none">
+        <div className="flex flex-1 items-start last:flex-none">
           <div className="flex flex-col items-center gap-1.5">
             <span
               className={`grid h-8 w-8 shrink-0 place-items-center rounded-full text-xs font-bold transition-colors ${
@@ -449,11 +595,11 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
               When &amp; Where
             </span>
           </div>
-          <span className={`mx-2 h-0.5 flex-1 rounded transition-colors ${step >= 3 ? "bg-brand" : "bg-slate-200"}`} />
+          <span className={`mx-2 mt-[15px] h-0.5 flex-1 rounded transition-colors ${step >= 3 ? "bg-brand" : "bg-slate-200"}`} />
         </div>
 
         {/* Step 3 Indicator */}
-        <div className="flex flex-1 items-center last:flex-none">
+        <div className="flex flex-1 items-start last:flex-none">
           <div className="flex flex-col items-center gap-1.5">
             <span
               className={`grid h-8 w-8 shrink-0 place-items-center rounded-full text-xs font-bold transition-colors ${
@@ -693,7 +839,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                   onClick={() => setReverifyOpen(true)}
                 >
                   <CheckCircle className="h-4 w-4 shrink-0 text-emerald-600" />
-                  <span className="text-sm font-semibold text-emerald-800">+91 {phone}</span>
+                  <span className="text-sm font-semibold text-emerald-800">{country.dial} {phone}</span>
                   <div className="flex items-center gap-1 rounded bg-emerald-500 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
                     Verified
                   </div>
@@ -790,6 +936,10 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
               </div>
             </div>
 
+            {submitError && (
+              <p className="mt-4 text-xs font-medium text-red-500">{submitError}</p>
+            )}
+
             <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-6">
               <button
                 type="button"
@@ -800,9 +950,10 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
               </button>
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 rounded bg-brand px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-light shadow-md cursor-pointer"
+                disabled={sending}
+                className="inline-flex items-center gap-2 rounded bg-brand px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-light shadow-md cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
               >
-                Confirm Test Drive
+                {sending ? "Booking..." : "Confirm Test Drive"}
               </button>
             </div>
           </form>
@@ -841,7 +992,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
 
             {/* Confirmation Text */}
             <p className="mt-4 text-sm sm:text-base leading-relaxed text-slate-600 font-light">
-              Thank you, <strong className="font-semibold text-slate-900">{fullName}</strong>. An MG Motor representative will call you at <strong className="font-semibold text-slate-900">+91 {phone}</strong> shortly to confirm your <strong className="font-semibold text-brand">MG {selectedCar?.name || "Vehicle"}</strong> test drive on <strong className="font-semibold text-slate-900">{preferredDate} ({timeSlot})</strong> at <strong className="font-semibold text-slate-900">{location}</strong>.
+              Thank you, <strong className="font-semibold text-slate-900">{fullName}</strong>. An MG Motor representative will call you at <strong className="font-semibold text-slate-900">{country.dial} {phone}</strong> shortly to confirm your <strong className="font-semibold text-brand">MG {selectedCar?.name || "Vehicle"}</strong> test drive on <strong className="font-semibold text-slate-900">{preferredDate} ({timeSlot})</strong> at <strong className="font-semibold text-slate-900">{location}</strong>.
             </p>
 
             {/* Reset / Action Button */}

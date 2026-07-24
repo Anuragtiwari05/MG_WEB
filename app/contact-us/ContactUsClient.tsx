@@ -9,6 +9,7 @@ import { MapPin, Phone, Mail, Clock } from "@/components/icons";
 import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 import PhoneOtpGate from "@/components/PhoneOtpGate";
 import ReverifyModal from "@/components/ReverifyModal";
+import { submitLead } from "@/lib/submitLead";
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -36,6 +37,8 @@ export default function ContactUsClient() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   // Field validation errors
   const [nameError, setNameError] = useState("");
@@ -52,7 +55,7 @@ export default function ContactUsClient() {
     }
   }, [verifiedPhone]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     let isValid = true;
 
@@ -116,7 +119,24 @@ export default function ContactUsClient() {
     }
 
     if (isValid && formData.phone) {
-      setSubmitted(true);
+      setSubmitError("");
+      setSending(true);
+      try {
+        await submitLead("contact", {
+          name: formData.name,
+          mobile_number: formData.phone,
+          email: formData.email,
+          pincode: formData.pincode,
+          subject: formData.subject,
+          message: formData.message,
+        });
+        setSubmitted(true);
+      } catch (err) {
+        console.error("Contact form submission failed:", err);
+        setSubmitError("Something went wrong sending your message. Please try again.");
+      } finally {
+        setSending(false);
+      }
     }
   };
 
@@ -260,6 +280,7 @@ export default function ContactUsClient() {
                   <PhoneOtpGate
                     title="Send Us a Message"
                     description="Verify your phone number first to send a message."
+                    formSource="contact"
                     onVerified={(phone) => setFormData((prev) => ({ ...prev, phone }))}
                   />
                 ) : submitted ? (
@@ -454,11 +475,16 @@ export default function ContactUsClient() {
                         )}
                       </div>
 
+                      {submitError && (
+                        <p className="col-span-full text-xs font-medium text-red-500">{submitError}</p>
+                      )}
+
                       <button
                         type="submit"
-                        className="col-span-full mt-1 rounded bg-brand py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-light"
+                        disabled={sending}
+                        className="col-span-full mt-1 rounded bg-brand py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-light disabled:cursor-not-allowed disabled:opacity-70"
                       >
-                        Send Message
+                        {sending ? "Sending..." : "Send Message"}
                       </button>
                     </form>
                   </>

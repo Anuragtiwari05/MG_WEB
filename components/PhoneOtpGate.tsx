@@ -4,28 +4,38 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Shield, X } from "@/components/icons";
 import { usePhoneVerification } from "@/components/PhoneVerificationContext";
-
-const isValidPhone = (p: string) => /^[6-9]\d{9}$/.test(p);
+import CountryCodeSelect from "@/components/CountryCodeSelect";
+import { countryCodes, isValidPhoneForCountry, type Country } from "@/lib/countryCodes";
+import { submitLead } from "@/lib/submitLead";
 
 type PhoneOtpGateProps = {
   onVerified: (phone: string) => void;
   title?: string;
   description?: string;
+  // Identifies which form this gate instance belongs to, e.g. "test_drive_section",
+  // "service", "contact" — logged to the "Numbers Only" sheet the moment OTP succeeds,
+  // even if the visitor abandons the rest of the form afterward.
+  formSource: string;
 };
 
 export default function PhoneOtpGate({
   onVerified,
   title = "Verify Your Number",
   description = "We'll text you a one-time code to confirm it's really you before you continue.",
+  formSource,
 }: PhoneOtpGateProps) {
   const { verifyPhone } = usePhoneVerification();
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
+  const [country, setCountry] = useState<Country>(countryCodes[0]);
+  const [consent, setConsent] = useState(false);
+  const [consentError, setConsentError] = useState("");
   const [sendingOtp, setSendingOtp] = useState(false);
   const [otpModalOpen, setOtpModalOpen] = useState(false);
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] = useState("");
   const [verifyingOtp, setVerifyingOtp] = useState(false);
+  const [otpVerificationId, setOtpVerificationId] = useState<string | null>(null);
   const otpInputRef = useRef<HTMLInputElement>(null);
 
   const [mounted, setMounted] = useState(false);
@@ -43,32 +53,79 @@ export default function PhoneOtpGate({
     }
   }, [otpModalOpen]);
 
-  const handleSendOtp = () => {
-    if (!isValidPhone(phone)) {
-      setPhoneError("Enter a valid 10-digit mobile number");
-      return;
+  const handleSendOtp = async () => {
+    let isValid = true;
+    if (!isValidPhoneForCountry(country.dial, phone)) {
+      setPhoneError(
+        country.dial === "+91"
+          ? "Enter a valid 10-digit mobile number"
+          : "Enter a valid mobile number"
+      );
+      isValid = false;
+    } else {
+      setPhoneError("");
     }
-    setPhoneError("");
+    if (!consent) {
+      setConsentError("Please accept our T&C and Privacy Policy to continue");
+      isValid = false;
+    } else {
+      setConsentError("");
+    }
+    if (!isValid) return;
+
     setSendingOtp(true);
-    setTimeout(() => {
-      setSendingOtp(false);
+    try {
+      const res = await fetch("/api/otp/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phoneNumber: `${country.dial}${phone}`, formSource }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to send OTP");
+      setOtpVerificationId(data.otpVerificationId);
       setOtpModalOpen(true);
-    }, 1200);
+    } catch (err) {
+      console.error("Send OTP failed:", err);
+      setPhoneError(err instanceof Error ? err.message : "Failed to send OTP. Please try again.");
+    } finally {
+      setSendingOtp(false);
+    }
   };
 
-  const handleVerifyOtp = () => {
+  const handleVerifyOtp = async () => {
     if (otp.length !== 4) {
       setOtpError("Enter the 4-digit code sent to your phone");
       return;
     }
+    if (!otpVerificationId) {
+      setOtpError("Something went wrong. Please request a new code.");
+      return;
+    }
     setOtpError("");
     setVerifyingOtp(true);
-    setTimeout(() => {
-      setVerifyingOtp(false);
+    try {
+      const res = await fetch("/api/otp/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ otpVerificationId, otpCode: otp }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.verified) throw new Error(data.error || "Verification failed");
+
       setOtpModalOpen(false);
       verifyPhone(phone);
+      // Fire-and-forget: capture the number the moment it's verified, regardless
+      // of whether the visitor goes on to finish/abandon the rest of the form.
+      submitLead("phone_capture", { phone_number: phone, form_source: formSource }).catch((err) => {
+        console.error("Phone capture failed:", err);
+      });
       onVerified(phone);
-    }, 800);
+    } catch (err) {
+      console.error("Verify OTP failed:", err);
+      setOtpError(err instanceof Error ? err.message : "Incorrect code. Please try again.");
+    } finally {
+      setVerifyingOtp(false);
+    }
   };
 
   return (
@@ -81,17 +138,15 @@ export default function PhoneOtpGate({
           Mobile Number
         </span>
         <div className="flex gap-2">
-          <span className="flex items-center rounded border border-border bg-bg-2 px-3.5 text-sm font-semibold text-muted">
-            +91
-          </span>
+          <CountryCodeSelect value={country} onChange={setCountry} />
           <input
             type="tel"
             inputMode="numeric"
-            maxLength={10}
+            maxLength={country.dial === "+91" ? 10 : 14}
             placeholder="98765 43210"
             value={phone}
             onChange={(e) => {
-              setPhone(e.target.value.replace(/\D/g, "").slice(0, 10));
+              setPhone(e.target.value.replace(/\D/g, "").slice(0, country.dial === "+91" ? 10 : 14));
               if (phoneError) setPhoneError("");
             }}
             onKeyDown={(e) => e.key === "Enter" && handleSendOtp()}
@@ -104,6 +159,42 @@ export default function PhoneOtpGate({
         </div>
         {phoneError && (
           <p className="mt-1.5 text-xs font-medium text-red-500">{phoneError}</p>
+        )}
+
+        <label className="mt-4 flex cursor-pointer items-start gap-2.5">
+          <input
+            type="checkbox"
+            checked={consent}
+            onChange={(e) => {
+              setConsent(e.target.checked);
+              if (consentError) setConsentError("");
+            }}
+            className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer rounded border-border accent-brand focus:ring-2 focus:ring-brand/20"
+          />
+          <span className="text-[11px] leading-relaxed text-muted">
+            I agree to MG Motor Mumbai&apos;s{" "}
+            <a
+              href="/terms-and-conditions"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-text underline underline-offset-2 hover:text-brand"
+            >
+              T&amp;C
+            </a>{" "}
+            and{" "}
+            <a
+              href="/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-text underline underline-offset-2 hover:text-brand"
+            >
+              Privacy Policy
+            </a>
+            . This consent overrides any DNC/NDNC registrations.
+          </span>
+        </label>
+        {consentError && (
+          <p className="mt-1.5 text-xs font-medium text-red-500">{consentError}</p>
         )}
 
         <button
@@ -154,7 +245,7 @@ export default function PhoneOtpGate({
                 </h3>
                 <p className="mt-1.5 text-xs text-muted">
                   Enter the 4-digit code sent to{" "}
-                  <span className="font-semibold text-text">+91 {phone}</span>
+                  <span className="font-semibold text-text">{country.dial} {phone}</span>
                 </p>
 
                 <input

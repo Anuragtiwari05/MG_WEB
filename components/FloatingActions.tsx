@@ -7,7 +7,7 @@ import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 
 const actions = [
   { label: "Book a\nTest Drive", href: "/book-a-test-drive", Icon: Calendar },
-  { label: "WhatsApp", href: `https://wa.me/912242125678`, Icon: WhatsApp },
+  { label: "WhatsApp", href: `https://wa.me/912242125678?text=${encodeURIComponent("Hi, I wanted to book a test drive")}`, Icon: WhatsApp },
   { label: "Call Us", href: `tel:${nav.phone.replace(/\s/g, "")}`, Icon: Phone },
 ];
 

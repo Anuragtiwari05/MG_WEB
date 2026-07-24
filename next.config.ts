@@ -63,6 +63,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "stimg2.cardekho.com",
       },
+      {
+        protocol: "https",
+        hostname: "www.entrepreneurindia.com",
+      },
     ],
   },
 };

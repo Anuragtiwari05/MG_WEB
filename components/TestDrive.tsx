@@ -8,6 +8,7 @@ import Reveal from "./Reveal";
 import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 import PhoneOtpGate from "@/components/PhoneOtpGate";
 import ReverifyModal from "@/components/ReverifyModal";
+import { submitLead } from "@/lib/submitLead";
 
 const fieldBase =
   "w-full rounded border border-border bg-white px-4 py-3 text-sm text-text outline-none transition-colors placeholder:text-faint focus:border-brand focus:ring-2 focus:ring-brand/10";
@@ -61,6 +62,8 @@ function SelectField({
 export default function TestDrive() {
   const { verifiedPhone, resetVerification, isMounted } = usePhoneVerification();
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [reverifyOpen, setReverifyOpen] = useState(false);
@@ -95,7 +98,7 @@ export default function TestDrive() {
     ? time
     : "";
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let isValid = true;
 
@@ -172,7 +175,29 @@ export default function TestDrive() {
     }
 
     if (isValid && verifiedPhone) {
-      setSubmitted(true);
+      setSubmitError("");
+      setSending(true);
+      try {
+        await submitLead("test_drive", {
+          car_model: carModel === "Other" ? carModelOther : carModel,
+          location: locationName,
+          name,
+          mobile_number: verifiedPhone,
+          email,
+          pincode,
+          address,
+          preferred_date: date,
+          preferred_time: time,
+          notes: "",
+          form_source: "test_drive_section",
+        });
+        setSubmitted(true);
+      } catch (err) {
+        console.error("Test drive form submission failed:", err);
+        setSubmitError("Something went wrong booking your test drive. Please try again.");
+      } finally {
+        setSending(false);
+      }
     }
   };
 
@@ -210,6 +235,7 @@ export default function TestDrive() {
               <PhoneOtpGate
                 title="Book a Test Drive"
                 description="Verify your phone number first to schedule a test drive."
+                formSource="test_drive_section"
                 onVerified={() => {}}
               />
             ) : submitted ? (
@@ -433,16 +459,21 @@ export default function TestDrive() {
                   )}
                 </div>
 
+                {submitError && (
+                  <p className="col-span-full text-xs font-medium text-red-500">{submitError}</p>
+                )}
+
                 <button
                   type="submit"
-                  className="col-span-full mt-2 rounded bg-brand py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-light"
+                  disabled={sending}
+                  className="col-span-full mt-2 rounded bg-brand py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-light disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  Book My Test Drive
+                  {sending ? "Booking..." : "Book My Test Drive"}
                 </button>
                 <p className="col-span-full text-center text-xs text-faint">
                   By submitting, you agree to be contacted by MG Motor Mumbai about
                   your test drive request. See our{" "}
-                  <a href="#" className="font-medium text-brand hover:underline">
+                  <a href="/privacy-policy" className="font-medium text-brand hover:underline">
                     Privacy Policy
                   </a>
                   .

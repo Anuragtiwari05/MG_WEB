@@ -426,7 +426,7 @@ export default function CarDetailClient({ car }: Props) {
         </section>
 
         {/* ── STICKY NAV ── */}
-        <nav aria-label="Vehicle sections" className="sticky top-[80px] z-30 hidden border-b border-slate-200 bg-white/95 backdrop-blur-md lg:block shadow-sm">
+        <nav aria-label="Vehicle sections" className="sticky top-[72px] z-30 hidden border-b border-slate-200 bg-white/95 backdrop-blur-md lg:block shadow-sm">
           <div className="container-px mx-auto flex max-w-[1400px] items-center justify-between py-3.5">
             {/* Left / Middle Navigation Links */}
             <div className="flex items-center gap-7 text-[11px] font-bold uppercase tracking-[0.14em] text-slate-600">
@@ -710,9 +710,9 @@ export default function CarDetailClient({ car }: Props) {
             <button className="absolute left-4 top-1/2 -translate-y-1/2 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 disabled:opacity-30" onClick={(e) => { e.stopPropagation(); prevImage(); }} disabled={lightboxIndex === 0} aria-label="Previous">
               <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
             </button>
-            <div className="relative mx-16 max-h-[85vh] max-w-[85vw] overflow-hidden rounded-xl" onClick={(e) => e.stopPropagation()}>
-              <div className="relative" style={{ width: "75vw", maxWidth: 1000, aspectRatio: "16/9" }}>
-                <Image src={car.galleryImages[lightboxIndex].src} alt={car.galleryImages[lightboxIndex].caption} fill className="object-contain" sizes="85vw" />
+            <div className="relative mx-14 max-w-[90vw] max-h-[85vh] overflow-hidden rounded-xl sm:mx-16 sm:max-w-[85vw]" onClick={(e) => e.stopPropagation()}>
+              <div className="relative w-full" style={{ maxWidth: 1000, aspectRatio: "16/9" }}>
+                <Image src={car.galleryImages[lightboxIndex].src} alt={car.galleryImages[lightboxIndex].caption} fill className="object-contain" sizes="90vw" />
               </div>
               <p className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 px-4 py-3 text-sm font-medium text-white">
                 {car.galleryImages[lightboxIndex].caption}

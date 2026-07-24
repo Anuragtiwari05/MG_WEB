@@ -33,15 +33,15 @@ export default function TestDriveModal() {
       <div
         role="dialog"
         aria-modal="true"
-        className={`relative max-h-[90vh] w-full overflow-y-auto rounded-2xl bg-white p-6 sm:p-10 shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-200 transition-all duration-300 ${
-          isVerified ? "max-w-3xl" : "max-w-md"
+        className={`relative max-h-[90vh] w-full overflow-y-auto rounded-2xl bg-white shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-200 transition-all duration-300 ${
+          isVerified ? "max-w-3xl p-6 sm:p-10" : "max-w-3xl p-0"
         }`}
       >
         <button
           type="button"
           onClick={closeTestDriveModal}
           aria-label="Close"
-          className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full bg-slate-100 text-slate-400 transition-colors hover:bg-slate-200 hover:text-slate-700 cursor-pointer"
+          className="absolute right-4 top-4 z-20 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-slate-500 shadow-sm backdrop-blur transition-colors hover:bg-white hover:text-slate-800 cursor-pointer"
         >
           <X className="h-5 w-5" />
         </button>

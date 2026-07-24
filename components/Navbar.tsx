@@ -121,7 +121,7 @@ export default function Navbar() {
           {!isCarDetailPage && (
             <button
               onClick={() => openTestDriveModal()}
-              className="hidden rounded bg-brand px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-brand-light sm:inline-block cursor-pointer"
+              className="hidden rounded bg-brand px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-brand-light md:inline-block cursor-pointer"
             >
               BOOK A TEST DRIVE
             </button>

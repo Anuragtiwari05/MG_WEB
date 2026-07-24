@@ -170,6 +170,19 @@ export type Slide = {
   sub: string;
   price: string;
   image: string;
+  // Portrait, smart-cropped variant of `image` used on mobile viewports so the
+  // car stays in frame instead of CSS-shrinking the landscape desktop banner.
+  // Generated via scripts/crop-hero-mobile.js.
+  mobileImage?: string;
+  // "contain" (default "cover") for slides whose mobileImage is a hand-picked
+  // safe-zone extract rather than a cover-fit smart-crop — the whole image must
+  // stay visible on mobile, not get further cropped by the device's own aspect.
+  mobileFit?: "cover" | "contain";
+  // Slides where the car isn't the dominant, tightly-framed subject (baked
+  // text/graphics eat too much of the frame, or there's no car at all) get
+  // dropped from the mobile carousel entirely rather than shown letterboxed.
+  // Desktop is unaffected — it still shows every slide via `heroSlides`.
+  mobileExclude?: boolean;
   alt: string;
   features: string[];
   video?: string;
@@ -186,6 +199,7 @@ export const heroSlides: Slide[] = [
     price: "18.98",
     hasImageText: true,
     image: "/images/zs-bn-dsc.jpg",
+    mobileImage: "/images/mobile/zs-bn-dsc-mobile.jpg",
     alt: "MG ZS EV Banner",
     features: [],
   },
@@ -197,6 +211,7 @@ export const heroSlides: Slide[] = [
     price: "65.00",
     hasImageText: true,
     image: "/images/cybie-kmi-desktop.webp",
+    mobileImage: "/images/mobile/cybie-kmi-desktop-mobile.jpg",
     alt: "MG Cyberster Electric Roadster",
     features: [],
   },
@@ -208,6 +223,7 @@ export const heroSlides: Slide[] = [
     price: "13.50",
     hasImageText: true,
     image: "/images/cuv-bn-dsc.jpg",
+    mobileImage: "/images/mobile/cuv-bn-dsc-mobile.jpg",
     alt: "MG Windsor EV CUV",
     features: [],
   },
@@ -218,6 +234,7 @@ export const heroSlides: Slide[] = [
     sub: "Premium design featuring Personal AI Assistant robot on your dashboard.",
     price: "9.98",
     image: "/images/as-bn-dsc.jpg",
+    mobileImage: "/images/mobile/as-bn-dsc-mobile.jpg",
     alt: "MG Astor Banner",
     features: [],
   },
@@ -228,9 +245,16 @@ export const heroSlides: Slide[] = [
     sub: "Make a statement with an Argyle-inspired front grille and Level 2 ADAS.",
     price: "11.99",
     image: "/images/hector-bn-dsc.jpg",
+    mobileImage: "/images/mobile/hector-bn-dsc-mobile.jpg",
+    mobileFit: "contain",
+    mobileExclude: true,
     video: "/videos/mgi-hector-vd-dsc-005.mp4",
     alt: "MG Hector SUV",
-    features: [],
+    // Mirrors the feature chip row baked into the desktop banner's own pixels
+    // (see categorizedFeatures.exterior / details.features on the Hector car
+    // entry below) — surfaced as real text on mobile, since mobileFit:"contain"
+    // deliberately crops that baked row out to avoid cutting it mid-word.
+    features: ["i-SWIPE", "AURA HEX GRILLE", "AURA SCULPT BUMPERS", "AURA BOLT ALLOY WHEELS"],
   },
   {
     model: "MG MAJESTOR",
@@ -239,6 +263,7 @@ export const heroSlides: Slide[] = [
     sub: "The best 7-seater premium SUV.",
     price: "39.99",
     image: "/images/hero-majestor.jpg",
+    mobileImage: "/images/mobile/hero-majestor-mobile.jpg",
     video: "/videos/hero-majestor.mp4",
     alt: "MG Majestor 7 Seater SUV",
     features: [],
@@ -251,6 +276,7 @@ export const heroSlides: Slide[] = [
     price: "45.00",
     hasImageText: true,
     image: "/images/m9-kmi-desktop.webp",
+    mobileImage: "/images/mobile/m9-kmi-desktop-mobile.jpg",
     alt: "MG M9 Premium Electric MPV",
     features: [],
   },
@@ -262,6 +288,8 @@ export const heroSlides: Slide[] = [
     price: "10.00",
     hasImageText: true,
     image: "/images/comet-hero-carousel.jpg",
+    mobileImage: "/images/mobile/comet-hero-carousel-mobile.jpg",
+    mobileExclude: true,
     alt: "MG Motor Premium Lineup 1",
     features: [],
   },
@@ -273,6 +301,9 @@ export const heroSlides: Slide[] = [
     price: "12.00",
     hasImageText: true,
     image: "/images/gloster-hero-carousel.jpg",
+    mobileImage: "/images/mobile/gloster-hero-carousel-mobile.jpg",
+    mobileFit: "contain",
+    mobileExclude: true,
     alt: "MG Motor Premium Lineup 2",
     features: [],
   },
@@ -285,6 +316,7 @@ export const heroSlides: Slide[] = [
     hasImageText: true,
     exploreSlug: "cyberster",
     image: "/images/mg-range-hero.jpg",
+    mobileImage: "/images/mobile/mg-range-hero-mobile.jpg",
     alt: "MG Motor Premium Lineup 3",
     features: [],
   },
