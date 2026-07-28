@@ -41,7 +41,9 @@ export default function TrustStrip() {
                 key={item.label}
                 delay={i * 80}
                 variant="scale-up"
-                className="flex flex-col items-center justify-center px-4 text-center first:border-l-0 lg:divide-x-0"
+                className={`flex flex-col items-center justify-center px-4 text-center first:border-l-0 lg:divide-x-0 ${
+                  i === trustStats.length - 1 ? "col-span-2 sm:col-span-1" : ""
+                }`}
               >
                 <div className="flex items-center gap-3">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand/10 text-brand">

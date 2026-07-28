@@ -68,6 +68,7 @@ export default function Offers() {
             <Image
               src="/images/promo-offer.jpg"
               alt="MG ZS Promo Offer"
+              title="MG ZS Promo Offer"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 45vw"

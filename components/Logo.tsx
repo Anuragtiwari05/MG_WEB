@@ -8,6 +8,7 @@ export default function Logo({ className = "", dark = false }: { className?: str
         <Image
           src="/images/logo-mg.png"
           alt="MG Logo"
+          title="MG Logo"
           width={22}
           height={22}
           className="object-contain"

@@ -25,7 +25,7 @@ export default function Testimonials() {
   }, []);
 
   const maxIndex = testimonials.length - visibleCards;
-  
+
   // Guard active index on resize
   useEffect(() => {
     if (active > maxIndex) {
@@ -64,7 +64,7 @@ export default function Testimonials() {
               across 50,000+ MG cars sold and 120,000+ services completed.
             </p>
           </div>
-          
+
           {/* Slider Chevrons */}
           <div className="flex gap-2">
             <button
@@ -86,8 +86,11 @@ export default function Testimonials() {
           </div>
         </Reveal>
 
-        {/* Carousel Window */}
-        <div className="w-full overflow-hidden">
+        {/* Carousel Window — overflow-hidden only needs to clip horizontally
+            (for the slide), but it clips vertically too, cutting off the
+            top of a card's border when hover lifts it. pt-2 -mt-2 gives the
+            lift room without shifting anything else's position. */}
+        <div className="-mt-2 w-full overflow-hidden pt-2">
           <div
             className="flex flex-nowrap transition-transform duration-500 ease-out"
             style={{
@@ -108,16 +111,16 @@ export default function Testimonials() {
                     width: `${100 / visibleCards}%`,
                   }}
                 >
-                  <figure className="flex h-full flex-col rounded-xl bg-white p-6 shadow-[0_0_0_1px_rgba(0,0,0,0.04),0_4px_24px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgba(0,0,0,0.04),0_12px_32px_rgba(0,0,0,0.12)]">
+                  <figure className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-7 pb-9 shadow-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)]">
                     <div className="flex gap-1">
                       {Array.from({ length: t.rating }).map((_, rIndex) => (
                         <Star key={rIndex} className="h-4 w-4 text-amber-400" />
                       ))}
                     </div>
-                    <blockquote className="mt-4 flex-1 text-sm sm:text-base leading-relaxed text-text/80">
+                    <blockquote className="mt-5 flex-1 text-sm sm:text-base leading-relaxed text-text/80">
                       &ldquo;{t.text}&rdquo;
                     </blockquote>
-                    <figcaption className="mt-5 flex items-center gap-4 border-t border-border pt-5">
+                    <figcaption className="mt-6 flex items-center gap-4 border-t border-border pt-6">
                       {/* Initials Badge avatar */}
                       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand/10 text-xs font-bold uppercase tracking-wider text-brand">
                         {initials}
@@ -136,7 +139,7 @@ export default function Testimonials() {
 
         {/* Dots Pagination */}
         {dotsCount > 1 && (
-          <div className="mt-8 flex justify-center gap-2">
+          <div className="mt-10 flex justify-center gap-2">
             {Array.from({ length: dotsCount }).map((_, i) => (
               <button
                 key={i}

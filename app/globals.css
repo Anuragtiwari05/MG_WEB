@@ -67,15 +67,23 @@
 /* ============================================================
    BASE
    ============================================================ */
-* {
-  border-color: var(--border);
-  box-sizing: border-box;
+/* Layered (not global) so Tailwind utility classes like border-black
+   always win over this default — unlayered CSS beats @layer CSS
+   regardless of specificity, which was silently defeating every
+   border-color utility in the codebase. */
+@layer base {
+  * {
+    border-color: var(--border);
+    box-sizing: border-box;
+  }
 }
 
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -83,6 +91,7 @@ body {
   color: var(--text);
   font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: hidden;
+  width: 100%;
 }
 
 ::selection {

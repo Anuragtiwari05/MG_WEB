@@ -7,6 +7,7 @@ import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 import CountryCodeSelect from "@/components/CountryCodeSelect";
 import { countryCodes, isValidPhoneForCountry, type Country } from "@/lib/countryCodes";
 import { submitLead } from "@/lib/submitLead";
+import { getUtmParams } from "@/lib/utm";
 
 type PhoneOtpGateProps = {
   onVerified: (phone: string) => void;
@@ -78,7 +79,11 @@ export default function PhoneOtpGate({
       const res = await fetch("/api/otp/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phoneNumber: `${country.dial}${phone}`, formSource }),
+        body: JSON.stringify({
+          phoneNumber: `${country.dial}${phone}`,
+          formSource,
+          ...getUtmParams(),
+        }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to send OTP");
@@ -116,7 +121,11 @@ export default function PhoneOtpGate({
       verifyPhone(phone);
       // Fire-and-forget: capture the number the moment it's verified, regardless
       // of whether the visitor goes on to finish/abandon the rest of the form.
-      submitLead("phone_capture", { phone_number: phone, form_source: formSource }).catch((err) => {
+      submitLead("phone_capture", {
+        phone_number: phone,
+        form_source: formSource,
+        otp_verification_id: otpVerificationId,
+      }).catch((err) => {
         console.error("Phone capture failed:", err);
       });
       onVerified(phone);

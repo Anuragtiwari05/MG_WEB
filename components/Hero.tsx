@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { heroSlides, getCarTransparentImage } from "@/lib/data";
+import { heroSlides } from "@/lib/data";
 import { ChevronLeft, ChevronRight } from "./icons";
 import Reveal from "./Reveal";
 
@@ -22,11 +22,12 @@ function getModelSlug(model: string): string {
   return "";
 }
 
-// Mobile shows the car alone (no banner scenery/baked text — see the
-// transparent product cutouts under public/images/models/), so only slides
-// that resolve to a real model get a cutout to show; the two generic
-// "MG MOTOR LINEUP" filler slides don't name an actual model and are skipped.
-const mobileSlides = heroSlides.filter((s) => s.exploreSlug || getModelSlug(s.model));
+// Mobile skips slides with no real model to link to, and any slide flagged
+// mobileExclude (banners whose baked-in text collides with the mobile crop
+// — desktop still shows those fine, full-bleed).
+const mobileSlides = heroSlides.filter(
+  (s) => (s.exploreSlug || getModelSlug(s.model)) && !s.mobileExclude
+);
 
 export default function Hero() {
   const [mobileIndex, setMobileIndex] = useState(0);
@@ -67,24 +68,17 @@ export default function Hero() {
     <section id="home" className="w-full bg-brand-deep">
 
       {/* ═══════════════════════════════════════
-          MOBILE  (<640 px)
-          Just the car — a transparent product cutout, not the desktop
-          banner — floating on the brand background. No crop, ever: the
-          whole vehicle is always visible on every phone size.
-          Text + CTAs sit below in a dark panel.
+          MOBILE + TABLET  (<1280 px, covers iPad Pro portrait/landscape too)
+          Same banner image as desktop, object-cover, no extra cutout
+          layered on top. Text + CTAs sit below in a dark panel — this avoids
+          the full-bleed desktop layout's text-over-car overlap at tablet
+          widths, where h-screen object-cover over-zooms a landscape banner.
           ═══════════════════════════════════════ */}
-      <div className="sm:hidden">
+      <div className="xl:hidden">
 
         <div className="relative w-full overflow-hidden aspect-[4/3] min-h-[220px] max-h-[38vh]">
-          {/* Soft spotlight + floor shadow so the floating cutout doesn't look bare */}
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <div className="h-2/3 w-2/3 rounded-full bg-brand/10 blur-3xl" />
-          </div>
-          <div className="pointer-events-none absolute bottom-[8%] left-1/2 h-4 w-2/3 -translate-x-1/2 rounded-[100%] bg-black/50 blur-md" />
-
           {mobileSlides.map((s, i) => {
             const active = i === mobileIndex;
-            const cutout = getCarTransparentImage(s.exploreSlug || getModelSlug(s.model));
             return (
               <div
                 key={`mob-img-${s.model}`}
@@ -92,13 +86,18 @@ export default function Hero() {
                 style={{ opacity: active ? 1 : 0, zIndex: active ? 10 : 0, pointerEvents: active ? "auto" : "none" }}
               >
                 <Image
-                  src={cutout}
+                  src={s.image}
                   alt={s.alt}
+                  title={s.alt}
                   fill
                   priority={i === 0}
                   sizes="100vw"
-                  className="object-contain p-6"
+                  className="object-cover object-bottom"
                 />
+                {/* Solid strip behind the navbar so any baked-in marketing
+                    text near the top of the banner doesn't collide with it. */}
+                <div className="absolute inset-x-0 top-0 z-[1] h-16 bg-gradient-to-b from-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-deep from-0% via-brand-deep/35 via-35% to-transparent to-75%" />
               </div>
             );
           })}
@@ -197,11 +196,11 @@ export default function Hero() {
       </div>
 
       {/* ═══════════════════════════════════════
-          DESKTOP  (≥640 px)
+          DESKTOP  (≥1280 px)
           Full viewport height. Video plays where available.
           Text overlaid bottom-left (or center-left).
           ═══════════════════════════════════════ */}
-      <div className="relative hidden h-screen h-dvh w-full sm:block">
+      <div className="relative hidden h-screen h-dvh w-full xl:block">
         {heroSlides.map((s, i) => {
           const active = i === desktopIndex;
           const slug = s.exploreSlug || getModelSlug(s.model);
@@ -224,6 +223,7 @@ export default function Hero() {
                 <Image
                   src={s.image}
                   alt={s.alt}
+                  title={s.alt}
                   fill
                   sizes="100vw"
                   className="object-cover"

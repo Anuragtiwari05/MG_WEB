@@ -165,6 +165,7 @@ export default function CarDetailClient({ car }: Props) {
                     <Image
                       src={activeImage}
                       alt={`${car.name} preview in ${activeLabel}`}
+                      title={`${car.name} preview in ${activeLabel}`}
                       fill
                       priority
                       className="object-contain p-4 transition-all duration-[600ms]"
@@ -179,6 +180,7 @@ export default function CarDetailClient({ car }: Props) {
                       <Image
                         src="/images/logo-mg.png"
                         alt="MG Logo"
+                        title="MG Logo"
                         width={12}
                         height={12}
                         className="object-contain"
@@ -267,6 +269,7 @@ export default function CarDetailClient({ car }: Props) {
                             <Image
                               src={img.src}
                               alt={img.caption}
+                              title={img.caption}
                               fill
                               sizes="(max-width: 640px) 33vw, 150px"
                               className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -288,6 +291,7 @@ export default function CarDetailClient({ car }: Props) {
                               <Image
                                 src={img.src}
                                 alt=""
+                                title=""
                                 fill
                                 sizes="60px"
                                 className="object-cover"
@@ -580,6 +584,7 @@ export default function CarDetailClient({ car }: Props) {
                       key={fsItem.image}
                       src={fsItem.image}
                       alt={fsItem.title}
+                      title={fsItem.title}
                       fill
                       className="object-cover transition duration-700"
                     />
@@ -627,7 +632,7 @@ export default function CarDetailClient({ car }: Props) {
                     className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-16 ${index % 2 !== 0 ? "lg:[&>*:first-child]:order-2" : ""}`}
                   >
                     <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-border shadow-[0_16px_40px_-20px_rgba(15,23,42,0.25)]">
-                      <Image src={section.image} alt={section.title} fill className="object-cover transition duration-700 hover:scale-105" />
+                      <Image src={section.image} alt={section.title} title={section.title} fill className="object-cover transition duration-700 hover:scale-105" />
                     </div>
                     <div>
                       <span className="text-[11px] font-black uppercase tracking-[0.2em] text-brand">0{index + 1}</span>
@@ -684,7 +689,7 @@ export default function CarDetailClient({ car }: Props) {
                       className="relative w-full aspect-square bg-bg-2"
                       onClick={() => setLightboxIndex(index)}
                     >
-                      <Image src={img.src} alt={img.caption} fill className="object-cover transition duration-500 group-hover:scale-105" />
+                      <Image src={img.src} alt={img.caption} title={img.caption} fill className="object-cover transition duration-500 group-hover:scale-105" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                       <p className="absolute bottom-0 left-0 right-0 translate-y-2 px-3 py-2.5 text-[11px] font-bold text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                         {img.caption}
@@ -713,7 +718,7 @@ export default function CarDetailClient({ car }: Props) {
             </button>
             <div className="relative mx-14 max-w-[90vw] max-h-[85vh] overflow-hidden rounded-xl sm:mx-16 sm:max-w-[85vw]" onClick={(e) => e.stopPropagation()}>
               <div className="relative w-full" style={{ maxWidth: 1000, aspectRatio: "16/9" }}>
-                <Image src={car.galleryImages[lightboxIndex].src} alt={car.galleryImages[lightboxIndex].caption} fill className="object-contain" sizes="90vw" />
+                <Image src={car.galleryImages[lightboxIndex].src} alt={car.galleryImages[lightboxIndex].caption} title={car.galleryImages[lightboxIndex].caption} fill className="object-contain" sizes="90vw" />
               </div>
               <p className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 px-4 py-3 text-sm font-medium text-white">
                 {car.galleryImages[lightboxIndex].caption}

@@ -59,6 +59,7 @@ export default function About() {
             <Image
               src={aboutCultureImage}
               alt="MG Motor Mumbai team culture"
+              title="MG Motor Mumbai team culture"
               fill
               sizes="(max-width: 1024px) 100vw, 45vw"
               className="object-cover"

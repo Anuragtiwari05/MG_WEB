@@ -16,6 +16,11 @@ const categories: ("All" | CarCategory)[] = [
   "Select",
 ];
 
+// These transparent cutouts already have a ground shadow baked into the
+// PNG itself — adding our own CSS floor shadow on top double-shadows them
+// and the two don't align, which is what read as the car "floating".
+const HAS_BAKED_IN_SHADOW = new Set(["zs-ev", "comet-ev", "majestor", "cyberster"]);
+
 function getFiltered(category: "All" | CarCategory) {
   return category === "All"
     ? cars
@@ -61,6 +66,48 @@ export default function FeaturedVehicles() {
   const len = filtered.length;
   const go = (dir: number) => setIndex((i) => (i + dir + len) % len);
 
+  // Touch swipe: drag left/right anywhere on the stage (including on top of
+  // the center car) to move to the next/previous model. Only the horizontal
+  // distance at touch-end matters — no live drag-following, just a threshold
+  // flick like the arrow buttons. didSwipeRef suppresses the synthetic click
+  // mobile browsers fire after a touch drag, so swiping off the center car
+  // doesn't also navigate to that car's detail page.
+  const touchStartX = useRef<number | null>(null);
+  const didSwipeRef = useRef(false);
+  const SWIPE_THRESHOLD = 40;
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    didSwipeRef.current = false;
+  };
+  const onTouchMove = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    if (Math.abs(e.touches[0].clientX - touchStartX.current) > 10) {
+      didSwipeRef.current = true;
+    }
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (deltaX > SWIPE_THRESHOLD) go(-1);
+    else if (deltaX < -SWIPE_THRESHOLD) go(1);
+  };
+
+  // Two-finger trackpad swipe: laptop trackpads report horizontal swipes as
+  // wheel events (deltaX), not touch events, so they need a separate handler.
+  // A trackpad swipe fires many wheel events in one gesture — cooldown so it
+  // advances one model per swipe instead of racing through several.
+  const wheelCooldownRef = useRef(false);
+  const onWheel = (e: React.WheelEvent) => {
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+    if (Math.abs(e.deltaX) < 15 || wheelCooldownRef.current) return;
+    wheelCooldownRef.current = true;
+    go(e.deltaX > 0 ? 1 : -1);
+    setTimeout(() => {
+      wheelCooldownRef.current = false;
+    }, 400);
+  };
+
   // Every car shares the same container width (widthFrac * stageWidth) and is only
   // told apart by CSS scale — object-contain never renders past that container, so
   // widthFrac*scale is a hard upper bound on any car's on-screen size regardless of
@@ -68,14 +115,17 @@ export default function FeaturedVehicles() {
   // blowing past its neighbors). step is then derived directly from that bound so
   // the center and side cars never overlap, while still leaving the nav arrows
   // (~48px circle sitting a few px off the edge) clear of the side cars.
-  const CENTER_SCALE = 1.15;
-  const SIDE_SCALE = 0.3;
-  const CENTER_SIDE_GAP = 24;
   const isMobile = stageWidth < 640;
   const isTablet = stageWidth >= 640 && stageWidth < 1024;
-  // Widths chosen so the side car's outer edge clears the nav button (which sits
-  // left-2/4/6 i.e. 8/16/24px off the edge) with real margin, not just barely.
-  const widthFrac = isMobile ? 0.25 : isTablet ? 0.34 : 0.42;
+  // A bit of extra pop on the center car specifically on mobile, where the
+  // stage is short and a same-scale-as-desktop car reads as too small.
+  const CENTER_SCALE = isMobile ? 1.7 : 1.15;
+  const SIDE_SCALE = isMobile ? 0.55 : 0.3;
+  // Bigger gap between center and side cars — widthFrac is trimmed down a
+  // touch alongside it so the side car's outer edge still clears the nav
+  // button (which sits left-2/4/6 i.e. 8/16/24px off the edge) with margin.
+  const CENTER_SIDE_GAP = 72;
+  const widthFrac = isMobile ? 0.28 : isTablet ? 0.28 : 0.34;
   const step =
     (widthFrac * stageWidth * (CENTER_SCALE + SIDE_SCALE)) / 2 +
     CENTER_SIDE_GAP;
@@ -108,12 +158,16 @@ export default function FeaturedVehicles() {
         {/* Coverflow stage */}
         <div
           ref={stageRef}
-          className="relative mt-6 sm:mt-8 h-[220px] sm:h-[280px] lg:h-[340px] select-none"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          onWheel={onWheel}
+          className="relative mt-6 sm:mt-8 h-[300px] sm:h-[280px] lg:h-[340px] select-none touch-pan-y"
         >
           <button
             aria-label="Previous car"
             onClick={() => go(-1)}
-            className="absolute left-2 sm:left-4 lg:left-6 top-1/2 z-40 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-slate-300 bg-white text-slate-800 shadow-lg transition-all duration-200 hover:scale-110 hover:shadow-xl active:scale-95 sm:h-12 sm:w-12 cursor-pointer"
+            className="absolute left-2 sm:left-4 lg:left-6 top-[68%] sm:top-1/2 z-40 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-slate-300 bg-white text-slate-800 shadow-lg transition-all duration-200 hover:scale-110 hover:shadow-xl active:scale-95 sm:h-12 sm:w-12 cursor-pointer"
           >
             <ChevronLeft className="h-6 w-6 text-slate-800" />
           </button>
@@ -121,7 +175,7 @@ export default function FeaturedVehicles() {
           <button
             aria-label="Next car"
             onClick={() => go(1)}
-            className="absolute right-2 sm:right-4 lg:right-6 top-1/2 z-40 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-slate-300 bg-white text-slate-800 shadow-lg transition-all duration-200 hover:scale-110 hover:shadow-xl active:scale-95 sm:h-12 sm:w-12 cursor-pointer"
+            className="absolute right-2 sm:right-4 lg:right-6 top-[68%] sm:top-1/2 z-40 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-slate-300 bg-white text-slate-800 shadow-lg transition-all duration-200 hover:scale-110 hover:shadow-xl active:scale-95 sm:h-12 sm:w-12 cursor-pointer"
           >
             <ChevronRight className="h-6 w-6 text-slate-800" />
           </button>
@@ -134,12 +188,16 @@ export default function FeaturedVehicles() {
             if (abs > 2) return null;
             const scale =
               offset === 0 ? CENTER_SCALE : abs === 1 ? SIDE_SCALE : SIDE_SCALE * 0.75;
-            const opacity = offset === 0 ? 1 : abs === 1 ? 0.55 : 0;
+            const opacity = offset === 0 ? 1 : abs === 1 ? (isMobile ? 0.85 : 0.55) : 0;
             const translateX = offset * step;
             return (
               <div
                 key={car.name}
                 onClick={() => {
+                  if (didSwipeRef.current) {
+                    didSwipeRef.current = false;
+                    return;
+                  }
                   if (offset === 0) {
                     router.push(`/cars/${car.id}`);
                   } else {
@@ -158,10 +216,11 @@ export default function FeaturedVehicles() {
                 }}
               >
                 <div className="relative h-[85%] w-full flex flex-col items-center justify-center bg-transparent">
-                  <div className="relative w-full h-[90%] flex items-center justify-center">
+                  <div className="relative w-full h-full flex items-center justify-center">
                     <Image
                       src={getCarTransparentImage(car.id)}
                       alt={car.alt}
+                      title={car.alt}
                       fill
                       priority={offset === 0}
                       className={`object-contain transition-all duration-300 ${
@@ -172,18 +231,13 @@ export default function FeaturedVehicles() {
                       sizes="(max-width: 640px) 30vw, (max-width: 1024px) 40vw, 46vw"
                     />
                   </div>
-                  {/* Soft realistic floor shadow under tyres */}
-                  {offset === 0 && (
+                  {/* Soft realistic floor shadow under tyres — skipped for cars whose
+                      cutout already has its own baked-in shadow (see HAS_BAKED_IN_SHADOW). */}
+                  {!HAS_BAKED_IN_SHADOW.has(car.id) && (
                     <div
-                      className="absolute bottom-[4%] left-1/2 h-[8px] w-[60%] -translate-x-1/2 rounded-[50%] bg-slate-950/10 blur-[4px] pointer-events-none"
+                      className="absolute bottom-[3%] left-1/2 h-[8px] w-[55%] -translate-x-1/2 rounded-[50%] bg-slate-950/25 blur-[4px] pointer-events-none"
+                      style={{ opacity: offset === 0 ? 1 : 0.6 }}
                     />
-                  )}
-                  {/* Hover popup for side cars */}
-                  {offset !== 0 && abs <= 1 && (
-                    <div className="absolute -top-2 left-1/2 -translate-x-1/2 -translate-y-full whitespace-nowrap rounded-lg bg-text px-3 py-1.5 text-xs font-bold text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 pointer-events-none z-50 shadow-lg">
-                      MG {car.name}
-                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-2 w-2 rotate-45 bg-text" />
-                    </div>
                   )}
                 </div>
               </div>
@@ -194,7 +248,7 @@ export default function FeaturedVehicles() {
         {/* Info row, keyed so it fades between models */}
         <div
           key={active.name}
-          className="mx-auto -mt-2 sm:mt-0 lg:mt-2 max-w-2xl text-center animate-[fade-up_.35s_ease-out_both]"
+          className="mx-auto mt-2 sm:mt-4 lg:mt-6 max-w-2xl text-center animate-[fade-up_.35s_ease-out_both]"
         >
           <Link
             href={`/cars/${active.id}`}
@@ -203,6 +257,7 @@ export default function FeaturedVehicles() {
             <Image
               src="/images/logo-mg.png"
               alt="MG Logo"
+              title="MG Logo"
               width={20}
               height={20}
               className="object-contain"

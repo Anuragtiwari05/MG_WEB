@@ -34,6 +34,7 @@ export default function AboutPage() {
           <Image
             src="https://bunny-wp-pullzone-cghvklkcns.b-cdn.net/wp-content/uploads/2026/05/GNP01423.JPG-2048x1365.jpeg"
             alt="Gautam Modi Group Legacy"
+            title="Gautam Modi Group Legacy"
             fill
             priority
             className="object-cover opacity-40 filter grayscale contrast-125"
@@ -126,6 +127,7 @@ export default function AboutPage() {
                 <Image
                   src="https://bunny-wp-pullzone-cghvklkcns.b-cdn.net/wp-content/uploads/2026/05/GNP01423.JPG-2048x1365.jpeg"
                   alt="Gautam Modi Group Headquarters & Team"
+                  title="Gautam Modi Group Headquarters & Team"
                   fill
                   sizes="(max-width: 1024px) 100vw, 45vw"
                   className="object-cover transition-transform duration-700 hover:scale-105"

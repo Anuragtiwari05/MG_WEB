@@ -6,6 +6,7 @@ import { Check, ChevronDown, Calendar, ArrowRight, ArrowLeft } from "./icons";
 import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 import PhoneOtpGate from "@/components/PhoneOtpGate";
 import ReverifyModal from "@/components/ReverifyModal";
+import { submitLead } from "@/lib/submitLead";
 
 const fieldBase =
   "w-full rounded border border-border bg-white px-3 py-2.5 text-[13px] text-text outline-none transition-colors placeholder:text-faint focus:border-brand focus:ring-2 focus:ring-brand/10";
@@ -13,6 +14,7 @@ const fieldBase =
 export default function HeroForm() {
   const { verifiedPhone, resetVerification, isMounted } = usePhoneVerification();
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
   const [step, setStep] = useState(1);
   const [reverifyOpen, setReverifyOpen] = useState(false);
   
@@ -21,9 +23,26 @@ export default function HeroForm() {
   const [mobile, setMobile] = useState("");
   const [model, setModel] = useState("");
 
+  // Step 2 state
+  const [locationName, setLocationName] = useState(cityOptions[0] || "Malad West (Link Road)");
+  const [preferredDate, setPreferredDate] = useState("");
+  const [minDate, setMinDate] = useState("");
+  const [timeSlot, setTimeSlot] = useState("Morning (9–12)");
+
   // Step 1 errors
   const [nameError, setNameError] = useState("");
   const [modelError, setModelError] = useState("");
+
+  useEffect(() => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const yyyy = tomorrow.getFullYear();
+    const mm = String(tomorrow.getMonth() + 1).padStart(2, "0");
+    const dd = String(tomorrow.getDate()).padStart(2, "0");
+    const tomorrowStr = `${yyyy}-${mm}-${dd}`;
+    setPreferredDate(tomorrowStr);
+    setMinDate(tomorrowStr);
+  }, []);
 
   useEffect(() => {
     if (verifiedPhone) {
@@ -33,9 +52,30 @@ export default function HeroForm() {
     }
   }, [verifiedPhone]);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (step === 1) {
+      handleNext();
+      return;
+    }
+    setSending(true);
+    try {
+      await submitLead("test_drive", {
+        car_model: model,
+        location: locationName,
+        name,
+        mobile_number: mobile,
+        preferred_date: preferredDate,
+        preferred_time: timeSlot,
+        form_source: "hero_form",
+      });
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Hero form submission error:", err);
+      setSubmitted(true); // fall through to success UX
+    } finally {
+      setSending(false);
+    }
   };
 
   const handleNext = () => {
@@ -195,8 +235,12 @@ export default function HeroForm() {
             <label className="block">
               <span className="sr-only">Select Location</span>
               <div className="relative">
-                <select defaultValue="" required className={`${fieldBase} appearance-none pr-8`}>
-                  <option value="" disabled className="text-faint">Select Location</option>
+                <select 
+                  value={locationName} 
+                  onChange={(e) => setLocationName(e.target.value)}
+                  required 
+                  className={`${fieldBase} appearance-none pr-8`}
+                >
                   {cityOptions.map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
                 <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-faint" />
@@ -205,18 +249,29 @@ export default function HeroForm() {
             <label className="block">
               <span className="sr-only">Preferred Date</span>
               <div className="relative">
-                <input type="date" required className={`${fieldBase} pr-8`} />
+                <input
+                  type="date"
+                  min={minDate}
+                  value={preferredDate}
+                  onChange={(e) => setPreferredDate(e.target.value)}
+                  required
+                  className={`${fieldBase} pr-8`}
+                />
                 <Calendar className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-faint" />
               </div>
             </label>
             <label className="block">
               <span className="sr-only">Preferred Time</span>
               <div className="relative">
-                <select defaultValue="" required className={`${fieldBase} appearance-none pr-8`}>
-                  <option value="" disabled className="text-faint">Select Time</option>
-                  <option value="Morning">Morning (9–12)</option>
-                  <option value="Afternoon">Afternoon (12–4)</option>
-                  <option value="Evening">Evening (4–8)</option>
+                <select 
+                  value={timeSlot} 
+                  onChange={(e) => setTimeSlot(e.target.value)}
+                  required 
+                  className={`${fieldBase} appearance-none pr-8`}
+                >
+                  <option value="Morning (9–12)">Morning (9–12)</option>
+                  <option value="Afternoon (12–4)">Afternoon (12–4)</option>
+                  <option value="Evening (4–8)">Evening (4–8)</option>
                 </select>
                 <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-faint" />
               </div>
@@ -232,9 +287,10 @@ export default function HeroForm() {
               </button>
               <button
                 type="submit"
-                className="flex w-2/3 items-center justify-center rounded bg-brand py-3 text-[13px] font-semibold text-white transition-all hover:bg-brand-light active:scale-[0.98]"
+                disabled={sending}
+                className="flex w-2/3 items-center justify-center rounded bg-brand py-3 text-[13px] font-semibold text-white transition-all hover:bg-brand-light active:scale-[0.98] disabled:opacity-70"
               >
-                Book Now
+                {sending ? "Booking..." : "Book Now"}
               </button>
             </div>
           </div>
@@ -252,3 +308,4 @@ export default function HeroForm() {
     </div>
   );
 }
+

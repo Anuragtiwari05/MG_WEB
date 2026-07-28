@@ -155,6 +155,7 @@ export default function Car360Viewer({ config, onClose }: Props) {
         <img
           src={src}
           alt={`Frame ${frame}`}
+          title={`Frame ${frame}`}
           draggable={false}
           className="object-contain w-full h-full pointer-events-none"
           style={{ opacity: ready ? 1 : 0 }}

@@ -59,6 +59,7 @@ export default function BlogsClient() {
           <Image
             src="/images/models/cyberster/03-side-view-left-90.jpg"
             alt="MG Motor blog journal"
+            title="MG Motor blog journal"
             fill
             priority
             className="object-cover opacity-65"
@@ -170,6 +171,7 @@ export default function BlogsClient() {
                     <Image
                       src={featuredBlog.coverImage}
                       alt={featuredBlog.title}
+                      title={featuredBlog.title}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       sizes="(max-width: 1024px) 100vw, 50vw"
@@ -226,6 +228,7 @@ export default function BlogsClient() {
                       <Image
                         src={post.coverImage}
                         alt={post.title}
+                        title={post.title}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                         sizes="(max-width: 640px) 100vw, 320px"

@@ -64,6 +64,7 @@ export default function Navbar() {
   const isCarDetailPage = Boolean(pathname?.startsWith("/cars/") && pathname !== "/cars");
 
   const getIsActive = (href: string) => {
+    if (href === "/") return pathname === "/" && activeSection === "home";
     if (href === "/about" && pathname === "/about") return true;
     if (href === "/cars" && pathname === "/cars") return true;
     if (href === "/locate-service-centre" && pathname === "/locate-service-centre") return true;
@@ -90,8 +91,10 @@ export default function Navbar() {
       <nav className="container-px mx-auto flex w-full max-w-[1400px] items-center justify-between">
         <Logo dark={isTransparent} />
 
-        {/* Desktop links */}
-        <ul className="hidden items-center lg:gap-2 xl:gap-4 lg:flex">
+        {/* Desktop links — xl+ only; below that (through iPad Pro width) the
+            full link row + CTA + logo get too cramped, so tablet uses the
+            hamburger drawer instead. */}
+        <ul className="hidden items-center gap-4 xl:flex">
           {nav.links.map((l) => {
             const isActive = getIsActive(l.href);
             return (
@@ -133,7 +136,7 @@ export default function Navbar() {
               isTransparent
                 ? "border-white/30 bg-white/10 text-white hover:bg-white/20"
                 : "border-border bg-bg-2 text-text"
-            } lg:hidden`}
+            } xl:hidden`}
           >
             <Menu className="h-5 w-5" />
           </button>
@@ -142,7 +145,7 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       <div
-        className={`fixed inset-0 z-50 lg:hidden ${open ? "" : "pointer-events-none"}`}
+        className={`fixed inset-0 z-50 xl:hidden ${open ? "" : "pointer-events-none"}`}
         aria-hidden={!open}
       >
         <div

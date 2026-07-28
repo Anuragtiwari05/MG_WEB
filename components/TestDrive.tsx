@@ -210,6 +210,7 @@ export default function TestDrive() {
             <Image
               src={testDriveImage}
               alt="MG interior and dashboard"
+              title="MG interior and dashboard"
               fill
               sizes="(max-width: 1024px) 100vw, 45vw"
               className="object-cover"

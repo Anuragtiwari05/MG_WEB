@@ -19,7 +19,7 @@ const sora = Sora({
 
 const title = "MG Motor Mumbai: Premium Dealership - Test Drives & Service";
 const description =
-  "Book a free test drive or service at MG Motor Mumbai, a premium authorised MG dealership in Malad, Andheri, Thane, and Navi Mumbai. Compare Majestor, Windsor EV, Hector and ZS EV.";
+  "Book a free test drive or service at MG Motor Mumbai, an authorised MG dealer in Malad, Andheri, Thane & Navi Mumbai. Explore Hector, Windsor EV & ZS EV.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -74,8 +74,10 @@ export const metadata: Metadata = {
 
 import FloatingActions from "@/components/FloatingActions";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
+import MobileStickyBar from "@/components/MobileStickyBar";
 import { PhoneVerificationProvider } from "@/components/PhoneVerificationContext";
 import TestDriveModal from "@/components/TestDriveModal";
+import UtmCapture from "@/components/UtmCapture";
 
 export default function RootLayout({
   children,
@@ -84,12 +86,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-IN" className={`${inter.variable} ${sora.variable}`}>
-      <body className="min-h-screen antialiased" suppressHydrationWarning>
+      <body className="min-h-screen pb-16 antialiased md:pb-0" suppressHydrationWarning>
         <PhoneVerificationProvider>
+          <UtmCapture />
           <JsonLd />
           {children}
           <FloatingActions />
           <WhatsAppWidget />
+          <MobileStickyBar />
           <TestDriveModal />
         </PhoneVerificationProvider>
       </body>

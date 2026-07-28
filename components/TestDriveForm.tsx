@@ -10,6 +10,7 @@ import ReverifyModal from "@/components/ReverifyModal";
 import CountryCodeSelect from "@/components/CountryCodeSelect";
 import { countryCodes, isValidPhoneForCountry, type Country } from "@/lib/countryCodes";
 import { submitLead } from "@/lib/submitLead";
+import { getUtmParams } from "@/lib/utm";
 
 function CarCard({
   car,
@@ -34,6 +35,7 @@ function CarCard({
         <Image
           src={getCarTransparentImage(car.id)}
           alt={`MG ${car.name}`}
+          title={`MG ${car.name}`}
           fill
           className="object-contain"
           sizes="140px"
@@ -131,6 +133,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
         body: JSON.stringify({
           phoneNumber: `${country.dial}${phone}`,
           formSource: isFromCarPage ? `test_drive_${presetCarId}` : "test_drive_pop_up",
+          ...getUtmParams(),
         }),
       });
       const data = await res.json();
@@ -172,6 +175,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
       submitLead("phone_capture", {
         phone_number: phone,
         form_source: isFromCarPage ? `test_drive_${presetCarId}` : "test_drive_pop_up",
+        otp_verification_id: otpVerificationId,
       }).catch((err) => {
         console.error("Phone capture failed:", err);
       });
@@ -230,6 +234,12 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
   const handleNext = () => {
     if (step === 1 && selectedCarId) setStep(2);
     else if (step === 2 && preferredDate && timeSlot && location) setStep(3);
+  };
+
+  // Step 1 skips the extra "Next Step" click — picking a car advances immediately.
+  const selectCarAndAdvance = (carId: string) => {
+    setSelectedCarId(carId);
+    setStep(2);
   };
 
   const handleBack = () => {
@@ -303,6 +313,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
           preferred_time: timeSlot,
           notes,
           form_source: isFromCarPage ? `test_drive_${presetCarId}` : "test_drive_pop_up",
+          otp_verification_id: otpVerificationId,
         });
         setShowSuccessModal(true);
       } catch (err) {
@@ -352,6 +363,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
           <Image
             src={gateImage}
             alt="MG Cyberster deliveries in Bengaluru"
+            title="MG Cyberster deliveries in Bengaluru"
             fill
             sizes="420px"
             className="object-cover"
@@ -638,33 +650,18 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                     <CarCard
                       car={selectedCar}
                       isSelected
-                      onClick={() => setSelectedCarId(selectedCar.id)}
+                      onClick={() => selectCarAndAdvance(selectedCar.id)}
                     />
                   )}
                 </div>
 
-                <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-6">
+                <div className="sticky bottom-0 -mx-6 mt-8 flex items-center border-t border-slate-100 bg-white px-6 pt-6 pb-6 sm:-mx-10 sm:px-10">
                   <button
                     type="button"
                     onClick={handleBack}
                     className="rounded border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 cursor-pointer"
                   >
                     Back
-                  </button>
-                  <button
-                    type="button"
-                    disabled={!selectedCarId}
-                    onClick={handleNext}
-                    className={`inline-flex items-center gap-2 rounded bg-brand px-6 py-3 text-sm font-semibold text-white transition-all cursor-pointer ${
-                      selectedCarId
-                        ? "hover:bg-brand-light shadow-sm"
-                        : "opacity-50 cursor-not-allowed"
-                    }`}
-                  >
-                    Next Step
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
                   </button>
                 </div>
 
@@ -679,7 +676,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                         key={car.id}
                         car={car}
                         isSelected={false}
-                        onClick={() => setSelectedCarId(car.id)}
+                        onClick={() => selectCarAndAdvance(car.id)}
                       />
                     ))}
                 </div>
@@ -692,34 +689,9 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                       key={car.id}
                       car={car}
                       isSelected={selectedCarId === car.id}
-                      onClick={() => setSelectedCarId(car.id)}
+                      onClick={() => selectCarAndAdvance(car.id)}
                     />
                   ))}
-                </div>
-
-                <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-6">
-                  <button
-                    type="button"
-                    disabled
-                    className="rounded border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-400 opacity-40 cursor-not-allowed"
-                  >
-                    Back
-                  </button>
-                  <button
-                    type="button"
-                    disabled={!selectedCarId}
-                    onClick={handleNext}
-                    className={`inline-flex items-center gap-2 rounded bg-brand px-6 py-3 text-sm font-semibold text-white transition-all cursor-pointer ${
-                      selectedCarId
-                        ? "hover:bg-brand-light shadow-sm"
-                        : "opacity-50 cursor-not-allowed"
-                    }`}
-                  >
-                    Next Step
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                  </button>
                 </div>
               </>
             )}
@@ -793,7 +765,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
               </div>
             </div>
 
-            <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-6">
+            <div className="sticky bottom-0 -mx-6 mt-8 flex items-center justify-between border-t border-slate-100 bg-white px-6 pt-6 pb-6 sm:-mx-10 sm:px-10">
               <button
                 type="button"
                 onClick={handleBack}
@@ -936,7 +908,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
               <p className="mt-4 text-xs font-medium text-red-500">{submitError}</p>
             )}
 
-            <div className="mt-8 flex items-center justify-between border-t border-slate-100 pt-6">
+            <div className="sticky bottom-0 -mx-6 mt-8 flex items-center justify-between border-t border-slate-100 bg-white px-6 pt-6 pb-6 sm:-mx-10 sm:px-10">
               <button
                 type="button"
                 onClick={handleBack}

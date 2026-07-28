@@ -3,7 +3,7 @@ import CarsClient from "./CarsClient";
 
 export const metadata: Metadata = {
   title: "MG Cars Price List & Specifications - MG Motor Mumbai",
-  description: "Explore the full Morris Garages vehicle range in Mumbai. Compare specifications, pricing, battery range, and features for Astor, Hector, ZS EV, Windsor EV, Comet EV, and Majestor.",
+  description: "Explore the full MG range in Mumbai — Astor, Hector, ZS EV, Windsor EV, Comet EV & Majestor. Compare specs, pricing and features.",
   alternates: { canonical: "/cars" },
   keywords: [
     "MG cars price list",

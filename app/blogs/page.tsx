@@ -3,7 +3,7 @@ import BlogsClient from "./BlogsClient";
 
 export const metadata: Metadata = {
   title: "MG Insights Blog - News, Tips & EV Guides | MG Motor Mumbai",
-  description: "Stay informed with JSW MG Motor India updates, electric vehicle guides, hybrid tech advice, and car maintenance tips from authorized experts at MG Motor Mumbai.",
+  description: "MG Motor Mumbai's blog: EV guides, maintenance tips, buying advice and dealership news from Mumbai's trusted MG experts.",
   alternates: { canonical: "/blogs" },
   keywords: [
     "MG Motor Mumbai blogs",

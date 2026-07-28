@@ -55,7 +55,7 @@ export const company = {
 export const nav = {
   phone: "98877 33000",
   links: [
-    { label: "Home", href: "/#home" },
+    { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Find a Car", href: "/cars" },
     { label: "Service", href: "/locate-service-centre" },
@@ -175,6 +175,9 @@ export type Slide = {
   video?: string;
   hasImageText?: boolean;
   exploreSlug?: string;
+  // Skip this slide in the mobile hero carousel (desktop still shows it) —
+  // e.g. banners whose baked-in text collides with the mobile crop.
+  mobileExclude?: boolean;
 };
 
 export const heroSlides: Slide[] = [
@@ -210,6 +213,7 @@ export const heroSlides: Slide[] = [
     image: "/images/cuv-bn-dsc.jpg",
     alt: "MG Windsor EV CUV",
     features: [],
+    mobileExclude: true,
   },
   {
     model: "MG ASTOR",
@@ -228,7 +232,7 @@ export const heroSlides: Slide[] = [
     sub: "Make a statement with an Argyle-inspired front grille and Level 2 ADAS.",
     price: "11.99",
     image: "/images/hector-bn-dsc.jpg",
-    video: "/videos/mgi-hector-vd-dsc-005.mp4",
+    video: "/videos/mgi-hector-vd-dsc-005-clean.mp4",
     alt: "MG Hector SUV",
     // Mirrors the feature chip row baked into the desktop banner's own pixels
     // (see categorizedFeatures.exterior / details.features on the Hector car
@@ -291,6 +295,10 @@ export const heroSlides: Slide[] = [
     image: "/images/mg-range-hero.jpg",
     alt: "MG Motor Premium Lineup 3",
     features: [],
+    // Wide desert/scissor-door shot with baked-in text on the left half — on the
+    // mobile crop (narrow, centered, object-bottom) it zooms in on just the door
+    // and mirror, which reads as the car "flying". Desktop still shows it full-bleed.
+    mobileExclude: true,
   },
 ];
 

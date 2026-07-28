@@ -6,7 +6,7 @@ import { workshops } from "@/lib/data";
 import Reveal from "@/components/Reveal";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { MapPin, Phone, CheckCircle, Wrench, Shield, DiscIcon, WindIcon, Road, BatteryIcon } from "@/components/icons";
+import { MapPin, Phone, CheckCircle, Wrench, Shield, DiscIcon, WindIcon, Road, BatteryIcon, Calendar } from "@/components/icons";
 import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 import PhoneOtpGate from "@/components/PhoneOtpGate";
 import ReverifyModal from "@/components/ReverifyModal";
@@ -62,6 +62,14 @@ const serviceCategories = [
 export default function LocateServiceCentrePage() {
   const { verifiedPhone, resetVerification, isMounted } = usePhoneVerification();
   const [reverifyOpen, setReverifyOpen] = useState(false);
+  const [minDate, setMinDate] = useState("");
+  useEffect(() => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
+    setMinDate(`${yyyy}-${mm}-${dd}`);
+  }, []);
   const [formData, setFormData] = useState({
     carModel: "",
     carModelOther: "",
@@ -223,6 +231,7 @@ export default function LocateServiceCentrePage() {
           <Image
             src="/images/service-centre-hero.jpg"
             alt="MG Motor authorized workshop bay"
+            title="MG Motor authorized workshop bay"
             fill
             priority
             className="object-cover opacity-70 animate-kenburns"
@@ -523,20 +532,25 @@ export default function LocateServiceCentrePage() {
                   <div>
                     <label className="block">
                       <span className="mb-1.5 block text-xs font-semibold text-muted">Preferred Date</span>
-                      <input
-                        type="date"
-                        required
-                        value={formData.date}
-                        onChange={(e) => {
-                          setFormData({ ...formData, date: e.target.value });
-                          if (dateError) setDateError("");
-                        }}
-                        className={`w-full rounded border bg-white px-4 py-3 text-sm text-text outline-none focus:ring-2 ${
-                          dateError 
-                            ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
-                            : "border-border focus:border-brand focus:ring-brand/10"
-                        }`}
-                      />
+                      <div className="relative">
+                        <input
+                          type="date"
+                          required
+                          min={minDate}
+                          value={formData.date}
+                          onChange={(e) => {
+                            setFormData({ ...formData, date: e.target.value });
+                            if (dateError) setDateError("");
+                          }}
+                          suppressHydrationWarning
+                          className={`w-full rounded border bg-white px-4 py-3 pr-10 text-sm text-text outline-none focus:ring-2 ${formData.date ? "" : "text-transparent"} ${
+                            dateError
+                              ? "border-red-300 focus:border-red-400 focus:ring-red-100"
+                              : "border-border focus:border-brand focus:ring-brand/10"
+                          }`}
+                        />
+                        <Calendar className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-faint" />
+                      </div>
                     </label>
                     {dateError && (
                       <p className="mt-1 text-[11px] font-medium text-red-500">{dateError}</p>
@@ -668,6 +682,7 @@ export default function LocateServiceCentrePage() {
                     <Image
                       src={w.image}
                       alt={`MG Motor ${w.name} ${w.city}`}
+                      title={`MG Motor ${w.name} ${w.city}`}
                       fill
                       sizes="(max-width: 640px) 100vw, 33vw"
                       className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"

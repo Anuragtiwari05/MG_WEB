@@ -141,6 +141,7 @@ export default function ContactUsClient() {
           {/* Background Image */}
           <Image
             alt="MG Cyberster"
+            title="MG Cyberster"
             src="/images/models/cyberster/03-side-view-left-90.jpg"
             fill
             className="object-cover opacity-80 lg:object-[65%_center] z-0"
