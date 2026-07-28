@@ -2,7 +2,7 @@
 
 import { useMemo, useState, type ChangeEvent, type FormEvent } from "react";
 import Image from "next/image";
-import { carModels, cityOptions, testDriveImage } from "@/lib/data";
+import { carModels, cityOptions, company, testDriveImage } from "@/lib/data";
 import { Calendar, Check, ChevronDown } from "./icons";
 import Reveal from "./Reveal";
 import { usePhoneVerification } from "@/components/PhoneVerificationContext";
@@ -240,16 +240,40 @@ export default function TestDrive() {
                 onVerified={() => {}}
               />
             ) : submitted ? (
-              <div className="flex h-full flex-col items-center justify-center py-10 text-center">
-                <span className="grid h-16 w-16 place-items-center rounded-full bg-brand/10 text-brand">
-                  <Check className="h-8 w-8" />
-                </span>
-                <h3 className="mt-6 font-display text-2xl font-bold text-text">
-                  Booking received!
+              <div className="flex flex-col items-center justify-center py-6 text-center">
+                <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-800">
+                  <svg className="h-7 w-7 text-slate-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="font-display text-2xl font-bold text-slate-900 sm:text-3xl">
+                  Thank you for your interest!
                 </h3>
-                <p className="mt-2 max-w-sm text-muted">
-                  Thank you. A MG Motor Mumbai representative will call you shortly to confirm your test drive.
+                <p className="mt-4 text-sm sm:text-base leading-relaxed text-slate-600 font-normal max-w-md">
+                  We thank you for showing an interest in test driving of the{" "}
+                  <strong className="font-semibold text-slate-900">
+                    {carModel ? (carModel.toUpperCase().startsWith("MG") ? carModel : `MG ${carModel}`) : "MG Vehicle"}
+                  </strong>.
                 </p>
+                <p className="mt-2 text-sm sm:text-base leading-relaxed text-slate-600 font-normal">
+                  We assure you our representative will contact you shortly.
+                </p>
+
+                <div className="mt-5 w-full max-w-md rounded-xl border border-amber-200/80 bg-[#FFFBEB] p-4 text-left shadow-xs">
+                  <h4 className="text-sm font-bold text-amber-900">Note</h4>
+                  <p className="mt-1 text-xs sm:text-sm leading-relaxed text-amber-800 font-normal">
+                    This is not the Test Drive confirmation. We shall check the schedule and confirm the vehicle availability.
+                  </p>
+                </div>
+
+                <p className="mt-5 text-sm text-slate-600 font-normal">
+                  We appreciate your time and patience.
+                </p>
+                <p className="mt-1 text-sm text-slate-600 font-normal">
+                  For any further details you may contact us on{" "}
+                  <strong className="font-bold text-slate-900">{company.phone}</strong>.
+                </p>
+
                 <button
                   onClick={() => {
                     setSubmitted(false);
@@ -270,9 +294,9 @@ export default function TestDrive() {
                     setDateError("");
                     setTimeError("");
                   }}
-                  className="mt-6 rounded border border-border px-6 py-3 text-sm font-semibold text-text transition-colors hover:bg-bg-3"
+                  className="mt-6 w-full max-w-md rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-50 cursor-pointer shadow-xs"
                 >
-                  Book another
+                  Book another test drive
                 </button>
               </div>
             ) : (

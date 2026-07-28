@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
-import { cars, getCarTransparentImage, type Car } from "@/lib/data";
+import { cars, company, getCarTransparentImage, type Car } from "@/lib/data";
 import { Shield, X, CheckCircle, ArrowRight } from "@/components/icons";
 import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 import ReverifyModal from "@/components/ReverifyModal";
@@ -932,7 +932,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
       {/* ── SUCCESS MODAL ── */}
       {showSuccessModal && (
         <div className="fixed inset-0 z-[110] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md rounded-2xl bg-white p-8 sm:p-10 text-center shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-200">
+          <div className="relative w-full max-w-md rounded-2xl bg-white p-6 sm:p-8 text-center shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-200">
 
             {/* Close Button */}
             <button
@@ -947,29 +947,57 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
             </button>
 
             {/* Checkmark Icon Badge */}
-            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-800">
-              <svg className="h-7 w-7 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-800">
+              <svg className="h-7 w-7 text-slate-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
             </div>
 
             {/* Headline */}
             <h3 className="font-display text-2xl font-bold text-slate-900 sm:text-3xl">
-              Test drive booked!
+              Thank you for your interest!
             </h3>
 
-            {/* Confirmation Text */}
-            <p className="mt-4 text-sm sm:text-base leading-relaxed text-slate-600 font-light">
-              Thank you, <strong className="font-semibold text-slate-900">{fullName}</strong>. An MG Motor representative will call you at <strong className="font-semibold text-slate-900">{country.dial} {phone}</strong> shortly to confirm your <strong className="font-semibold text-brand">MG {selectedCar?.name || "Vehicle"}</strong> test drive on <strong className="font-semibold text-slate-900">{preferredDate} ({timeSlot})</strong> at <strong className="font-semibold text-slate-900">{location}</strong>.
+            {/* Main Text */}
+            <p className="mt-4 text-sm sm:text-base leading-relaxed text-slate-600 font-normal">
+              We thank you for showing an interest in test driving of the{" "}
+              <strong className="font-semibold text-slate-900">
+                {selectedCar?.name
+                  ? selectedCar.name.toUpperCase().startsWith("MG")
+                    ? selectedCar.name
+                    : `MG ${selectedCar.name}`
+                  : "MG Vehicle"}
+              </strong>.
+            </p>
+
+            <p className="mt-2 text-sm sm:text-base leading-relaxed text-slate-600 font-normal">
+              We assure you our representative will contact you shortly.
+            </p>
+
+            {/* Note Box */}
+            <div className="mt-5 rounded-xl border border-amber-200/80 bg-[#FFFBEB] p-4 text-left shadow-xs">
+              <h4 className="text-sm font-bold text-amber-900">Note</h4>
+              <p className="mt-1 text-xs sm:text-sm leading-relaxed text-amber-800 font-normal">
+                This is not the Test Drive confirmation. We shall check the schedule and confirm the vehicle availability.
+              </p>
+            </div>
+
+            {/* Further Info & Contact */}
+            <p className="mt-5 text-sm text-slate-600 font-normal">
+              We appreciate your time and patience.
+            </p>
+            <p className="mt-2 text-sm text-slate-600 font-normal">
+              For any further details you may contact us on{" "}
+              <strong className="font-bold text-slate-900">{company.phone}</strong>.
             </p>
 
             {/* Reset / Action Button */}
             <button
               type="button"
               onClick={handleReset}
-              className="mt-8 rounded-lg border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-50 cursor-pointer shadow-sm"
+              className="mt-6 w-full rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-50 cursor-pointer shadow-xs"
             >
-              Done
+              Book another test drive
             </button>
           </div>
         </div>

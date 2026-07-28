@@ -106,13 +106,42 @@ export default function HeroForm() {
   };
 
   if (submitted) {
+    const selectedModelName = model
+      ? (model.toUpperCase().startsWith("MG") ? model : `MG ${model}`)
+      : "MG Vehicle";
     return (
-      <div className="flex h-[340px] w-full max-w-[340px] flex-col items-center justify-center rounded-lg bg-white p-8 text-center shadow-2xl">
-        <span className="grid h-12 w-12 place-items-center rounded-full bg-brand/10 text-brand">
-          <Check className="h-6 w-6" />
-        </span>
-        <h3 className="mt-4 font-display text-lg font-bold text-text">Booking received!</h3>
-        <p className="mt-2 text-xs text-muted">We will call you shortly to confirm.</p>
+      <div className="flex w-full max-w-[340px] flex-col items-center justify-center rounded-2xl bg-white p-6 text-center shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-200">
+        <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 text-slate-800">
+          <svg className="h-6 w-6 text-slate-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 className="font-display text-xl font-bold text-slate-900">
+          Thank you for your interest!
+        </h3>
+        <p className="mt-2 text-xs leading-relaxed text-slate-600 font-normal">
+          We thank you for showing an interest in test driving of the{" "}
+          <strong className="font-semibold text-slate-900">{selectedModelName}</strong>.
+        </p>
+        <p className="mt-1 text-xs leading-relaxed text-slate-600 font-normal">
+          We assure you our representative will contact you shortly.
+        </p>
+
+        <div className="mt-4 w-full rounded-lg border border-amber-200/80 bg-[#FFFBEB] p-3 text-left">
+          <h4 className="text-xs font-bold text-amber-900">Note</h4>
+          <p className="mt-0.5 text-[11px] leading-relaxed text-amber-800">
+            This is not the Test Drive confirmation. We shall check the schedule and confirm the vehicle availability.
+          </p>
+        </div>
+
+        <p className="mt-4 text-xs text-slate-600 font-normal">
+          We appreciate your time and patience.
+        </p>
+        <p className="mt-1 text-xs text-slate-600 font-normal">
+          For details contact us on{" "}
+          <strong className="font-bold text-slate-900">98877 33000</strong>.
+        </p>
+
         <button
           onClick={() => {
             setSubmitted(false);
@@ -122,9 +151,9 @@ export default function HeroForm() {
             setNameError("");
             setModelError("");
           }}
-          className="mt-6 rounded border border-border px-4 py-2 text-xs font-semibold text-text transition-colors hover:bg-bg-2"
+          className="mt-5 w-full rounded-lg border border-slate-300 bg-white py-2.5 text-xs font-semibold text-slate-800 transition-colors hover:bg-slate-50 cursor-pointer shadow-xs"
         >
-          Book another
+          Book another test drive
         </button>
       </div>
     );
