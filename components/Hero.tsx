@@ -9,6 +9,20 @@ import Reveal from "./Reveal";
 
 const AUTOPLAY = 7000;
 
+// Only the active slide plus its immediate neighbors get mounted — with all
+// slides absolute-positioned inset-0 over the viewport, opacity:0 doesn't
+// stop the browser from fetching every one of them (unlike display:none),
+// so mounting all 7-8 multi-hundred-KB banners (plus two multi-MB hero
+// videos) at once was blowing the page's network payload well past 10MB on
+// every visit, mobile included.
+function isNearIndex(i: number, activeIdx: number, len: number): boolean {
+  const dist = Math.min(
+    Math.abs(i - activeIdx),
+    len - Math.abs(i - activeIdx)
+  );
+  return dist <= 1;
+}
+
 function getModelSlug(model: string): string {
   const m = model.toLowerCase();
   if (m.includes("zs ev") || m.includes("zs-ev")) return "zs-ev";
@@ -79,6 +93,7 @@ export default function Hero() {
         <div className="relative w-full overflow-hidden aspect-[4/3] min-h-[220px] max-h-[38vh]">
           {mobileSlides.map((s, i) => {
             const active = i === mobileIndex;
+            if (!isNearIndex(i, mobileIndex, mobileSlides.length)) return null;
             return (
               <div
                 key={`mob-img-${s.model}`}
@@ -91,6 +106,7 @@ export default function Hero() {
                   title={s.alt}
                   fill
                   priority={i === 0}
+                  {...(i === 0 ? ({ fetchPriority: "high" } as Record<string, unknown>) : {})}
                   sizes="100vw"
                   className="object-cover object-bottom"
                 />
@@ -106,14 +122,14 @@ export default function Hero() {
           <button
             aria-label="Previous slide"
             onClick={() => goMobile(-1)}
-            className="absolute left-2 top-1/2 z-30 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur-sm"
+            className="absolute left-2 top-1/2 z-30 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur-sm"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
           <button
             aria-label="Next slide"
             onClick={() => goMobile(1)}
-            className="absolute right-2 top-1/2 z-30 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur-sm"
+            className="absolute right-2 top-1/2 z-30 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/45 text-white backdrop-blur-sm"
           >
             <ChevronRight className="h-4 w-4" />
           </button>
@@ -183,10 +199,10 @@ export default function Hero() {
                 style={{ width: i === mobileIndex ? 36 : 12 }}
               >
                 <span
-                  className="block h-full rounded-full bg-brand"
+                  className="block h-full w-full origin-left rounded-full bg-brand"
                   style={{
-                    width: i === mobileIndex ? "100%" : "0%",
-                    transition: i === mobileIndex ? `width ${AUTOPLAY}ms linear` : "none",
+                    transform: `scaleX(${i === mobileIndex ? 1 : 0})`,
+                    transition: i === mobileIndex ? `transform ${AUTOPLAY}ms linear` : "none",
                   }}
                 />
               </button>
@@ -203,6 +219,7 @@ export default function Hero() {
       <div className="relative hidden h-screen h-dvh w-full xl:block">
         {heroSlides.map((s, i) => {
           const active = i === desktopIndex;
+          if (!isNearIndex(i, desktopIndex, heroSlides.length)) return null;
           const slug = s.exploreSlug || getModelSlug(s.model);
           const showOwnText = !s.hasImageText;
 
@@ -212,11 +229,12 @@ export default function Hero() {
               className="absolute inset-0 h-full w-full overflow-hidden transition-opacity duration-1000"
               style={{ opacity: active ? 1 : 0, zIndex: active ? 10 : 0, pointerEvents: active ? "auto" : "none" }}
             >
-              {s.video ? (
+              {s.video && active ? (
                 <video
                   src={s.video}
                   poster={s.image}
                   autoPlay loop muted playsInline
+                  preload="none"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
               ) : (
@@ -323,10 +341,10 @@ export default function Hero() {
               style={{ width: i === desktopIndex ? 36 : 12 }}
             >
               <span
-                className="block h-full rounded-full bg-brand"
+                className="block h-full w-full origin-left rounded-full bg-brand"
                 style={{
-                  width: i === desktopIndex ? "100%" : "0%",
-                  transition: i === desktopIndex ? `width ${AUTOPLAY}ms linear` : "none",
+                  transform: `scaleX(${i === desktopIndex ? 1 : 0})`,
+                  transition: i === desktopIndex ? `transform ${AUTOPLAY}ms linear` : "none",
                 }}
               />
             </button>

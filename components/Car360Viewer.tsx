@@ -19,6 +19,12 @@ type Props = {
 };
 
 const DRAG_SENSITIVITY = 0.65;
+// Browsers allow ~6 concurrent connections per origin. Capping background
+// preloading at 4 leaves headroom for the <img> display request to slip
+// through instantly when the user drags to an uncached frame — instead of
+// queuing behind all N simultaneous requests like the old "fire them all"
+// approach did (72 requests at once on hector/cyberster/m9).
+const MAX_CONCURRENT = 4;
 
 export default function Car360Viewer({ config, onClose }: Props) {
   const { exteriorFrameCount: totalFrames, template, reversed } = config;
@@ -33,43 +39,77 @@ export default function Car360Viewer({ config, onClose }: Props) {
   const dragStartFrame = useRef(1);
   const viewerWidth = useRef(0);
   const rafId = useRef<number | null>(null);
-  const preloaded = useRef(false);
 
-  /* ── Preload all frames on mount ─────────────────── */
+  /* ── Progressive preload queue ──────────────────────
+     Frames load in order with limited concurrency (not all at once).
+     loadedRef doubles as a "requested" set to prevent duplicate requests —
+     a frame is added when its request is dispatched. The display <img>
+     then relies on the browser cache + request coalescing for instant
+     swaps to already-loaded frames. */
+  const loadedRef = useRef<Set<number>>(new Set());
+  const queueRef = useRef<number[]>([]);
+  const activeRef = useRef(0);
+  const aliveRef = useRef(true);
+
+  const processQueue = useCallback(() => {
+    if (!aliveRef.current) return;
+    while (activeRef.current < MAX_CONCURRENT && queueRef.current.length > 0) {
+      const n = queueRef.current.shift()!;
+      if (loadedRef.current.has(n)) continue;
+      loadedRef.current.add(n); // mark in-flight to avoid duplicate requests
+      activeRef.current++;
+      const img = new Image();
+      img.onload = img.onerror = () => {
+        if (!aliveRef.current) return;
+        activeRef.current--;
+        if (n === 1) setReady(true);
+        processQueue();
+      };
+      img.src = frameSrc(template, n);
+    }
+  }, [template]);
+
   useEffect(() => {
-    if (preloaded.current) return;
-    preloaded.current = true;
-
-    let loaded = 0;
-    const urls: string[] = [];
-    for (let i = 1; i <= totalFrames; i++) urls.push(frameSrc(template, i));
-
-    // load frame 1 eagerly
-    const first = new Image();
-    first.onload = first.onerror = () => {
-      loaded++;
-      if (loaded >= 1) setReady(true);
+    aliveRef.current = true;
+    loadedRef.current = new Set();
+    queueRef.current = [];
+    activeRef.current = 0;
+    for (let i = 1; i <= totalFrames; i++) queueRef.current.push(i);
+    processQueue();
+    return () => {
+      aliveRef.current = false;
+      queueRef.current = [];
     };
-    first.src = urls[0];
+  }, [template, totalFrames, processQueue]);
 
-    // load rest in idle time
-    const loadRest = () => {
-      for (let i = 1; i < urls.length; i++) {
-        const img = new Image();
-        img.onload = img.onerror = () => {
-          loaded++;
-          if (loaded >= totalFrames) setReady(true);
-        };
-        img.src = urls[i];
+  /* When the user drags toward a frame that isn't loaded yet, bump it
+     (and its immediate neighbors) to the front of the queue so it loads
+     next — instead of waiting behind every preceding sequential frame. */
+  const prioritize = useCallback(
+    (n: number) => {
+      if (loadedRef.current.has(n)) return; // already loaded or in-flight
+      const idx = queueRef.current.indexOf(n);
+      if (idx > -1) queueRef.current.splice(idx, 1);
+      // Insert target + neighbors at the front, nearest first.
+      for (const f of [n - 2, n - 1, n + 1, n + 2, n]) {
+        if (f >= 1 && f <= totalFrames && !loadedRef.current.has(f)) {
+          queueRef.current.unshift(f);
+        }
+      }
+      processQueue();
+    },
+    [totalFrames, processQueue]
+  );
+
+  /* ── Cancel any pending RAF on unmount ───────────── */
+  useEffect(() => {
+    return () => {
+      if (rafId.current) {
+        cancelAnimationFrame(rafId.current);
+        rafId.current = null;
       }
     };
-
-    if (typeof requestIdleCallback === "function") {
-      requestIdleCallback(loadRest, { timeout: 3000 });
-    } else {
-      setTimeout(loadRest, 0);
-    }
-  }, [template, totalFrames]);
+  }, []);
 
   const src = frameSrc(template, frame);
 
@@ -96,9 +136,10 @@ export default function Car360Viewer({ config, onClose }: Props) {
         const directionMultiplier = reversed ? 1 : -1;
         const nf = ((dragStartFrame.current - 1 + directionMultiplier * steps) % totalFrames + totalFrames) % totalFrames + 1;
         setFrame(nf);
+        prioritize(nf);
       });
     },
-    [isDragging, totalFrames, reversed]
+    [isDragging, totalFrames, reversed, prioritize]
   );
 
   const handleDragEnd = useCallback(() => {
@@ -108,8 +149,16 @@ export default function Car360Viewer({ config, onClose }: Props) {
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     setHasInteracted(true);
-    if (e.key === "ArrowLeft") setFrame((p) => ((p - 2 + totalFrames) % totalFrames) + 1);
-    if (e.key === "ArrowRight") setFrame((p) => (p % totalFrames) + 1);
+    if (e.key === "ArrowLeft") {
+      const nf = ((frame - 2 + totalFrames) % totalFrames) + 1;
+      setFrame(nf);
+      prioritize(nf);
+    }
+    if (e.key === "ArrowRight") {
+      const nf = (frame % totalFrames) + 1;
+      setFrame(nf);
+      prioritize(nf);
+    }
   };
 
   return (

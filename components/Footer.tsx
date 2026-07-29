@@ -63,7 +63,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`Follow MG Motor Mumbai on ${label}`}
-                  className="grid h-9 w-9 place-items-center rounded border border-white/15 text-white/60 transition-all hover:border-white/40 hover:text-white"
+                  className="grid h-11 w-11 place-items-center rounded border border-white/15 text-white/60 transition-all hover:border-white/40 hover:text-white"
                 >
                   <Icon className="h-4 w-4" />
                 </a>

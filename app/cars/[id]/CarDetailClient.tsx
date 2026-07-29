@@ -1,16 +1,21 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import Car360Viewer from "@/components/Car360Viewer";
-import TestDriveForm from "@/components/TestDriveForm";
 import { type Car, type FeatureSection, formatINR } from "@/lib/data";
 import { getCarDekhoImage } from "@/lib/cardekho-image-map";
 import { get360Config } from "@/lib/car360Config";
+
+// Both are only mounted once the user opens the 360° viewer or the test
+// drive modal — code-splitting them keeps that JS out of every car page's
+// initial bundle.
+const Car360Viewer = dynamic(() => import("@/components/Car360Viewer"), { ssr: false });
+const TestDriveForm = dynamic(() => import("@/components/TestDriveForm"), { ssr: false });
 
 type Props = { car: Car };
 
@@ -168,7 +173,8 @@ export default function CarDetailClient({ car }: Props) {
                       title={`${car.name} preview in ${activeLabel}`}
                       fill
                       priority
-                      className="object-contain p-4 transition-all duration-[600ms]"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover transition-all duration-[600ms]"
                       style={{ filter: activeImage === car.image ? selectedColor.cssFilter || "none" : "none" }}
                     />
 

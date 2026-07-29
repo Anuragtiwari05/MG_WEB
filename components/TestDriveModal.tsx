@@ -1,9 +1,16 @@
 "use client";
 
 import { useEffect } from "react";
+import dynamic from "next/dynamic";
 import { usePhoneVerification } from "./PhoneVerificationContext";
-import TestDriveForm from "./TestDriveForm";
 import { X } from "./icons";
+
+// Code-split: this 1000+ line form (with its country-code list, OTP flow,
+// etc.) only needs to load once someone actually opens the modal, instead of
+// shipping in every page's initial JS bundle.
+const TestDriveForm = dynamic(() => import("./TestDriveForm"), {
+  ssr: false,
+});
 
 export default function TestDriveModal() {
   const { isTestDriveModalOpen, closeTestDriveModal, presetCarId, verifiedPhone, isMounted } = usePhoneVerification();
@@ -41,7 +48,7 @@ export default function TestDriveModal() {
           type="button"
           onClick={closeTestDriveModal}
           aria-label="Close"
-          className="absolute right-4 top-4 z-20 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-slate-500 shadow-sm backdrop-blur transition-colors hover:bg-white hover:text-slate-800 cursor-pointer"
+          className="absolute right-4 top-4 z-20 grid h-11 w-11 place-items-center rounded-full bg-white/90 text-slate-500 shadow-sm backdrop-blur transition-colors hover:bg-white hover:text-slate-800 cursor-pointer"
         >
           <X className="h-5 w-5" />
         </button>

@@ -132,7 +132,7 @@ export default function Navbar() {
           <button
             aria-label="Open menu"
             onClick={() => setOpen(true)}
-            className={`grid h-9 w-9 place-items-center rounded border transition-colors ${
+            className={`grid h-11 w-11 place-items-center rounded border transition-colors ${
               isTransparent
                 ? "border-white/30 bg-white/10 text-white hover:bg-white/20"
                 : "border-border bg-bg-2 text-text"
@@ -146,7 +146,7 @@ export default function Navbar() {
       {/* Mobile drawer */}
       <div
         className={`fixed inset-0 z-50 xl:hidden ${open ? "" : "pointer-events-none"}`}
-        aria-hidden={!open}
+        aria-hidden={!open || undefined}
       >
         <div
           className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${
@@ -164,7 +164,7 @@ export default function Navbar() {
             <button
               aria-label="Close menu"
               onClick={() => setOpen(false)}
-              className="grid h-9 w-9 place-items-center rounded border border-border bg-bg-2 text-text"
+              className="grid h-11 w-11 place-items-center rounded border border-border bg-bg-2 text-text"
             >
               <X className="h-5 w-5" />
             </button>

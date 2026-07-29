@@ -17,7 +17,10 @@
   /* Text */
   --text: #0f172a;
   --muted: #475569;
-  --faint: #94a3b8;
+  /* slate-400 (#94a3b8) only hit ~2.6:1 on white — fails WCAG AA even for
+     large text, and this token is used for real copy (price disclaimers,
+     helper text), not just decorative icons. slate-500 clears 4.5:1. */
+  --faint: #64748b;
 
   /* MG brand red & dark theme */
   --brand: #e4002b;
@@ -226,15 +229,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
   transition:
     opacity 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    transform 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    filter 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  will-change: opacity, transform, filter;
-  filter: blur(4px);
+    transform 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: opacity, transform;
 }
 .reveal.is-visible {
   opacity: 1;
   transform: none;
-  filter: blur(0);
 }
 
 /* Reveal variants */
@@ -258,13 +258,35 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   from {
     opacity: 0;
     transform: translateY(20px);
-    filter: blur(4px);
   }
   to {
     opacity: 1;
     transform: none;
-    filter: blur(0);
   }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes zoom-in-95 {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.zoom-in-95 {
+  animation: zoom-in-95 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes marquee {

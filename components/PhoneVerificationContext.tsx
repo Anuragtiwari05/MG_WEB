@@ -2,6 +2,35 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
+// Verified phone expires after this many milliseconds (24 hours).
+// After expiry the stored value is silently discarded on next load,
+// so returning users have to re-verify rather than having their old
+// phone number silently pre-filled in every form.
+const PHONE_TTL_MS = 24 * 60 * 60 * 1000;
+
+type StoredPhone = { phone: string; expiresAt: number };
+
+function readStoredPhone(): string | null {
+  try {
+    const raw = localStorage.getItem("verified_phone");
+    if (!raw) return null;
+    // Legacy format: plain string (before expiry was added) — treat as expired
+    if (!raw.startsWith("{")) {
+      localStorage.removeItem("verified_phone");
+      return null;
+    }
+    const { phone, expiresAt }: StoredPhone = JSON.parse(raw);
+    if (Date.now() > expiresAt) {
+      localStorage.removeItem("verified_phone");
+      return null;
+    }
+    return phone;
+  } catch {
+    localStorage.removeItem("verified_phone");
+    return null;
+  }
+}
+
 type PhoneVerificationContextType = {
   verifiedPhone: string | null;
   verifyPhone: (phone: string) => void;
@@ -23,14 +52,13 @@ export function PhoneVerificationProvider({ children }: { children: React.ReactN
 
   useEffect(() => {
     setIsMounted(true);
-    const stored = localStorage.getItem("verified_phone");
-    if (stored) {
-      setVerifiedPhone(stored);
-    }
+    const phone = readStoredPhone();
+    if (phone) setVerifiedPhone(phone);
   }, []);
 
   const verifyPhone = (phone: string) => {
-    localStorage.setItem("verified_phone", phone);
+    const payload: StoredPhone = { phone, expiresAt: Date.now() + PHONE_TTL_MS };
+    localStorage.setItem("verified_phone", JSON.stringify(payload));
     setVerifiedPhone(phone);
   };
 

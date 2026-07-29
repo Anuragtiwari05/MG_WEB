@@ -17,6 +17,11 @@ export default function LocationsPage() {
 
   const [filter, setFilter] = useState<"Showroom" | "Workshop">("Showroom");
   const [selectedLoc, setSelectedLoc] = useState<typeof allLocations[0] | null>(null);
+  // On mobile the map isn't sticky (that's desktop-only), but a Google Maps
+  // iframe still grabs every touch-drag to pan itself, so a swipe meant to
+  // scroll the page past the map just gets stuck there. Block interaction
+  // until the user deliberately taps in, same as embedding a YouTube video.
+  const [mapActive, setMapActive] = useState(false);
 
   const filteredLocations = allLocations.filter((loc) => loc.type === filter);
 
@@ -58,7 +63,7 @@ export default function LocationsPage() {
         <section className="border-b border-border bg-white">
           <div className="mx-auto flex max-w-[1400px] flex-col lg:flex-row min-h-[600px]">
             {/* Left Column: Interactive List */}
-            <div className="w-full lg:w-[45%] border-r border-border max-h-[80vh] overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-4">
+            <div className="w-full lg:w-[45%] border-r border-border lg:max-h-[80vh] lg:overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-4">
               {/* Toggle/Filter Bar */}
               <Reveal>
                 <div className="flex rounded-lg bg-bg-2 p-1 border border-border max-w-xs mb-5">
@@ -108,10 +113,10 @@ export default function LocationsPage() {
                     <Reveal key={loc.name + i} delay={i * 50}>
                       <div
                         onClick={() => setSelectedLoc(loc)}
-                        className={`group cursor-pointer rounded-xl border p-5 transition-all duration-300 ${
+                        className={`group cursor-pointer rounded-xl p-5 transition-all duration-300 ${
                           isSelected
-                            ? "bg-brand/5 border-brand shadow-md"
-                            : "bg-bg-2 border-border hover:bg-white hover:border-brand/40"
+                            ? "bg-brand/5 shadow-md"
+                            : "bg-bg-2 hover:bg-white hover:shadow-md"
                         }`}
                       >
                         <div className="flex items-start justify-between">
@@ -173,10 +178,22 @@ export default function LocationsPage() {
               <iframe
                 title="MG Mumbai Locations Map"
                 src={mapSrc}
-                className="w-full h-full border-0 min-h-[400px]"
+                className={`w-full h-full border-0 min-h-[400px] ${mapActive ? "" : "pointer-events-none lg:pointer-events-auto"}`}
                 allowFullScreen
                 loading="lazy"
               />
+              {!mapActive && (
+                <button
+                  type="button"
+                  onClick={() => setMapActive(true)}
+                  aria-label="Activate map to interact"
+                  className="absolute inset-0 flex items-center justify-center bg-black/5 text-xs font-bold uppercase tracking-wider text-white cursor-pointer lg:hidden"
+                >
+                  <span className="rounded-full bg-black/60 px-4 py-2 backdrop-blur-sm">
+                    Tap to interact with map
+                  </span>
+                </button>
+              )}
             </div>
           </div>
         </section>

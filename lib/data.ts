@@ -187,7 +187,7 @@ export const heroSlides: Slide[] = [
     headline: "MG ZS EV",
     sub: "Advanced tech meets clean electric power with Level 2 ADAS safety.",
     price: "18.98",
-    hasImageText: true,
+    // Plain road photo, no baked-in text — same fix as Cyberster/M9 above.
     image: "/images/zs-bn-dsc.jpg",
     alt: "MG ZS EV Banner",
     features: [],
@@ -198,7 +198,9 @@ export const heroSlides: Slide[] = [
     headline: "MG CYBERSTER",
     sub: "An all-electric roadster that marks the return of the iconic MG sports car.",
     price: "65.00",
-    hasImageText: true,
+    // This banner (cybie-kmi-desktop.webp) is a plain track photo with no
+    // baked-in text — hasImageText:true was wrongly suppressing our own
+    // badge/headline overlay on desktop, leaving that slide blank.
     image: "/images/cybie-kmi-desktop.webp",
     alt: "MG Cyberster Electric Roadster",
     features: [],
@@ -257,7 +259,7 @@ export const heroSlides: Slide[] = [
     headline: "MG M9",
     sub: "Experience the peak of luxury electric MPV travel.",
     price: "45.00",
-    hasImageText: true,
+    // Plain road photo, no baked-in text — same fix as Cyberster above.
     image: "/images/m9-kmi-desktop.webp",
     alt: "MG M9 Premium Electric MPV",
     features: [],
@@ -402,7 +404,7 @@ export function getCarTransparentImage(id: string): string {
     case "comet-ev": return "/images/models/model-comet-transparent.png";
     case "majestor": return "/images/models/model-majestor-transparent.png";
     case "m9": return "/images/models/model-m9-transparent.png";
-    case "cyberster": return "/images/models/model-cyberster-transparent.png";
+    case "cyberster": return "/images/models/model-cyberster-v2.png";
     default: return `/images/models/model-${id}-transparent.png`;
   }
 }
@@ -1759,7 +1761,7 @@ export const cars: Car[] = [
     fuel: "Electric",
     blurb: "The premium electric scissor-door roadster, delivering supercar dynamics and performance.",
     cta: "Explore Cyberster",
-    image: "/images/models/cyberster/01-front-left-side-47.jpg",
+    image: "/images/models/model-cyberster-v2.png",
     alt: "MG Cyberster Electric Roadster",
     seating: "2 Seater",
     mileage: "509 km Range*",
@@ -1770,10 +1772,10 @@ export const cars: Car[] = [
       "Triple Screen Curved Display Layout",
       "F1-Inspired Chassis Tuning",
     ],
-    heroImage: "/images/models/model-cyberster.png",
+    heroImage: "/images/models/model-cyberster-v2.png",
     interiorImage: "/images/models/cyberster/48-dashboard-59.jpg",
     galleryImages: [
-      { src: "/images/models/cyberster/01-front-left-side-47.jpg", caption: "MG Cyberster — Commanding front-left road posture" },
+      { src: "/images/models/cyberster/cyberster-hero-red.jpg", caption: "MG Cyberster — Commanding front-left road posture" },
       { src: "/images/models/cyberster/03-side-view-left-90.jpg", caption: "Sleek aerodynamic side profile" },
       { src: "/images/models/cyberster/48-dashboard-59.jpg", caption: "Premium cockpit wrap-around layout" },
       { src: "/images/models/cyberster/62-door-view-of-driver-seat-51.jpg", caption: "Luxury sports bucket seats" },
@@ -1784,10 +1786,10 @@ export const cars: Car[] = [
       { src: "/images/models/cyberster/23-wheel-42.jpg", caption: "Dynamic turbine alloy wheels" },
     ],
     colors: [
-      { name: "Dynamic Red", hex: "#cc0000", cssFilter: "none", image: "/images/models/cyberster/Flare-Red_ba0116.jpg" },
+      { name: "Dynamic Red", hex: "#cc0000", cssFilter: "none", image: "/images/models/cyberster/cyberster-hero-red.jpg" },
       { name: "Electric Yellow", hex: "#ffea00", cssFilter: "none", image: "/images/models/cyberster/Nuclear-Yellow_eeac37.jpg" },
       { name: "Bullet Silver", hex: "#cccccc", cssFilter: "none", image: "/images/models/cyberster/Modern-Beige_b8b5a8.jpg" },
-      { name: "Andes Grey", hex: "#111111", cssFilter: "none", image: "/images/models/cyberster/Andes-Grey_3b3b3b.jpg" },
+      { name: "Andes Grey", hex: "#3b3b3b", cssFilter: "none", image: "/images/models/cyberster/Andes-Grey_3b3b3b.jpg" },
     ],
     details: {
       length: "4535 mm",
@@ -2128,7 +2130,7 @@ export const blogs: Blog[] = [
     title: "MG Cyberster: Redefining Electric Performance",
     excerpt: "A closer look at MG's all-electric roadster and the future of performance EVs.",
     readTime: "5 min read",
-    image: "/images/models/model-cyberster-transparent.png",
+    image: "/images/models/model-cyberster-v2.png",
     coverImage: "/images/cyberster-night.webp",
     alt: "MG Cyberster roadster",
     author: "Priya Sharma",
@@ -2254,7 +2256,7 @@ export const blogs: Blog[] = [
     title: "MG Cyberster Wins Global EV Design Award",
     excerpt: "The all-electric roadster receives critical acclaim for blending heritage aesthetics with supercar aero.",
     readTime: "3 min read",
-    image: "/images/models/model-cyberster-transparent.png",
+    image: "/images/models/model-cyberster-v2.png",
     coverImage: "/images/cyberster-night.webp",
     alt: "MG Cyberster award",
     author: "Priya Sharma",

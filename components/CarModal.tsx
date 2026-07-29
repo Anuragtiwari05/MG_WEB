@@ -44,7 +44,7 @@ export default function CarModal({
         <button
           aria-label="Close"
           onClick={onClose}
-          className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-text shadow transition-colors hover:bg-bg-2"
+          className="absolute right-4 top-4 z-10 grid h-11 w-11 place-items-center rounded-full bg-white/90 text-text shadow transition-colors hover:bg-bg-2"
         >
           <X className="h-5 w-5" />
         </button>

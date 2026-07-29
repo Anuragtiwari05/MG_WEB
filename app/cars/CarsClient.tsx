@@ -127,6 +127,7 @@ export default function CarsPage() {
                           <div className="mt-auto pt-5">
                             <Link
                               href={`/cars/${car.id}`}
+                              aria-label={`Explore details for MG ${car.name}`}
                               className="group/link inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-brand transition-colors hover:text-brand-light"
                             >
                               Explore Details

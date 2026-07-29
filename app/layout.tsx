@@ -85,7 +85,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-IN" className={`${inter.variable} ${sora.variable}`}>
+    <html lang="en-IN" className={`${inter.variable} ${sora.variable}`} suppressHydrationWarning>
       <body className="min-h-screen pb-16 antialiased md:pb-0" suppressHydrationWarning>
         <PhoneVerificationProvider>
           <UtmCapture />

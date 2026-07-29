@@ -19,7 +19,7 @@ const categories: ("All" | CarCategory)[] = [
 // These transparent cutouts already have a ground shadow baked into the
 // PNG itself — adding our own CSS floor shadow on top double-shadows them
 // and the two don't align, which is what read as the car "floating".
-const HAS_BAKED_IN_SHADOW = new Set(["zs-ev", "comet-ev", "majestor", "cyberster"]);
+const HAS_BAKED_IN_SHADOW = new Set(["zs-ev", "comet-ev", "majestor"]);
 
 function getFiltered(category: "All" | CarCategory) {
   return category === "All"
@@ -167,7 +167,7 @@ export default function FeaturedVehicles() {
           <button
             aria-label="Previous car"
             onClick={() => go(-1)}
-            className="absolute left-2 sm:left-4 lg:left-6 top-[68%] sm:top-1/2 z-40 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-slate-300 bg-white text-slate-800 shadow-lg transition-all duration-200 hover:scale-110 hover:shadow-xl active:scale-95 sm:h-12 sm:w-12 cursor-pointer"
+            className="absolute left-2 sm:left-4 lg:left-6 top-[68%] sm:top-1/2 z-40 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-slate-300 bg-white text-slate-800 shadow-lg transition-all duration-200 hover:scale-110 hover:shadow-xl active:scale-95 sm:h-12 sm:w-12 cursor-pointer"
           >
             <ChevronLeft className="h-6 w-6 text-slate-800" />
           </button>
@@ -175,7 +175,7 @@ export default function FeaturedVehicles() {
           <button
             aria-label="Next car"
             onClick={() => go(1)}
-            className="absolute right-2 sm:right-4 lg:right-6 top-[68%] sm:top-1/2 z-40 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-slate-300 bg-white text-slate-800 shadow-lg transition-all duration-200 hover:scale-110 hover:shadow-xl active:scale-95 sm:h-12 sm:w-12 cursor-pointer"
+            className="absolute right-2 sm:right-4 lg:right-6 top-[68%] sm:top-1/2 z-40 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-slate-300 bg-white text-slate-800 shadow-lg transition-all duration-200 hover:scale-110 hover:shadow-xl active:scale-95 sm:h-12 sm:w-12 cursor-pointer"
           >
             <ChevronRight className="h-6 w-6 text-slate-800" />
           </button>

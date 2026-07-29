@@ -55,8 +55,8 @@ export const carDekhoImages: Record<string, ModelImages> = {
     technology: "/images/models/m9/49-dashboard-59.jpg",
   },
   cyberster: {
-    hero: "/images/models/cyberster/01-front-left-side-47.jpg",
-    exterior: "/images/models/cyberster/01-front-left-side-47.jpg",
+    hero: "/images/models/cyberster/cyberster-hero-red.jpg",
+    exterior: "/images/models/cyberster/cyberster-hero-red.jpg",
     safety: "/images/models/cyberster/41-360-camera-front-249.jpg",
     technology: "/images/models/cyberster/48-dashboard-59.jpg",
   },
