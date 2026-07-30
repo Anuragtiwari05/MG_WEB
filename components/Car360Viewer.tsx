@@ -7,6 +7,7 @@ export type Car360Config = {
   exteriorFrameCount: number;
   template: string; // {n} replaced with frame number
   reversed?: boolean;
+  aspect?: number; // width/height of the source photos, so the viewer box matches them instead of forcing a generic 16:10 crop
 };
 
 function frameSrc(template: string, n: number): string {
@@ -27,7 +28,7 @@ const DRAG_SENSITIVITY = 0.65;
 const MAX_CONCURRENT = 4;
 
 export default function Car360Viewer({ config, onClose }: Props) {
-  const { exteriorFrameCount: totalFrames, template, reversed } = config;
+  const { exteriorFrameCount: totalFrames, template, reversed, aspect } = config;
 
   const [frame, setFrame] = useState(1);
   const [isDragging, setIsDragging] = useState(false);
@@ -165,7 +166,7 @@ export default function Car360Viewer({ config, onClose }: Props) {
     <div
       ref={viewerRef}
       className="relative flex w-full overflow-hidden rounded-2xl bg-white shadow-xl select-none"
-      style={{ aspectRatio: "16/10", touchAction: "none" }}
+      style={{ aspectRatio: aspect ?? 16 / 10, touchAction: "none" }}
       onPointerDown={(e) => { e.preventDefault(); handleDragStart(e.clientX); }}
       onPointerMove={(e) => handleDragMove(e.clientX)}
       onPointerUp={handleDragEnd}
@@ -220,11 +221,6 @@ export default function Car360Viewer({ config, onClose }: Props) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h8M8 12h8M8 17h8" />
           </svg>
           Drag horizontally to rotate
-        </div>
-
-        {/* Frame counter */}
-        <div className="absolute bottom-4 right-4 text-[10px] font-mono text-black/25 pointer-events-none">
-          {frame}/{totalFrames}
         </div>
       </div>
     </div>

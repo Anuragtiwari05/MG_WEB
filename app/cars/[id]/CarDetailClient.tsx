@@ -174,7 +174,7 @@ export default function CarDetailClient({ car }: Props) {
                       fill
                       priority
                       sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover transition-all duration-[600ms]"
+                      className="object-contain transition-all duration-[600ms]"
                       style={{ filter: activeImage === car.image ? selectedColor.cssFilter || "none" : "none" }}
                     />
 

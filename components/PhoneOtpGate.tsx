@@ -37,6 +37,7 @@ export default function PhoneOtpGate({
   const [otpError, setOtpError] = useState("");
   const [verifyingOtp, setVerifyingOtp] = useState(false);
   const [otpVerificationId, setOtpVerificationId] = useState<string | null>(null);
+  const [resent, setResent] = useState(false);
   const otpInputRef = useRef<HTMLInputElement>(null);
   const isMounted = useRef(true);
 
@@ -51,13 +52,14 @@ export default function PhoneOtpGate({
     if (otpModalOpen) {
       setOtp("");
       setOtpError("");
+      setResent(false);
       // autofocus once the modal has mounted
       const t = setTimeout(() => otpInputRef.current?.focus(), 50);
       return () => clearTimeout(t);
     }
   }, [otpModalOpen]);
 
-  const handleSendOtp = async () => {
+  const handleSendOtp = async (isResend = false) => {
     let isValid = true;
     if (!isValidPhoneForCountry(country.dial, phone)) {
       setPhoneError(
@@ -78,6 +80,11 @@ export default function PhoneOtpGate({
     if (!isValid) return;
 
     setSendingOtp(true);
+    if (isResend) {
+      setOtp("");
+      setOtpError("");
+      setResent(false);
+    }
     try {
       const res = await fetch("/api/otp/send", {
         method: "POST",
@@ -90,15 +97,20 @@ export default function PhoneOtpGate({
       });
       const data = await res.json();
       if (!isMounted.current) return;
-      
+
       setOtpVerificationId(data.otpVerificationId || "fallback-id");
       setOtpModalOpen(true);
+      if (isResend) {
+        setResent(true);
+        otpInputRef.current?.focus();
+      }
     } catch (err) {
       console.error("Send OTP failed:", err);
       if (!isMounted.current) return;
       // Fallback open OTP modal even on network glitch so user is never blocked
       setOtpVerificationId(`fb-${Date.now()}`);
       setOtpModalOpen(true);
+      if (isResend) setResent(true);
     } finally {
       if (isMounted.current) setSendingOtp(false);
     }
@@ -211,16 +223,13 @@ export default function PhoneOtpGate({
 
         <button
           type="button"
-          onClick={handleSendOtp}
+          onClick={() => handleSendOtp()}
           disabled={sendingOtp}
           className="mt-5 flex w-full items-center justify-center gap-2 rounded bg-brand py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-light cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
         >
           {sendingOtp ? (
             <>
-              <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-              </svg>
+              <span className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-white/30 border-t-white" />
               Sending OTP...
             </>
           ) : (
@@ -282,6 +291,24 @@ export default function PhoneOtpGate({
                   <p className="mt-1.5 text-xs font-medium text-red-500">{otpError}</p>
                 )}
 
+                <p className="mt-3 text-[11px] text-muted">
+                  {resent ? (
+                    <span className="font-semibold text-green-600">OTP resent successfully.</span>
+                  ) : (
+                    <>
+                      Didn&apos;t receive the code?{" "}
+                      <button
+                        type="button"
+                        onClick={() => handleSendOtp(true)}
+                        disabled={sendingOtp}
+                        className="font-semibold text-brand underline underline-offset-2 hover:text-brand-light disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
+                      >
+                        Resend OTP
+                      </button>
+                    </>
+                  )}
+                </p>
+
                 <button
                   type="button"
                   onClick={handleVerifyOtp}
@@ -290,10 +317,7 @@ export default function PhoneOtpGate({
                 >
                   {verifyingOtp ? (
                     <>
-                      <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-                      </svg>
+                      <span className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-white/30 border-t-white" />
                       Verifying...
                     </>
                   ) : (

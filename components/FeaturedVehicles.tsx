@@ -16,10 +16,6 @@ const categories: ("All" | CarCategory)[] = [
   "Select",
 ];
 
-// These transparent cutouts already have a ground shadow baked into the
-// PNG itself — adding our own CSS floor shadow on top double-shadows them
-// and the two don't align, which is what read as the car "floating".
-const HAS_BAKED_IN_SHADOW = new Set(["zs-ev", "comet-ev", "majestor"]);
 
 function getFiltered(category: "All" | CarCategory) {
   return category === "All"
@@ -133,7 +129,7 @@ export default function FeaturedVehicles() {
   return (
     <section
       id="cars"
-      className="scroll-mt-24 overflow-hidden bg-white py-8 lg:py-10"
+      className="scroll-mt-24 overflow-x-hidden bg-white py-8 lg:py-10"
     >
       <div className="container-px mx-auto max-w-[1400px]">
         {/* Category tabs */}
@@ -215,30 +211,20 @@ export default function FeaturedVehicles() {
                   willChange: "transform, opacity",
                 }}
               >
-                <div className="relative h-[85%] w-full flex flex-col items-center justify-center bg-transparent">
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    <Image
-                      src={getCarTransparentImage(car.id)}
-                      alt={car.alt}
-                      title={car.alt}
-                      fill
-                      priority={offset === 0}
-                      className={`object-contain transition-all duration-300 ${
-                        offset === 0
-                          ? "hover:scale-[1.03]"
-                          : "grayscale-[55%] saturate-[0.6] brightness-105"
-                      }`}
-                      sizes="(max-width: 640px) 30vw, (max-width: 1024px) 40vw, 46vw"
-                    />
-                  </div>
-                  {/* Soft realistic floor shadow under tyres — skipped for cars whose
-                      cutout already has its own baked-in shadow (see HAS_BAKED_IN_SHADOW). */}
-                  {!HAS_BAKED_IN_SHADOW.has(car.id) && (
-                    <div
-                      className="absolute bottom-[3%] left-1/2 h-[8px] w-[55%] -translate-x-1/2 rounded-[50%] bg-slate-950/25 blur-[4px] pointer-events-none"
-                      style={{ opacity: offset === 0 ? 1 : 0.6 }}
-                    />
-                  )}
+                <div className="relative h-[85%] w-full flex items-center justify-center bg-transparent">
+                  <Image
+                    src={getCarTransparentImage(car.id)}
+                    alt={car.alt}
+                    title={car.alt}
+                    fill
+                    priority={offset === 0}
+                    className={`object-contain transition-all duration-300 ${
+                      offset === 0
+                        ? "hover:scale-[1.03]"
+                        : "grayscale-[55%] saturate-[0.6] brightness-105"
+                    }`}
+                    sizes="(max-width: 640px) 30vw, (max-width: 1024px) 40vw, 46vw"
+                  />
                 </div>
               </div>
             );

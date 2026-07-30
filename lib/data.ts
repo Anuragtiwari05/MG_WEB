@@ -2366,8 +2366,5 @@ export const cityOptions = [
   "MG Motor Krishiv Auto Showroom (Malad)",
   "MG Motor Krishiv Auto Showroom (Vasai)",
   "MG Select Mumbai (Worli)",
-  "MG Motor Krishiv Auto Service Center (Kandivali)",
-  "MG Motor Krishiv Auto Service Center (Jogeshwari)",
-  "MG Motor Krishiv Auto Service Center (Tokersy Jivraj)",
 ];
 export const testDriveImage = "/images/test-drive-interior.png";

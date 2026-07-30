@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from "react";
 import Image from "next/image";
 import { carModels, cityOptions, company, testDriveImage } from "@/lib/data";
 import { Calendar, Check, ChevronDown } from "./icons";
@@ -67,7 +67,16 @@ export default function TestDrive() {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [reverifyOpen, setReverifyOpen] = useState(false);
-  const minDate = new Date().toISOString().slice(0, 10);
+  const [minDate, setMinDate] = useState("");
+
+  // Disallow today/past dates — a same-day walk-in isn't guaranteed a slot,
+  // so the calendar's earliest selectable day is tomorrow. The field itself
+  // stays blank until the user actually picks a date.
+  useEffect(() => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    setMinDate(tomorrow.toISOString().slice(0, 10));
+  }, []);
 
   // Form Field States
   const [carModel, setCarModel] = useState("");
@@ -411,7 +420,12 @@ export default function TestDrive() {
                         min={minDate}
                         value={date}
                         onChange={(e) => {
-                          setDate(e.target.value);
+                          const val = e.target.value;
+                          if (val && minDate && val < minDate) {
+                            setDate(minDate);
+                            return;
+                          }
+                          setDate(val);
                           if (dateError) setDateError("");
                         }}
                         suppressHydrationWarning

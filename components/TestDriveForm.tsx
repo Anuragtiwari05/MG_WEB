@@ -78,6 +78,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
   const [otpError, setOtpError] = useState("");
   const [verifyingOtp, setVerifyingOtp] = useState(false);
   const [otpVerificationId, setOtpVerificationId] = useState<string | null>(null);
+  const [resent, setResent] = useState(false);
   const otpInputRef = useRef<HTMLInputElement>(null);
   const mountedRef = useRef(true);
 
@@ -102,13 +103,14 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
     if (otpModalOpen) {
       setOtp("");
       setOtpError("");
+      setResent(false);
       // autofocus once the modal has mounted
       const t = setTimeout(() => otpInputRef.current?.focus(), 50);
       return () => clearTimeout(t);
     }
   }, [otpModalOpen]);
 
-  const handleSendOtp = async () => {
+  const handleSendOtp = async (isResend = false) => {
     let isValid = true;
     if (!isValidPhoneForCountry(country.dial, phone)) {
       setPhoneError(
@@ -129,6 +131,11 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
     if (!isValid) return;
 
     setSendingOtp(true);
+    if (isResend) {
+      setOtp("");
+      setOtpError("");
+      setResent(false);
+    }
     try {
       const res = await fetch("/api/otp/send", {
         method: "POST",
@@ -144,11 +151,16 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
 
       setOtpVerificationId(data.otpVerificationId || `fb-${Date.now()}`);
       setOtpModalOpen(true);
+      if (isResend) {
+        setResent(true);
+        otpInputRef.current?.focus();
+      }
     } catch (err) {
       console.error("Send OTP failed:", err);
       if (!mountedRef.current) return;
       setOtpVerificationId(`fb-${Date.now()}`);
       setOtpModalOpen(true);
+      if (isResend) setResent(true);
     } finally {
       if (mountedRef.current) setSendingOtp(false);
     }
@@ -241,7 +253,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
 
   const handleNext = () => {
     if (step === 1 && selectedCarId) setStep(2);
-    else if (step === 2 && preferredDate && timeSlot && location) setStep(3);
+    else if (step === 2 && preferredDate && preferredDate >= minDate && timeSlot && location) setStep(3);
   };
 
   // Step 1 skips the extra "Next Step" click — picking a car advances immediately.
@@ -476,16 +488,13 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
 
             <button
               type="button"
-              onClick={handleSendOtp}
+              onClick={() => handleSendOtp()}
               disabled={sendingOtp}
               className="mt-5 flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-black cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
             >
               {sendingOtp ? (
                 <>
-                  <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-                  </svg>
+                  <span className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-white/30 border-t-white" />
                   Sending OTP...
                 </>
               ) : (
@@ -551,6 +560,24 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                     <p className="mt-1.5 text-xs font-medium text-red-500">{otpError}</p>
                   )}
 
+                  <p className="mt-3 text-xs text-slate-500">
+                    {resent ? (
+                      <span className="font-semibold text-green-600">OTP resent successfully.</span>
+                    ) : (
+                      <>
+                        Didn&apos;t receive the code?{" "}
+                        <button
+                          type="button"
+                          onClick={() => handleSendOtp(true)}
+                          disabled={sendingOtp}
+                          className="font-semibold text-brand underline underline-offset-2 hover:text-brand-light disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
+                        >
+                          Resend OTP
+                        </button>
+                      </>
+                    )}
+                  </p>
+
                   <button
                     type="button"
                     onClick={handleVerifyOtp}
@@ -559,10 +586,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                   >
                     {verifyingOtp ? (
                       <>
-                        <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
-                        </svg>
+                        <span className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-white/30 border-t-white" />
                         Verifying...
                       </>
                     ) : (
@@ -759,7 +783,14 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                   type="date"
                   min={minDate}
                   value={preferredDate}
-                  onChange={(e) => setPreferredDate(e.target.value)}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    if (val && minDate && val < minDate) {
+                      setPreferredDate(minDate);
+                      return;
+                    }
+                    setPreferredDate(val);
+                  }}
                   className="w-full rounded-lg border border-slate-200 bg-white p-3 text-sm text-slate-800 outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 cursor-pointer"
                 />
               </div>

@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import { locations, workshops } from "@/lib/data";
+import { locations } from "@/lib/data";
 import { MapPin, Phone, ArrowRight } from "./icons";
 import Reveal from "./Reveal";
 import Link from "next/link";
@@ -61,8 +60,7 @@ function LocationCard({ loc }: { loc: Loc }) {
 }
 
 export default function Locations() {
-  const [activeTab, setActiveTab] = useState<"showrooms" | "workshops">("showrooms");
-  const currentList = activeTab === "showrooms" ? locations : workshops;
+  const currentList = locations;
 
   return (
     <section id="locations" className="scroll-mt-24 bg-brand-deep py-14 lg:py-20 text-white">
@@ -91,37 +89,10 @@ export default function Locations() {
           </div>
         </Reveal>
 
-        {/* Tab Capsules */}
-        <Reveal className="mb-10 flex gap-3">
-          <button
-            onClick={() => setActiveTab("showrooms")}
-            className={`rounded-full border px-6 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
-              activeTab === "showrooms"
-                ? "bg-white border-white text-black"
-                : "bg-white/5 border-white/10 text-white/75 hover:bg-white/10"
-            }`}
-          >
-            Showrooms
-          </button>
-          <button
-            onClick={() => setActiveTab("workshops")}
-            className={`rounded-full border px-6 py-2 text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
-              activeTab === "workshops"
-                ? "bg-white border-white text-black"
-                : "bg-white/5 border-white/10 text-white/75 hover:bg-white/10"
-            }`}
-          >
-            Workshops
-          </button>
-        </Reveal>
-
         {/* Mobile: native horizontal swipeable row (scroll-snap, same
             mechanism as the blog/testimonial cards) — real finger-drag
             momentum instead of a stacked single-column grid. */}
-        <div
-          key={`${activeTab}-mobile`}
-          className="-mr-4 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-2 pr-4 sm:hidden [&::-webkit-scrollbar]:hidden [scrollbar-width:none]"
-        >
+        <div className="-mr-4 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-2 pr-4 sm:hidden [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
           {currentList.map((loc, i) => (
             <div key={loc.name + i} className="w-[78%] shrink-0 snap-start">
               <LocationCard loc={loc} />
@@ -132,23 +103,14 @@ export default function Locations() {
         {/* Tablet & up: responsive flex-wrap (not grid) so an incomplete last
             row — e.g. 5 showrooms at 3-per-row on iPad leaves 2 stranded on
             the left — centers itself instead of hugging the grid's left
-            edge. Swaps key to trigger fade-in transitions. */}
-        <div
-          key={activeTab}
-          className={`hidden flex-wrap justify-center gap-6 animate-[fade-in_0.4s_ease-out_both] sm:flex ${
-            activeTab === "showrooms" ? "" : "max-w-[1100px] mx-auto"
-          }`}
-        >
+            edge. */}
+        <div className="hidden flex-wrap justify-center gap-6 animate-[fade-in_0.4s_ease-out_both] sm:flex">
           {currentList.map((loc, i) => (
             <Reveal
               key={loc.name + i}
               delay={(i % 4) * 80}
               variant="slide-left"
-              className={`grow-0 shrink-0 basis-[calc(50%-12px)] ${
-                activeTab === "showrooms"
-                  ? "lg:basis-[calc(33.333%-16px)] xl:basis-[calc(20%-19.2px)]"
-                  : "lg:basis-[calc(33.333%-16px)]"
-              }`}
+              className="grow-0 shrink-0 basis-[calc(50%-12px)] lg:basis-[calc(33.333%-16px)] xl:basis-[calc(20%-19.2px)]"
             >
               <LocationCard loc={loc} />
             </Reveal>
