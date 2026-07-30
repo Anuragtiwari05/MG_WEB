@@ -938,8 +938,9 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
       </div>
 
       {/* ── SUCCESS MODAL ── */}
-      {showSuccessModal && (
-        <div className="fixed inset-0 z-[110] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+      {showSuccessModal && mounted && typeof window !== "undefined"
+        ? createPortal(
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
           <div className="relative w-full max-w-md rounded-2xl bg-white p-6 sm:p-8 text-center shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-200">
 
             {/* Close Button */}
@@ -1008,10 +1009,12 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
               Book another test drive
             </button>
           </div>
-        </div>
-      )}
+        </div>,
+        document.body
+      )
+        : null}
 
-      <ReverifyModal 
+      <ReverifyModal
         isOpen={reverifyOpen}
         onClose={() => setReverifyOpen(false)}
         onConfirm={() => {
