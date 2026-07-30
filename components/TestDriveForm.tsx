@@ -208,12 +208,14 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
   // Contact details
   const [fullName, setFullName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [pincode, setPincode] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [notes, setNotes] = useState<string>("");
 
   // Error states for Step 3 validation
   const [nameError, setNameError] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
+  const [pincodeError, setPincodeError] = useState<string>("");
   const [addressError, setAddressError] = useState<string>("");
 
   // Modal & submission state
@@ -292,6 +294,17 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
       setEmailError("");
     }
 
+    // Pincode: required, 6 digits
+    if (!pincode.trim()) {
+      setPincodeError("Pincode is required");
+      isValid = false;
+    } else if (!/^[0-9]{6}$/.test(pincode.trim())) {
+      setPincodeError("Please enter a valid 6-digit pincode");
+      isValid = false;
+    } else {
+      setPincodeError("");
+    }
+
     // Address: required, min 10 characters
     if (!address.trim()) {
       setAddressError("Address / Area is required");
@@ -313,7 +326,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
           name: fullName,
           mobile_number: phone,
           email,
-          pincode: "",
+          pincode,
           address,
           preferred_date: preferredDate,
           preferred_time: timeSlot,
@@ -339,11 +352,13 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
     setSelectedCarId("");
     setFullName("");
     setEmail("");
+    setPincode("");
     setAddress("");
     setNotes("");
     setOtp("");
     setNameError("");
     setEmailError("");
+    setPincodeError("");
     setAddressError("");
     resetVerification();
   };
@@ -805,27 +820,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
               Confirming test drive for <strong className="text-slate-900 font-semibold">MG {selectedCar?.name}</strong> on <strong className="text-slate-900 font-semibold">{preferredDate} ({timeSlot})</strong>.
             </p>
 
-            <div className="mt-6 space-y-4">
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Mobile Number
-                </label>
-                <div 
-                  className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3.5 py-3 cursor-pointer transition-colors hover:bg-emerald-100/70"
-                  onClick={() => setReverifyOpen(true)}
-                >
-                  <CheckCircle className="h-4 w-4 shrink-0 text-emerald-600" />
-                  <span className="text-sm font-semibold text-emerald-800">{country.dial} {phone}</span>
-                  <div className="flex items-center gap-1 rounded bg-emerald-500 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
-                    Verified
-                  </div>
-                  <span className="ml-auto text-[10px] font-bold uppercase tracking-wide text-emerald-600 hover:text-emerald-800">
-                    Change
-                  </span>
-                </div>
-                <input type="hidden" name="mobile" value={phone} />
-              </div>
-
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Full Name *
@@ -840,14 +835,34 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                     if (nameError) setNameError("");
                   }}
                   className={`w-full rounded-lg border p-3 text-sm text-slate-800 outline-none transition-colors focus:ring-2 ${
-                    nameError 
-                      ? "border-red-300 focus:border-red-400 focus:ring-red-100" 
+                    nameError
+                      ? "border-red-300 focus:border-red-400 focus:ring-red-100"
                       : "border-slate-200 focus:border-brand focus:ring-brand/20"
                   }`}
                 />
                 {nameError && (
                   <p className="mt-1.5 text-xs font-medium text-red-500">{nameError}</p>
                 )}
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  Mobile Number
+                </label>
+                <div
+                  className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-3.5 py-3 cursor-pointer transition-colors hover:bg-emerald-100/70"
+                  onClick={() => setReverifyOpen(true)}
+                >
+                  <CheckCircle className="h-4 w-4 shrink-0 text-emerald-600" />
+                  <span className="text-sm font-semibold text-emerald-800">{country.dial} {phone}</span>
+                  <div className="flex items-center gap-1 rounded bg-emerald-500 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
+                    Verified
+                  </div>
+                  <span className="ml-auto text-[10px] font-bold uppercase tracking-wide text-emerald-600 hover:text-emerald-800">
+                    Change
+                  </span>
+                </div>
+                <input type="hidden" name="mobile" value={phone} />
               </div>
 
               <div>
@@ -876,6 +891,31 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  Pincode *
+                </label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  required
+                  placeholder="e.g. 400001"
+                  value={pincode}
+                  onChange={(e) => {
+                    setPincode(e.target.value);
+                    if (pincodeError) setPincodeError("");
+                  }}
+                  className={`w-full rounded-lg border p-3 text-sm text-slate-800 outline-none transition-colors focus:ring-2 ${
+                    pincodeError
+                      ? "border-red-300 focus:border-red-400 focus:ring-red-100"
+                      : "border-slate-200 focus:border-brand focus:ring-brand/20"
+                  }`}
+                />
+                {pincodeError && (
+                  <p className="mt-1.5 text-xs font-medium text-red-500">{pincodeError}</p>
+                )}
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Your Address / Area *
                 </label>
                 <input
@@ -898,7 +938,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                 )}
               </div>
 
-              <div>
+              <div className="sm:col-span-2">
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
                   Comments / Variant Preference (Optional)
                 </label>
