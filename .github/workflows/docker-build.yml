@@ -7,7 +7,9 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  # Image name = ghcr.io/<owner>/<repo>  (all lower-case)
+  # Main image:  ghcr.io/<owner>/<repo>
+  # Cache image: ghcr.io/<owner>/<repo>-cache  ← separate so it never
+  #              overwrites the "Latest" badge on the main package page
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
@@ -50,16 +52,19 @@ jobs:
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
             type=ref,event=branch
 
-      # 5. Build and push (uses layer cache from the registry for speed)
+      # 5. Build and push
+      #    Cache is stored in a SEPARATE *-cache package so the main package's
+      #    "Latest" badge always points to the real production image.
       - name: Build and push Docker image
+        id: build-and-push
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache
-          cache-to:   type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:buildcache,mode=max
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cache:buildcache
+          cache-to:   type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cache:buildcache,mode=max
 
       # 6. Print the published image tags to the job summary
       - name: Image digest
