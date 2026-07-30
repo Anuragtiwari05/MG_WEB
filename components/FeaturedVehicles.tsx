@@ -115,7 +115,7 @@ export default function FeaturedVehicles() {
   const isTablet = stageWidth >= 640 && stageWidth < 1024;
   // A bit of extra pop on the center car specifically on mobile, where the
   // stage is short and a same-scale-as-desktop car reads as too small.
-  const CENTER_SCALE = isMobile ? 1.7 : 1.15;
+  const CENTER_SCALE = isMobile ? 1.85 : 1.25;
   const SIDE_SCALE = isMobile ? 0.55 : 0.3;
   // Bigger gap between center and side cars — widthFrac is trimmed down a
   // touch alongside it so the side car's outer edge still clears the nav
@@ -220,7 +220,7 @@ export default function FeaturedVehicles() {
                     priority={offset === 0}
                     className={`object-contain transition-all duration-300 ${
                       offset === 0
-                        ? "hover:scale-[1.03]"
+                        ? "hover:scale-[1.03] drop-shadow-[0_12px_28px_rgba(0,0,0,0.22)]"
                         : "grayscale-[55%] saturate-[0.6] brightness-105"
                     }`}
                     sizes="(max-width: 640px) 30vw, (max-width: 1024px) 40vw, 46vw"

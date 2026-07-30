@@ -398,11 +398,11 @@ const lakh = (inr: number) => (inr / 100000).toFixed(2);
 export function getCarTransparentImage(id: string): string {
   switch (id) {
     case "astor": return "/images/models/model-astor-transparent.png";
-    case "hector": return "/images/models/model-hector-transparent.png";
-    case "zs-ev": return "/images/models/model-zs-ev-transparent.png";
+    case "hector": return "/images/models/model-hector-v3.png";
+    case "zs-ev": return "/images/models/model-zs-ev-edited.png";
     case "windsor-ev": return "/images/models/model-windsor-transparent.png";
     case "comet-ev": return "/images/models/model-comet-transparent.png";
-    case "majestor": return "/images/models/model-majestor-transparent.png";
+    case "majestor": return "/images/models/model-majestor-v3.png";
     case "m9": return "/images/models/model-m9-transparent.png";
     case "cyberster": return "/images/models/model-cyberster-v2.png";
     default: return `/images/models/model-${id}-transparent.png`;
