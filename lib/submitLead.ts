@@ -117,7 +117,7 @@ export async function submitLead(formType: string, formData: Record<string, unkn
   const dbRequest = fetch("/api/leads", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ formType, formData }),
+    body: JSON.stringify({ formType, formData: { ...formData, ...utm } }),
   }).then(async (res) => {
     if (!res.ok) {
       const body = await res.json().catch(() => ({}));

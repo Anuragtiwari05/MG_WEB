@@ -98,6 +98,26 @@ export default function TestDrive() {
     ? time
     : "";
 
+  const handleReset = () => {
+    setSubmitted(false);
+    setCarModel("");
+    setCarModelOther("");
+    setLocationName("");
+    setName("");
+    setEmail("");
+    setPincode("");
+    setAddress("");
+    setDate("");
+    setTime("");
+    setModelError("");
+    setLocationError("");
+    setNameError("");
+    setEmailError("");
+    setPincodeError("");
+    setDateError("");
+    setTimeError("");
+  };
+
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let isValid = true;
@@ -239,66 +259,6 @@ export default function TestDrive() {
                 formSource="test_drive_section"
                 onVerified={() => {}}
               />
-            ) : submitted ? (
-              <div className="flex flex-col items-center justify-center py-6 text-center">
-                <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-800">
-                  <svg className="h-7 w-7 text-slate-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <h3 className="font-display text-2xl font-bold text-slate-900 sm:text-3xl">
-                  Thank you for your interest!
-                </h3>
-                <p className="mt-4 text-sm sm:text-base leading-relaxed text-slate-600 font-normal max-w-md">
-                  We thank you for showing an interest in test driving of the{" "}
-                  <strong className="font-semibold text-slate-900">
-                    {carModel ? (carModel.toUpperCase().startsWith("MG") ? carModel : `MG ${carModel}`) : "MG Vehicle"}
-                  </strong>.
-                </p>
-                <p className="mt-2 text-sm sm:text-base leading-relaxed text-slate-600 font-normal">
-                  We assure you our representative will contact you shortly.
-                </p>
-
-                <div className="mt-5 w-full max-w-md rounded-xl border border-amber-200/80 bg-[#FFFBEB] p-4 text-left shadow-xs">
-                  <h4 className="text-sm font-bold text-amber-900">Note</h4>
-                  <p className="mt-1 text-xs sm:text-sm leading-relaxed text-amber-800 font-normal">
-                    This is not the Test Drive confirmation. We shall check the schedule and confirm the vehicle availability.
-                  </p>
-                </div>
-
-                <p className="mt-5 text-sm text-slate-600 font-normal">
-                  We appreciate your time and patience.
-                </p>
-                <p className="mt-1 text-sm text-slate-600 font-normal">
-                  For any further details you may contact us on{" "}
-                  <strong className="font-bold text-slate-900">{company.phone}</strong>.
-                </p>
-
-                <button
-                  onClick={() => {
-                    setSubmitted(false);
-                    setCarModel("");
-                    setCarModelOther("");
-                    setLocationName("");
-                    setName("");
-                    setEmail("");
-                    setPincode("");
-                    setAddress("");
-                    setDate("");
-                    setTime("");
-                    setModelError("");
-                    setLocationError("");
-                    setNameError("");
-                    setEmailError("");
-                    setPincodeError("");
-                    setDateError("");
-                    setTimeError("");
-                  }}
-                  className="mt-6 w-full max-w-md rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-50 cursor-pointer shadow-xs"
-                >
-                  Book another test drive
-                </button>
-              </div>
             ) : (
               <form onSubmit={onSubmit} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
@@ -510,7 +470,66 @@ export default function TestDrive() {
         </div>
       </div>
 
-      <ReverifyModal 
+      {submitted && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="relative w-full max-w-md rounded-2xl bg-white p-6 sm:p-8 text-center shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-200">
+            <button
+              type="button"
+              onClick={handleReset}
+              className="absolute right-4 top-4 rounded-full p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition-colors cursor-pointer"
+              aria-label="Close modal"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-slate-100 text-slate-800">
+              <svg className="h-7 w-7 text-slate-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+
+            <h3 className="font-display text-2xl font-bold text-slate-900 sm:text-3xl">
+              Thank you for your interest!
+            </h3>
+            <p className="mt-4 text-sm sm:text-base leading-relaxed text-slate-600 font-normal">
+              We thank you for showing an interest in test driving of the{" "}
+              <strong className="font-semibold text-slate-900">
+                {carModel ? (carModel.toUpperCase().startsWith("MG") ? carModel : `MG ${carModel}`) : "MG Vehicle"}
+              </strong>.
+            </p>
+            <p className="mt-2 text-sm sm:text-base leading-relaxed text-slate-600 font-normal">
+              We assure you our representative will contact you shortly.
+            </p>
+
+            <div className="mt-5 rounded-xl border border-amber-200/80 bg-[#FFFBEB] p-4 text-left shadow-xs">
+              <h4 className="text-sm font-bold text-amber-900">Note</h4>
+              <p className="mt-1 text-xs sm:text-sm leading-relaxed text-amber-800 font-normal">
+                This is not the Test Drive confirmation. We shall check the schedule and confirm the vehicle availability.
+              </p>
+            </div>
+
+            <p className="mt-5 text-sm text-slate-600 font-normal">
+              We appreciate your time and patience.
+            </p>
+            <p className="mt-2 text-sm text-slate-600 font-normal">
+              For any further details you may contact us on{" "}
+              <strong className="whitespace-nowrap font-bold text-slate-900">{company.phone}</strong>.
+            </p>
+
+            <button
+              type="button"
+              onClick={handleReset}
+              className="mt-6 w-full rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-50 cursor-pointer shadow-xs"
+            >
+              Book another test drive
+            </button>
+          </div>
+        </div>
+      )}
+
+      <ReverifyModal
         isOpen={reverifyOpen}
         onClose={() => setReverifyOpen(false)}
         onConfirm={() => {

@@ -996,7 +996,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
             </p>
             <p className="mt-2 text-sm text-slate-600 font-normal">
               For any further details you may contact us on{" "}
-              <strong className="font-bold text-slate-900">{company.phone}</strong>.
+              <strong className="whitespace-nowrap font-bold text-slate-900">{company.phone}</strong>.
             </p>
 
             {/* Reset / Action Button */}
