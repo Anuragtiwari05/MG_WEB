@@ -53,7 +53,7 @@ jobs:
             type=ref,event=branch
 
       # 5. Build and push
-      #    Cache is stored in a SEPARATE *-cache package so the main package's
+      #    Cache goes to a SEPARATE *-cache package so the main package's
       #    "Latest" badge always points to the real production image.
       - name: Build and push Docker image
         id: build-and-push
@@ -66,7 +66,32 @@ jobs:
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cache:buildcache
           cache-to:   type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cache:buildcache,mode=max
 
-      # 6. Print the published image tags to the job summary
+      # 6. Delete the stale "buildcache" tag from the MAIN package (if it
+      #    exists from a previous workflow run) so the package page is clean.
+      - name: Remove stale buildcache tag from main package
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OWNER="${{ github.repository_owner }}"
+          REPO="${{ github.event.repository.name }}"
+          # Find the package version whose name contains "buildcache"
+          VERSION_ID=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            "/user/packages/container/${REPO}/versions" \
+            --paginate \
+            --jq '.[] | select(.metadata.container.tags[] | contains("buildcache")) | .id' \
+            2>/dev/null || true)
+          if [ -n "$VERSION_ID" ]; then
+            echo "Deleting stale buildcache version $VERSION_ID from main package…"
+            gh api --method DELETE \
+              -H "Accept: application/vnd.github+json" \
+              "/user/packages/container/${REPO}/versions/${VERSION_ID}" && \
+              echo "Deleted." || echo "Delete failed (may need org-level token)."
+          else
+            echo "No buildcache tag found in main package — nothing to clean up."
+          fi
+
+      # 7. Print the published image tags to the job summary
       - name: Image digest
         run: |
           echo "### ✅ Docker image published" >> $GITHUB_STEP_SUMMARY
