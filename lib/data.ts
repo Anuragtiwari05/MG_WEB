@@ -21,8 +21,8 @@ export const SITE_URL =
 export const company = {
   name: "MG Motor Mumbai",
   tagline: "Premium Dealership",
-  phone: "98877 33000",
-  phoneE164: "+919887733000",
+  phone: "72290 51111",
+  phoneE164: "+917229051111",
   email: "contact@mgmotormumbai.com",
   primaryAddress: {
     street: "5th Floor, Modi House, Link Road, Malad (West)",
@@ -53,7 +53,7 @@ export const company = {
 };
 
 export const nav = {
-  phone: "98877 33000",
+  phone: "72290 51111",
   links: [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
@@ -2111,7 +2111,7 @@ export const faqData = [
   {
     question: "How do I book a test drive at MG Motor Mumbai?",
     answer:
-      "You can book a test drive online using the form on our website, or by calling us at 98877 33000. Our team will verify your details and coordinate the test drive at your nearest showroom or at your doorstep.",
+      "You can book a test drive online using the form on our website, or by calling us at 72290 51111. Our team will verify your details and coordinate the test drive at your nearest showroom or at your doorstep.",
   },
   {
     question: "Do you offer car finance and exchange programs?",
@@ -2261,7 +2261,7 @@ export const blogs: Blog[] = [
     alt: "MG M9 EV luxury MPV",
     author: "Sanjay Kulkarni",
     authorRole: "Luxury Segment Editor",
-    content: `<h2>The Pinnacle of MG Select</h2><p>When MG Motor launched its premium sub-brand MG Select in India, it promised to bring world-class luxury vehicles to the Indian market. The MG M9 EV is the fulfillment of that promise — a seven-seater electric MPV that rivals the finest executive transport the world has to offer.</p><h2>First Class in the Second Row</h2><p>The M9's party piece is its second-row captain's chairs — electrically adjustable, heated, ventilated, and capable of a near-flat recline. They are finished in Nappa leather with contrast stitching.</p><blockquote>The MG M9 EV's second-row seats recline to 135 degrees and offer an integrated massage function — thoughtful touches that transform a Mumbai–Pune journey into a spa experience.</blockquote><h2>Powertrain: Silent and Swift</h2><p>Beneath the M9's majestic exterior lies a dual-motor electric powertrain producing 245 hp and 400 Nm. The 90 kWh battery delivers a claimed 480 km range.</p><h2>Electric Sliding Doors</h2><p>The M9's hands-free electric sliding rear doors are a revelation. Approach with the key fob in your pocket, wave your foot under the door sensor, and the door glides open silently.</p><h2>Available at MG Select Mumbai</h2><p>The MG M9 EV is exclusively available at MG Select Mumbai, our flagship showroom at Atur House, Worli. Private viewings can be arranged by appointment — call 98877 33000.</p>`,
+    content: `<h2>The Pinnacle of MG Select</h2><p>When MG Motor launched its premium sub-brand MG Select in India, it promised to bring world-class luxury vehicles to the Indian market. The MG M9 EV is the fulfillment of that promise — a seven-seater electric MPV that rivals the finest executive transport the world has to offer.</p><h2>First Class in the Second Row</h2><p>The M9's party piece is its second-row captain's chairs — electrically adjustable, heated, ventilated, and capable of a near-flat recline. They are finished in Nappa leather with contrast stitching.</p><blockquote>The MG M9 EV's second-row seats recline to 135 degrees and offer an integrated massage function — thoughtful touches that transform a Mumbai–Pune journey into a spa experience.</blockquote><h2>Powertrain: Silent and Swift</h2><p>Beneath the M9's majestic exterior lies a dual-motor electric powertrain producing 245 hp and 400 Nm. The 90 kWh battery delivers a claimed 480 km range.</p><h2>Electric Sliding Doors</h2><p>The M9's hands-free electric sliding rear doors are a revelation. Approach with the key fob in your pocket, wave your foot under the door sensor, and the door glides open silently.</p><h2>Available at MG Select Mumbai</h2><p>The MG M9 EV is exclusively available at MG Select Mumbai, our flagship showroom at Atur House, Worli. Private viewings can be arranged by appointment — call 72290 51111.</p>`,
   },
   {
     slug: "understanding-level-2-adas-in-mg-suvs",
@@ -2336,7 +2336,7 @@ export const locations: Location[] = [
     type: "Showroom",
     city: "Jogeshwari",
     address: "CTS 227, Service Rd JVLR, Western Express Hwy, Opp Balasaheb Thackeray Hospital, Jogeshwari East 400060",
-    phone: "98877 33000",
+    phone: "72290 51111",
     image: "/images/dealer-jogeshwari.jpg",
   },
   {
@@ -2344,7 +2344,7 @@ export const locations: Location[] = [
     type: "Showroom",
     city: "Prabhadevi",
     address: "G-2 Electric Mansion, Plot 1086, Appasaheb Marathe Marg, Century Bazaar, Prabhadevi, Mumbai 400025",
-    phone: "98877 33000",
+    phone: "72290 51111",
     image: "/images/dealer-prabhadevi.png",
   },
   {
@@ -2352,7 +2352,7 @@ export const locations: Location[] = [
     type: "Showroom",
     city: "Malad",
     address: "Shakti Premises, New Link Rd, Near Inorbit Mall, Opp Cloud Nine Hospital, Malad West, Mumbai, Maharashtra 400064",
-    phone: "98877 33000",
+    phone: "72290 51111",
     image: "/images/dealer-malad.png",
   },
   {
@@ -2360,7 +2360,7 @@ export const locations: Location[] = [
     type: "Showroom",
     city: "Vasai",
     address: "Ground Fl Shop 1-2, Rajprabha Ind Estate, Boidpada, Sativali Rd, Goli Naka, Vasai East 401208",
-    phone: "98877 33000",
+    phone: "72290 51111",
     image: "/images/dealer-vasai.png",
   },
   {
@@ -2368,7 +2368,7 @@ export const locations: Location[] = [
     type: "Showroom",
     city: "Worli",
     address: "Atur House 87, Dr Annie Besant Rd, Tulsi Vihar, Siddharth Nagar, Worli, Mumbai, Maharashtra 400018",
-    phone: "98877 33000",
+    phone: "72290 51111",
     image: "/images/electric-car-news.jpg",
   },
 ];
@@ -2379,7 +2379,7 @@ export const workshops: Location[] = [
     type: "Service Centre",
     city: "Kandivali",
     address: "301, New Link Rd, Opp Sonal Link Residency, Kandivali, Mithchowki, Malad West, Mumbai, Maharashtra 400064",
-    phone: "98877 33000",
+    phone: "72290 51111",
     image: "/images/dealer-malad.png",
   },
   {
@@ -2387,7 +2387,7 @@ export const workshops: Location[] = [
     type: "Service Centre",
     city: "Jogeshwari",
     address: "CTS 227, Service Rd near JVLR, Western Express Hwy, Beside MG Showroom, Jogeshwari East, Mumbai, Maharashtra 400060",
-    phone: "98877 33000",
+    phone: "72290 51111",
     image: "/images/dealer-jogeshwari.jpg",
   },
   {
@@ -2395,7 +2395,7 @@ export const workshops: Location[] = [
     type: "Service Centre",
     city: "Tokersy Jivraj",
     address: "MG South Shree Ram Cotton Press Compound, Tokersy Jivraj Rd, Railway Bridge, Opp Cotton Green Station, Mumbai 400015",
-    phone: "98877 33000",
+    phone: "72290 51111",
     image: "/images/dealer-prabhadevi.png",
   },
 ];
@@ -2410,3 +2410,4 @@ export const cityOptions = [
   "MG Select Mumbai (Worli)",
 ];
 export const testDriveImage = "/images/test-drive-interior.png";
+

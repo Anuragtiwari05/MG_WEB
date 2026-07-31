@@ -139,7 +139,7 @@ export default function HeroForm() {
         </p>
         <p className="mt-1 text-xs text-slate-600 font-normal">
           For details contact us on{" "}
-          <strong className="font-bold text-slate-900">98877 33000</strong>.
+          <strong className="font-bold text-slate-900">72290 51111</strong>.
         </p>
 
         <button
@@ -337,4 +337,5 @@ export default function HeroForm() {
     </div>
   );
 }
+
 

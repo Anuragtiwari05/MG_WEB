@@ -161,7 +161,7 @@ export default function ContactUsClient() {
                 Get in Touch
               </h1>
               <p className="mt-3 max-w-xl text-sm text-white/80 sm:text-base">
-                Call 98877 33000, WhatsApp us, email us, or send a message and our team will get back to you.
+                Call 72290 51111, WhatsApp us, email us, or send a message and our team will get back to you.
               </p>
             </Reveal>
           </div>
@@ -200,10 +200,10 @@ export default function ContactUsClient() {
                     <div>
                       <p className="text-xs font-medium text-muted">Call Us</p>
                       <a
-                        href="tel:+919887733000"
+                        href="tel:+917229051111"
                         className="text-sm font-semibold text-text transition-colors hover:text-brand"
                       >
-                        98877 33000
+                        72290 51111
                       </a>
                     </div>
                   </li>
@@ -215,12 +215,12 @@ export default function ContactUsClient() {
                     <div>
                       <p className="text-xs font-medium text-muted">WhatsApp</p>
                       <a
-                        href="https://wa.me/919887733000"
+                        href="https://wa.me/917229051111"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm font-semibold text-text transition-colors hover:text-brand"
                       >
-                        98877 33000
+                        72290 51111
                       </a>
                     </div>
                   </li>
@@ -499,3 +499,4 @@ export default function ContactUsClient() {
     </>
   );
 }
+
