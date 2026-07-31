@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
-import { verifyFallbackOtp } from '@/lib/otpStore';
+import { verifyFallbackOtp, resetOtpSendLimit } from '@/lib/otpStore';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,6 +18,7 @@ export async function POST(req: NextRequest) {
       if (!fbRes.success) {
         return NextResponse.json({ error: fbRes.error || 'Verification failed' }, { status: 400 });
       }
+      if (fbRes.phoneNumber) resetOtpSendLimit(fbRes.phoneNumber);
       return NextResponse.json({ verified: true });
     }
 
@@ -52,6 +53,7 @@ export async function POST(req: NextRequest) {
           .update({ is_verified: true, verified_at: new Date().toISOString() })
           .eq('id', otpVerificationId);
 
+        if (record.phone_number) resetOtpSendLimit(record.phone_number);
         return NextResponse.json({ verified: true });
       }
     } catch (dbErr) {
@@ -61,6 +63,7 @@ export async function POST(req: NextRequest) {
     // 3. Fallback verification
     const fbRes = verifyFallbackOtp(otpVerificationId, otpCode);
     if (fbRes.success) {
+      if (fbRes.phoneNumber) resetOtpSendLimit(fbRes.phoneNumber);
       return NextResponse.json({ verified: true });
     }
 

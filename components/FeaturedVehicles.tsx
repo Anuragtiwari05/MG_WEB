@@ -176,6 +176,10 @@ export default function FeaturedVehicles() {
             <ChevronRight className="h-6 w-6 text-slate-800" />
           </button>
 
+          {/* The side cars are meant to be visible at their own low
+              scale/opacity — no edge fade here, it was hiding them
+              almost entirely instead of just softening a hard clip. */}
+          <div className="absolute inset-0">
           {filtered.map((car, i) => {
             let offset = i - index;
             if (offset > len / 2) offset -= len;
@@ -194,11 +198,10 @@ export default function FeaturedVehicles() {
                     didSwipeRef.current = false;
                     return;
                   }
-                  if (offset === 0) {
-                    router.push(`/cars/${car.id}`);
-                  } else {
-                    setIndex(i);
-                  }
+                  // Clicking any visible car — centered or a peeking side
+                  // car — goes straight to its page, instead of making a
+                  // side-car click just re-center it first.
+                  router.push(`/cars/${car.id}`);
                 }}
                 className="absolute left-1/2 top-1/2 flex h-full items-center justify-center transition-all duration-[600ms] ease-[cubic-bezier(0.22,1,0.36,1)] group"
                 style={{
@@ -206,7 +209,7 @@ export default function FeaturedVehicles() {
                   transform: `translate(-50%, -50%) translateX(${translateX}px) scale(${scale})`,
                   opacity,
                   zIndex: 20 - abs,
-                  cursor: offset !== 0 ? "pointer" : "default",
+                  cursor: "pointer",
                   pointerEvents: abs > 1 ? "none" : "auto",
                   willChange: "transform, opacity",
                 }}
@@ -229,6 +232,7 @@ export default function FeaturedVehicles() {
               </div>
             );
           })}
+          </div>
         </div>
 
         {/* Info row, keyed so it fades between models */}

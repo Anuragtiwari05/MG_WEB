@@ -140,16 +140,15 @@ export default function ContactUsClient() {
         <section className="relative h-[280px] w-full overflow-hidden bg-neutral-950 sm:h-[380px] lg:h-[420px]">
           {/* Background Image */}
           <Image
-            alt="MG Cyberster"
-            title="MG Cyberster"
-            src="/images/models/cyberster/03-side-view-left-90.jpg"
+            alt="Global connectivity"
+            title="MG Motor Mumbai"
+            src="/images/contact-hero-suv.jpg"
             fill
-            className="object-cover opacity-80 lg:object-[65%_center] z-0"
+            className="object-cover opacity-80 z-0"
             priority
           />
           {/* Overlays */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-black/70 z-10" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(227,24,55,0.2)_0%,transparent_65%)] z-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/85 via-neutral-950/15 to-transparent z-10" />
           <div className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-transparent via-brand/40 to-transparent z-20" />
           

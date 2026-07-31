@@ -31,18 +31,19 @@ export default function Blogs() {
             so it can't miscalculate and push the page into horizontal overflow). */}
         <div className="-mr-4 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-2 pr-4 sm:hidden [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
           {homepageBlogs.map((post) => (
-            <article
+            <Link
               key={post.title}
-              className="group flex h-full w-[78%] shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-border bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.03)]"
+              href={`/blogs/${post.slug}`}
+              className="group flex h-full w-[78%] shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-border bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.03)] cursor-pointer"
             >
-              <div className="relative aspect-[16/9] overflow-hidden bg-slate-50/50 p-4">
+              <div className="relative aspect-[16/9] overflow-hidden bg-slate-50/50">
                 <Image
                   src={post.image}
                   alt={post.title}
                   title={post.title}
                   fill
                   sizes="78vw"
-                  className="object-contain p-3"
+                  className="object-cover"
                 />
               </div>
               <div className="flex flex-1 flex-col p-4">
@@ -57,15 +58,12 @@ export default function Blogs() {
                 <p className="mt-1.5 text-xs text-muted line-clamp-2">
                   {post.excerpt}
                 </p>
-                <Link
-                  href="/blogs"
-                  className="group/link mt-4 inline-flex items-center gap-1 text-xs font-semibold text-brand transition-colors hover:text-brand-light"
-                >
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-brand">
                   Read more
-                  <ArrowRight className="h-3 w-3 transition-transform group-hover/link:translate-x-0.5" />
-                </Link>
+                  <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                </span>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
 
@@ -73,16 +71,19 @@ export default function Blogs() {
         <div className="hidden gap-5 sm:grid sm:grid-cols-2 lg:grid-cols-4">
           {homepageBlogs.map((post, i) => (
             <Reveal key={post.title} delay={i * 70}>
-              <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)]">
+              <Link
+                href={`/blogs/${post.slug}`}
+                className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-white shadow-[0_4px_12px_0_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_0_rgba(0,0,0,0.08)] cursor-pointer"
+              >
                 {/* Image */}
-                <div className="relative aspect-[16/9] overflow-hidden bg-slate-50/50 p-4">
+                <div className="relative aspect-[16/9] overflow-hidden bg-slate-50/50">
                   <Image
                     src={post.image}
                     alt={post.title}
                     title={post.title}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-contain p-3 transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                 </div>
 
@@ -99,15 +100,12 @@ export default function Blogs() {
                   <p className="mt-1.5 text-xs text-muted line-clamp-2">
                     {post.excerpt}
                   </p>
-                  <Link
-                    href="/blogs"
-                    className="group/link mt-4 inline-flex items-center gap-1 text-xs font-semibold text-brand transition-colors hover:text-brand-light"
-                  >
+                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-brand">
                     Read more
-                    <ArrowRight className="h-3 w-3 transition-transform group-hover/link:translate-x-0.5" />
-                  </Link>
+                    <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                  </span>
                 </div>
-              </article>
+              </Link>
             </Reveal>
           ))}
         </div>

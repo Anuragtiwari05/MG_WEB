@@ -166,7 +166,7 @@ export default function CarDetailClient({ car }: Props) {
                   /* ── STATIC PREVIEW CARD ─────────────────────────── */
                   <div className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden rounded-2xl bg-white border border-slate-200/60 shadow-sm">
                     <div className="absolute inset-x-[20%] bottom-[8%] h-[6%] rounded-[50%] bg-black/10 blur-2xl" />
-                    
+
                     <Image
                       src={activeImage}
                       alt={`${car.name} preview in ${activeLabel}`}
@@ -180,18 +180,6 @@ export default function CarDetailClient({ car }: Props) {
 
                     <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1.5 text-xs font-semibold text-text shadow-sm backdrop-blur">
                       {activeLabel}
-                    </span>
-
-                    <span className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full border border-black/10 bg-white/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-text backdrop-blur-sm shadow-sm">
-                      <Image
-                        src="/images/logo-mg.png"
-                        alt="MG Logo"
-                        title="MG Logo"
-                        width={12}
-                        height={12}
-                        className="object-contain"
-                      />
-                      <span>MG {car.name}</span>
                     </span>
 
                     {car360Config && (
@@ -411,19 +399,24 @@ export default function CarDetailClient({ car }: Props) {
                   </ul>
                 </div>
 
-                {/* CTAs */}
-                <div ref={ctasRef} className="mt-6 flex flex-wrap gap-3">
-                  <button type="button" onClick={() => setShowTestDriveModal(true)} className="group inline-flex items-center gap-2 rounded bg-brand px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-light cursor-pointer">
-                    Book a Test Drive
-                    <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
-                  </button>
-                  <Link href="/contact-us" className="inline-flex items-center gap-2 rounded border border-brand bg-white px-6 py-3.5 text-sm font-semibold text-brand transition-all hover:bg-brand hover:text-white cursor-pointer">
-                    Get a Variant Quote
-                  </Link>
+                {/* CTAs — Book a Test Drive and Get a Variant Quote sit side by
+                    side as an aligned pair on every breakpoint; Download
+                    Brochure joins the row once there's room (sm+), otherwise
+                    it sits on its own row below. */}
+                <div ref={ctasRef} className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <div className="flex gap-3 sm:contents">
+                    <button type="button" onClick={() => setShowTestDriveModal(true)} className="group flex flex-1 items-center justify-center gap-2 rounded bg-brand px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-light cursor-pointer sm:flex-none sm:inline-flex">
+                      Book a Test Drive
+                      <svg className="h-4 w-4 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </button>
+                    <Link href="/contact-us" className="flex flex-1 items-center justify-center gap-2 rounded border border-brand bg-white px-6 py-3.5 text-sm font-semibold text-brand transition-all hover:bg-brand hover:text-white cursor-pointer sm:flex-none sm:inline-flex">
+                      Get a Variant Quote
+                    </Link>
+                  </div>
                   {car.brochureUrl && (
-                    <a href={car.brochureUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded border border-slate-200 bg-slate-50 px-6 py-3.5 text-sm font-semibold text-text transition-all hover:border-slate-400 hover:bg-slate-100 cursor-pointer">
+                    <a href={car.brochureUrl} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 rounded border border-slate-200 bg-slate-50 px-6 py-3.5 text-sm font-semibold text-text transition-all hover:border-slate-400 hover:bg-slate-100 cursor-pointer sm:inline-flex">
                       <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
                       </svg>
@@ -451,10 +444,10 @@ export default function CarDetailClient({ car }: Props) {
 
             {/* Extreme Right: Transitioned CTA Buttons */}
             <div
-              className={`flex items-center gap-2.5 transition-all duration-300 ${
+              className={`flex items-center gap-2.5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                 showStickyCtas
-                  ? "opacity-100 translate-y-0 pointer-events-auto"
-                  : "opacity-0 translate-y-2 pointer-events-none"
+                  ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
+                  : "opacity-0 translate-y-1.5 scale-[0.98] pointer-events-none"
               }`}
             >
               <button
@@ -660,7 +653,7 @@ export default function CarDetailClient({ car }: Props) {
               <p className="eyebrow">Your peace of mind</p>
               <h2 className="mt-2 font-display text-3xl font-black text-text">Safety, as standard</h2>
             </Reveal>
-            <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-9 grid grid-cols-2 gap-4 lg:grid-cols-4">
               {car.details.safety.map((item, index) => (
                 <Reveal key={item} delay={index * 60} className="rounded-xl border border-border bg-white p-5">
                   <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand/10">
@@ -695,7 +688,15 @@ export default function CarDetailClient({ car }: Props) {
                       className="relative w-full aspect-square bg-bg-2"
                       onClick={() => setLightboxIndex(index)}
                     >
-                      <Image src={img.src} alt={img.caption} title={img.caption} fill className="object-cover transition duration-500 group-hover:scale-105" />
+                      <Image
+                        src={img.src}
+                        alt={img.caption}
+                        title={img.caption}
+                        fill
+                        className={`transition duration-500 group-hover:scale-105 ${
+                          index === 0 ? "object-contain" : "object-cover"
+                        }`}
+                      />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                       <p className="absolute bottom-0 left-0 right-0 translate-y-2 px-3 py-2.5 text-[11px] font-bold text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                         {img.caption}
@@ -744,7 +745,7 @@ export default function CarDetailClient({ car }: Props) {
               <p className="eyebrow">Built-in intelligence</p>
               <h2 className="mt-2 font-display text-3xl font-black text-text">Key technology</h2>
             </Reveal>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
               {car.details.features.map((feat, index) => (
                 <Reveal key={feat} delay={index * 60} className="flex items-start gap-4 rounded-xl border border-border bg-white p-5">
                   <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand/10">

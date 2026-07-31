@@ -29,11 +29,8 @@ export default function WhatsAppWidget() {
         aria-label="Chat with MG Motor Mumbai on WhatsApp"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-xl transition-transform duration-300 hover:scale-110 active:scale-95"
+        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-xl"
       >
-        {/* Pulse ring */}
-        <span className="absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-30" />
-
         {/* Official WhatsApp logo asset (public/images/whatsapp-logo-white.svg) */}
         <Image
           src="/images/whatsapp-logo-white.svg"

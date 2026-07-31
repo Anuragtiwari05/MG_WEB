@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabaseAdmin';
 import { sendOtpWhatsapp } from '@/lib/whatsapp';
-import { saveFallbackOtp } from '@/lib/otpStore';
+import { saveFallbackOtp, checkOtpSendLimit } from '@/lib/otpStore';
 
 export const dynamic = 'force-dynamic';
 
@@ -21,6 +21,15 @@ export async function POST(req: NextRequest) {
 
     if (!phoneNumber) {
       return NextResponse.json({ error: 'phoneNumber is required' }, { status: 400 });
+    }
+
+    const limit = checkOtpSendLimit(phoneNumber);
+    if (!limit.allowed) {
+      const minutes = Math.max(1, Math.ceil((limit.retryAfterSeconds || 0) / 60));
+      return NextResponse.json(
+        { error: `Too many OTP requests for this number. Please try again in ${minutes} minute(s).` },
+        { status: 429 }
+      );
     }
 
     const otpCode = Math.floor(1000 + Math.random() * 9000).toString();

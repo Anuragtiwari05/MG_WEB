@@ -54,15 +54,15 @@ export default function CarsPage() {
         <section className="py-12 lg:py-16">
           <div className="container-px mx-auto max-w-[1400px]">
             {/* Category selection */}
-            <Reveal className="flex flex-wrap gap-2 border-b border-border pb-6">
+            <Reveal className="flex gap-1 overflow-x-auto border-b border-border sm:gap-2">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setCategory(cat)}
-                  className={`rounded-full px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
+                  className={`shrink-0 border-b-2 px-3 py-3 text-sm font-semibold transition-colors sm:px-4 ${
                     category === cat
-                      ? "bg-brand text-white shadow-lg shadow-brand/20"
-                      : "bg-white border border-border text-muted hover:text-text hover:bg-bg-2"
+                      ? "border-brand text-brand"
+                      : "border-transparent text-muted hover:text-text"
                   }`}
                 >
                   {cat}

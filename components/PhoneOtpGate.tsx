@@ -37,7 +37,7 @@ export default function PhoneOtpGate({
   const [otpError, setOtpError] = useState("");
   const [verifyingOtp, setVerifyingOtp] = useState(false);
   const [otpVerificationId, setOtpVerificationId] = useState<string | null>(null);
-  const [resent, setResent] = useState(false);
+  const [resendCooldown, setResendCooldown] = useState(30);
   const otpInputRef = useRef<HTMLInputElement>(null);
   const isMounted = useRef(true);
 
@@ -52,12 +52,19 @@ export default function PhoneOtpGate({
     if (otpModalOpen) {
       setOtp("");
       setOtpError("");
-      setResent(false);
+      setResendCooldown(30);
       // autofocus once the modal has mounted
       const t = setTimeout(() => otpInputRef.current?.focus(), 50);
       return () => clearTimeout(t);
     }
   }, [otpModalOpen]);
+
+  // 30s resend cooldown, counted down one second at a time while the modal is open.
+  useEffect(() => {
+    if (!otpModalOpen || resendCooldown <= 0) return;
+    const t = setTimeout(() => setResendCooldown((s) => s - 1), 1000);
+    return () => clearTimeout(t);
+  }, [otpModalOpen, resendCooldown]);
 
   const handleSendOtp = async (isResend = false) => {
     let isValid = true;
@@ -83,7 +90,6 @@ export default function PhoneOtpGate({
     if (isResend) {
       setOtp("");
       setOtpError("");
-      setResent(false);
     }
     try {
       const res = await fetch("/api/otp/send", {
@@ -98,10 +104,18 @@ export default function PhoneOtpGate({
       const data = await res.json();
       if (!isMounted.current) return;
 
+      if (!res.ok) {
+        // e.g. the 3-attempts-per-number backend limit was hit
+        const message = data.error || "Unable to send OTP right now. Please try again later.";
+        if (isResend) setOtpError(message);
+        else setPhoneError(message);
+        return;
+      }
+
       setOtpVerificationId(data.otpVerificationId || "fallback-id");
       setOtpModalOpen(true);
       if (isResend) {
-        setResent(true);
+        setResendCooldown(30);
         otpInputRef.current?.focus();
       }
     } catch (err) {
@@ -110,7 +124,7 @@ export default function PhoneOtpGate({
       // Fallback open OTP modal even on network glitch so user is never blocked
       setOtpVerificationId(`fb-${Date.now()}`);
       setOtpModalOpen(true);
-      if (isResend) setResent(true);
+      if (isResend) setResendCooldown(30);
     } finally {
       if (isMounted.current) setSendingOtp(false);
     }
@@ -224,8 +238,8 @@ export default function PhoneOtpGate({
         <button
           type="button"
           onClick={() => handleSendOtp()}
-          disabled={sendingOtp}
-          className="mt-5 flex w-full items-center justify-center gap-2 rounded bg-brand py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-light cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
+          disabled={sendingOtp || !phone || !consent}
+          className="mt-5 flex w-full items-center justify-center gap-2 rounded bg-brand py-3.5 text-sm font-semibold text-white transition-all hover:bg-brand-light cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
         >
           {sendingOtp ? (
             <>
@@ -292,8 +306,11 @@ export default function PhoneOtpGate({
                 )}
 
                 <p className="mt-3 text-[11px] text-muted">
-                  {resent ? (
-                    <span className="font-semibold text-green-600">OTP resent successfully.</span>
+                  {resendCooldown > 0 ? (
+                    <>
+                      Resend OTP in{" "}
+                      <span className="font-semibold text-text">{resendCooldown}s</span>
+                    </>
                   ) : (
                     <>
                       Didn&apos;t receive the code?{" "}

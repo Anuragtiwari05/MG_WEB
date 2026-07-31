@@ -175,7 +175,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="relative z-[60] flex flex-col items-center justify-between gap-3 pt-8 text-[11px] text-white/40 sm:flex-row">
-          <p>© 2024 MG Motor Mumbai. All Rights Reserved.</p>
+          <p>© 2026 MG Motor Mumbai. All Rights Reserved.</p>
           <div className="flex gap-6">
             <Link href="/privacy-policy" className="text-xs font-semibold text-white/60 transition-colors hover:text-white">
               Privacy Policy

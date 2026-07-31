@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { workshops } from "@/lib/data";
+import { workshops, type Location } from "@/lib/data";
 import Reveal from "@/components/Reveal";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -58,6 +58,52 @@ const serviceCategories = [
     description: "Battery diagnostics, terminal cleaning, and quick replacements for uninterrupted journeys.",
   },
 ];
+
+function WorkshopCard({ w }: { w: Location }) {
+  return (
+    <article className="group relative flex h-[340px] flex-col justify-end overflow-hidden rounded-xl border border-border bg-white shadow-md">
+      <Image
+        src={w.image}
+        alt={`MG Motor ${w.name} ${w.city}`}
+        title={`MG Motor ${w.name} ${w.city}`}
+        fill
+        sizes="(max-width: 640px) 78vw, 33vw"
+        className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent" />
+      <div className="relative p-5 text-white">
+        <span className="mb-2 inline-block rounded bg-brand px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
+          {w.type}
+        </span>
+        <h3 className="font-display text-base font-extrabold leading-snug text-white">
+          {w.name} ({w.city})
+        </h3>
+        <p className="mt-2 flex items-start gap-1.5 text-[11px] text-white/70">
+          <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand" />
+          <span className="line-clamp-2">{w.address}</span>
+        </p>
+        <a
+          href={`tel:${w.phone.replace(/[^0-9+]/g, "")}`}
+          className="mt-2 flex items-center gap-1.5 text-[11px] font-bold text-white/80 transition-colors hover:text-white"
+        >
+          <Phone className="h-3.5 w-3.5 shrink-0 text-brand" />
+          {w.phone}
+        </a>
+        <div className="mt-4">
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(w.name + " " + w.city + " " + w.address)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded bg-[#00ad8a] px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white transition-all hover:bg-[#009677] hover:shadow-[0_0_12px_rgba(0,173,138,0.3)]"
+          >
+            <MapPin className="h-3 w-3" />
+            Google Maps
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+}
 
 export default function LocateServiceCentrePage() {
   const { verifiedPhone, resetVerification, isMounted } = usePhoneVerification();
@@ -669,8 +715,19 @@ export default function LocateServiceCentrePage() {
               </p>
             </div>
 
-            {/* Service Centres Grid */}
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-[1100px] mx-auto">
+            {/* Mobile: horizontal swipeable row (scroll-snap), same pattern
+                as the home page's Locations section, instead of a stacked
+                single column. */}
+            <div className="-mr-4 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-2 pr-4 sm:hidden [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
+              {workshops.map((w, i) => (
+                <div key={w.city + i} className="w-[78%] shrink-0 snap-start">
+                  <WorkshopCard w={w} />
+                </div>
+              ))}
+            </div>
+
+            {/* Tablet & up: grid */}
+            <div className="hidden gap-6 sm:grid sm:grid-cols-2 lg:grid-cols-3 max-w-[1100px] mx-auto">
               {workshops.map((w, i) => (
                 <Reveal
                   key={w.city + i}
@@ -678,47 +735,7 @@ export default function LocateServiceCentrePage() {
                   variant="slide-left"
                   className="w-full"
                 >
-                  <article className="group relative flex h-[340px] flex-col justify-end overflow-hidden rounded-xl border border-border bg-white shadow-md">
-                    <Image
-                      src={w.image}
-                      alt={`MG Motor ${w.name} ${w.city}`}
-                      title={`MG Motor ${w.name} ${w.city}`}
-                      fill
-                      sizes="(max-width: 640px) 100vw, 33vw"
-                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-transparent" />
-                    <div className="relative p-5 text-white">
-                      <span className="mb-2 inline-block rounded bg-brand px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white">
-                        {w.type}
-                      </span>
-                      <h3 className="font-display text-base font-extrabold leading-snug text-white">
-                        {w.name} ({w.city})
-                      </h3>
-                      <p className="mt-2 flex items-start gap-1.5 text-[11px] text-white/70">
-                        <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand" />
-                        <span className="line-clamp-2">{w.address}</span>
-                      </p>
-                      <a
-                        href={`tel:${w.phone.replace(/[^0-9+]/g, "")}`}
-                        className="mt-2 flex items-center gap-1.5 text-[11px] font-bold text-white/80 transition-colors hover:text-white"
-                      >
-                        <Phone className="h-3.5 w-3.5 shrink-0 text-brand" />
-                        {w.phone}
-                      </a>
-                      <div className="mt-4">
-                        <a
-                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(w.name + " " + w.city + " " + w.address)}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded bg-[#00ad8a] px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white transition-all hover:bg-[#009677] hover:shadow-[0_0_12px_rgba(0,173,138,0.3)]"
-                        >
-                          <MapPin className="h-3 w-3" />
-                          Google Maps
-                        </a>
-                      </div>
-                    </div>
-                  </article>
+                  <WorkshopCard w={w} />
                 </Reveal>
               ))}
             </div>
