@@ -9,35 +9,35 @@ const REAL_COUNT = testimonials.length;
 
 export default function Testimonials() {
   const [visibleCards, setVisibleCards] = useState(3);
-  // Logical window-start index. Not clamped to [0, maxIndex] — it can run
-  // past either end into the cloned cards below, which is what lets the
-  // track keep sliding in the same direction instead of jump-cutting back
-  // to the start. Once it fully reaches a clone (which is pixel-identical
-  // to the real slide on the other end) we snap back with the transition
-  // switched off, so the loop is invisible.
   const [index, setIndex] = useState(0);
   const [snapping, setSnapping] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState(0);
-  // The clone buffer only holds one extra page's worth of cards on each
-  // side. A click landing mid-slide (before the previous move snapped back)
-  // can push `index` past that buffer, which renders as a card cut off
-  // mid-card instead of a clean tile. Blocking new moves while one is
-  // still animating keeps `index` inside the buffer at all times.
   const [isAnimating, setIsAnimating] = useState(false);
+
+  // Keep a ref to index so handleTransitionEnd never reads a stale closure
+  const indexRef = useRef(index);
+  const visibleRef = useRef(visibleCards);
+  const animatingRef = useRef(isAnimating);
+
+  useEffect(() => { indexRef.current = index; }, [index]);
+  useEffect(() => { visibleRef.current = visibleCards; }, [visibleCards]);
+  useEffect(() => { animatingRef.current = isAnimating; }, [isAnimating]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartXRef = useRef(0);
   const draggingRef = useRef(false);
 
+  // Responsive visible-cards
   useEffect(() => {
     const handleResize = () => {
-      const next = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
-      // The clone regions are sized to `visibleCards`, so a change here
-      // invalidates the current index — reset to a known-good slide
-      // rather than trying to remap it.
+      const next =
+        window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1;
       setVisibleCards((prev) => {
-        if (prev !== next) setIndex(0);
+        if (prev !== next) {
+          setIndex(0);
+          setIsAnimating(false);
+        }
         return next;
       });
     };
@@ -46,83 +46,92 @@ export default function Testimonials() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Page by a full visible group at a time, not one card at a time — so
-  // clicking a chevron slides the whole row of cards aside as a unit.
+  // Dots
   const dotsCount = Math.max(1, Math.round(REAL_COUNT / visibleCards));
-  const activeDot = Math.min(Math.round(Math.max(index, 0) / visibleCards), dotsCount - 1);
+  const activeDot = Math.min(
+    Math.round(Math.max(index, 0) / visibleCards),
+    dotsCount - 1
+  );
 
-  const go = (dir: number) => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setIndex((prev) => prev + dir * visibleCards);
-  };
-
-  const goToPage = (page: number) => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setIndex(page * visibleCards);
-  };
-
-  // Extended track = [last N real cards] + [all real cards] + [first N real
-  // cards], where N = visibleCards. Sliding one step past the last real
-  // window lands on the head clone, which shows the same cards as index 0 —
-  // so the "first one comes next in the same direction" instead of teleporting.
+  // Extended track: [last N clones] + [all real] + [first N clones]
   const extended = [
     ...testimonials.slice(REAL_COUNT - visibleCards),
     ...testimonials,
     ...testimonials.slice(0, visibleCards),
   ];
   const extendedLength = extended.length;
+
+  // translateX as % of the track (which IS the container width since each
+  // card is 100/visibleCards % of container and track has no explicit width)
   const translatePercent = (index + visibleCards) * (100 / extendedLength);
 
+  const go = (dir: number) => {
+    if (animatingRef.current) return;
+    setIsAnimating(true);
+    setIndex((prev) => prev + dir * visibleCards);
+  };
+
+  const goToPage = (page: number) => {
+    if (animatingRef.current) return;
+    setIsAnimating(true);
+    setIndex(page * visibleCards);
+  };
+
+  // Use ref-based index so this handler never reads stale state
   const handleTransitionEnd = () => {
-    if (index >= REAL_COUNT) {
+    const i = indexRef.current;
+    const v = visibleRef.current;
+    if (i >= REAL_COUNT) {
       setSnapping(true);
-      setIndex((i) => i - REAL_COUNT);
-    } else if (index <= -visibleCards) {
+      setIndex(i - REAL_COUNT);
+      indexRef.current = i - REAL_COUNT;
+    } else if (i <= -v) {
       setSnapping(true);
-      setIndex((i) => i + REAL_COUNT);
+      setIndex(i + REAL_COUNT);
+      indexRef.current = i + REAL_COUNT;
     }
     setIsAnimating(false);
   };
 
-  // Re-enable the transition on the frame after an instant snap, so the
-  // snap itself renders with no animation but subsequent moves still slide.
+  // Re-enable transition one frame after an instant snap
   useEffect(() => {
     if (!snapping) return;
     const id = requestAnimationFrame(() => setSnapping(false));
     return () => cancelAnimationFrame(id);
   }, [snapping]);
 
+  // Auto-advance — simple interval, just calls go() which self-guards
+  useEffect(() => {
+    const t = setInterval(() => go(1), 5000);
+    return () => clearInterval(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Touch handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     if (e.touches.length !== 1) return;
     touchStartXRef.current = e.touches[0].clientX;
     draggingRef.current = true;
     setIsDragging(true);
   };
-
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!draggingRef.current) return;
-    const dx = e.touches[0].clientX - touchStartXRef.current;
-    setDragOffset(dx);
+    setDragOffset(e.touches[0].clientX - touchStartXRef.current);
   };
-
   const endDrag = () => {
     if (!draggingRef.current) return;
     draggingRef.current = false;
     const width = containerRef.current?.offsetWidth || 1;
-    const threshold = width * 0.12;
-    if (dragOffset <= -threshold) {
-      go(1);
-    } else if (dragOffset >= threshold) {
-      go(-1);
-    }
+    if (dragOffset <= -width * 0.12) go(1);
+    else if (dragOffset >= width * 0.12) go(-1);
     setDragOffset(0);
     setIsDragging(false);
   };
 
   const trackTransitionClass =
-    isDragging || snapping ? "transition-none" : "transition-transform duration-500 ease-out";
+    isDragging || snapping
+      ? "transition-none"
+      : "transition-transform duration-500 ease-out";
 
   return (
     <section className="bg-white py-14 lg:py-20 overflow-hidden">
@@ -139,32 +148,25 @@ export default function Testimonials() {
             </p>
           </div>
 
-          {/* Slider Chevrons — the loop is infinite, so these are never
-              permanently disabled, only briefly locked mid-slide */}
           <div className="flex gap-2">
             <button
               aria-label="Previous review"
               onClick={() => go(-1)}
-              disabled={isAnimating}
-              className="grid h-10 w-10 place-items-center rounded border border-border bg-bg-2 text-text transition-colors hover:bg-bg-3 hover:text-brand disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+              className="grid h-10 w-10 place-items-center rounded border border-border bg-bg-2 text-text transition-colors hover:bg-bg-3 hover:text-brand cursor-pointer"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button
               aria-label="Next review"
               onClick={() => go(1)}
-              disabled={isAnimating}
-              className="grid h-10 w-10 place-items-center rounded border border-border bg-bg-2 text-text transition-colors hover:bg-bg-3 hover:text-brand disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
+              className="grid h-10 w-10 place-items-center rounded border border-border bg-bg-2 text-text transition-colors hover:bg-bg-3 hover:text-brand cursor-pointer"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>
         </Reveal>
 
-        {/* Carousel Window — overflow-hidden only needs to clip horizontally
-            (for the slide), but it clips vertically too, cutting off the
-            top of a card's border when hover lifts it. pt-2 -mt-2 gives the
-            lift room without shifting anything else's position. */}
+        {/* Carousel Window — overflow-hidden clips the extended track */}
         <div
           ref={containerRef}
           className="-mt-2 w-full touch-pan-y overflow-hidden pt-2"
@@ -185,14 +187,11 @@ export default function Testimonials() {
                 .split(" ")
                 .map((n) => n[0])
                 .join("");
-
               return (
                 <div
                   key={`${t.name}-${i}`}
                   className="shrink-0 px-2.5"
-                  style={{
-                    width: `${100 / visibleCards}%`,
-                  }}
+                  style={{ width: `${100 / visibleCards}%` }}
                 >
                   <figure className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-7 pb-9 shadow-none transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(0,0,0,0.08)]">
                     <div className="flex gap-1">
@@ -204,7 +203,6 @@ export default function Testimonials() {
                       &ldquo;{t.text}&rdquo;
                     </blockquote>
                     <figcaption className="mt-6 flex items-center gap-4 border-t border-border pt-6">
-                      {/* Initials Badge avatar */}
                       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand/10 text-xs font-bold uppercase tracking-wider text-brand">
                         {initials}
                       </div>
@@ -220,7 +218,7 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* Dots Pagination */}
+        {/* Dots */}
         {dotsCount > 1 && (
           <div className="mt-10 flex justify-center gap-2">
             {Array.from({ length: dotsCount }).map((_, i) => (
@@ -228,8 +226,7 @@ export default function Testimonials() {
                 key={i}
                 aria-label={`Go to slide page ${i + 1}`}
                 onClick={() => goToPage(i)}
-                className="h-1.5 rounded-full transition-all cursor-pointer disabled:cursor-not-allowed"
-                disabled={isAnimating}
+                className="h-1.5 rounded-full transition-all cursor-pointer"
                 style={{
                   width: i === activeDot ? 24 : 8,
                   background: i === activeDot ? "var(--brand)" : "#c8cfd9",
