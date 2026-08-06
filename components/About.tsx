@@ -35,13 +35,13 @@ export default function About() {
               Who We Are
             </p>
             <h2 className="mt-2 font-display text-3xl font-black tracking-wide text-text sm:text-4xl">
-              About MG Motor Mumbai & Thane
+              About MG Motor Mumbai
             </h2>
             <div className="mt-4 space-y-4 text-sm leading-relaxed text-muted sm:text-base">
               <p>
                 MG Motor Mumbai is an authorised MG dealership, owned and
                 operated by the {groupInfo.name}. We run state-of-the-art showrooms and
-                service centres across Mumbai and Thane, and we have served over{" "}
+                service centres across Mumbai (Malad, Vasai, Prabhadevi & Jogeshwari), and we have served over{" "}
                 {company.stats.happyCustomers} happy customers.
               </p>
               <p>

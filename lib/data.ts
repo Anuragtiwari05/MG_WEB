@@ -23,17 +23,17 @@ export const company = {
   tagline: "Premium Dealership",
   phone: "72290 51111",
   phoneE164: "+917229051111",
-  email: "contact@mgmotormumbai.com",
+  email: "cem.krishiv.mum@mgselectdealer.co.in",
   primaryAddress: {
-    street: "5th Floor, Modi House, Link Road, Malad (West)",
+    street: "Shakti Premises, New Link Rd, near Inorbit Mall, opposite Cloud Nine Hospital, Malad West",
     locality: "Mumbai",
     region: "Maharashtra",
     postalCode: "400064",
     country: "IN",
   },
-  hours: "Mon to Sun, 9:00 AM to 8:00 PM",
-  hoursSpec: { days: "Mo-Su", opens: "09:00", closes: "20:00" },
-  areasServed: ["Mumbai", "Thane", "Navi Mumbai", "Malad", "Andheri"],
+  hours: "Mon to Sun, 9:30 AM to 6:30 PM",
+  hoursSpec: { days: "Mo-Su", opens: "09:30", closes: "18:30" },
+  areasServed: ["Mumbai", "Navi Mumbai", "Malad", "Andheri", "Vasai"],
   stats: {
     legacy: "100+ Years",
     happyCustomers: "50,000+",
@@ -104,7 +104,7 @@ export const groupInfo = {
     },
   ],
   headquarters:
-    "5th Floor, Modi House, Link Road, Malad (West), Mumbai – 400064",
+    "Shakti Premises, New Link Rd, near Inorbit Mall, opposite Cloud Nine Hospital, Malad West, Mumbai, Maharashtra 400064",
 };
 
 export const mgIndiaFacts = {
@@ -1937,7 +1937,7 @@ export const trust = [
   {
     icon: "network",
     title: "6+ Modern Showrooms",
-    text: "Strategically located showrooms and state-of-the-art service workshops across Mumbai & Thane.",
+    text: "Strategically located showrooms and state-of-the-art service workshops across Mumbai, Malad, Vasai & Worli.",
   },
   {
     icon: "rupee",
@@ -2327,6 +2327,7 @@ export type Location = {
   city: string;
   address: string;
   phone: string;
+  hours?: string;
   image: string;
 };
 
@@ -2334,41 +2335,46 @@ export const locations: Location[] = [
   {
     name: "MG Motor Krishiv Auto Showroom",
     type: "Showroom",
-    city: "Jogeshwari",
-    address: "CTS 227, Service Rd JVLR, Western Express Hwy, Opp Balasaheb Thackeray Hospital, Jogeshwari East 400060",
-    phone: "72290 51111",
-    image: "/images/dealer-jogeshwari.jpg",
-  },
-  {
-    name: "MG Motor Krishiv Auto Showroom",
-    type: "Showroom",
-    city: "Prabhadevi",
-    address: "G-2 Electric Mansion, Plot 1086, Appasaheb Marathe Marg, Century Bazaar, Prabhadevi, Mumbai 400025",
-    phone: "72290 51111",
-    image: "/images/dealer-prabhadevi.png",
-  },
-  {
-    name: "MG Motor Krishiv Auto Showroom",
-    type: "Showroom",
     city: "Malad",
-    address: "Shakti Premises, New Link Rd, Near Inorbit Mall, Opp Cloud Nine Hospital, Malad West, Mumbai, Maharashtra 400064",
+    address: "Shakti Premises, New Link Rd, near Inorbit Mall, opposite Cloud Nine Hospital, Malad, Ram Nagar, Malad West, Mumbai, Maharashtra 400064",
     phone: "72290 51111",
+    hours: "Mon–Sun, 9:30 AM – 6:30 PM",
     image: "/images/dealer-malad.png",
   },
   {
     name: "MG Motor Krishiv Auto Showroom",
     type: "Showroom",
     city: "Vasai",
-    address: "Ground Fl Shop 1-2, Rajprabha Ind Estate, Boidpada, Sativali Rd, Goli Naka, Vasai East 401208",
+    address: "Ground Floor Shop No 1 & 2, Rajprabha Industrial Estate Boidpada, Sativali Rd, Waliv, Golani Naka, Vasai East, Vasai-Virar, Maharashtra 401208",
     phone: "72290 51111",
+    hours: "Mon–Sun, 9:30 AM – 6:30 PM",
     image: "/images/dealer-vasai.png",
+  },
+  {
+    name: "MG Motor Krishiv Auto Showroom",
+    type: "Showroom",
+    city: "Prabhadevi",
+    address: "G-2, Electric Mansion, Plot-1086, Appasaheb Marathe Marg, Century Bazaar, Prabhadevi, Mumbai, Maharashtra 400025",
+    phone: "72290 51111",
+    hours: "Mon–Sun, 9:30 AM – 6:30 PM",
+    image: "/images/dealer-prabhadevi.png",
+  },
+  {
+    name: "MG Motor Krishiv Auto Showroom",
+    type: "Showroom",
+    city: "Jogeshwari",
+    address: "CTS 227, Service Road Near Junction Of JVLR, &, Western Express Hwy, opposite Balsaheb Thackrey Hospital, Gupha Tekdi, Jogeshwari East, Mumbai, Maharashtra 400060",
+    phone: "72290 51111",
+    hours: "Mon–Sun, 9:30 AM – 6:30 PM",
+    image: "/images/dealer-jogeshwari.jpg",
   },
   {
     name: "MG Select Mumbai",
     type: "Showroom",
     city: "Worli",
-    address: "Atur House 87, Dr Annie Besant Rd, Tulsi Vihar, Siddharth Nagar, Worli, Mumbai, Maharashtra 400018",
-    phone: "72290 51111",
+    address: "Atur House, 87, Dr Annie Besant Rd, Tulsi Vihar, Siddharth Nagar, Worli, Mumbai, Maharashtra 400018",
+    phone: "82388 04111",
+    hours: "Mon–Sun, 9:30 AM – 8:00 PM",
     image: "/images/electric-car-news.jpg",
   },
 ];
@@ -2403,10 +2409,10 @@ export const workshops: Location[] = [
 export const popularCars = cars.slice(0, 3);
 export const carModels = cars.map((c) => c.name);
 export const cityOptions = [
-  "MG Motor Krishiv Auto Showroom (Jogeshwari)",
-  "MG Motor Krishiv Auto Showroom (Prabhadevi)",
   "MG Motor Krishiv Auto Showroom (Malad)",
   "MG Motor Krishiv Auto Showroom (Vasai)",
+  "MG Motor Krishiv Auto Showroom (Prabhadevi)",
+  "MG Motor Krishiv Auto Showroom (Jogeshwari)",
   "MG Select Mumbai (Worli)",
 ];
 export const testDriveImage = "/images/test-drive-interior.png";

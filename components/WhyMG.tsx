@@ -26,7 +26,7 @@ export default function WhyMG() {
             </h2>
             <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted sm:text-base">
               <p>
-                MG Motor Mumbai (Gautam Modi Group) is an authorised MG dealership serving Mumbai, Thane, Navi Mumbai, and surrounding regions. Every new car, genuine part, and accessory is sourced directly from MG Motor India, backed by manufacturer warranty and professional service.
+                MG Motor Mumbai (Gautam Modi Group) is an authorised MG dealership serving Mumbai, Navi Mumbai, Vasai, and surrounding regions. Every new car, genuine part, and accessory is sourced directly from MG Motor India, backed by manufacturer warranty and professional service.
               </p>
               <p>
                 With over {company.stats.carsSold} new cars delivered and {company.stats.servicesDone} services completed, our team brings decades of automotive expertise to guide you through test drives, transparent finance schemes, and hassle-free maintenance.
@@ -44,7 +44,7 @@ export default function WhyMG() {
                 href="/about"
                 className="rounded border border-border bg-white px-6 py-3 text-xs font-bold uppercase tracking-wider text-text transition-all hover:bg-bg-2 hover:border-brand"
               >
-                About MG Motor Mumbai & Thane
+                About MG Motor Mumbai
               </Link>
             </div>
           </Reveal>

@@ -232,10 +232,10 @@ export default function ContactUsClient() {
                     <div>
                       <p className="text-xs font-medium text-muted">Email Us</p>
                       <a
-                        href="mailto:contact@mgmotormumbai.com"
+                        href="mailto:cem.krishiv.mum@mgselectdealer.co.in"
                         className="text-sm font-semibold text-text transition-colors hover:text-brand"
                       >
-                        contact@mgmotormumbai.com
+                        cem.krishiv.mum@mgselectdealer.co.in
                       </a>
                     </div>
                   </li>
@@ -245,9 +245,8 @@ export default function ContactUsClient() {
                       <MapPin className="h-4 w-4" />
                     </span>
                     <div>
-                      <p className="text-xs font-medium text-muted">Main Office</p>
                       <p className="text-sm font-semibold text-text">
-                        Shop No. 7 &amp; 8, Raj Akshay Building, Miragaon, Mira Road East, Thane – 401107
+                        Shakti Premises, New Link Rd, near Inorbit Mall, opposite Cloud Nine Hospital, Malad West, Mumbai, Maharashtra 400064
                       </p>
                     </div>
                   </li>
@@ -259,7 +258,7 @@ export default function ContactUsClient() {
                     <div>
                       <p className="text-xs font-medium text-muted">Working Hours</p>
                       <p className="text-sm font-semibold text-text">
-                        Mon to Sun, 9:00 AM to 8:00 PM
+                        Mon to Sun, 9:30 AM to 6:30 PM (MG Motors)
                       </p>
                     </div>
                   </li>

@@ -75,7 +75,7 @@ export default function Locations() {
               FIND US NEAR YOU
             </h2>
             <p className="mt-2 text-sm text-white/70">
-              Explore our state-of-the-art facilities across Mumbai and Thane.
+              Explore our state-of-the-art showrooms across Mumbai — Malad, Vasai, Prabhadevi, Jogeshwari & Worli.
             </p>
           </div>
           <div className="flex shrink-0 items-center">

@@ -53,7 +53,7 @@ export default function LocationsPage() {
                 Our Showrooms & Workshops
               </h1>
               <p className="mt-2 text-sm text-muted max-w-xl">
-                Explore all 4 authorized MG showrooms and 3 state-of-the-art service workshops across Mumbai in a single view.
+                Explore all 5 authorized MG showrooms and 3 state-of-the-art service workshops across Mumbai in a single view.
               </p>
             </Reveal>
           </div>
@@ -152,6 +152,12 @@ export default function LocationsPage() {
                             <Phone className="h-3.5 w-3.5" />
                             {loc.phone}
                           </a>
+
+                          {'hours' in loc && loc.hours && (
+                            <span className="text-[11px] font-medium text-muted">
+                              🕐 {loc.hours}
+                            </span>
+                          )}
 
                           <a
                             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(

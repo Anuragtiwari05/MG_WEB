@@ -141,7 +141,7 @@ export default function Footer() {
               <li className="flex gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-white/40" />
                 <span className="leading-relaxed">
-                  5th Floor, Modi House, Link Road, Malad (West), Mumbai – 400064
+                  Shakti Premises, New Link Rd, near Inorbit Mall, opposite Cloud Nine Hospital, Malad West, Mumbai – 400064
                 </span>
               </li>
               <li className="flex gap-3">
@@ -165,8 +165,7 @@ export default function Footer() {
               <li className="flex gap-3">
                 <Clock className="mt-0.5 h-4 w-4 shrink-0 text-white/40" />
                 <span className="leading-relaxed">
-                  Mon–Sat 10:00 AM–7:00 PM<br />
-                  Sun 10:00 AM–5:00 PM
+                  Mon–Sun 9:30 AM–6:30 PM
                 </span>
               </li>
             </ul>
