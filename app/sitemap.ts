@@ -1,12 +1,11 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL, cars, blogs } from "@/lib/data";
+import { SITE_URL, cars } from "@/lib/data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
     "/about",
     "/cars",
-    "/blogs",
     "/contact-us",
     "/book-a-test-drive",
     "/locate-service-centre",
@@ -31,12 +30,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const blogEntries: MetadataRoute.Sitemap = blogs.map((post) => ({
-    url: `${SITE_URL}/blogs/${post.slug}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
-
-  return [...staticEntries, ...carEntries, ...blogEntries];
+  return [...staticEntries, ...carEntries];
 }

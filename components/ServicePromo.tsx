@@ -6,7 +6,7 @@ import Reveal from "./Reveal";
 const items = [
   "Periodic maintenance on the manufacturer-recommended schedule, done right the first time.",
   "Only genuine, warranty-backed MG parts and accessories — never aftermarket substitutes.",
-  "Convenient free pickup and drop service for maintenance across the Mumbai and Thane region.",
+  "Convenient free pickup and drop service for maintenance across the Mumbai region.",
   "24x7 roadside assistance and extendable warranty plans for total peace of mind on every journey."
 ];
 

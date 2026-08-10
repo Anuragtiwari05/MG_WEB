@@ -11,7 +11,7 @@ const steps = [
   {
     num: "02",
     title: "Book a test drive",
-    description: "Select a date and visit your nearest MG Motor Mumbai outlet across Malad, Thane, or Navi Mumbai, or request a doorstep test drive."
+    description: "Select a date and visit your nearest MG Motor Mumbai showroom, or request a doorstep test drive."
   },
   {
     num: "03",

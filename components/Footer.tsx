@@ -22,7 +22,6 @@ const quickLinks = [
   { label: "Car Models", href: "/cars" },
   { label: "Service", href: "/locate-service-centre" },
   { label: "Locations", href: "/locations" },
-  { label: "Blogs", href: "/blogs" },
   { label: "Test Drive", href: "/book-a-test-drive" },
   { label: "Contact Us", href: "/contact-us" },
 ];
@@ -83,6 +82,7 @@ export default function Footer() {
                       <button
                         onClick={() => openTestDriveModal()}
                         className="text-xs font-semibold text-white/60 transition-colors hover:text-white cursor-pointer bg-transparent border-0 p-0 text-left"
+                        suppressHydrationWarning
                       >
                         {l.label}
                       </button>
@@ -155,12 +155,20 @@ export default function Footer() {
               </li>
               <li className="flex gap-3">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-white/40" />
-                <a
-                  href={`mailto:${company.email}`}
-                  className="transition-colors hover:text-white"
-                >
-                  {company.email}
-                </a>
+                <div className="flex flex-col gap-1">
+                  <a
+                    href={`mailto:${company.email}`}
+                    className="transition-colors hover:text-white"
+                  >
+                    {company.email}
+                  </a>
+                  <a
+                    href={`mailto:${company.emailSelect}`}
+                    className="transition-colors hover:text-white"
+                  >
+                    {company.emailSelect}
+                  </a>
+                </div>
               </li>
               <li className="flex gap-3">
                 <Clock className="mt-0.5 h-4 w-4 shrink-0 text-white/40" />

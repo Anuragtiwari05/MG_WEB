@@ -31,6 +31,7 @@ export default function FloatingActions() {
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle floating actions"
         className="absolute right-full top-1/2 flex h-12 w-5 -translate-y-1/2 items-center justify-center rounded-l-md border border-r-0 border-white/20 bg-brand text-white transition-colors hover:bg-brand-light"
+        suppressHydrationWarning
       >
         {isOpen ? (
           <ChevronRight className="h-3.5 w-3.5" />

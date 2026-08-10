@@ -231,12 +231,26 @@ export default function ContactUsClient() {
                     </span>
                     <div>
                       <p className="text-xs font-medium text-muted">Email Us</p>
-                      <a
-                        href="mailto:cem.krishiv.mum@mgselectdealer.co.in"
-                        className="text-sm font-semibold text-text transition-colors hover:text-brand"
-                      >
-                        cem.krishiv.mum@mgselectdealer.co.in
-                      </a>
+                      <div className="flex flex-col gap-1.5 mt-0.5">
+                        <div>
+                          <p className="text-[10px] uppercase tracking-wider text-muted font-bold">MG Motors</p>
+                          <a
+                            href="mailto:mumbaiwest.marketingmanager@mgdealer.co.in"
+                            className="text-sm font-semibold text-text transition-colors hover:text-brand"
+                          >
+                            mumbaiwest.marketingmanager@mgdealer.co.in
+                          </a>
+                        </div>
+                        <div>
+                          <p className="text-[10px] uppercase tracking-wider text-muted font-bold">MG Select (Premium/Worli)</p>
+                          <a
+                            href="mailto:cem.krishiv.mum@mgselectdealer.co.in"
+                            className="text-sm font-semibold text-text transition-colors hover:text-brand"
+                          >
+                            cem.krishiv.mum@mgselectdealer.co.in
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </li>
 

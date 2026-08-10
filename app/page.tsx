@@ -9,7 +9,6 @@ import BuyingSteps from "@/components/BuyingSteps";
 import ServicePromo from "@/components/ServicePromo";
 import Services from "@/components/Services";
 import Testimonials from "@/components/Testimonials";
-import Blogs from "@/components/Blogs";
 import FAQ from "@/components/FAQ";
 import Locations from "@/components/Locations";
 import Footer from "@/components/Footer";
@@ -29,7 +28,6 @@ export default function Home() {
         <ServicePromo />
         <Services />
         <Testimonials />
-        <Blogs />
         <FAQ />
         <Locations />
       </main>

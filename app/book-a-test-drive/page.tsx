@@ -4,7 +4,7 @@ import TestDriveClient from "./TestDriveClient";
 
 export const metadata: Metadata = {
   title: "Book a Test Drive | MG Motor Mumbai",
-  description: "Book a no-obligation MG test drive in Mumbai, Thane, or Navi Mumbai. Choose your model, preferred time and showroom or doorstep location online.",
+  description: "Book a no-obligation MG test drive in Mumbai or Navi Mumbai. Choose your model, preferred time and showroom or doorstep location online.",
   alternates: { canonical: "/book-a-test-drive" },
   keywords: [
     "MG test drive Mumbai",

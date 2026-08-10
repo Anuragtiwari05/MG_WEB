@@ -93,7 +93,7 @@ export default function AboutPage() {
                 </h2>
                 <div className="mt-5 space-y-4 text-sm font-light leading-relaxed text-white/75 sm:text-base">
                   <p>
-                    MG Motor Mumbai is an authorized JSW MG Motor India dealership, owned and operated by the <strong className="text-white font-semibold">{groupInfo.name}</strong>. We run state-of-the-art showrooms and service centers across Mumbai, Thane, Vasai, and Worli, serving over <strong className="text-white font-semibold">{company.stats.happyCustomers}</strong> satisfied owners.
+                    MG Motor Mumbai is an authorized JSW MG Motor India dealership, owned and operated by the <strong className="text-white font-semibold">{groupInfo.name}</strong>. We run state-of-the-art showrooms and service centers across Mumbai, Vasai, and Worli, serving over <strong className="text-white font-semibold">{company.stats.happyCustomers}</strong> satisfied owners.
                   </p>
                   <p>
                     From iconic British heritage and intelligent connected SUVs to zero-emission electric vehicles and luxury MPVs, our mission is to deliver unmatched customer satisfaction, transparent advice, and factory-trained technical support.

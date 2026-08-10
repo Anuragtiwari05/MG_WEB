@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "MG Motor Mumbai, authorised MG dealer in Mumbai and Thane";
+  "MG Motor Mumbai, authorised MG dealer in Mumbai";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -61,7 +61,7 @@ export default function OpengraphImage() {
             New MG Cars, Test Drives &amp; Service
           </span>
           <span style={{ fontSize: 34, color: "#f4f4f5", marginTop: 12 }}>
-            Authorised MG dealer in Mumbai &amp; Thane
+            Authorised MG dealer in Mumbai
           </span>
         </div>
 
