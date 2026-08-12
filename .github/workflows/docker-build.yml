@@ -37,7 +37,16 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # 4. Extract metadata (tags + labels)
+      # 4. GHCR requires lowercase repository names — the repo is
+      #    "Anuragtiwari05/MG_WEB" which contains uppercase, so compute a
+      #    lowercased version to use for the cache image reference.
+      - name: Lowercase image name
+        id: lower
+        run: echo "image_name=${IMAGE_NAME,,}" >> "$GITHUB_OUTPUT"
+        env:
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+
+      # 5. Extract metadata (tags + labels)
       #    Tags produced:
       #      • ghcr.io/<owner>/<repo>:sha-<short-sha>   (every commit)
       #      • ghcr.io/<owner>/<repo>:latest             (only on main/master)
@@ -52,7 +61,7 @@ jobs:
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
             type=ref,event=branch
 
-      # 5. Build and push
+      # 6. Build and push
       #    Cache goes to a SEPARATE *-cache package so the main package's
       #    "Latest" badge always points to the real production image.
       - name: Build and push Docker image
@@ -63,10 +72,10 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cache:buildcache
-          cache-to:   type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-cache:buildcache,mode=max
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ steps.lower.outputs.image_name }}-cache:buildcache
+          cache-to:   type=registry,ref=${{ env.REGISTRY }}/${{ steps.lower.outputs.image_name }}-cache:buildcache,mode=max
 
-      # 6. Delete the stale "buildcache" tag from the MAIN package (if it
+      # 7. Delete the stale "buildcache" tag from the MAIN package (if it
       #    exists from a previous workflow run) so the package page is clean.
       - name: Remove stale buildcache tag from main package
         env:
@@ -91,7 +100,7 @@ jobs:
             echo "No buildcache tag found in main package — nothing to clean up."
           fi
 
-      # 7. Print the published image tags to the job summary
+      # 8. Print the published image tags to the job summary
       - name: Image digest
         run: |
           echo "### ✅ Docker image published" >> $GITHUB_STEP_SUMMARY
