@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 
-const PHONE = "918697882371"; // 91 = India country code
+const PHONE = "918655918814"; // 91 = India country code
 const WA_URL = `https://wa.me/${PHONE}?text=${encodeURIComponent("Hi, I wanted to book a test drive")}`;
 
 export default function WhatsAppWidget() {
@@ -18,7 +18,7 @@ export default function WhatsAppWidget() {
         }`}
       >
         <span className="text-xs font-bold text-slate-700">Chat with us</span>
-        <span className="text-[10px] text-slate-400">+91 86978 82371</span>
+        <span className="text-[10px] text-slate-400">+91 86559 18814</span>
       </div>
 
       {/* WhatsApp Bubble */}

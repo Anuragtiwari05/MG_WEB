@@ -215,12 +215,12 @@ export default function ContactUsClient() {
                     <div>
                       <p className="text-xs font-medium text-muted">WhatsApp</p>
                       <a
-                        href="https://wa.me/917229051111"
+                        href="https://wa.me/918655918814"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm font-semibold text-text transition-colors hover:text-brand"
                       >
-                        72290 51111
+                        86559 18814
                       </a>
                     </div>
                   </li>
