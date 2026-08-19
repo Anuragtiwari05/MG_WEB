@@ -39,7 +39,7 @@ export default function FAQ({
               </p>
               
               <a
-                href="#offers"
+                href="#test-drive"
                 className="mt-8 group inline-flex items-center gap-2 rounded-full border border-black/15 bg-transparent px-6 py-3 text-xs font-bold uppercase tracking-wider text-black transition-all hover:bg-black hover:text-white"
               >
                 ASK US DIRECTLY

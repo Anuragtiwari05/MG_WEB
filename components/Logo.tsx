@@ -23,6 +23,15 @@ export default function Logo({ className = "", dark = false }: { className?: str
           Premium Dealership
         </span>
       </span>
+      <span className={`ml-1 h-6 w-px shrink-0 ${dark ? "bg-white/20" : "bg-border"}`} />
+      <Image
+        src="/images/mg-select-logo.png"
+        alt="MG Select"
+        title="MG Select"
+        width={84}
+        height={16}
+        className={`h-4 w-auto shrink-0 object-contain ${dark ? "invert brightness-0 filter" : ""}`}
+      />
     </Link>
   );
 }

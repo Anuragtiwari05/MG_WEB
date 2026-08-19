@@ -5,17 +5,11 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import { MapPin, Phone, Mail, Clock } from "@/components/icons";
+import { MapPin, Mail, Clock } from "@/components/icons";
 import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 import PhoneOtpGate from "@/components/PhoneOtpGate";
 import ReverifyModal from "@/components/ReverifyModal";
 import { submitLead } from "@/lib/submitLead";
-
-const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg viewBox="0 0 32 32" fill="currentColor" {...props}>
-    <path d="M16.001 2.667C8.637 2.667 2.667 8.637 2.667 16c0 2.363.63 4.587 1.728 6.517L2 30l7.72-2.347A13.273 13.273 0 0 0 16 29.333C23.363 29.333 29.333 23.363 29.333 16S23.363 2.667 16.001 2.667zm0 2.666A10.618 10.618 0 0 1 26.667 16c0 5.88-4.787 10.667-10.666 10.667a10.62 10.62 0 0 1-5.38-1.458l-.385-.225-4.583 1.394 1.35-4.42-.252-.4A10.593 10.593 0 0 1 5.333 16c0-5.88 4.787-10.667 10.668-10.667zm-3.56 5.333c-.213 0-.56.08-.853.4-.293.32-1.12 1.094-1.12 2.667 0 1.573 1.147 3.093 1.307 3.307.16.213 2.253 3.44 5.453 4.826 2.667 1.12 3.2 1.12 3.76 1.12.56 0 1.786-.507 2.04-1.76.253-1.253.04-2-.08-2.187-.133-.186-.213-.213-.4-.293-.186-.08-1.573-.8-1.813-.88-.24-.08-.413-.12-.587.12-.173.24-.666.88-.813 1.066-.147.187-.293.213-.533.08-.24-.133-1.013-.373-1.934-1.2-.72-.64-1.2-1.426-1.347-1.666-.147-.24-.013-.373.107-.493.107-.107.24-.28.36-.413.12-.133.16-.24.24-.4.08-.16.04-.307-.02-.427-.06-.12-.56-1.493-.787-2.013-.187-.48-.4-.44-.587-.44z" />
-  </svg>
-);
 
 export default function ContactUsClient() {
   const { verifiedPhone, resetVerification, isMounted } = usePhoneVerification();
@@ -161,7 +155,7 @@ export default function ContactUsClient() {
                 Get in Touch
               </h1>
               <p className="mt-3 max-w-xl text-sm text-white/80 sm:text-base">
-                Call 72290 51111, WhatsApp us, email us, or send a message and our team will get back to you.
+                Email us or send a message and our team will get back to you.
               </p>
             </Reveal>
           </div>
@@ -178,7 +172,7 @@ export default function ContactUsClient() {
                 Get in Touch
               </h2>
               <p className="mt-3 text-sm text-muted">
-                Reach our team by call, WhatsApp, email, or send a message here.
+                Reach our team by email, or send a message here.
               </p>
             </Reveal>
 
@@ -193,38 +187,6 @@ export default function ContactUsClient() {
                 </p>
 
                 <ul className="mt-6 space-y-4">
-                  <li className="flex items-start gap-3">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
-                      <Phone className="h-4 w-4" />
-                    </span>
-                    <div>
-                      <p className="text-xs font-medium text-muted">Call Us</p>
-                      <a
-                        href="tel:+917229051111"
-                        className="text-sm font-semibold text-text transition-colors hover:text-brand"
-                      >
-                        72290 51111
-                      </a>
-                    </div>
-                  </li>
-
-                  <li className="flex items-start gap-3">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
-                      <WhatsAppIcon className="h-4 w-4" />
-                    </span>
-                    <div>
-                      <p className="text-xs font-medium text-muted">WhatsApp</p>
-                      <a
-                        href="https://wa.me/918655918814"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm font-semibold text-text transition-colors hover:text-brand"
-                      >
-                        86559 18814
-                      </a>
-                    </div>
-                  </li>
-
                   <li className="flex items-start gap-3">
                     <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand/10 text-brand">
                       <Mail className="h-4 w-4" />

@@ -45,7 +45,7 @@ function LocationCard({ loc }: { loc: Loc }) {
         {/* Green Google Maps Search Button */}
         <div className="mt-4">
           <a
-            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.name + " " + loc.city + " " + loc.address)}`}
+            href={loc.gmb || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.name + " " + loc.city + " " + loc.address)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded bg-[#00ad8a] px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-wider text-white transition-all hover:bg-[#009677] hover:shadow-[0_0_12px_rgba(0,173,138,0.3)]"

@@ -19,7 +19,7 @@ const sora = Sora({
 
 const title = "MG Motor Mumbai: Premium Dealership - Test Drives & Service";
 const description =
-  "Book a free test drive or service at MG Motor Mumbai, an authorised MG dealer in Malad, Andheri & Navi Mumbai. Explore Hector, Windsor EV & ZS EV.";
+  "Book a free test drive or service at MG Motor Mumbai, an authorised MG dealer in Malad & Andheri. Explore Hector, Windsor EV & ZS EV.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -39,7 +39,6 @@ export const metadata: Metadata = {
     "MG Majestor price",
     "MG Hector",
     "MG ZS EV",
-    "authorised MG dealer Navi Mumbai",
   ],
   alternates: { canonical: "/" },
   robots: {

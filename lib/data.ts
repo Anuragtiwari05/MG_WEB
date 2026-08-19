@@ -34,7 +34,7 @@ export const company = {
   },
   hours: "Mon to Sun, 9:30 AM to 6:30 PM",
   hoursSpec: { days: "Mo-Su", opens: "09:30", closes: "18:30" },
-  areasServed: ["Mumbai", "Navi Mumbai", "Malad", "Andheri", "Vasai"],
+  areasServed: ["Mumbai", "Malad", "Andheri", "Vasai"],
   stats: {
     legacy: "100+ Years",
     happyCustomers: "50,000+",
@@ -2329,6 +2329,7 @@ export type Location = {
   phone: string;
   hours?: string;
   image: string;
+  gmb?: string;
 };
 
 export const locations: Location[] = [
@@ -2340,6 +2341,7 @@ export const locations: Location[] = [
     phone: "72290 51111",
     hours: "Mon–Sun, 9:30 AM – 6:30 PM",
     image: "/images/dealer-malad.png",
+    gmb: "https://share.google/tpg6bFcdA0OxuL48V",
   },
   {
     name: "MG Motor Krishiv Auto Showroom",
@@ -2349,6 +2351,7 @@ export const locations: Location[] = [
     phone: "72290 51111",
     hours: "Mon–Sun, 9:30 AM – 6:30 PM",
     image: "/images/dealer-vasai.png",
+    gmb: "https://share.google/pgv1qrHHqUn3Fq8V5",
   },
   {
     name: "MG Motor Krishiv Auto Showroom",
@@ -2358,6 +2361,7 @@ export const locations: Location[] = [
     phone: "72290 51111",
     hours: "Mon–Sun, 9:30 AM – 6:30 PM",
     image: "/images/dealer-prabhadevi.png",
+    gmb: "https://share.google/TLY62MwRT1uYg6ypD",
   },
   {
     name: "MG Motor Krishiv Auto Showroom",
@@ -2367,6 +2371,7 @@ export const locations: Location[] = [
     phone: "72290 51111",
     hours: "Mon–Sun, 9:30 AM – 6:30 PM",
     image: "/images/dealer-jogeshwari.jpg",
+    gmb: "https://share.google/B3eQan4eNWlPGztSU",
   },
   {
     name: "MG Select Mumbai",
@@ -2383,7 +2388,7 @@ export const workshops: Location[] = [
   {
     name: "MG Motor Krishiv Auto Service Center",
     type: "Service Centre",
-    city: "Kandivali",
+    city: "Malad",
     address: "301, New Link Rd, Opp Sonal Link Residency, Kandivali, Mithchowki, Malad West, Mumbai, Maharashtra 400064",
     phone: "72290 51111",
     image: "/images/dealer-malad.png",
@@ -2397,7 +2402,7 @@ export const workshops: Location[] = [
     image: "/images/dealer-jogeshwari.jpg",
   },
   {
-    name: "MG Motor Krishiv Auto Service Center",
+    name: "MG Select Service Center",
     type: "Service Centre",
     city: "Tokersy Jivraj",
     address: "MG South Shree Ram Cotton Press Compound, Tokersy Jivraj Rd, Railway Bridge, Opp Cotton Green Station, Mumbai 400015",
@@ -2415,5 +2420,5 @@ export const cityOptions = [
   "MG Motor Krishiv Auto Showroom (Jogeshwari)",
   "MG Select Mumbai (Worli)",
 ];
-export const testDriveImage = "/images/test-drive-interior.png";
+export const testDriveImage = "/images/zs-bn-dsc.jpg";
 

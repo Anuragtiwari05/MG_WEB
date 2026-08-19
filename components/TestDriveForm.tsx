@@ -4,13 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { cars, company, getCarTransparentImage, type Car } from "@/lib/data";
-import { Shield, X, CheckCircle, ArrowRight } from "@/components/icons";
+import { CheckCircle, ArrowRight } from "@/components/icons";
 import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 import ReverifyModal from "@/components/ReverifyModal";
 import CountryCodeSelect from "@/components/CountryCodeSelect";
 import { countryCodes, isValidPhoneForCountry, type Country } from "@/lib/countryCodes";
 import { submitLead } from "@/lib/submitLead";
-import { getUtmParams } from "@/lib/utm";
 
 function CarCard({
   car,
@@ -64,7 +63,7 @@ type Props = {
 export default function TestDriveForm({ presetCarId, onExit }: Props) {
   const isFromCarPage = Boolean(presetCarId);
 
-  /* ── PHONE + OTP GATE ── */
+  /* ── PHONE VERIFICATION GATE ── */
   const { verifiedPhone, verifyPhone, resetVerification, isMounted } = usePhoneVerification();
   const [reverifyOpen, setReverifyOpen] = useState(false);
   const [phone, setPhone] = useState("");
@@ -73,13 +72,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
   const [consent, setConsent] = useState(false);
   const [consentError, setConsentError] = useState("");
   const [sendingOtp, setSendingOtp] = useState(false);
-  const [otpModalOpen, setOtpModalOpen] = useState(false);
-  const [otp, setOtp] = useState("");
-  const [otpError, setOtpError] = useState("");
-  const [verifyingOtp, setVerifyingOtp] = useState(false);
   const [otpVerificationId, setOtpVerificationId] = useState<string | null>(null);
-  const [resent, setResent] = useState(false);
-  const otpInputRef = useRef<HTMLInputElement>(null);
   const mountedRef = useRef(true);
 
   const [mounted, setMounted] = useState(false);
@@ -99,18 +92,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
     }
   }, [verifiedPhone]);
 
-  useEffect(() => {
-    if (otpModalOpen) {
-      setOtp("");
-      setOtpError("");
-      setResent(false);
-      // autofocus once the modal has mounted
-      const t = setTimeout(() => otpInputRef.current?.focus(), 50);
-      return () => clearTimeout(t);
-    }
-  }, [otpModalOpen]);
-
-  const handleSendOtp = async (isResend = false) => {
+  const handleVerify = async () => {
     let isValid = true;
     if (!isValidPhoneForCountry(country.dial, phone)) {
       setPhoneError(
@@ -131,77 +113,19 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
     if (!isValid) return;
 
     setSendingOtp(true);
-    if (isResend) {
-      setOtp("");
-      setOtpError("");
-      setResent(false);
-    }
     try {
-      const res = await fetch("/api/otp/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          phoneNumber: `${country.dial}${phone}`,
-          formSource: isFromCarPage ? `test_drive_${presetCarId}` : "test_drive_pop_up",
-          ...getUtmParams(),
-        }),
-      });
-      const data = await res.json();
-      if (!mountedRef.current) return;
-
-      setOtpVerificationId(data.otpVerificationId || `fb-${Date.now()}`);
-      setOtpModalOpen(true);
-      if (isResend) {
-        setResent(true);
-        otpInputRef.current?.focus();
-      }
-    } catch (err) {
-      console.error("Send OTP failed:", err);
-      if (!mountedRef.current) return;
-      setOtpVerificationId(`fb-${Date.now()}`);
-      setOtpModalOpen(true);
-      if (isResend) setResent(true);
-    } finally {
-      if (mountedRef.current) setSendingOtp(false);
-    }
-  };
-
-  const handleVerifyOtp = async () => {
-    if (otp.length !== 4) {
-      setOtpError("Enter the 4-digit code sent to your phone");
-      return;
-    }
-    if (!otpVerificationId) {
-      setOtpError("Something went wrong. Please request a new code.");
-      return;
-    }
-    setOtpError("");
-    setVerifyingOtp(true);
-    try {
-      const res = await fetch("/api/otp/verify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ otpVerificationId, otpCode: otp }),
-      });
-      const data = await res.json();
-      if (!res.ok || !data.verified) throw new Error(data.error || "Verification failed");
-
-      if (!mountedRef.current) return;
-      setOtpModalOpen(false);
+      const verificationId = `no-otp-${Date.now()}`;
+      setOtpVerificationId(verificationId);
       verifyPhone(phone);
       submitLead("phone_capture", {
         phone_number: phone,
         form_source: isFromCarPage ? `test_drive_${presetCarId}` : "test_drive_pop_up",
-        otp_verification_id: otpVerificationId,
+        otp_verification_id: verificationId,
       }).catch((err) => {
         console.error("Phone capture failed:", err);
       });
-    } catch (err) {
-      console.error("Verify OTP failed:", err);
-      if (!mountedRef.current) return;
-      setOtpError(err instanceof Error ? err.message : "Incorrect code. Please try again.");
     } finally {
-      if (mountedRef.current) setVerifyingOtp(false);
+      if (mountedRef.current) setSendingOtp(false);
     }
   };
 
@@ -367,7 +291,6 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
     setPincode("");
     setAddress("");
     setNotes("");
-    setOtp("");
     setNameError("");
     setEmailError("");
     setPincodeError("");
@@ -420,10 +343,10 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
         {/* Form side */}
         <div className="flex flex-col justify-center px-6 py-10 sm:px-10 sm:py-12">
           <h3 className="font-display text-xl font-bold text-slate-900">
-            Verify your Mobile Number
+            Verify to Unlock Your Test Drive
           </h3>
           <p className="mt-1.5 text-xs text-slate-500 font-light">
-            To serve you better, please verify your phone number to proceed with your test drive booking.
+            Enter your mobile number and verify to unlock the test drive booking form.
           </p>
 
           <div className="mt-6 w-full">
@@ -442,7 +365,7 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
                   setPhone(e.target.value.replace(/\D/g, "").slice(0, country.dial === "+91" ? 10 : 14));
                   if (phoneError) setPhoneError("");
                 }}
-                onKeyDown={(e) => e.key === "Enter" && handleSendOtp()}
+                onKeyDown={(e) => e.key === "Enter" && handleVerify()}
                 className={`w-full rounded-lg border bg-white p-3 text-sm text-slate-800 outline-none transition-colors focus:ring-2 ${
                   phoneError
                     ? "border-red-300 focus:border-red-400 focus:ring-red-100"
@@ -488,18 +411,18 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
 
             <button
               type="button"
-              onClick={() => handleSendOtp()}
+              onClick={() => handleVerify()}
               disabled={sendingOtp}
               className="mt-5 flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-6 py-3.5 text-sm font-semibold text-white transition-all hover:bg-black cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
             >
               {sendingOtp ? (
                 <>
                   <span className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-                  Sending OTP...
+                  Verifying...
                 </>
               ) : (
                 <>
-                  Send OTP
+                  Verify &amp; Unlock Test Drive
                   <ArrowRight className="h-4 w-4" />
                 </>
               )}
@@ -507,105 +430,6 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
           </div>
         </div>
 
-        {/* ── OTP VERIFICATION POPUP ── */}
-        {otpModalOpen && mounted && typeof window !== "undefined"
-          ? createPortal(
-              <div
-                className="fixed inset-0 z-[250] flex items-center justify-center bg-black/55 backdrop-blur-sm p-4 animate-in fade-in duration-200"
-                onClick={(e) => {
-                  if (e.target === e.currentTarget) setOtpModalOpen(false);
-                }}
-              >
-                <div className="relative w-full max-w-sm rounded-2xl bg-white p-7 text-center shadow-2xl animate-[fade-up_.3s_ease-out_both] sm:p-8">
-                  <button
-                    type="button"
-                    onClick={() => setOtpModalOpen(false)}
-                    aria-label="Close"
-                    className="absolute right-4 top-4 rounded-full p-1.5 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700 cursor-pointer"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
-
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand/10 text-brand">
-                    <Shield className="h-6 w-6" />
-                  </div>
-
-                  <h3 className="mt-4 font-display text-xl font-bold text-slate-900">
-                    Verify OTP
-                  </h3>
-                  <p className="mt-1.5 text-xs text-slate-500 font-light">
-                    Enter the 4-digit code sent to{" "}
-                    <span className="font-semibold text-slate-800">{country.dial} {phone}</span>
-                  </p>
-
-                  <input
-                    ref={otpInputRef}
-                    type="text"
-                    inputMode="numeric"
-                    maxLength={4}
-                    value={otp}
-                    onChange={(e) => {
-                      setOtp(e.target.value.replace(/\D/g, "").slice(0, 4));
-                      if (otpError) setOtpError("");
-                    }}
-                    onKeyDown={(e) => e.key === "Enter" && handleVerifyOtp()}
-                    className={`mt-6 w-full rounded-lg border bg-white py-3 text-center text-2xl font-bold tracking-[0.5em] pl-[0.25em] text-slate-900 outline-none transition-colors focus:ring-2 ${
-                      otpError
-                        ? "border-red-300 focus:border-red-400 focus:ring-red-100"
-                        : "border-slate-200 focus:border-brand focus:ring-brand/20"
-                    }`}
-                    placeholder="••••"
-                  />
-                  {otpError && (
-                    <p className="mt-1.5 text-xs font-medium text-red-500">{otpError}</p>
-                  )}
-
-                  <p className="mt-3 text-xs text-slate-500">
-                    {resent ? (
-                      <span className="font-semibold text-green-600">OTP resent successfully.</span>
-                    ) : (
-                      <>
-                        Didn&apos;t receive the code?{" "}
-                        <button
-                          type="button"
-                          onClick={() => handleSendOtp(true)}
-                          disabled={sendingOtp}
-                          className="font-semibold text-brand underline underline-offset-2 hover:text-brand-light disabled:cursor-not-allowed disabled:opacity-60 cursor-pointer"
-                        >
-                          Resend OTP
-                        </button>
-                      </>
-                    )}
-                  </p>
-
-                  <button
-                    type="button"
-                    onClick={handleVerifyOtp}
-                    disabled={verifyingOtp}
-                    className="mt-6 flex w-full items-center justify-center gap-2 rounded bg-brand px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-light cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
-                  >
-                    {verifyingOtp ? (
-                      <>
-                        <span className="h-4 w-4 shrink-0 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-                        Verifying...
-                      </>
-                    ) : (
-                      "Verify OTP"
-                    )}
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setOtpModalOpen(false)}
-                    className="mt-3 text-xs font-semibold text-slate-500 transition-colors hover:text-brand cursor-pointer"
-                  >
-                    ← Change number
-                  </button>
-                </div>
-              </div>,
-              document.body
-            )
-          : null}
       </div>
     );
   }

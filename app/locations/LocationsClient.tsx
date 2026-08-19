@@ -160,7 +160,7 @@ export default function LocationsPage() {
                           )}
 
                           <a
-                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                            href={('gmb' in loc && loc.gmb) || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
                               loc.name + " " + loc.city + " " + loc.address
                             )}`}
                             target="_blank"

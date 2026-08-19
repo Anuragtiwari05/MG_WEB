@@ -9,20 +9,6 @@ import {
   mgIndiaFacts,
 } from "@/lib/data";
 
-const gmgStats = [
-  { value: "9", label: "Decades of Legacy" },
-  { value: "3,500+", label: "Global Talent" },
-  { value: "35+", label: "Global Presence" },
-  { value: "1 Lakh+", label: "Satisfied Customers" },
-];
-
-const dealerStats = [
-  { value: company.stats.carsSold, label: "New Cars Sold" },
-  { value: company.stats.usedCarsSold, label: "Used Cars Sold" },
-  { value: company.stats.servicesDone, label: "Services Completed" },
-  { value: company.stats.satisfaction, label: "Customer Satisfaction" },
-];
-
 export default function AboutPage() {
   return (
     <>
@@ -54,29 +40,6 @@ export default function AboutPage() {
                 Grounded in a legacy built on trust, passion, and motoring excellence. With nearly a century of progress behind us, we raise the bar in innovation and customer engagement.
               </p>
             </Reveal>
-          </div>
-        </section>
-
-        {/* STATS GRID SECTION (Exact numbers from gautammodigroup.com) */}
-        <section className="border-b border-white/10 bg-neutral-950 py-12 lg:py-16">
-          <div className="container-px mx-auto max-w-[1400px]">
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-              {gmgStats.map((s, i) => (
-                <Reveal
-                  key={s.label}
-                  delay={i * 80}
-                  variant="scale-up"
-                  className="relative rounded-2xl border border-white/10 bg-neutral-900/60 p-6 text-center transition-all hover:border-brand/50 hover:bg-neutral-900"
-                >
-                  <p className="font-display text-3xl font-black tracking-tight text-brand sm:text-4xl lg:text-5xl">
-                    {s.value}
-                  </p>
-                  <p className="mt-2 text-[11px] font-bold uppercase tracking-widest text-white/70">
-                    {s.label}
-                  </p>
-                </Reveal>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -138,31 +101,6 @@ export default function AboutPage() {
                   <p className="text-sm font-semibold text-white mt-1">Gautam Modi Group Corporate &amp; Showroom Network</p>
                 </div>
               </Reveal>
-            </div>
-          </div>
-        </section>
-
-        {/* DEALER STATS STRIP */}
-        <section className="border-b border-white/10 bg-neutral-950 py-12">
-          <div className="container-px mx-auto max-w-[1400px]">
-            <div className="rounded-2xl bg-neutral-900/60 py-10 px-6 border border-white/10">
-              <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-                {dealerStats.map((s, i) => (
-                  <Reveal
-                    key={s.label}
-                    delay={i * 90}
-                    variant="scale-up"
-                    className="text-center"
-                  >
-                    <p className="font-display text-2xl font-black text-brand sm:text-3xl lg:text-4xl">
-                      {s.value}
-                    </p>
-                    <p className="mt-1.5 text-xs font-bold uppercase tracking-wider text-white/60">
-                      {s.label}
-                    </p>
-                  </Reveal>
-                ))}
-              </div>
             </div>
           </div>
         </section>

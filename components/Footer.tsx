@@ -10,9 +10,7 @@ import {
   Clock,
   Facebook,
   Instagram,
-  Twitter,
   LinkedIn,
-  YouTube,
 } from "./icons";
 import { usePhoneVerification } from "@/components/PhoneVerificationContext";
 
@@ -33,11 +31,11 @@ const ourServices = [
 ];
 
 const socials = [
-  { Icon: Facebook, label: "Facebook", href: "https://www.facebook.com/MGMotorIN/" },
-  { Icon: Instagram, label: "Instagram", href: "https://www.instagram.com/mgmotorin/" },
-  { Icon: Twitter, label: "Twitter", href: "https://x.com/MGMotorIn" },
-  { Icon: YouTube, label: "YouTube", href: "https://www.youtube.com/MGMotorIndia" },
-  { Icon: LinkedIn, label: "LinkedIn", href: "https://in.linkedin.com/company/mg-motor-mumbai" },
+  { Icon: Instagram, label: "Instagram (Mumbai South)", href: "https://www.instagram.com/mgmotor_mumbaisouth?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
+  { Icon: Instagram, label: "Instagram (Vasai)", href: "https://www.instagram.com/mgmotor_vasai?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
+  { Icon: Instagram, label: "Instagram (Mumbai West)", href: "https://www.instagram.com/mgmotor_mumbaiwest?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" },
+  { Icon: Facebook, label: "Facebook", href: "https://www.facebook.com/mgmotormumbaiwest/" },
+  { Icon: LinkedIn, label: "LinkedIn", href: "https://www.linkedin.com/company/71848597/admin/dashboard/" },
 ];
 
 export default function Footer() {
@@ -51,7 +49,7 @@ export default function Footer() {
           <div className="col-span-2 lg:col-span-1">
             <Logo dark />
             <p className="mt-5 max-w-xs text-xs leading-relaxed text-white/60">
-              MG Motor Mumbai is an authorised MG dealership offering premium new car
+              MG Motor Mumbai & MG Select is an authorised JSW MG Motor India and MG Select dealership offering premium new car
               sales, professional service, and genuine MG parts in Mumbai.
             </p>
             <div className="mt-6 flex gap-2.5">
