@@ -1,0 +1,112 @@
+name: Build & Push Docker Image
+
+on:
+  push:
+    branches: ["**"]   # every branch, every commit
+  workflow_dispatch:   # allow manual trigger from GitHub UI
+
+env:
+  REGISTRY: ghcr.io
+  # Main image:  ghcr.io/<owner>/<repo>
+  # Cache image: ghcr.io/<owner>/<repo>-cache  ← separate so it never
+  #              overwrites the "Latest" badge on the main package page
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push:
+    name: Build Docker image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write   # needed to push to ghcr.io
+
+    steps:
+      # 1. Checkout source
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Set up Docker Buildx (multi-platform + layer caching)
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # 3. Log in to GitHub Container Registry
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # 4. GHCR requires lowercase repository names — the repo is
+      #    "Anuragtiwari05/MG_WEB" which contains uppercase, so compute a
+      #    lowercased version to use for the cache image reference.
+      - name: Lowercase image name
+        id: lower
+        run: echo "image_name=${IMAGE_NAME,,}" >> "$GITHUB_OUTPUT"
+        env:
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+
+      # 5. Extract metadata (tags + labels)
+      #    Tags produced:
+      #      • ghcr.io/<owner>/<repo>:sha-<short-sha>   (every commit)
+      #      • ghcr.io/<owner>/<repo>:latest             (only on main/master)
+      #      • ghcr.io/<owner>/<repo>:<branch-name>      (all other branches)
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=sha,prefix=sha-,format=short
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
+            type=ref,event=branch
+
+      # 6. Build and push
+      #    Cache goes to a SEPARATE *-cache package so the main package's
+      #    "Latest" badge always points to the real production image.
+      - name: Build and push Docker image
+        id: build-and-push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ steps.lower.outputs.image_name }}-cache:buildcache
+          cache-to:   type=registry,ref=${{ env.REGISTRY }}/${{ steps.lower.outputs.image_name }}-cache:buildcache,mode=max
+
+      # 7. Delete the stale "buildcache" tag from the MAIN package (if it
+      #    exists from a previous workflow run) so the package page is clean.
+      - name: Remove stale buildcache tag from main package
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OWNER="${{ github.repository_owner }}"
+          REPO="${{ github.event.repository.name }}"
+          # Find the package version whose name contains "buildcache"
+          VERSION_ID=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            "/user/packages/container/${REPO}/versions" \
+            --paginate \
+            --jq '.[] | select(.metadata.container.tags[] | contains("buildcache")) | .id' \
+            2>/dev/null || true)
+          if [ -n "$VERSION_ID" ]; then
+            echo "Deleting stale buildcache version $VERSION_ID from main package…"
+            gh api --method DELETE \
+              -H "Accept: application/vnd.github+json" \
+              "/user/packages/container/${REPO}/versions/${VERSION_ID}" && \
+              echo "Deleted." || echo "Delete failed (may need org-level token)."
+          else
+            echo "No buildcache tag found in main package — nothing to clean up."
+          fi
+
+      # 8. Print the published image tags to the job summary
+      - name: Image digest
+        run: |
+          echo "### ✅ Docker image published" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Tags:**" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.meta.outputs.tags }}" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "**Digest:** ${{ steps.build-and-push.outputs.digest }}" >> $GITHUB_STEP_SUMMARY
