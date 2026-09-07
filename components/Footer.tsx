@@ -73,7 +73,9 @@ export default function Footer() {
             </span>
             <p className="mt-5 max-w-xs text-xs leading-relaxed text-white/60">
               MG Motor Mumbai & MG Select is an authorised JSW MG Motor India and MG Select dealership offering premium new car
-              sales, professional service, and genuine MG parts in Mumbai.
+              sales, professional service, and genuine MG parts in Mumbai, with
+              showrooms in Malad, Vasai, Prabhadevi, Jogeshwari and Worli, and
+              service centres in Malad, Jogeshwari and Cotton Green.
             </p>
             <div className="mt-6 flex gap-2.5">
               {socials.map(({ Icon, label, href }) => (

@@ -86,24 +86,20 @@ export const groupInfo = {
   ],
   values: [
     {
-      title: "Customer First",
-      text: "Your satisfaction is our priority, from purchase to long-term ownership care.",
+      title: "Exploring New Horizons",
+      text: "Embracing new opportunities for growth and innovation.",
     },
     {
-      title: "Integrity",
-      text: "Honest, transparent, and trustworthy in everything we do.",
+      title: "Nurturing Talents",
+      text: "Empowering and developing our people to help them excel.",
     },
     {
-      title: "Innovation",
-      text: "Embracing new ideas and technologies to drive the future of mobility.",
+      title: "Process with Tenacity",
+      text: "Converting strategy into consistent, effective action.",
     },
     {
-      title: "Excellence",
-      text: "Delivering the highest standards in products, services, and operations.",
-    },
-    {
-      title: "Passion",
-      text: "Driven by our love for cars and the experiences they create for people.",
+      title: "Grandiose Experience",
+      text: "Creating meaningful experiences through recognition and service.",
     },
   ],
   headquarters:

@@ -98,7 +98,7 @@ export default function About() {
               Our Core Values
             </h3>
           </Reveal>
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {groupInfo.values.map((v, i) => (
               <Reveal
                 key={v.title}

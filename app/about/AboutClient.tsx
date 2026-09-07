@@ -57,11 +57,11 @@ export default function AboutPage() {
                   Who We Are
                 </p>
                 <h2 className="mt-2 font-display text-3xl font-black tracking-wide text-text sm:text-4xl">
-                  About MG Motor Mumbai &amp; Gautam Modi Group
+                  About MG Motor Mumbai
                 </h2>
                 <div className="mt-5 space-y-4 text-sm font-light leading-relaxed text-muted sm:text-base">
                   <p>
-                    MG Motor Mumbai is an authorized JSW MG Motor India dealership, owned and operated by the <strong className="text-text font-semibold">{groupInfo.name}</strong>. We run state-of-the-art showrooms and service centers across Mumbai, Vasai, and Worli, serving satisfied owners across the region.
+                    MG Motor Mumbai is an authorized JSW MG Motor India dealership, owned and operated by the <strong className="text-text font-semibold">{groupInfo.name}</strong>. We run state-of-the-art showrooms in Malad, Vasai, Prabhadevi, Jogeshwari and Worli, backed by service centers in Malad, Jogeshwari and Cotton Green, serving satisfied owners across the region.
                   </p>
                   <p>
                     From iconic British heritage and intelligent connected SUVs to zero-emission electric vehicles and luxury MPVs, our mission is to deliver unmatched customer satisfaction, transparent advice, and factory-trained technical support.
@@ -132,7 +132,7 @@ export default function AboutPage() {
                 Our Core Values
               </h2>
             </Reveal>
-            <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+            <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {groupInfo.values.map((v, i) => (
                 <Reveal
                   key={v.title}

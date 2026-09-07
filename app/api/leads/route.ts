@@ -115,8 +115,13 @@ export async function POST(req: NextRequest) {
 
     const { error } = await supabaseAdmin.from(table).insert(row);
     if (error) {
-      console.error(`[leads] Supabase insert into "${table}" failed:`, error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      console.error(`[leads] Supabase insert into "${table}" failed:`, {
+        code: error.code,
+        message: error.message,
+        details: error.details,
+        hint: error.hint,
+      });
+      return NextResponse.json({ error: error.message, code: error.code }, { status: 500 });
     }
 
     return NextResponse.json({ success: true });

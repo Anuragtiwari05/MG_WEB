@@ -27,12 +27,17 @@ export async function POST(req: NextRequest) {
     // Store in the in-memory OTP store — no external DB dependency.
     const otpVerificationId = saveFallbackOtp(phoneNumber, otpCode, formSource);
 
-    // Dispatch WhatsApp sending asynchronously (DO NOT BLOCK HTTP RESPONSE)
-    sendOtpWhatsapp(phoneNumber, otpCode).catch((waErr) => {
-      console.warn('[WhatsApp BG Send] Warning:', waErr);
-    });
+    // AWAIT the WhatsApp sending. 
+    // In serverless environments (like Netlify), returning a response immediately kills any background promises.
+    // We must wait for the fetch to complete, and we'll log the exact output.
+    try {
+      const waResponse = await sendOtpWhatsapp(phoneNumber, otpCode);
+      console.log(`[WhatsApp API Response]`, JSON.stringify(waResponse));
+    } catch (waErr) {
+      console.error('[WhatsApp API Fatal Error]:', waErr);
+    }
 
-    console.log(`[OTP Fast Sent] Phone: ${phoneNumber} | Code: ${otpCode} | ID: ${otpVerificationId}`);
+    console.log(`[OTP Sent] Phone: ${phoneNumber} | Code: ${otpCode} | ID: ${otpVerificationId}`);
 
     return NextResponse.json({ otpVerificationId });
   } catch (err: unknown) {

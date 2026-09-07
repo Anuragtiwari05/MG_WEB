@@ -154,7 +154,7 @@ export default function PhoneOtpGate({
       setOtpModalOpen(false);
       verifyPhone(phone);
       submitLead("phone_capture", {
-        phone_number: phone,
+        phone_number: `${country.dial}${phone}`,
         form_source: formSource,
         otp_verification_id: otpVerificationId,
       }).catch((err) => {
