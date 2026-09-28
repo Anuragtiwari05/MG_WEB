@@ -247,7 +247,6 @@ export default function TestDriveForm({ presetCarId, onExit }: Props) {
 
   const showroomOptions = [
     "Malad West (Link Road)",
-    "Jogeshwari East (JVLR, WEH)",
     "Prabhadevi (Century Bazaar)",
     "Vasai East (Sativali Road)",
     "Worli (MG Select Flagship)",

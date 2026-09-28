@@ -54,6 +54,11 @@ export const company = {
     youtube: "https://www.youtube.com/",
     linkedin: "https://www.linkedin.com/company/71848597/",
   },
+  socialSelect: {
+    facebook: "https://www.facebook.com/p/MG-Select-Mumbai-61574532844591/",
+    instagram: "https://www.instagram.com/mgselect_mumbai/",
+    linkedin: "https://www.linkedin.com/company/mgselect-krishivauto-mumbai/?originalSubdomain=in",
+  },
 };
 
 export const nav = {
@@ -143,7 +148,7 @@ export const aboutFaqData = [
   {
     question: "Is MG Motor Mumbai an authorized MG dealership?",
     answer:
-      "Yes. MG Motor Mumbai (Krishiv Auto) is an authorized JSW MG Motor India dealership, with state-of-the-art showrooms located in Jogeshwari, Prabhadevi, Malad, Vasai, and Worli.",
+      "Yes. MG Motor Mumbai (Krishiv Auto) is an authorized JSW MG Motor India dealership, with state-of-the-art showrooms located in Prabhadevi, Malad, Vasai, and Worli.",
   },
   {
     question: "What services does MG Motor Mumbai offer?",
@@ -153,7 +158,7 @@ export const aboutFaqData = [
   {
     question: "What areas do you cover in Mumbai?",
     answer:
-      "Our showrooms and workshops are strategically located across Mumbai, including Jogeshwari, Prabhadevi, Malad, Vasai, and Worli.",
+      "Our showrooms and workshops are strategically located across Mumbai, including Prabhadevi, Malad, Vasai, and Worli.",
   },
 ];
 
@@ -2028,20 +2033,6 @@ export const testimonials: Testimonial[] = [
     avatar: "/images/logo-mg.png",
   },
   {
-    name: "Dishant Doshi",
-    role: "MG Astor Owner · Jogeshwari",
-    rating: 5,
-    text: "My brother-in-law recently purchased an MG Astor from this showroom. The greeting, the staff, the information provided by everyone was impressive - nobody left you unnoticed or unattended. The delivery process was excellent. They made it a truly memorable moment.",
-    avatar: "/images/logo-mg.png",
-  },
-  {
-    name: "Aaditya Bhatt",
-    role: "Jogeshwari Showroom",
-    rating: 5,
-    text: "My overall experience was lovely - the staff were genuinely interested in assisting us and walked us through the entire feel, ethos and purpose of the launch. Very few showrooms take the time to share this much detail. Keep up the good work!",
-    avatar: "/images/logo-mg.png",
-  },
-  {
     name: "Amish Mehta",
     role: "MG Windsor Owner · Prabhadevi",
     rating: 5,
@@ -2076,7 +2067,7 @@ export const faqData = [
   {
     question: "Where are the showroom locations in Mumbai?",
     answer:
-      "Our showroom branches are located in Jogeshwari, Prabhadevi, Malad, Vasai, and Worli in Mumbai. Detailed addresses and contact details are available on our Contact Us page.",
+      "Our showroom branches are located in Prabhadevi, Malad, Vasai, and Worli in Mumbai. Detailed addresses and contact details are available on our Contact Us page.",
   },
   {
     question: "What is MG Select and how is it different?",
@@ -2510,7 +2501,7 @@ export type Location = {
 
 export const locations: Location[] = [
   {
-    name: "Modi MG Motor Krishiv Auto - Malad Showroom",
+    name: "MG Motor Mumbai Krishiv Auto - Malad Showroom",
     type: "Showroom",
     city: "Malad",
     address: "Shakti Premises, New Link Rd, near Inorbit Mall, opposite Cloud Nine Hospital, Malad, Ram Nagar, Malad West, Mumbai, Maharashtra 400064",
@@ -2523,7 +2514,7 @@ export const locations: Location[] = [
     cid: "978335010101520280",
   },
   {
-    name: "Modi MG Motor Krishiv Auto - Vasai Showroom",
+    name: "MG Motor Mumbai Krishiv Auto - Vasai Showroom",
     type: "Showroom",
     city: "Vasai",
     address: "Ground Floor Shop No 1 & 2, Rajprabha Industrial Estate Boidpada, Sativali Rd, Waliv, Golani Naka, Vasai East, Vasai-Virar, Maharashtra 401208",
@@ -2536,7 +2527,7 @@ export const locations: Location[] = [
     cid: "12582703504985258269",
   },
   {
-    name: "Modi MG Motor Krishiv Auto - Prabhadevi Showroom",
+    name: "MG Motor Mumbai Krishiv Auto - Prabhadevi Showroom",
     type: "Showroom",
     city: "Prabhadevi",
     address: "G-2, Electric Mansion, Plot-1086, Appasaheb Marathe Marg, Century Bazaar, Prabhadevi, Mumbai, Maharashtra 400025",
@@ -2549,20 +2540,7 @@ export const locations: Location[] = [
     cid: "5327794391287444801",
   },
   {
-    name: "Modi MG Motor Krishiv Auto - Jogeshwari Showroom",
-    type: "Showroom",
-    city: "Jogeshwari",
-    address: "CTS 227, Service Road Near Junction Of JVLR, &, Western Express Hwy, opposite Balsaheb Thackrey Hospital, Gupha Tekdi, Jogeshwari East, Mumbai, Maharashtra 400060",
-    phone: "72290 51111",
-    hours: "Mon–Sun, 9:30 AM – 6:30 PM",
-    image: "/images/dealer-jogeshwari.jpg",
-    gmb: "https://share.google/B3eQan4eNWlPGztSU",
-    lat: 19.1397491,
-    lng: 72.8553842,
-    cid: "99843755307466599",
-  },
-  {
-    name: "Modi MG Select Mumbai - Worli Showroom",
+    name: "MG Select Mumbai Krishiv Auto - Worli Showroom",
     type: "Showroom",
     city: "Worli",
     address: "Atur House, 87, Dr Annie Besant Rd, Tulsi Vihar, Siddharth Nagar, Worli, Mumbai, Maharashtra 400018",
@@ -2577,7 +2555,7 @@ export const locations: Location[] = [
 
 export const workshops: Location[] = [
   {
-    name: "Modi MG Motor Krishiv Auto - Malad Service Center",
+    name: "MG Motor Mumbai Krishiv Auto - Malad Service Center",
     type: "Service Centre",
     city: "Malad",
     address: "301, New Link Rd, Opp Sonal Link Residency, Kandivali, Mithchowki, Malad West, Mumbai, Maharashtra 400064",
@@ -2588,7 +2566,7 @@ export const workshops: Location[] = [
     cid: "1170355283868899667",
   },
   {
-    name: "Modi MG Motor Krishiv Auto - Jogeshwari Service Center",
+    name: "MG Motor Mumbai Krishiv Auto - Jogeshwari Service Center",
     type: "Service Centre",
     city: "Jogeshwari",
     address: "CTS 227, Service Rd near JVLR, Western Express Hwy, Beside MG Showroom, Jogeshwari East, Mumbai, Maharashtra 400060",
@@ -2599,7 +2577,7 @@ export const workshops: Location[] = [
     cid: "13847223898451402819",
   },
   {
-    name: "Modi MG Select - Tokersy Jivraj Service Center",
+    name: "MG Select Mumbai Krishiv Auto - Tokersy Jivraj Service Center",
     type: "Service Centre",
     city: "Tokersy Jivraj",
     address: "MG South Shree Ram Cotton Press Compound, Tokersy Jivraj Rd, Railway Bridge, Opp Cotton Green Station, Mumbai 400015",
@@ -2614,11 +2592,9 @@ export const workshops: Location[] = [
 export const popularCars = cars.slice(0, 3);
 export const carModels = cars.map((c) => c.name);
 export const cityOptions = [
-  "MG Motor Krishiv Auto Showroom (Malad)",
-  "MG Motor Krishiv Auto Showroom (Vasai)",
-  "MG Motor Krishiv Auto Showroom (Prabhadevi)",
-  "MG Motor Krishiv Auto Showroom (Jogeshwari)",
-  "MG Select Mumbai (Worli)",
+  "MG Motor Mumbai Krishiv Auto - Malad Showroom",
+  "MG Motor Mumbai Krishiv Auto - Vasai Showroom",
+  "MG Motor Mumbai Krishiv Auto - Prabhadevi Showroom",
+  "MG Select Mumbai Krishiv Auto - Worli Showroom",
 ];
 export const testDriveImage = "/images/zs-bn-dsc.jpg";
-

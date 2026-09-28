@@ -14,8 +14,8 @@ function LocationCard({ loc }: { loc: Loc }) {
     <article className="group relative aspect-square w-full overflow-hidden rounded-lg">
       <Image
         src={loc.image}
-        alt={`MG Motor Mumbai ${loc.name} ${loc.city}`}
-        title={`MG Motor Mumbai ${loc.name} ${loc.city}`}
+        alt={loc.name}
+        title={loc.name}
         fill
         sizes="(max-width: 640px) 78vw, (max-width: 1024px) 50vw, 33vw"
         className="object-cover transition-transform duration-500 ease-out group-hover:scale-110"
@@ -27,7 +27,7 @@ function LocationCard({ loc }: { loc: Loc }) {
         </span>
 
         <h3 className="font-display text-sm font-semibold leading-snug text-white">
-          {loc.name} - {loc.city}
+          {loc.name}
         </h3>
 
         <p className="mt-1 flex items-center gap-1 text-[11px] text-white/75">
@@ -71,7 +71,7 @@ export default function Locations() {
               FIND US NEAR YOU
             </h2>
             <p className="mt-2 text-sm text-white/70">
-              Explore our state-of-the-art showrooms and service centres across Mumbai - Malad, Vasai, Prabhadevi, Jogeshwari & Worli.
+              Explore our state-of-the-art showrooms and service centres across Mumbai.
             </p>
           </div>
           <div className="flex shrink-0 items-center">

@@ -140,7 +140,7 @@ function WorkshopCard({ w }: { w: Location }) {
           {w.type}
         </span>
         <h3 className="font-display text-base font-extrabold leading-snug text-white">
-          {w.name} ({w.city})
+          {w.name}
         </h3>
         <p className="mt-2 flex items-start gap-1.5 text-[11px] text-white/70">
           <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand" />
@@ -505,8 +505,8 @@ export default function LocateServiceCentrePage() {
                       >
                         <option value="" disabled className="text-muted">Select Service Centre</option>
                         {workshops.map((w) => (
-                          <option key={w.city} value={`${w.name} (${w.city})`}>
-                            {w.name} ({w.city})
+                          <option key={w.city} value={w.name}>
+                            {w.name}
                           </option>
                         ))}
                       </select>

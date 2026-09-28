@@ -30,10 +30,16 @@ const ourServices = [
   { label: "Genuine Parts", href: "/locate-service-centre" },
 ];
 
-const socials = [
+const motorSocials = [
   { Icon: Instagram, label: "Instagram", href: company.social.instagram },
   { Icon: Facebook, label: "Facebook", href: company.social.facebook },
   { Icon: LinkedIn, label: "LinkedIn", href: company.social.linkedin },
+];
+
+const selectSocials = [
+  { Icon: Instagram, label: "Instagram", href: company.socialSelect.instagram },
+  { Icon: Facebook, label: "Facebook", href: company.socialSelect.facebook },
+  { Icon: LinkedIn, label: "LinkedIn", href: company.socialSelect.linkedin },
 ];
 
 export default function Footer() {
@@ -74,21 +80,34 @@ export default function Footer() {
             <p className="mt-5 max-w-xs text-xs leading-relaxed text-white/60">
               MG Motor Mumbai & MG Select is an authorised JSW MG Motor India and MG Select dealership offering premium new car
               sales, professional service, and genuine MG parts in Mumbai, with
-              showrooms in Malad, Vasai, Prabhadevi, Jogeshwari and Worli, and
+              showrooms in Malad, Vasai, Prabhadevi and Worli, and
               service centres in Malad, Jogeshwari and Cotton Green.
             </p>
-            <div className="mt-6 flex gap-2.5">
-              {socials.map(({ Icon, label, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Follow MG Motor Mumbai on ${label}`}
-                  className="grid h-11 w-11 place-items-center rounded border border-white/15 text-white/60 transition-all hover:border-white/40 hover:text-white"
-                >
-                  <Icon className="h-4 w-4" />
-                </a>
+            <div className="mt-6 space-y-3">
+              <p className="text-xs font-bold uppercase tracking-wider text-white">Follow Us</p>
+              {[
+                { name: "MG Motor", socials: motorSocials },
+                { name: "MG Select", socials: selectSocials },
+              ].map(({ name, socials }) => (
+                <div key={name} className="flex items-center gap-3">
+                  <span className="w-20 shrink-0 text-xs font-bold uppercase tracking-wider text-white/80">
+                    {name}
+                  </span>
+                  <div className="flex gap-2.5">
+                    {socials.map(({ Icon, label, href }) => (
+                      <a
+                        key={label}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Follow ${name} Mumbai on ${label}`}
+                        className="grid h-11 w-11 place-items-center rounded border border-white/15 text-white/60 transition-all hover:border-white/40 hover:text-white"
+                      >
+                        <Icon className="h-4 w-4" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </div>

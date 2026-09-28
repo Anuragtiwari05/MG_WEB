@@ -23,7 +23,7 @@ export default function AboutPage() {
         {/* BANNER / HERO SECTION */}
         <section className="relative min-h-[420px] w-full overflow-hidden bg-neutral-950 sm:min-h-[480px] flex items-center border-b border-white/10">
           <Image
-            src="/images/dealer-jogeshwari.jpg"
+            src="/images/dealer-malad.png"
             alt="MG Motor Mumbai Showroom"
             title="MG Motor Mumbai Showroom"
             fill
@@ -61,7 +61,7 @@ export default function AboutPage() {
                 </h2>
                 <div className="mt-5 space-y-4 text-sm font-light leading-relaxed text-muted sm:text-base">
                   <p>
-                    MG Motor Mumbai is an authorized JSW MG Motor India dealership, owned and operated by the <strong className="text-text font-semibold">{groupInfo.name}</strong>. We run state-of-the-art showrooms in Malad, Vasai, Prabhadevi, Jogeshwari and Worli, backed by service centers in Malad, Jogeshwari and Cotton Green, serving satisfied owners across the region.
+                    MG Motor Mumbai is an authorized JSW MG Motor India dealership, owned and operated by the <strong className="text-text font-semibold">{groupInfo.name}</strong>. We run state-of-the-art showrooms in Malad, Vasai, Prabhadevi and Worli, backed by service centers in Malad, Jogeshwari and Cotton Green, serving satisfied owners across the region.
                   </p>
                   <p>
                     From iconic British heritage and intelligent connected SUVs to zero-emission electric vehicles and luxury MPVs, our mission is to deliver unmatched customer satisfaction, transparent advice, and factory-trained technical support.
@@ -108,7 +108,7 @@ export default function AboutPage() {
                 Whether you are buying your first MG, upgrading to an electric SUV, or arranging routine service, our showroom and service teams provide practical help close to home. Visit MG Motor Mumbai across the city for new MG cars, test drives, genuine parts, and expert service support.
               </p>
               <div className="mt-5 flex flex-wrap gap-2">
-                {["Malad", "Jogeshwari", "Prabhadevi", "Vasai", "Worli"].map((loc) => (
+                {["Malad", "Prabhadevi", "Vasai", "Worli"].map((loc) => (
                   <span
                     key={loc}
                     className="rounded-full border border-white/20 px-3 py-1 text-xs font-semibold text-white/90"
