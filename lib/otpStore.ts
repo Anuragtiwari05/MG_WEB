@@ -36,7 +36,7 @@ function cleanupExpired() {
 // go. Resets once the window passes or the number is successfully verified.
 const sendAttemptsMap: Map<string, SendAttempts> = g.__otpSendAttempts ?? (g.__otpSendAttempts = new Map());
 const MAX_OTP_SENDS = 3;
-const SEND_WINDOW_MS = 15 * 60 * 1000;
+const SEND_WINDOW_MS = 60 * 60 * 1000;
 
 export function checkOtpSendLimit(phoneNumber: string): {
   allowed: boolean;

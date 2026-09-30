@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { sendOtpWhatsapp } from '@/lib/whatsapp';
+import { sendOtpSms } from '@/lib/sms';
 import { saveFallbackOtp, checkOtpSendLimit } from '@/lib/otpStore';
 
 export const dynamic = 'force-dynamic';
@@ -27,14 +27,14 @@ export async function POST(req: NextRequest) {
     // Store in the in-memory OTP store — no external DB dependency.
     const otpVerificationId = saveFallbackOtp(phoneNumber, otpCode, formSource);
 
-    // AWAIT the WhatsApp sending. 
+    // AWAIT the SMS sending.
     // In serverless environments (like Netlify), returning a response immediately kills any background promises.
     // We must wait for the fetch to complete, and we'll log the exact output.
     try {
-      const waResponse = await sendOtpWhatsapp(phoneNumber, otpCode);
-      console.log(`[WhatsApp API Response]`, JSON.stringify(waResponse));
-    } catch (waErr) {
-      console.error('[WhatsApp API Fatal Error]:', waErr);
+      const smsResponse = await sendOtpSms(phoneNumber, otpCode);
+      console.log(`[SMS API Response]`, JSON.stringify(smsResponse));
+    } catch (smsErr) {
+      console.error('[SMS API Fatal Error]:', smsErr);
     }
 
     console.log(`[OTP Sent] Phone: ${phoneNumber} | Code: ${otpCode} | ID: ${otpVerificationId}`);
