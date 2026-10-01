@@ -158,7 +158,7 @@ export const aboutFaqData = [
   {
     question: "What areas do you cover in Mumbai?",
     answer:
-      "Our showrooms and workshops are strategically located across Mumbai, including Prabhadevi, Malad, Vasai, and Worli.",
+      "Our showrooms and workshops are strategically located across Mumbai, including Prabhadevi, Malad, Vasai, Worli, and Cotton Green.",
   },
 ];
 
@@ -2001,7 +2001,7 @@ export type Testimonial = {
 };
 
 // Real 5-star Google reviews from our own showroom listings (Malad, Vasai,
-// Jogeshwari, Prabhadevi/Worli) — lightly trimmed for length/typos, meaning
+// Prabhadevi/Worli) — lightly trimmed for length/typos, meaning
 // and names kept as written by the reviewer.
 export const testimonials: Testimonial[] = [
   {
@@ -2566,20 +2566,9 @@ export const workshops: Location[] = [
     cid: "1170355283868899667",
   },
   {
-    name: "MG Motor Mumbai Krishiv Auto - Jogeshwari Service Center",
+    name: "MG Select Mumbai Krishiv Auto - Cotton Green Service Center",
     type: "Service Centre",
-    city: "Jogeshwari",
-    address: "CTS 227, Service Rd near JVLR, Western Express Hwy, Beside MG Showroom, Jogeshwari East, Mumbai, Maharashtra 400060",
-    phone: "72290 51111",
-    image: "/images/dealer-jogeshwari.jpg",
-    lat: 19.1399155,
-    lng: 72.8553706,
-    cid: "13847223898451402819",
-  },
-  {
-    name: "MG Select Mumbai Krishiv Auto - Tokersy Jivraj Service Center",
-    type: "Service Centre",
-    city: "Tokersy Jivraj",
+    city: "Cotton Green",
     address: "MG South Shree Ram Cotton Press Compound, Tokersy Jivraj Rd, Railway Bridge, Opp Cotton Green Station, Mumbai 400015",
     phone: "72290 51111",
     image: "/images/dealer-prabhadevi.png",

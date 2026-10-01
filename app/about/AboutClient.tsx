@@ -61,7 +61,7 @@ export default function AboutPage() {
                 </h2>
                 <div className="mt-5 space-y-4 text-sm font-light leading-relaxed text-muted sm:text-base">
                   <p>
-                    MG Motor Mumbai is an authorized JSW MG Motor India dealership, owned and operated by the <strong className="text-text font-semibold">{groupInfo.name}</strong>. We run state-of-the-art showrooms in Malad, Vasai, Prabhadevi and Worli, backed by service centers in Malad, Jogeshwari and Cotton Green, serving satisfied owners across the region.
+                    MG Motor Mumbai is an authorized JSW MG Motor India dealership, owned and operated by the <strong className="text-text font-semibold">{groupInfo.name}</strong>. We run state-of-the-art showrooms in Malad, Vasai, Prabhadevi and Worli, backed by service centers in Malad and Cotton Green, serving satisfied owners across the region.
                   </p>
                   <p>
                     From iconic British heritage and intelligent connected SUVs to zero-emission electric vehicles and luxury MPVs, our mission is to deliver unmatched customer satisfaction, transparent advice, and factory-trained technical support.

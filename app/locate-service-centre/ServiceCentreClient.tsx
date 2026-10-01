@@ -68,7 +68,7 @@ const serviceInfoBlocks = [
     paragraphs: [
       "Every part we fit at an MG Motor Mumbai service centre is a genuine JSW MG component, sourced directly from MG Motor India and engineered for the exact model we are servicing.",
       "Aftermarket substitutes may look similar but differ in material grade and tolerances, and that gap shows up over time as faster wear and reduced reliability. Fitting genuine parts protects your car's performance, safety, and resale value.",
-      "Our parts counter is open to retail customers across Malad, Jogeshwari, Prabhadevi, Vasai, and Worli, so you can pick up genuine MG parts and accessories whether or not your car is in for service.",
+      "Our parts counter is open to retail customers across Malad, Prabhadevi, Vasai, and Worli, so you can pick up genuine MG parts and accessories whether or not your car is in for service.",
     ],
     checklist: [
       "Engineered and tested by MG for your exact model",

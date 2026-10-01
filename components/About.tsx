@@ -41,7 +41,7 @@ export default function About() {
               <p>
                 MG Motor Mumbai is an authorised MG dealership, owned and
                 operated by the {groupInfo.name}. We run state-of-the-art showrooms and
-                service centres across Mumbai (Malad, Vasai, Prabhadevi & Jogeshwari), and we have served over{" "}
+                service centres across Mumbai (Malad, Vasai & Prabhadevi), and we have served over{" "}
                 {company.stats.happyCustomers} happy customers.
               </p>
               <p>

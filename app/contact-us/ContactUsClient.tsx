@@ -14,7 +14,7 @@ import { company } from "@/lib/data";
 
 const brandInfo = {
   motors: {
-    label: "MG Motors",
+    label: "MG Motors Mumbai",
     phone: company.phone,
     phoneE164: company.phoneE164,
     email: company.email,
@@ -22,7 +22,7 @@ const brandInfo = {
     hours: company.hours,
   },
   select: {
-    label: "MG Select",
+    label: "MG Select Mumbai",
     phone: company.phoneSelect,
     phoneE164: company.phoneSelectE164,
     email: company.emailSelect,
