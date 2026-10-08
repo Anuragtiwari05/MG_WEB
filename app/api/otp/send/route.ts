@@ -1,3 +1,4 @@
+import { randomInt } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { sendOtpSms } from '@/lib/sms';
 import { saveFallbackOtp, checkOtpSendLimit } from '@/lib/otpStore';
@@ -22,7 +23,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const otpCode = Math.floor(1000 + Math.random() * 9000).toString();
+    const otpCode = randomInt(1000, 10000).toString();
 
     // Store in the in-memory OTP store — no external DB dependency.
     const otpVerificationId = saveFallbackOtp(phoneNumber, otpCode, formSource);

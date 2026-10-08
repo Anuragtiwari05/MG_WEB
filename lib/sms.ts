@@ -1,14 +1,14 @@
 export async function sendOtpSms(phoneNumber: string, otpCode: string) {
-  if (!process.env.SMS_API_KEY) {
-    console.warn("[SMS OTP] API key missing in environment. Code generated:", otpCode);
+  if (!process.env.SMS_API_KEY || !process.env.SMS_TEMPLATE_ID) {
+    console.warn("[SMS OTP] SMS_API_KEY or SMS_TEMPLATE_ID missing in environment. Code generated:", otpCode);
     return { status: "skipped_no_creds" };
   }
 
   const number = phoneNumber.replace(/\D/g, "");
-  const text = `Your Modi MG verification code is ${otpCode} It expires in 10 minutes. Do not share this code with anyone.`;
+  const text = `Your MG Motor Mumbai verification code is ${otpCode}. It expires in 10 minutes. Do not share this code with anyone.`;
 
   const url =
-    `https://alotsolutions.in/api/mt/SendSMS` +
+    `https://alotsolutions.in/api/bulkmt/SendSMS` +
     `?user=MGKrishiv` +
     `&apikey=${encodeURIComponent(process.env.SMS_API_KEY)}` +
     `&senderid=KRISHV` +
@@ -17,7 +17,7 @@ export async function sendOtpSms(phoneNumber: string, otpCode: string) {
     `&flashsms=0` +
     `&number=${encodeURIComponent(number)}` +
     `&text=${encodeURIComponent(text)}` +
-    `&DLTTemplateId=1177179067510290531`;
+    `&DLTTemplateId=${encodeURIComponent(process.env.SMS_TEMPLATE_ID)}`;
 
   try {
     const res = await fetch(url, { method: 'GET' });
