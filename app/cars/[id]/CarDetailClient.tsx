@@ -67,6 +67,8 @@ const getBestFor = (id: string) => {
     case "windsor-ev": return "City commuters looking for a luxurious, spacious electric crossover utility vehicle.";
     case "comet-ev": return "Urban commuters seeking a compact, highly maneuverable, and smart city electric vehicle.";
     case "majestor": return "Elite travelers and executives seeking supreme business-class comfort and heavy-duty SUV road presence.";
+    case "hector-tomahawk-ev": return "Families wanting a long-range 5 or 7-seater electric SUV from the Hector family.";
+    case "hector-tomahawk-phev": return "Families wanting a 7-seater with pure-electric city driving and petrol range for long trips.";
     case "m9": return "VVIPs and large families wanting the pinnacle of luxury, silent, and clean electric MPV mobility.";
     case "cyberster": return "Sports car enthusiasts wanting pure open-top electric roadster thrills and jaw-dropping styling.";
     default: return "Buyers seeking premium luxury, safety, and modern connected vehicle technology.";
@@ -344,7 +346,7 @@ export default function CarDetailClient({ car }: Props) {
                 
                 <div className="mt-5 flex items-baseline gap-2 border-t border-slate-100 pt-5">
                   <span className="font-display text-3xl font-black text-brand">
-                    {formatINR(car.priceINR)}
+                    {formatINR(car.priceINR)}{car.priceNote ? ` ${car.priceNote}` : ""}
                   </span>
                   <span className="text-xs font-semibold text-slate-400">
                     *Ex-showroom price
@@ -364,10 +366,12 @@ export default function CarDetailClient({ car }: Props) {
                     <dt className="text-xs font-semibold text-muted">Mileage / range</dt>
                     <dd className="mt-0.5 text-sm font-bold text-text leading-snug">{car.mileage}</dd>
                   </div>
-                  <div>
-                    <dt className="text-xs font-semibold text-muted">Boot space</dt>
-                    <dd className="mt-0.5 text-sm font-bold text-text leading-snug">{car.bootSpace}</dd>
-                  </div>
+                  {car.bootSpace && (
+                    <div>
+                      <dt className="text-xs font-semibold text-muted">Boot space</dt>
+                      <dd className="mt-0.5 text-sm font-bold text-text leading-snug">{car.bootSpace}</dd>
+                    </div>
+                  )}
                   <div className="col-span-2 sm:col-span-3">
                     <dt className="text-xs font-semibold text-muted">Best for</dt>
                     <dd className="mt-0.5 text-sm font-medium text-text leading-snug">{getBestFor(car.id)}</dd>
@@ -838,7 +842,9 @@ export default function CarDetailClient({ car }: Props) {
   );
 }
 
-function SpecCard({ title, items }: { title: string; items: string[][] }) {
+function SpecCard({ title, items: allItems }: { title: string; items: (string | undefined)[][] }) {
+  const items = allItems.filter(([, value]) => value) as string[][];
+  if (items.length === 0) return null;
   return (
     <Reveal className="rounded-xl border border-border bg-white p-6 sm:p-7">
       <h3 className="border-b border-border pb-4 text-xs font-black tracking-[0.13em] text-text">{title}</h3>

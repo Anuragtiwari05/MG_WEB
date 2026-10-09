@@ -75,7 +75,7 @@ export default function AboutPage() {
                 className="relative min-h-[340px] overflow-hidden rounded-2xl lg:min-h-[440px] border border-border shadow-xl"
               >
                 <Image
-                  src="https://bunny-wp-pullzone-cghvklkcns.b-cdn.net/wp-content/uploads/2026/05/GNP01423.JPG-2048x1365.jpeg"
+                  src="/images/remote/bunny-wp-pullzone-cghvklkcns-10.jpg"
                   alt="Gautam Modi Group Headquarters & Team"
                   title="Gautam Modi Group Headquarters & Team"
                   fill

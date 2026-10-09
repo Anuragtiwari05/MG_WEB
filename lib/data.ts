@@ -168,6 +168,7 @@ export type Slide = {
   headline: string;
   sub: string;
   price: string;
+  priceNote?: string;
   image: string;
   alt: string;
   features: string[];
@@ -185,7 +186,7 @@ export const heroSlides: Slide[] = [
     badge: "PURE ELECTRIC SUV",
     headline: "MG ZS EV",
     sub: "Advanced tech meets clean electric power with Level 2 ADAS safety.",
-    price: "18.98",
+    price: "13.00",
     // Plain road photo, no baked-in text — same fix as Cyberster/M9 above.
     image: "/images/zs-bn-dsc.jpg",
     alt: "MG ZS EV Banner",
@@ -209,7 +210,7 @@ export const heroSlides: Slide[] = [
     badge: "TECH-FORWARD SUV",
     headline: "MG ASTOR",
     sub: "Premium design featuring Personal AI Assistant robot on your dashboard.",
-    price: "9.98",
+    price: "9.65",
     image: "/images/as-bn-dsc.jpg",
     alt: "MG Astor Banner",
     features: [],
@@ -219,7 +220,7 @@ export const heroSlides: Slide[] = [
     badge: "INTERNET SUV",
     headline: "BOLD & POWERFUL",
     sub: "Make a statement with an Argyle-inspired front grille and Level 2 ADAS.",
-    price: "11.99",
+    price: "12.14",
     image: "/images/hector-bn-dsc.jpg",
     video: "/videos/mgi-hector-vd-dsc-005-clean.mp4",
     alt: "MG Hector SUV",
@@ -230,11 +231,23 @@ export const heroSlides: Slide[] = [
     features: ["i-SWIPE", "AURA HEX GRILLE", "AURA SCULPT BUMPERS", "AURA BOLT ALLOY WHEELS"],
   },
   {
+    model: "MG HECTOR TOMAHAWK",
+    badge: "EV & PHEV",
+    headline: "HECTOR TOMAHAWK",
+    sub: "Up to 517 km on a single charge. Also available as a 7-seater PHEV with 1,100+ km combined range.",
+    price: "13.99",
+    priceNote: "+ ₹4.90/km",
+    exploreSlug: "hector-tomahawk-ev",
+    image: "/images/hector-tomahawk-hero.jpg",
+    alt: "MG Hector Tomahawk EV",
+    features: ["517 KM RANGE", "5 & 7 SEATER", "PHEV AVAILABLE"],
+  },
+  {
     model: "MG MAJESTOR",
     badge: "PREMIUM 7-SEATER SUV",
     headline: "MG MAJESTOR",
     sub: "The best 7-seater premium SUV.",
-    price: "39.99",
+    price: "43.49",
     image: "/images/hero-majestor.jpg",
     video: "/videos/hero-majestor.mp4",
     alt: "MG Majestor 7 Seater SUV",
@@ -290,19 +303,19 @@ export type CarColor = {
 };
 
 export type CarSpecs = {
-  length: string;
-  width: string;
-  height: string;
-  wheelbase: string;
-  power: string;
-  torque: string;
+  length?: string;
+  width?: string;
+  height?: string;
+  wheelbase?: string;
+  power?: string;
+  torque?: string;
   battery?: string;
   acceleration?: string;
   safety: string[];
   features: string[];
-  chassis: string;
-  suspension: string;
-  brakes: string;
+  chassis?: string;
+  suspension?: string;
+  brakes?: string;
   infotainment: string;
   warranty: string;
 };
@@ -346,6 +359,8 @@ export type Car = {
   category: CarCategory;
   price: string;
   priceINR: number;
+  /** Battery-as-a-Service running charge shown beside the price, e.g. "+ ₹4.5/km". */
+  priceNote?: string;
   engine: string;
   transmission: string;
   blurb: string;
@@ -355,7 +370,7 @@ export type Car = {
   alt: string;
   seating: string;
   mileage: string;
-  bootSpace: string;
+  bootSpace?: string;
   highlights: string[];
   heroImage: string;
   interiorImage: string;
@@ -385,6 +400,8 @@ export function getCarTransparentImage(id: string): string {
     case "majestor": return "/images/models/model-majestor-v3.png";
     case "m9": return "/images/models/model-m9-transparent.png";
     case "cyberster": return "/images/models/model-cyberster-v2.png";
+    case "hector-tomahawk-ev": return cars.find((c) => c.id === id)?.image ?? "";
+    case "hector-tomahawk-phev": return cars.find((c) => c.id === id)?.image ?? "";
     default: return `/images/models/model-${id}-transparent.png`;
   }
 }
@@ -395,8 +412,8 @@ export const cars: Car[] = [
     name: "ASTOR",
     type: "Mid-size SUV",
     category: "SUV",
-    price: lakh(998000),
-    priceINR: 998000,
+    price: lakh(965000),
+    priceINR: 965000,
     engine: "1.5L VTi-TECH Petrol",
     transmission: "5-Speed Manual, CVT",
     fuel: "Petrol",
@@ -484,7 +501,7 @@ export const cars: Car[] = [
         { title: "TURBINE ALLOY WHEELS", description: "Dynamic 17-inch alloy finishes.", image: "/images/models/astor/05-exterior-image-167.jpg" }
       ],
       safety: [
-        { title: "LEVEL 2 ADAS DRIVING", description: "Active braking and lane assist.", image: "https://www.motorbeam.com/wp-content/uploads/MG-Astor-ADAS.jpeg" },
+        { title: "LEVEL 2 ADAS DRIVING", description: "Active braking and lane assist.", image: "/images/remote/motorbeam-1.jpg" },
         { title: "360-DEGREE SURROUND VIEW", description: "Seamless bird's-eye view camera.", image: "/images/models/astor/16-infotainment-system-main-menu-183.jpg" }
       ],
       tech: [
@@ -528,7 +545,7 @@ export const cars: Car[] = [
             title: "PANORAMIC SUNROOF",
             subtitle: "Sweeping views of sky",
             description: "The panoramic skyroof covers over 90% of the vehicle roof area, flooding the cabin with ambient daylight and creating a spacious and airy passenger environment.",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQI7GepKQ5MLSe9FZ8gau25wiBKLILUUbZXT9KHlxGulapn6IjmPkeOEgex&s=10",
+            image: "/images/remote/encrypted-tbn0-2.jpg",
             highlights: ["Sliding anti-pinch glass blind", "Integrated bug-mesh wind barrier", "One-touch electronic switch"]
           }
         ]
@@ -554,7 +571,7 @@ export const cars: Car[] = [
             title: "AUTONOMOUS LEVEL 2 ADAS",
             subtitle: "State-of-the-art crash mitigation",
             description: "Features a network of radars and camera sensors supporting 14 autonomous driving aids. Offers active lane alignment, emergency braking control, speed sign warnings, and adaptive tracking support.",
-            image: "https://www.motorbeam.com/wp-content/uploads/MG-Astor-ADAS.jpeg",
+            image: "/images/remote/motorbeam-1.jpg",
             highlights: ["14 autonomous driving aids", "Rear Cross Traffic Alert radars", "Lane Keeping Assist alignment"]
           }
         ]
@@ -566,8 +583,8 @@ export const cars: Car[] = [
     name: "HECTOR",
     type: "Internet SUV",
     category: "SUV",
-    price: lakh(1199000),
-    priceINR: 1199000,
+    price: lakh(1214000),
+    priceINR: 1214000,
     engine: "1.5L Turbo Petrol, 2.0L Diesel",
     transmission: "6-Speed Manual, CVT",
     fuel: "Petrol · Diesel",
@@ -660,7 +677,7 @@ export const cars: Car[] = [
       ],
       tech: [
         { title: "14-INCH SMART PORTRAIT", description: "India's largest vertical display with Smart Boost.", image: "/images/models/hector/08-dashboard-59.jpg" },
-        { title: "DUAL TONE URBAN TAN", description: "Sophisticated interior finish and seat quilting.", image: "https://etimg.etb2bimg.com/photo/125974723.cms" }
+        { title: "DUAL TONE URBAN TAN", description: "Sophisticated interior finish and seat quilting.", image: "/images/remote/etimg-3.jpg" }
       ]
     },
     featureSections: [
@@ -686,7 +703,7 @@ export const cars: Car[] = [
             title: "SPORTY REAR DESIGN",
             subtitle: "Power in every angle",
             description: "The Hector's confident rear is shaped with a full-width LED tail lamp cluster, Aura fin antenna, and a sculpted twin-tipped exhaust finish - making a statement from every angle.",
-            image: "https://media.zigcdn.com/media/model/2025/Dec/rear-back-1028881429_930x620.jpg",
+            image: "/images/remote/media-4.jpg",
             highlights: ["Full-width LED tail lamps", "Aura fin antenna", "Shark-fin roof antenna"]
           },
           {
@@ -713,7 +730,7 @@ export const cars: Car[] = [
             title: "DUAL TONE URBAN TAN",
             subtitle: "Inspired by modern city living",
             description: "The refreshed Dual Tone Urban Tan interior is inspired by modern city aesthetics, with Hydra Gloss Finish accents on the central console, armrest, and door trims - creating an environment that feels premium and contemporary.",
-            image: "https://etimg.etb2bimg.com/photo/125974723.cms",
+            image: "/images/remote/etimg-3.jpg",
             highlights: ["Hydra Gloss accents", "Premium leatherette seats", "Ambient lighting system"]
           },
           {
@@ -781,7 +798,7 @@ export const cars: Car[] = [
             title: "LANE CHANGE ASSISTANCE",
             subtitle: "Never miss your lane",
             description: "Lane Departure Warning and Lane Keep Assist monitor road markings and alert you if you drift - while the Lane Change Assist and Blind Spot Detection warn you of vehicles in adjacent lanes before every maneuver.",
-            image: "https://www.carandbike.com/_next/image?url=https%3A%2F%2Fimages.carandbike.com%2Fcar-images%2Fgallery%2Fmg%2Fhector-plus%2Fexterior%2Fmg_hector_plus_safety_3.jpg%3Fv%3D2024-08-02&w=1920&q=90",
+            image: "/images/remote/carandbike-5.avif",
             highlights: ["Lane Departure Warning", "Blind Spot Detection (BSD)", "Rear Cross Traffic Alert (RCTA)"]
           }
         ]
@@ -808,7 +825,7 @@ export const cars: Car[] = [
             title: "ELECTRIC PARKING BRAKE",
             subtitle: "Precision braking control",
             description: "The Electronic Parking Brake (EPB) with Auto Hold technology replaces the conventional handbrake with a one-touch operation - automatically holding the Hector on inclines and releasing smoothly when you accelerate, preventing rollback on Mumbai's steep roads.",
-            image: "https://www.marketresearchintellect.com/images/blogs/driving-forward-the-rise-of-electric-parking-brake-systems-in-modern-vehicles.webp",
+            image: "/images/remote/marketresearchintellect-6.webp",
             highlights: ["Auto-hold on inclines", "Hill Start Assist (HSA)", "ABS + EBD + ESC"]
           }
         ]
@@ -820,8 +837,9 @@ export const cars: Car[] = [
     name: "ZS EV",
     type: "Premium Electric SUV",
     category: "Electric",
-    price: lakh(1898000),
-    priceINR: 1898000,
+    price: lakh(1300000),
+    priceINR: 1300000,
+    priceNote: "+ ₹4.5/km",
     engine: "50.3 kWh Battery, 176 PS Motor",
     transmission: "Automatic",
     fuel: "Electric",
@@ -1002,7 +1020,7 @@ export const cars: Car[] = [
             title: "DIGITAL BLUETOOTH KEY",
             subtitle: "Drive keyless with phone",
             description: "Activate your ZS EV and drive away using only your smartphone. The Digital Bluetooth Key uses secure signals to authenticate and unlock your vehicle without standard keys.",
-            image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5DJKeL_tzQjW-S-GcqTEJPG7hp5lo-JTMBoQf81BsjdzPWq2Q024Cwc4&s=10",
+            image: "/images/remote/encrypted-tbn0-7.jpg",
             highlights: ["Secure Bluetooth authorization", "Physical keyless convenience", "Safe digital key sharing option"]
           }
         ]
@@ -1015,7 +1033,7 @@ export const cars: Car[] = [
             title: "LEVEL 2 ADAS AUTOMATION",
             subtitle: "Intelligent driving systems",
             description: "Level 2 Advanced Driver Assistance System uses high-definition camera arrays and forward radar systems to actively guide, decelerate, and guard the ZS EV on open roads.",
-            image: "https://images.here.com/x7rx8ayph7ee/78eb921e-37f5-49ee-bec4-e9f059a80333/e1c6a3a71a852e416cea3608dbbaf135/adas-driverless-car-blog.jpg?w=827&q=80&fm=webp",
+            image: "/images/remote/images-8.webp",
             highlights: ["Lane Departure Warning (LDW)", "Emergency Lane Keep (ELK)", "Forward Collision Warning (FCW)"]
           },
           {
@@ -1035,7 +1053,7 @@ export const cars: Car[] = [
             title: "360-DEGREE VIEW CAMERA",
             subtitle: "Park with absolute ease",
             description: "The 360-degree Around View Camera stitches footage from four wide-angle lenses to render an overhead bird's-eye view, making tight parking spots simple to navigate.",
-            image: "https://spn-sta.spinny.com/blog/20230818204705/360_camera-1160x653.webp?compress=true&quality=80&w=1200&dpr=2.6",
+            image: "/images/remote/spn-sta-9.webp",
             highlights: ["Four dynamic HD cameras", "Synthesized top-down view grid", "Dynamic guidelines indicator"]
           },
           {
@@ -1054,8 +1072,9 @@ export const cars: Car[] = [
     name: "WINDSOR EV",
     type: "Business Class CUV",
     category: "Electric",
-    price: lakh(1349800),
-    priceINR: 1349800,
+    price: lakh(999000),
+    priceINR: 999000,
+    priceNote: "+ ₹3.9/km",
     engine: "38 kWh Battery, 136 PS Motor",
     transmission: "Automatic",
     fuel: "Electric",
@@ -1224,8 +1243,9 @@ export const cars: Car[] = [
     name: "COMET EV",
     type: "Smart City Hatchback",
     category: "Hatchback",
-    price: lakh(699000),
-    priceINR: 699000,
+    price: lakh(499000),
+    priceINR: 499000,
+    priceNote: "+ ₹3.2/km",
     engine: "17.3 kWh Battery, 42 PS Motor",
     transmission: "Automatic",
     fuel: "Electric",
@@ -1392,8 +1412,8 @@ export const cars: Car[] = [
     name: "MAJESTOR",
     type: "Premium Luxury SUV",
     category: "SUV",
-    price: lakh(4099000),
-    priceINR: 4099000,
+    price: lakh(4349000),
+    priceINR: 4349000,
     engine: "2.0L Twin-Turbo Diesel Engine",
     transmission: "8-Speed Automatic (AT)",
     fuel: "Diesel",
@@ -1901,6 +1921,572 @@ export const cars: Car[] = [
       }
     ]
   },
+  {
+    id: "hector-tomahawk-ev",
+    name: "HECTOR TOMAHAWK EV",
+    type: "5 or 7 Seater Electric SUV",
+    category: "Electric",
+    price: lakh(1399000),
+    priceINR: 1399000,
+    priceNote: "+ ₹4.90/km",
+    engine: "69.2 kWh LFP MAGIC Battery, 204 PS Motor",
+    transmission: "Automatic",
+    fuel: "Electric",
+    blurb: "Enjoy the smoothness of electric power with the versatility to go further, effortlessly.",
+    cta: "Explore Hector Tomahawk EV",
+    image: "/images/models/tomahawk/004-khaki-green-s-black-image.webp",
+    alt: "MG Hector Tomahawk EV",
+    seating: "5 or 7 Seater",
+    mileage: "517 km Range*",
+    bootSpace: "610 L (5-seater) | 192 L to 528 L (7-seater)",
+    highlights: [
+      "Certified range of up to 517 km on a single charge",
+      "India's first car with Vehicle-to-Home (V2H) technology",
+      "39.6 cm Grand View Display with Gen AI and Karaoke",
+      "Level 2 ADAS with 6 airbags and 360-degree camera"
+    ],
+    heroImage: "/images/models/tomahawk/004-khaki-green-s-black-image.webp",
+    interiorImage: "/images/models/tomahawk/003-interiors-image.webp",
+    galleryImages: [
+      { src: "/images/models/tomahawk/004-khaki-green-s-black-image.webp", caption: "MG Hector Tomahawk EV" },
+      { src: "/images/models/tomahawk/001-exteriors-image.webp", caption: "Bold front fascia with illuminated MG logo" },
+      { src: "/images/models/tomahawk/004-exteriors-image.webp", caption: "Rear profile with signature LED tail lights" },
+      { src: "/images/models/tomahawk/005-exteriors-image.webp", caption: "Automatic powered tailgate" },
+      { src: "/images/models/tomahawk/003-interiors-image.webp", caption: "Cabin with 256-colour ambient lighting" },
+      { src: "/images/models/tomahawk/005-interiors-image.webp", caption: "Premium seating in the Desert Squadron interior" },
+      { src: "/images/models/tomahawk/010-interiors-image.webp", caption: "39.6 cm Grand View Display" },
+      { src: "/images/models/tomahawk/011-interiors-image.webp", caption: "Spacious boot" }
+    ],
+    colors: [
+      { name: "Khaki Green", hex: "#7f927f", cssFilter: "none", image: "/images/models/tomahawk/001-khaki-green-image.webp" },
+      { name: "Khaki Green & Starry Black Roof", hex: "#7f927f", cssFilter: "none", image: "/images/models/tomahawk/004-khaki-green-s-black-image.webp" },
+      { name: "Aurora Silver", hex: "#d1d1db", cssFilter: "none", image: "/images/models/tomahawk/002-aurora-silver-image.webp" },
+      { name: "Celadon Blue", hex: "#042343", cssFilter: "none", image: "/images/models/tomahawk/003-celadon-blue-image.webp" },
+      { name: "Pearl White", hex: "#e3e8e5", cssFilter: "none", image: "/images/models/tomahawk/005-pearl-white-image.webp" },
+      { name: "Starry Black", hex: "#242020", cssFilter: "none", image: "/images/models/tomahawk/008-starry-black-image.webp" },
+      { name: "Shadow Gold", hex: "#aca7a0", cssFilter: "none", image: "/images/models/tomahawk/006-shadow-gold-image.webp" },
+      { name: "Shadow Gold & Starry Black Roof", hex: "#aca7a0", cssFilter: "none", image: "/images/models/tomahawk/007-shadow-gold-s-black-image.webp" }
+    ],
+    details: {
+      wheelbase: "2810 mm",
+      power: "204 PS",
+      torque: "310 Nm",
+      battery: "69.2 kWh LFP MAGIC Battery",
+      acceleration: "0-100 km/h in 8.2 seconds",
+      chassis: "MG ADAPT platform with ultra-high-strength construction and 230 mm ground clearance",
+      infotainment: "39.6 cm Grand View Display with Gen AI and Karaoke, 22.3 cm multi information display, Jio Sphere with 18 apps, wireless charging with Android Auto & Apple CarPlay",
+      warranty: "Assured Buyback Plan available",
+      safety: [
+        "6 Airbags",
+        "Level 2 ADAS",
+        "360-degree camera",
+        "Electronic Stability Control, TPMS, ABS with EBD",
+        "Built on the MG ADAPT platform to global safety standards"
+      ],
+      features: [
+        "India's first Vehicle-to-Home (V2H) and Vehicle-to-Load (V2L)",
+        "i-SMART 3.0 with 80+ connected car features",
+        "Segment-first i-SWIPE touch gesture control",
+        "10-speaker Infinity sound system",
+        "Dual-pane cockpit sunroof",
+        "Front ventilated seats",
+        "256-colour ambient lighting",
+        "7.4 kW AC home charger with installation included"
+      ],
+    },
+    detailedSections: [
+      {
+        title: "Up to 517 km on a single charge",
+        description: "Powered by a 69.2 kWh LFP MAGIC Battery with a single 204 PS motor, delivering 0-100 km/h in 8.2 seconds.",
+        image: "/images/models/tomahawk/004-khaki-green-s-black-image.webp"
+      },
+      {
+        title: "Best-in-segment space",
+        description: "2810 mm wheelbase with 85% usable floor space, more legroom and headroom, and flexible 5 and 7 seating options.",
+        image: "/images/models/tomahawk/001-interiors-image.webp"
+      },
+      {
+        title: "Vehicle-to-Home (V2H)",
+        description: "Use the car's stored energy to help power your home, or power compatible devices directly with V2L.",
+        image: "/images/models/tomahawk/004-interiors-image.webp"
+      }
+    ],
+    youtubeVideo: "https://www.youtube.com/embed/g2J03pT9114",
+    categorizedFeatures: {
+      exterior: [
+        { title: "BEACON HEADLAMPS", description: "LED projector headlamps with DRLs.", image: "/images/models/tomahawk/001-exteriors-image.webp" },
+        { title: "ROTOR ALLOYS", description: "R18 dual-tone precision-cut alloy wheels.", image: "/images/models/tomahawk/002-exteriors-image.webp" },
+        { title: "ILLUMINATED MG LOGO", description: "A distinctive touch on the bold front.", image: "/images/models/tomahawk/003-exteriors-image.webp" }
+      ],
+      safety: [
+        { title: "LEVEL 2 ADAS", description: "Intelligent driver assistance.", image: "/images/models/tomahawk/001-exteriors-image.webp" },
+        { title: "6 AIRBAGS + 360 CAMERA", description: "ESC, TPMS and ABS with EBD as standard.", image: "/images/models/tomahawk/004-exteriors-image.webp" }
+      ],
+      tech: [
+        { title: "GRAND VIEW DISPLAY", description: "39.6 cm with Gen AI and Karaoke.", image: "/images/models/tomahawk/010-interiors-image.webp" },
+        { title: "i-SMART 3.0", description: "80+ connected car features.", image: "/images/models/tomahawk/012-interiors-image.webp" }
+      ]
+    },
+    featureSections: [
+      {
+        tab: "EXTERIOR",
+        icon: "car",
+        items: [
+          {
+            title: "BEACON HEADLAMPS",
+            subtitle: "Cut through the dark",
+            description: "LED projector headlamps with DRLs, designed to cut through the dark.",
+            image: "/images/models/tomahawk/001-exteriors-image.webp",
+            highlights: ["LED projector headlamps","DRLs"]
+          },
+          {
+            title: "ROTOR ALLOYS",
+            subtitle: "Inspired by a supercharger rotor",
+            description: "R18 dual-tone precision-cut alloy wheels, inspired by the Tomahawk's supercharger rotor.",
+            image: "/images/models/tomahawk/002-exteriors-image.webp",
+            highlights: ["R18 dual-tone alloys","Precision-cut design"]
+          },
+          {
+            title: "ILLUMINATED MG LOGO",
+            subtitle: "A distinctive front",
+            description: "Adds a distinctive touch to its bold front presence.",
+            image: "/images/models/tomahawk/003-exteriors-image.webp",
+            highlights: ["Illuminated MG logo"]
+          },
+          {
+            title: "BUMPER AND SIGNATURE TAIL LIGHTS",
+            subtitle: "Bold rear",
+            description: "Dynamic LED tail lights set into a sculpted rear bumper for a bold look.",
+            image: "/images/models/tomahawk/004-exteriors-image.webp",
+            highlights: ["Dynamic LED tail lights","Floating light turn indicator"]
+          },
+          {
+            title: "AUTOMATIC POWERED TAILGATE",
+            subtitle: "Effortless loading",
+            description: "Close the tailgate effortlessly at the touch of a button.",
+            image: "/images/models/tomahawk/005-exteriors-image.webp",
+            highlights: ["Powered tailgate"]
+          }
+        ]
+      },
+      {
+        tab: "INTERIOR",
+        icon: "seat",
+        items: [
+          {
+            title: "BEST-IN-SEGMENT SPACE",
+            subtitle: "5 and 7 seating",
+            description: "2810 mm wheelbase with 85% usable floor space, more legroom and headroom, and flexible 5 and 7 seating options.",
+            image: "/images/models/tomahawk/001-interiors-image.webp",
+            highlights: ["2810 mm wheelbase","85% usable floor space","5 and 7-seater flexibility"]
+          },
+          {
+            title: "22.3 CM MULTI INFORMATION DISPLAY",
+            subtitle: "Essential info, in view",
+            description: "Essential driving information, clearly in view.",
+            image: "/images/models/tomahawk/002-interiors-image.webp",
+            highlights: ["22.3 cm display"]
+          },
+          {
+            title: "AMBIENT LIGHTING",
+            subtitle: "Set the mood",
+            description: "256-colour ambient and roof lighting to set the mood for every drive.",
+            image: "/images/models/tomahawk/003-interiors-image.webp",
+            highlights: ["256-colour ambient lighting"]
+          },
+          {
+            title: "DOUBLE DECKER STORAGE",
+            subtitle: "Easier journeys",
+            description: "Storage space in the cabin is thoughtfully designed to add more ease to your journeys.",
+            image: "/images/models/tomahawk/004-interiors-image.webp",
+            highlights: ["Double decker storage","Wireless charging pad"]
+          },
+          {
+            title: "FRONT VENTILATED SEATS",
+            subtitle: "Stay cool",
+            description: "Intelligent seat ventilation keeps you cool and comfortable, journey after journey.",
+            image: "/images/models/tomahawk/008-interiors-image.webp",
+            highlights: ["Front ventilated seats"]
+          },
+          {
+            title: "PREMIUM SOUND SYSTEM BY INFINITY",
+            subtitle: "Immersive audio",
+            description: "Experience rich, immersive audio on every journey.",
+            image: "/images/models/tomahawk/007-interiors-image.webp",
+            highlights: ["Infinity sound system"]
+          },
+          {
+            title: "DESERT SQUADRON INTERIOR THEME",
+            subtitle: "Premium seating",
+            description: "Generous space and premium seating for a more relaxing journey.",
+            image: "/images/models/tomahawk/005-interiors-image.webp",
+            highlights: ["Premium seating"]
+          },
+          {
+            title: "SPACIOUS BOOT SPACE",
+            subtitle: "Room for everything",
+            description: "Ample boot space designed to accommodate your luggage, gear, and everyday essentials with ease.",
+            image: "/images/models/tomahawk/011-interiors-image.webp",
+            highlights: ["610 L boot (5-seater)","192 L to 528 L (7-seater)"]
+          }
+        ]
+      },
+      {
+        tab: "i-SMART",
+        icon: "wifi",
+        items: [
+          {
+            title: "GRAND VIEW DISPLAY WITH GEN AI",
+            subtitle: "India's first Gen AI with karaoke",
+            description: "39.6 cm Grand View Display with Gen AI and Karaoke, featuring 8K+ songs across genres.",
+            image: "/images/models/tomahawk/010-interiors-image.webp",
+            highlights: ["39.6 cm display","Gen AI and Karaoke","8K+ songs"]
+          },
+          {
+            title: "i-SMART 3.0",
+            subtitle: "Always connected",
+            description: "Upgrade your driving experience with 80+ connected car features that enhance your comfort, convenience and safety.",
+            image: "/images/models/tomahawk/012-interiors-image.webp",
+            highlights: ["80+ connected features"]
+          },
+          {
+            title: "i-SWIPE TOUCH GESTURE CONTROL",
+            subtitle: "Segment first",
+            description: "Adjust AC, temperature, fan speed, music and volume with intuitive hand swipes.",
+            image: "/images/models/tomahawk/006-interiors-image.webp",
+            highlights: ["Hand-swipe control","Wireless charging pad","Android Auto and Apple CarPlay"]
+          },
+          {
+            title: "JIO SPHERE",
+            subtitle: "Apps on the go",
+            description: "18 connected apps for entertainment, shopping, social media, food, essentials and gaming.",
+            image: "/images/models/tomahawk/006-interiors-image.webp",
+            highlights: ["18 connected apps"]
+          }
+        ]
+      },
+      {
+        tab: "POWER & BATTERY",
+        icon: "cpu",
+        items: [
+          {
+            title: "MAGIC BATTERY",
+            subtitle: "69.2 kWh LFP",
+            description: "23 cm ground clearance for added battery protection, validated across 2,000+ bench tests and 490+ vehicle validations.",
+            image: "/images/models/tomahawk/004-khaki-green-s-black-image.webp",
+            highlights: ["69.2 kWh LFP battery","Monitored 24x7 by the Battery Management System","Up to 517 km certified range"]
+          },
+          {
+            title: "CHARGING",
+            subtitle: "Home and fast charging",
+            description: "A 7.4 kW AC home charger with installation is included. A 10-100% charge takes roughly 12.5 hours; a 90 kW DC fast charger takes 30% to 80% in about 35 minutes.",
+            image: "/images/models/tomahawk/004-khaki-green-s-black-image.webp",
+            highlights: ["7.4 kW AC charger included","90 kW DC fast charging"]
+          },
+          {
+            title: "VEHICLE-TO-HOME (V2H)",
+            subtitle: "India's first",
+            description: "During a power cut, the battery can power your home appliances. V2L runs compatible devices directly from the vehicle.",
+            image: "/images/models/tomahawk/004-khaki-green-s-black-image.webp",
+            highlights: ["V2H","V2L"]
+          }
+        ]
+      },
+      {
+        tab: "SAFETY",
+        icon: "shield",
+        items: [
+          {
+            title: "BUILT ON THE MG ADAPT PLATFORM",
+            subtitle: "Global safety standards",
+            description: "Ultra-high-strength construction with Level 2 ADAS, 6 airbags, a 360-degree camera, Electronic Stability Control, TPMS and ABS with EBD. The official NCAP rating will be shared once certified.",
+            image: "/images/models/tomahawk/001-exteriors-image.webp",
+            highlights: ["Level 2 ADAS","6 airbags","360-degree camera"]
+          }
+        ]
+      },
+      {
+        tab: "SMART MODES",
+        icon: "cpu",
+        items: [
+          {
+            title: "PET MODE",
+            subtitle: "Cabin comfort for pets",
+            description: "Maintains your preferred cabin temperature and displays a \"return soon\" message.",
+            image: "/images/models/tomahawk/003-interiors-image.webp",
+            highlights: ["Pet Mode"]
+          },
+          {
+            title: "VALET MODE",
+            subtitle: "Protect your data",
+            description: "Protects personal data with a custom PIN and provides a detailed trip summary.",
+            image: "/images/models/tomahawk/010-interiors-image.webp",
+            highlights: ["Valet Mode"]
+          },
+          {
+            title: "CAMP MODE",
+            subtitle: "Outdoor ready",
+            description: "Configures the cabin for outdoor adventures and powers compatible gadgets via V2L.",
+            image: "/images/models/tomahawk/011-interiors-image.webp",
+            highlights: ["Camp Mode"]
+          },
+          {
+            title: "ENERGISE MODE",
+            subtitle: "Cool down fast",
+            description: "Maximises the fan and minimises the temperature for five minutes to cool the cabin quickly.",
+            image: "/images/models/tomahawk/003-interiors-image.webp",
+            highlights: ["Energise Mode"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "hector-tomahawk-phev",
+    name: "HECTOR TOMAHAWK PHEV",
+    type: "7 Seater Plug-in Hybrid SUV",
+    category: "Electric",
+    price: lakh(2179000),
+    priceINR: 2179000,
+    priceNote: "+ ₹3.20/km",
+    engine: "1.5L Hybrid Petrol Engine + 201 PS Electric Motor, 20.5 kWh Battery",
+    transmission: "Electromagnetic DHT (Automatic)",
+    fuel: "Plug-in Hybrid",
+    blurb: "Seamlessly blending exhilarating performance, intelligent technology and refined comfort into every drive.",
+    cta: "Explore Hector Tomahawk PHEV",
+    image: "/images/models/tomahawk/006-hw-phev-turquoise-green.webp",
+    alt: "MG Hector Tomahawk PHEV",
+    seating: "7 Seater",
+    mileage: "1,100+ km Combined Range*",
+    bootSpace: "192 L (all rows up) | 528 L (3rd row folded)",
+    highlights: [
+      "Over 115 km of pure electric driving",
+      "1,100+ km combined range with the petrol engine",
+      "India's first mass-market plug-in hybrid",
+      "World's first electromagnetic Dedicated Hybrid Transmission"
+    ],
+    heroImage: "/images/models/tomahawk/006-hw-phev-turquoise-green.webp",
+    interiorImage: "/images/models/tomahawk/004-interior-image.webp",
+    galleryImages: [
+      { src: "/images/models/tomahawk/006-hw-phev-turquoise-green.webp", caption: "MG Hector Tomahawk PHEV" },
+      { src: "/images/models/tomahawk/001-interior-image.webp", caption: "Hawk X 3D grille" },
+      { src: "/images/models/tomahawk/003-interior-image.webp", caption: "Commanding road presence" },
+      { src: "/images/models/tomahawk/002-interior-image.webp", caption: "Aeronautic alloy wheels" },
+      { src: "/images/models/tomahawk/004-interior-image.webp", caption: "7-seater cabin with three rows" },
+      { src: "/images/models/tomahawk/005-interior-image.webp", caption: "Panoramic sunroof" }
+    ],
+    colors: [
+      { name: "Turquoise Green", hex: "#2f444d", cssFilter: "none", image: "/images/models/tomahawk/006-hw-phev-turquoise-green.webp" },
+      { name: "Turquoise Green & Pearl White Roof", hex: "#2f444d", cssFilter: "none", image: "/images/models/tomahawk/007-hw-phev-turquoise-green-pearl-white-roof.webp" },
+      { name: "Aurora Silver", hex: "#d1d1db", cssFilter: "none", image: "/images/models/tomahawk/001-hw-phev-aurora-silver.webp" },
+      { name: "Caledon Blue", hex: "#042343", cssFilter: "none", image: "/images/models/tomahawk/002-hw-phev-caledon-blue.webp" },
+      { name: "Pearl White", hex: "#e3e8e5", cssFilter: "none", image: "/images/models/tomahawk/003-hw-phev-pearl-white.webp" },
+      { name: "Shadow Gold", hex: "#aca7a0", cssFilter: "none", image: "/images/models/tomahawk/004-hw-phev-shadow-gold.webp" },
+      { name: "Starry Black", hex: "#242020", cssFilter: "none", image: "/images/models/tomahawk/005-hw-phev-starry-black.webp" }
+    ],
+    details: {
+      power: "Engine 102 PS | Motor 201 PS",
+      torque: "Engine 125 Nm | Motor 237 Nm",
+      battery: "20.5 kWh",
+      chassis: "MG ADAPT Multi-NEV platform with ultra-high-strength construction",
+      infotainment: "Advanced connectivity with i-SMART",
+      warranty: "Assured Buyback Plan available",
+      safety: [
+        "6 Airbags",
+        "Level 2 ADAS",
+        "360-degree camera",
+        "Electronic Stability Control, TPMS, ABS with EBD",
+        "24x7 Battery Management System monitoring",
+        "Built on the MG ADAPT platform to global safety standards"
+      ],
+      features: [
+        "10-in-1 Intelligent Drive Unit",
+        "Dedicated Hybrid Engine with 43.2% thermal efficiency",
+        "World's first Electromagnetic DHT with 98.8% transmission efficiency",
+        "Direct, Pure EV, Parallel Hybrid and Series Hybrid modes",
+        "Panoramic sunroof",
+        "3.3 kW AC charger with installation included",
+        "25 kW DC fast charging"
+      ],
+    },
+    detailedSections: [
+      {
+        title: "Over 115 km pure electric, 1,100+ km combined",
+        description: "A 1.5L Dedicated Hybrid Engine works with a 201 PS electric motor and a 20.5 kWh battery, so daily drives can be pure EV and long trips need no charging stops.",
+        image: "/images/models/tomahawk/006-hw-phev-turquoise-green.webp"
+      },
+      {
+        title: "7-seater. More space for everyone.",
+        description: "Three rows with generous legroom.",
+        image: "/images/models/tomahawk/004-interior-image.webp"
+      },
+      {
+        title: "A presence that's hard to miss",
+        description: "Bold design and commanding proportions, crafted to make an unmistakable impression.",
+        image: "/images/models/tomahawk/003-interior-image.webp"
+      }
+    ],
+    youtubeVideo: "https://www.youtube.com/embed/g2J03pT9114",
+    categorizedFeatures: {
+      exterior: [
+        { title: "HAWK X", description: "A striking 3D grille for a distinctive, futuristic look.", image: "/images/models/tomahawk/001-interior-image.webp" },
+        { title: "AERONAUTIC ALLOYS", description: "Aerodynamic contours inspired by the Tomahawk.", image: "/images/models/tomahawk/002-interior-image.webp" },
+        { title: "COMMANDING ROAD PRESENCE", description: "Tall, wide and confidently proportioned.", image: "/images/models/tomahawk/003-interior-image.webp" }
+      ],
+      safety: [
+        { title: "LEVEL 2 ADAS", description: "Intelligent driver assistance.", image: "/images/models/tomahawk/003-interior-image.webp" },
+        { title: "6 AIRBAGS + 360 CAMERA", description: "ESC, TPMS and ABS with EBD as standard.", image: "/images/models/tomahawk/001-interior-image.webp" }
+      ],
+      tech: [
+        { title: "INTELLIGENT HYBRID POWERTRAIN", description: "Optimised across EV, Hybrid and Boost modes.", image: "/images/models/tomahawk/006-hw-phev-turquoise-green.webp" },
+        { title: "PANORAMIC SUNROOF", description: "Opens the cabin to expansive views.", image: "/images/models/tomahawk/005-interior-image.webp" }
+      ]
+    },
+    featureSections: [
+      {
+        tab: "EXTERIOR",
+        icon: "car",
+        items: [
+          {
+            title: "HAWK X",
+            subtitle: "Futuristic grille",
+            description: "A striking 3D grille for a distinctive, futuristic look.",
+            image: "/images/models/tomahawk/001-interior-image.webp",
+            highlights: ["3D grille"]
+          },
+          {
+            title: "AERONAUTIC ALLOYS",
+            subtitle: "Inspired by the Tomahawk",
+            description: "Aerodynamic contours inspired by the Tomahawk.",
+            image: "/images/models/tomahawk/002-interior-image.webp",
+            highlights: ["Aerodynamic alloy design"]
+          },
+          {
+            title: "COMMANDING ROAD PRESENCE",
+            subtitle: "Tall and wide",
+            description: "Tall, wide and confidently proportioned to command attention.",
+            image: "/images/models/tomahawk/003-interior-image.webp",
+            highlights: ["Bold proportions"]
+          }
+        ]
+      },
+      {
+        tab: "INTERIOR",
+        icon: "seat",
+        items: [
+          {
+            title: "PREMIUM COMFORT, CRAFTED INSIDE",
+            subtitle: "Refined cabin",
+            description: "Refined finishes, spacious seating, and thoughtful details create a sophisticated cabin experience.",
+            image: "/images/models/tomahawk/004-interior-image.webp",
+            highlights: ["Spacious seating","Refined finishes"]
+          },
+          {
+            title: "7-SEATER",
+            subtitle: "More space for everyone",
+            description: "Three rows with generous legroom. 192 L of boot space with all rows up and 528 L with the third row folded.",
+            image: "/images/models/tomahawk/004-interior-image.webp",
+            highlights: ["7 seats","3 rows","192 L to 528 L boot"]
+          },
+          {
+            title: "SKY ABOVE, JOURNEY BEYOND",
+            subtitle: "Panoramic sunroof",
+            description: "The panoramic sunroof opens the cabin to expansive views, bringing light and a sense of openness to every drive.",
+            image: "/images/models/tomahawk/005-interior-image.webp",
+            highlights: ["Panoramic sunroof"]
+          }
+        ]
+      },
+      {
+        tab: "HYBRID POWERTRAIN",
+        icon: "cpu",
+        items: [
+          {
+            title: "INTELLIGENT HYBRID POWERTRAIN",
+            subtitle: "EV, Hybrid and Boost",
+            description: "Built to intelligently optimise power delivery across EV, Hybrid and Boost modes for seamless efficiency in every drive.",
+            image: "/images/models/tomahawk/006-hw-phev-turquoise-green.webp",
+            highlights: ["1.5L engine: 102 PS, 125 Nm","Electric motor: 201 PS, 237 Nm","20.5 kWh battery"]
+          },
+          {
+            title: "10-IN-1 INTELLIGENT DRIVE UNIT",
+            subtitle: "One unit, ten functions",
+            description: "Integrates ten critical functions into one intelligent unit, improving efficiency, reliability and system responsiveness.",
+            image: "/images/models/tomahawk/006-hw-phev-turquoise-green.webp",
+            highlights: ["Improved efficiency","Faster system response"]
+          },
+          {
+            title: "DEDICATED HYBRID ENGINE",
+            subtitle: "43.2% thermal efficiency",
+            description: "Delivers an industry-leading 43.2% thermal efficiency, maximising every drop of fuel while seamlessly supporting electric drive.",
+            image: "/images/models/tomahawk/006-hw-phev-turquoise-green.webp",
+            highlights: ["43.2% thermal efficiency"]
+          },
+          {
+            title: "WORLD'S FIRST ELECTROMAGNETIC DHT",
+            subtitle: "98.8% transmission efficiency",
+            description: "Delivers 98.8% transmission efficiency with ultra-fast 0.1-second mode switching for intelligent and seamless power delivery.",
+            image: "/images/models/tomahawk/006-hw-phev-turquoise-green.webp",
+            highlights: ["98.8% efficiency","0.1-second mode switching"]
+          },
+          {
+            title: "DEDICATED BATTERY SYSTEM",
+            subtitle: "Smart energy flow",
+            description: "Purpose-built to intelligently manage energy flow and maximise hybrid efficiency across every journey.",
+            image: "/images/models/tomahawk/006-hw-phev-turquoise-green.webp",
+            highlights: ["Monitored 24x7"]
+          }
+        ]
+      },
+      {
+        tab: "DRIVE MODES",
+        icon: "cpu",
+        items: [
+          {
+            title: "DIRECT MODE",
+            subtitle: "Effortless everyday drives",
+            description: "Smooth, confident power for effortless everyday drives, delivering a refined and responsive experience on every journey.",
+            image: "/images/models/tomahawk/006-hw-phev-turquoise-green.webp",
+            highlights: ["Direct drive"]
+          },
+          {
+            title: "PURE EV MODE",
+            subtitle: "Silent and zero-emission",
+            description: "Silent, smooth and responsive electric driving, designed for effortless everyday city journeys with zero-emission mobility.",
+            image: "/images/models/tomahawk/006-hw-phev-turquoise-green.webp",
+            highlights: ["Over 115 km electric range"]
+          },
+          {
+            title: "PARALLEL HYBRID MODE",
+            subtitle: "Extra surge",
+            description: "When overtaking or accelerating, the engine and motor work together for an extra surge of performance.",
+            image: "/images/models/tomahawk/006-hw-phev-turquoise-green.webp",
+            highlights: ["Engine and motor together"]
+          },
+          {
+            title: "SERIES HYBRID MODE",
+            subtitle: "Stop-and-go ready",
+            description: "Ideal for stop and go traffic, with the motor driving the wheels while the engine generates electricity in the background.",
+            image: "/images/models/tomahawk/006-hw-phev-turquoise-green.webp",
+            highlights: ["Engine generates electricity"]
+          }
+        ]
+      },
+      {
+        tab: "SAFETY",
+        icon: "shield",
+        items: [
+          {
+            title: "BUILT ON THE MG ADAPT PLATFORM",
+            subtitle: "Global safety standards",
+            description: "Level 2 ADAS, 6 airbags, a 360-degree camera, Electronic Stability Control, TPMS and ABS with EBD, with 24x7 Battery Management System monitoring. The official NCAP rating will be shared once certified.",
+            image: "/images/models/tomahawk/003-interior-image.webp",
+            highlights: ["Level 2 ADAS","6 airbags","360-degree camera"]
+          }
+        ]
+      }
+    ]
+  },
 ];
 
 export const trust = [
@@ -2077,6 +2663,110 @@ export const faqData = [
 ];
 
 export const carFaqData: Record<string, { question: string; answer: string }[]> = {
+  "hector-tomahawk-ev": [
+    {
+      question: "What is the range of the MG Hector Tomahawk EV?",
+      answer:
+        "The Hector Tomahawk EV delivers a certified range of up to 517 km on a single charge, powered by a 69.2 kWh LFP MAGIC Battery. Real-world range varies with driving style, load, terrain and air-conditioning use.",
+    },
+    {
+      question: "How long does it take to charge the Hector Tomahawk EV?",
+      answer:
+        "With the standard 7.4 kW AC charger, a 10-100% charge takes roughly 12.5 hours. On a 90 kW DC fast charger, the battery charges from 30% to 80% in about 35 minutes. Every EV comes with a 7.4 kW AC home charger and installation.",
+    },
+    {
+      question: "Is the Hector Tomahawk EV a 5-seater or a 7-seater?",
+      answer:
+        "Both. The Excite and Exclusive variants come as 7-seaters, while the top-spec Essence is available in both 5-seater and 7-seater layouts.",
+    },
+    {
+      question: "What is Battery-as-a-Service (BaaS) on the Hector Tomahawk EV?",
+      answer:
+        "BaaS lets you buy the car at a lower upfront price (from ₹13.99 lakh) and pay for the battery as you drive, at ₹4.90 per km. If you prefer to own the battery outright, the EV is also available at a full ex-showroom price without the per-km charge.",
+    },
+    {
+      question: "How much power does the Hector Tomahawk EV produce?",
+      answer:
+        "The single electric motor produces 204 PS and 310 Nm of torque, taking the SUV from 0 to 100 km/h in 8.2 seconds.",
+    },
+    {
+      question: "What is Vehicle-to-Home (V2H) on the Hector Tomahawk EV?",
+      answer:
+        "It is India's first car with V2H technology. During a power cut, the battery can power your home appliances. It also supports Vehicle-to-Load (V2L) to run compatible devices directly from the vehicle.",
+    },
+    {
+      question: "What safety features does the Hector Tomahawk EV have?",
+      answer:
+        "6 airbags, Level 2 ADAS, a 360-degree camera, Electronic Stability Control, TPMS and ABS with EBD, built on the MG ADAPT platform. The official NCAP rating will be shared once certified.",
+    },
+    {
+      question: "How much boot space does the Hector Tomahawk EV offer?",
+      answer:
+        "The 5-seater offers a 610-litre boot. In the 7-seater, you get 192 litres with all three rows up, expanding to 528 litres with the third row folded.",
+    },
+    {
+      question: "Which variants and colours is the Hector Tomahawk EV available in?",
+      answer:
+        "Excite, Exclusive and Essence variants, in Khaki Green, Aurora Silver, Celadon Blue, Pearl White, Starry Black, Shadow Gold and dual-tone Khaki Green and Shadow Gold with a Starry Black roof.",
+    },
+    {
+      question: "When can I test drive or take delivery of the Hector Tomahawk EV?",
+      answer:
+        "Test drives, showroom display vehicles and deliveries are planned from September 2026. Your nearest dealership will confirm the exact timeline.",
+    },
+  ],
+  "hector-tomahawk-phev": [
+    {
+      question: "What is a plug-in hybrid (PHEV) and how does the Hector Tomahawk PHEV work?",
+      answer:
+        "A plug-in hybrid combines a petrol engine with an electric motor and a battery you can charge from a socket. The Hector Tomahawk PHEV pairs a 1.5-litre Dedicated Hybrid Engine with a 201 PS electric motor and a 20.5 kWh battery. City driving can run as a pure EV; on longer trips the engine takes over or works with the motor.",
+    },
+    {
+      question: "What is the pure electric range of the Hector Tomahawk PHEV?",
+      answer:
+        "Over 115 km of pure electric range on a full charge, enough for most daily commutes without using any petrol.",
+    },
+    {
+      question: "What is the total driving range of the Hector Tomahawk PHEV?",
+      answer:
+        "With a full battery and a full tank, the combined range is over 1,100 km.",
+    },
+    {
+      question: "Do I have to charge the Hector Tomahawk PHEV?",
+      answer:
+        "No, charging is optional. If the battery is low, the PHEV automatically runs as a self-charging hybrid using the petrol engine. Charging regularly lets you drive more in Pure EV Mode and lowers running cost.",
+    },
+    {
+      question: "How do I charge the Hector Tomahawk PHEV and how long does it take?",
+      answer:
+        "It comes with a 3.3 kW AC charger and installation as standard, which charges the battery from 10-100% in around 7.5 hours. It also supports 25 kW DC fast charging, taking the battery from 30% to 80% in approximately 35 minutes.",
+    },
+    {
+      question: "What are the engine and motor specifications?",
+      answer:
+        "The 1.5-litre naturally aspirated petrol Dedicated Hybrid Engine produces 102 PS and 125 Nm with 43.2% thermal efficiency. The electric motor adds 201 PS and 237 Nm, delivered through the electromagnetic Dedicated Hybrid Transmission (DHT) with 98.8% transmission efficiency.",
+    },
+    {
+      question: "Is the Hector Tomahawk PHEV a 7-seater?",
+      answer:
+        "Yes, it is offered exclusively as a 7-seater with three rows. Boot space is 192 litres with all rows up and 528 litres with the third row folded.",
+    },
+    {
+      question: "Which variants does the Hector Tomahawk PHEV come in?",
+      answer:
+        "Two variants: Exclusive and Essence. It starts at ₹21.79 lakh + ₹3.20/km with Battery-as-a-Service (BaaS).",
+    },
+    {
+      question: "Should I choose the Hector Tomahawk PHEV or the EV?",
+      answer:
+        "Choose the PHEV if you want electric-only driving for daily use but also need petrol back-up for long trips or lack reliable charging access. Choose the EV if you have dependable home or office charging and mostly drive in the city or on shorter trips.",
+    },
+    {
+      question: "When can I test drive or take delivery of the Hector Tomahawk PHEV?",
+      answer:
+        "Test drives, showroom display vehicles and deliveries are planned from November 2026. Your nearest dealership will confirm the exact timeline.",
+    },
+  ],
   astor: [
     {
       question: "What is the mileage of the MG Astor?",

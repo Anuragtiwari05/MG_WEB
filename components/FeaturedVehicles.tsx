@@ -276,7 +276,7 @@ export default function FeaturedVehicles() {
             <div>
               <p className="text-xs font-medium text-muted">Starting at</p>
               <p className="mt-0.5 text-base font-semibold text-text">
-                {formatINR(active.priceINR)}
+                {formatINR(active.priceINR)}{active.priceNote ? ` ${active.priceNote}` : ""}
               </p>
               <p className="text-xs text-faint">*Ex Showroom Price</p>
             </div>

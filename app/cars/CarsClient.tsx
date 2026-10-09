@@ -115,7 +115,7 @@ export default function CarsPage() {
                           <p className="mt-2 text-xs text-muted">
                             Starts from{" "}
                             <span className="text-sm font-bold text-text">
-                              ₹{car.price} Lakh*
+                              ₹{car.price} Lakh*{car.priceNote ? ` ${car.priceNote}` : ""}
                             </span>
                           </p>
                           <div className="mt-2">

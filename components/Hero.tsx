@@ -151,7 +151,7 @@ export default function Hero() {
               {slide.price && (
                 <p className="mt-2 text-xs font-semibold text-white/60">
                   Starting at{" "}
-                  <span className="text-lg font-bold text-white">₹{slide.price} Lakh</span>*
+                  <span className="text-lg font-bold text-white">₹{slide.price} Lakh</span>*{slide.priceNote ? ` ${slide.priceNote}` : ""}
                 </p>
               )}
               {/* Feature chips: stands in for whatever feature row is baked
@@ -289,7 +289,7 @@ export default function Hero() {
                               <span className="text-2xl font-bold text-white">
                                 ₹{s.price} Lakh
                               </span>
-                              *
+                              *{s.priceNote ? ` ${s.priceNote}` : ""}
                             </p>
                           )}
                         </>

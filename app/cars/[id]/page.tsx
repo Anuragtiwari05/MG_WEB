@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `MG ${car.name} Price, Specifications & Features - MG Motor Mumbai`,
-    description: `MG ${car.name} at MG Motor Mumbai - ₹${car.price} Lakh*, ${car.mileage}. See specs, dimensions & book a test drive.`,
+    description: `MG ${car.name} at MG Motor Mumbai - ₹${car.price} Lakh*${car.priceNote ? ` ${car.priceNote}` : ""}, ${car.mileage}. See specs, dimensions & book a test drive.`,
     alternates: { canonical: `/cars/${car.id}` },
     keywords: [
       `MG ${car.name} price Mumbai`,

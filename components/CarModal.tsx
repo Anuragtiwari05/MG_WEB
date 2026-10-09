@@ -72,7 +72,7 @@ export default function CarModal({
             <div>
               <p className="text-xs font-medium text-muted">Starting at</p>
               <p className="mt-0.5 text-base font-semibold text-text">
-                {formatINR(car.priceINR)}
+                {formatINR(car.priceINR)}{car.priceNote ? ` ${car.priceNote}` : ""}
               </p>
               <p className="text-xs text-faint">*Ex Showroom Price</p>
             </div>
@@ -92,10 +92,12 @@ export default function CarModal({
               <p className="text-xs font-medium text-muted">Mileage / Range</p>
               <p className="mt-0.5 text-sm text-text">{car.mileage}</p>
             </div>
-            <div>
-              <p className="text-xs font-medium text-muted">Boot Space</p>
-              <p className="mt-0.5 text-sm text-text">{car.bootSpace}</p>
-            </div>
+            {car.bootSpace && (
+              <div>
+                <p className="text-xs font-medium text-muted">Boot Space</p>
+                <p className="mt-0.5 text-sm text-text">{car.bootSpace}</p>
+              </div>
+            )}
           </div>
 
           <div className="mt-6 border-t border-border pt-6">
