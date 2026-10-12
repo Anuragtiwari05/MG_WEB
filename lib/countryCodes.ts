@@ -6,7 +6,7 @@ export type Country = {
 
 /** Flag emoji glyphs don't render reliably on Windows, so we use flag images instead. */
 export function flagUrl(iso2: string, width: 20 | 40 = 20): string {
-  return `https://flagcdn.com/w${width}/${iso2.toLowerCase()}.png`;
+  return `/images/flags/w${width}/${iso2.toLowerCase()}.png`;
 }
 
 /** India uses strict 10-digit mobile validation; other countries get a looser digit-count check. */

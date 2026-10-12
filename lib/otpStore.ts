@@ -6,6 +6,8 @@
 // here would silently become a *different* Map per route file (send vs
 // verify), even though they import "the same" module. globalThis is the one
 // object guaranteed to be shared across the whole process.
+import { createHmac, timingSafeEqual } from 'crypto';
+
 type OtpRecord = {
   id: string;
   phoneNumber: string;
@@ -63,14 +65,63 @@ export function resetOtpSendLimit(phoneNumber: string) {
   sendAttemptsMap.delete(phoneNumber);
 }
 
+// On Netlify, /api/otp/send and /api/otp/verify often run on *different*
+// serverless instances (or after a cold start), so the in-memory map above
+// is empty at verify time. To survive that, the verification id handed to the
+// client is a signed, self-contained token (phone + expiry + HMAC of the code),
+// which any instance can check without shared state.
+const OTP_TTL_MS = 5 * 60 * 1000;
+
+function otpSecret(): string {
+  return (
+    process.env.OTP_SECRET ||
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.SMS_API_KEY ||
+    'mg-otp-dev-secret'
+  );
+}
+
+function sign(phoneNumber: string, otpCode: string, expiresAt: number): string {
+  return createHmac('sha256', otpSecret())
+    .update(`${phoneNumber}|${otpCode}|${expiresAt}`)
+    .digest('base64url');
+}
+
+function encodeToken(phoneNumber: string, expiresAt: number, sig: string): string {
+  return `t.${Buffer.from(JSON.stringify({ p: phoneNumber, e: expiresAt })).toString('base64url')}.${sig}`;
+}
+
+function verifyToken(
+  token: string,
+  code: string
+): { success: boolean; error?: string; phoneNumber?: string } {
+  const [, payload, sig] = token.split('.');
+  let data: { p: string; e: number };
+  try {
+    data = JSON.parse(Buffer.from(payload, 'base64url').toString());
+  } catch {
+    return { success: false, error: 'Verification code expired or not found. Please request a new code.' };
+  }
+  if (!data?.p || typeof data.e !== 'number' || data.e < Date.now()) {
+    return { success: false, error: 'OTP has expired. Please request a new code.' };
+  }
+  const expected = Buffer.from(sign(data.p, code, data.e));
+  const given = Buffer.from(sig || '');
+  if (expected.length !== given.length || !timingSafeEqual(expected, given)) {
+    return { success: false, error: 'Incorrect 4-digit verification code' };
+  }
+  return { success: true, phoneNumber: data.p };
+}
+
 export function saveFallbackOtp(phoneNumber: string, otpCode: string, formSource?: string): string {
   cleanupExpired();
-  const id = `fb-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+  const expiresAt = Date.now() + OTP_TTL_MS;
+  const id = encodeToken(phoneNumber, expiresAt, sign(phoneNumber, otpCode, expiresAt));
   globalOtpMap.set(id, {
     id,
     phoneNumber,
     otpCode,
-    expiresAt: Date.now() + 5 * 60 * 1000,
+    expiresAt,
     attempts: 0,
     formSource,
   });
@@ -84,6 +135,8 @@ export function verifyFallbackOtp(
   cleanupExpired();
   const record = globalOtpMap.get(id);
   if (!record) {
+    // Different/cold instance — fall back to the stateless signed token.
+    if (id.startsWith('t.')) return verifyToken(id, code);
     return { success: false, error: 'Verification code expired or not found. Please request a new code.' };
   }
   if (record.expiresAt < Date.now()) {

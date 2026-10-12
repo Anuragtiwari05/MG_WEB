@@ -399,7 +399,7 @@ export function getCarTransparentImage(id: string): string {
     case "comet-ev": return "/images/models/model-comet-transparent.png";
     case "majestor": return "/images/models/model-majestor-v3.png";
     case "m9": return "/images/models/model-m9-transparent.png";
-    case "cyberster": return "/images/models/model-cyberster-v2.png";
+    case "cyberster": return "/images/models/cyberster/cyberster-dynamic-red.webp";
     case "hector-tomahawk-ev": return cars.find((c) => c.id === id)?.image ?? "";
     case "hector-tomahawk-phev": return cars.find((c) => c.id === id)?.image ?? "";
     default: return `/images/models/model-${id}-transparent.png`;
@@ -1761,7 +1761,7 @@ export const cars: Car[] = [
     fuel: "Electric",
     blurb: "The premium electric scissor-door roadster, delivering supercar dynamics and performance.",
     cta: "Explore Cyberster",
-    image: "/images/models/model-cyberster-v2.png",
+    image: "/images/models/cyberster/cyberster-dynamic-red.webp",
     alt: "MG Cyberster Electric Roadster",
     seating: "2 Seater",
     mileage: "509 km Range*",
@@ -1772,7 +1772,7 @@ export const cars: Car[] = [
       "Triple Screen Curved Display Layout",
       "F1-Inspired Chassis Tuning",
     ],
-    heroImage: "/images/models/model-cyberster-v2.png",
+    heroImage: "/images/models/cyberster/cyberster-dynamic-red.webp",
     interiorImage: "/images/models/cyberster/48-dashboard-59.jpg",
     galleryImages: [
       { src: "/images/models/cyberster/cyberster-hero-red.jpg", caption: "MG Cyberster - Commanding front-left road posture" },
@@ -1786,10 +1786,11 @@ export const cars: Car[] = [
       { src: "/images/models/cyberster/23-wheel-42.jpg", caption: "Dynamic turbine alloy wheels" },
     ],
     colors: [
-      { name: "Dynamic Red", hex: "#cc0000", cssFilter: "none", image: "/images/models/cyberster/cyberster-hero-red.jpg" },
-      { name: "Electric Yellow", hex: "#ffea00", cssFilter: "none", image: "/images/models/cyberster/Nuclear-Yellow_eeac37.jpg" },
-      { name: "Bullet Silver", hex: "#cccccc", cssFilter: "none", image: "/images/models/cyberster/Modern-Beige_b8b5a8.jpg" },
-      { name: "Andes Grey", hex: "#3b3b3b", cssFilter: "none", image: "/images/models/cyberster/Andes-Grey_3b3b3b.jpg" },
+      { name: "Dynamic Red", hex: "#cc0000", cssFilter: "none", image: "/images/models/cyberster/cyberster-dynamic-red.webp" },
+      { name: "Inca Blue", hex: "#7fd3d6", cssFilter: "none", image: "/images/models/cyberster/cyberster-inca-blue.webp" },
+      { name: "Nuclear Yellow", hex: "#e3b23c", cssFilter: "none", image: "/images/models/cyberster/cyberster-nuclear-yellow.webp" },
+      { name: "Andes Grey", hex: "#5a5a5c", cssFilter: "none", image: "/images/models/cyberster/cyberster-andes-grey.webp" },
+      { name: "Modern Beige", hex: "#d9d6cc", cssFilter: "none", image: "/images/models/cyberster/cyberster-modern-beige.webp" },
     ],
     details: {
       length: "4535 mm",
@@ -3148,7 +3149,7 @@ export const blogs: Blog[] = [
     title: "MG Cyberster Wins Global EV Design Award",
     excerpt: "The all-electric roadster receives critical acclaim for blending heritage aesthetics with supercar aero.",
     readTime: "3 min read",
-    image: "/images/models/model-cyberster-v2.png",
+    image: "/images/models/cyberster/cyberster-dynamic-red.webp",
     coverImage: "/images/cyberster-night.webp",
     alt: "MG Cyberster award",
     author: "Priya Sharma",

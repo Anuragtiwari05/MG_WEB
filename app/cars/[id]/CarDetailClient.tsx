@@ -173,19 +173,15 @@ export default function CarDetailClient({ car }: Props) {
                     {/* Fixed inset (not a percentage height, which resolves
                         to 0 on a flex child) gives the car visible breathing
                         room on every side instead of touching/overflowing
-                        the card edges. The Cyberster's photos are natively
-                        very wide/low (convertible roadster) and letterbox
-                        under object-contain, so it fills the box edge to
-                        edge with object-cover instead - other models keep
-                        the original inset/contain behaviour untouched. */}
-                    <div className={car.id === "cyberster" ? "absolute inset-0" : "absolute inset-8 sm:inset-12"}>
+                        the card edges. */}
+                    <div className="absolute inset-8 sm:inset-12">
                       <Image
                         src={activeImage}
                         alt={`${car.name} preview in ${activeLabel}`}
                         fill
                         priority
                         sizes="(max-width: 1024px) 100vw, 50vw"
-                        className={`transition-all duration-[600ms] ${car.id === "cyberster" ? "object-cover" : "object-contain"}`}
+                        className={`transition-all duration-[600ms] object-contain`}
                         style={{ filter: activeImage === car.image ? selectedColor.cssFilter || "none" : "none" }}
                       />
                     </div>
